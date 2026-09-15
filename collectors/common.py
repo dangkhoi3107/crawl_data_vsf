@@ -256,14 +256,23 @@ class StateDB:
             )"""
         )
         self.conn.execute("CREATE INDEX IF NOT EXISTS idx_items_status ON items(source, status, priority)")
+        self.conn.execute(
+            """CREATE TABLE IF NOT EXISTS discovery (
+                source TEXT NOT NULL,
+                key TEXT NOT NULL,
+                found INTEGER,
+                done_at TEXT,
+                PRIMARY KEY (source, key)
+            )"""
+        )
         cols = {r[1] for r in self.conn.execute("PRAGMA table_info(items)")}
         if "plan" not in cols:  # nâng cấp DB cũ
             self.conn.execute("ALTER TABLE items ADD COLUMN plan TEXT")
         self.conn.commit()
 
     def add_many(self, source: str, rows: Iterable[tuple]) -> int:
-        """rows: (url, priority) hoặc (url, priority, plan_dict). URL đã có thì giữ trạng thái,
-        nhưng cập nhật plan (điểm đến, thứ hạng) và priority tốt hơn nếu được phát hiện lại."""
+        """rows: (url, priority) hoặc (url, priority, plan_dict). URL đã có thì giữ trạng thái và plan của lần
+        phát hiện đầu tiên (điểm đến, thứ hạng), chỉ nhận priority tốt hơn."""
         before = self.conn.total_changes
         now = now_iso()
         for row in rows:
@@ -272,12 +281,22 @@ class StateDB:
             self.conn.execute(
                 """INSERT INTO items(source, url, priority, plan, updated_at) VALUES (?, ?, ?, ?, ?)
                    ON CONFLICT(source, url) DO UPDATE SET
-                     plan = COALESCE(excluded.plan, items.plan),
+                     plan = COALESCE(items.plan, excluded.plan),
                      priority = MIN(items.priority, excluded.priority)""",
                 (source, url, prio, plan, now),
             )
         self.conn.commit()
         return self.conn.total_changes - before
+
+    def is_discovered(self, source: str, key: str) -> bool:
+        return self.conn.execute("SELECT 1 FROM discovery WHERE source = ? AND key = ?", (source, key)).fetchone() is not None
+
+    def mark_discovered(self, source: str, key: str, found: int) -> None:
+        self.conn.execute(
+            "INSERT OR REPLACE INTO discovery(source, key, found, done_at) VALUES (?, ?, ?, ?)",
+            (source, key, found, now_iso()),
+        )
+        self.conn.commit()
 
     def plan_of(self, source: str, url: str) -> dict:
         row = self.conn.execute("SELECT plan FROM items WHERE source = ? AND url = ?", (source, url)).fetchone()
@@ -606,8 +625,10 @@ class BrowserSession:
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=60_000)
         except Exception as e:
-            if "ERR_ABORTED" not in str(e) and "interrupted by another navigation" not in str(e):
+            soft = ("ERR_ABORTED", "interrupted by another navigation", "Timeout")
+            if not any(x in str(e) or x in type(e).__name__ for x in soft):
                 raise
+            log.debug("[%s] goto %s: %s – tiếp tục chờ nội dung", self.name, url, str(e)[:120])
         deadline = t0 + self.opts.challenge_timeout
         manual = False
         while True:

@@ -38,6 +38,7 @@ from .common import (
     PageGone,
     Paths,
     RawCache,
+    read_jsonl,
     looks_like_challenge,
     now_iso,
     slim_html,
@@ -96,6 +97,11 @@ class VinpearlCollector:
         self._session: BrowserSession | None = None
         self._site_page = None
         self._api_page = None
+        self._previous_dates: dict[str, list[str]] = {}
+        if opts.offline:  # reparse: nhớ thứ tự ngày hỏi giá của lần crawl trước
+            for r in read_jsonl(paths.interim / f"{SOURCE}.jsonl"):
+                if r.get("recordType") == "vinpearl_hotel" and r.get("hotelId"):
+                    self._previous_dates[r["hotelId"]] = (r.get("priceQuery") or {}).get("dates") or []
 
     # ------------------------------------------------------------------ fetch helpers
 
@@ -146,9 +152,9 @@ class VinpearlCollector:
             return None
         try:
             page = await self._ensure_api_page()
-        except ChallengeBlocked as e:
+        except Exception as e:  # thử thách chưa qua, timeout mạng...
             self.breaker.blocked()
-            log.warning("Không mở được booking.vinpearl.com: %s", e)
+            log.warning("Không mở được booking.vinpearl.com: %s", str(e)[:200])
             self._api_page = None
             return None
         session = await self._browser()
@@ -217,9 +223,15 @@ class VinpearlCollector:
                     stats["hotels"] += 1
                     stats["rooms"] += len(rec.get("rooms") or [])
             if not self.opts.skip_tours:
-                async for rec in self.collect_tours():
-                    writer.write(rec)
-                    stats["tours"] += 1
+                try:
+                    async for rec in self.collect_tours():
+                        writer.write(rec)
+                        stats["tours"] += 1
+                except (KeyboardInterrupt, SystemExit):
+                    raise
+                except Exception as e:  # phần tour lỗi không làm mất phần khách sạn đã lấy
+                    log.error("Vinpearl tour lỗi: %s – giữ phần đã thu được, chạy lại để tiếp tục (có cache).", str(e)[:300])
+                    stats["toursError"] = str(e)[:200]
         finally:
             await self.close()
         if self.breaker.tripped:
@@ -275,7 +287,7 @@ class VinpearlCollector:
         crawled_at = now_iso()
         for n, (hid, h) in enumerate(sorted(hotels.items(), key=lambda kv: kv[1].get("apiName") or ""), 1):
             responses = []
-            for d in self.opts.price_dates:
+            for d in self._price_dates_for(hid):
                 params = {
                     "hotelId": hid,
                     "arrivalDate": d.isoformat(),
@@ -297,6 +309,21 @@ class VinpearlCollector:
             log.info("Vinpearl %d/%d: %s – %d hạng phòng", n, len(hotels), rec["name"], len(rec["rooms"]))
             records.append(rec)
         return records
+
+    def _price_dates_for(self, hotel_id: str) -> list[date]:
+        """reparse vào ngày khác ngày crawl thì hôm nay + 30/14/60 không có trong cache (mất cả hạng phòng lẫn toạ độ),
+        nên dùng các ngày đã cache của khách sạn, giữ thứ tự lần crawl trước (ngày đầu tiên quyết định giá)."""
+        dates = self.opts.price_dates
+        key = lambda d: f"api-rooms-{hotel_id}-{d.isoformat()}-{self.opts.adults}a"
+        if not self.opts.offline or all(self.cache.has(key(d), "json") for d in dates):
+            return dates
+        cached = set()
+        for f in (self.cache.dir / "json").glob(f"api-rooms-{hotel_id}-*-{self.opts.adults}a.json.gz"):
+            m = re.search(r"-(\d{4}-\d{2}-\d{2})-\d+a\.json\.gz$", f.name)
+            if m:
+                cached.add(m.group(1))
+        previous = [d for d in self._previous_dates.get(hotel_id, []) if d in cached]
+        return [date.fromisoformat(d) for d in previous + sorted(cached - set(previous))]
 
     async def _site_info(self, h: dict) -> dict:
         m = HOTEL_URL_RE.match((h.get("pageUrl") or "").split("?")[0])
@@ -572,6 +599,8 @@ def _tour_record(item: dict, detail: dict | None, crawled_at: str) -> dict:
         "cancellationPolicy": html_to_text(td.get("cancellationPolicy")),
         "audience": [clean_text(t.get("name")) for t in d.get("tourTypes") or [] if isinstance(t, dict)],
         "supplierName": d.get("supplierName"),
+        "supplierCode": d.get("supplierCode"),
+        "imageUrlSlug": d.get("imageUrlSlug") or item.get("imageUrlSlug"),
         "soldQuantity": item.get("soldQuantity"),
         "isEnabled": item.get("isEnabled"),
         "saleStartDate": item.get("saleStartDate"),

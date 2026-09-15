@@ -1,291 +1,373 @@
 # data-collection — catalog du lịch cho V-OTA RecSys
 
-Thu thập sản phẩm du lịch thật từ **Vinpearl** (khách sạn, hạng phòng, vé VinWonders, tour, combo, golf)
-và **booking.com** (toàn bộ chỗ ở tại Việt Nam cùng hạng phòng, và vé tham quan). Đầu ra đúng schema
-`Product` ở §6 của handbook.
+Thu thập catalog theo đúng **handbook §3**: khoảng 2.000–5.000 sản phẩm thật (hotel, flight, attraction, combo, golf)
+trên 15 điểm đến Việt Nam, mô tả tiếng Việt, xuất theo schema `Product` ở §6.
 
-Chỉ lấy dữ liệu sản phẩm. Không lấy review, tên người đánh giá hay bất cứ thông tin nào về từng khách;
-chỉ giữ điểm đánh giá trung bình và số lượt đánh giá.
+| Handbook yêu cầu | Làm ở đây |
+|---|---|
+| vinpearl.com trước: khách sạn, VinWonders, golf, combo | `crawl.py vinpearl`: API của booking.vinpearl.com (vinpearl.com có Cloudflare) |
+| booking.com: độ phủ chỗ ở, thuộc tính có cấu trúc | `crawl.py booking-hotels`: N khách sạn phổ biến mỗi điểm đến + hạng phòng + giá |
+| agoda.com: phủ tốt chỗ ở nội địa | `crawl.py agoda-hotels`: N khách sạn phổ biến mỗi điểm đến + giá |
+| trip.com: vé máy bay, điểm tham quan (gợi ý chéo tuần 3) | `crawl.py trip-flights`, `crawl.py trip-attractions` |
+| 2.000–5.000 sản phẩm, 10–15 điểm đến | `collectors/plan.py`: 15 điểm đến, ngân sách mỗi điểm đến |
+| Gộp trùng: vinpearl.com thắng tên/mô tả, OTA thắng giá/tình trạng | `normalise.py` |
+| Toạ độ nếu có | khách sạn và điểm tham quan theo nguồn, vé Vinpearl theo địa điểm dùng vé, vé máy bay theo sân bay; xuất cho Google My Maps + GeoJSON (xem [Vị trí và Google Maps](#vị-trí-toạ-độ-và-google-maps)) |
+| Chỉ dữ liệu sản phẩm, không review / tên người | review bị xoá khỏi HTML/JSON **trước khi** ghi cache |
+| Cache raw, rate limit, robots.txt, resume, README nguồn trường | có đủ, xem bên dưới |
+| Fallback Amadeus Self-Service | **đã ngừng hoạt động từ 17/07/2026** (Amadeus chỉ còn gói Enterprise), nên không dùng |
 
 ## Cài đặt
 
-Cần Python 3.10 trở lên (đã chạy thử trên 3.14) và khoảng 2–3 GB ổ đĩa nếu crawl toàn bộ.
+Cần Python 3.10 trở lên (đã chạy thử trên 3.10 và 3.14).
 
 ```bash
 cd data-collection
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+conda activate vsf                  # hoặc: python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-playwright install chromium        # Linux thiếu thư viện hệ thống: playwright install --with-deps chromium
+playwright install chromium         # Linux thiếu thư viện hệ thống: playwright install --with-deps chromium
 ```
 
 ## Chạy
 
-```bash
-python crawl.py vinpearl               # ~20–25 phút: 15 khách sạn, ~120 hạng phòng, ~380 vé/tour/combo/golf
-python crawl.py booking-hotels         # ~34.000 chỗ ở; dừng/chạy lại thoải mái
-python crawl.py booking-attractions    # ~13.500 vé tham quan (nguồn phụ)
-python normalise.py                    # → data/products.jsonl, products.csv, stats.md, dedup_report.csv
-```
-
-Chạy thử trước khi chạy lớn:
+Chạy trọn kế hoạch (Vinpearl → trip.com → booking.com → agoda.com → normalise), ước tính 2–3 giờ:
 
 ```bash
-python crawl.py vinpearl --tour-limit 10
-python crawl.py booking-hotels --limit 20
-python crawl.py booking-attractions --limit 10
-python normalise.py && head -60 data/stats.md
+python crawl.py handbook --fast
 ```
 
-Tiến độ và dừng/chạy tiếp:
+Chạy thử nhỏ trước (2 điểm đến, 3 sản phẩm mỗi loại, khoảng 15 phút):
 
 ```bash
-python crawl.py status                          # đã xong / còn lại / lỗi theo từng nguồn
-python crawl.py retry-failed booking-hotels     # đưa URL lỗi về hàng đợi
-python crawl.py reparse booking-hotels          # sửa parser xong thì parse lại từ cache, không tải lại
+python crawl.py handbook --destinations 'Nha Trang,Phú Quốc' --per-destination 3 --tour-limit 25 --fast
 ```
 
-Ctrl+C lúc nào cũng được. Mỗi trang xong là ghi ngay vào `data/state/crawl_state.sqlite`, nên chạy lại
-đúng lệnh cũ sẽ tiếp tục từ chỗ dừng.
+Hoặc chạy từng nguồn, theo thứ tự handbook:
 
-### Vì sao mặc định mở cửa sổ trình duyệt
+```bash
+python crawl.py vinpearl
+python crawl.py trip-flights
+python crawl.py trip-attractions
+python crawl.py booking-hotels --fast --concurrency 2
+python crawl.py agoda-hotels
+python crawl.py venues              # toạ độ địa điểm vé Vinpearl (chỉ gọi mạng cho địa điểm chưa có toạ độ)
+python normalise.py
+```
 
-Cả hai website đều có lớp chống bot. Script dùng Chromium thật qua Playwright và **không** dùng bất kỳ
-kỹ thuật che giấu nào: không stealth plugin, không giả fingerprint, không proxy, không giải CAPTCHA.
+Kết quả: `data/products.jsonl`, `data/products.csv`, `data/stats.md` (có bảng **đối chiếu mục tiêu handbook**),
+`data/dedup_report.csv` và thư mục `data/map/` (bản đồ).
+
+Ctrl+C lúc nào cũng được: chạy lại đúng lệnh cũ sẽ tiếp tục từ chỗ dừng. `python crawl.py status` xem tiến độ.
+
+## Kế hoạch: 15 điểm đến
+
+Chọn các điểm đến có Vinpearl trước, rồi thêm các điểm du lịch lớn. Slug/mã của từng nguồn đã được kiểm tra thủ công
+và nằm trong [collectors/plan.py](collectors/plan.py).
+
+| Điểm đến | Vinpearl | booking.com tìm | agoda city | trip.com city | Sân bay |
+|---|---|---|---|---|---|
+| Nha Trang | ✓ | Nha Trang | nha-trang-vn | nha-trang-670 | CXR |
+| Phú Quốc | ✓ | Phu Quoc | phu-quoc-island-vn | phu-quoc-island-24779 | PQC |
+| Hội An | ✓ | Hoi An | hoi-an-vn | hoi-an-668 | (qua DAD) |
+| Đà Nẵng | | Da Nang | da-nang-vn | da-nang-669 | DAD |
+| Hạ Long | ✓ | Ha Long | h-long-vn | ha-long-city-1524623 | VDO |
+| Hà Nội | ✓ | Hanoi | hanoi-vn | hanoi-181 | HAN |
+| TP. Hồ Chí Minh | | Ho Chi Minh City | ho-chi-minh-city-vn | ho-chi-minh-city-434 | SGN |
+| Hải Phòng | ✓ | Hai Phong | haiphong-vn | haiphong-180 | HPH |
+| Nghệ An | ✓ | Cua Lo | vinh-vn | vinh-city-24768 | VII |
+| Hà Tĩnh | ✓ | Ha Tinh | ha-tinh-vn | – | (qua VII) |
+| Đà Lạt | | Da Lat | dalat-vn | dalat-1393 | DLI |
+| Huế | | Hue | hue-vn | hue-667 | HUI |
+| Quy Nhơn | | Quy Nhon | quy-nhon-binh-dinh-vn | quy-nhon-24728 | UIH |
+| Sa Pa | | Sa Pa | sapa-vn | sapa-24736 | – |
+| Phan Thiết | | Mui Ne | phan-thiet-vn | phan-thiet-1218 | – |
+
+Ngân sách mặc định **mỗi điểm đến**: 30 khách sạn booking.com, 20 khách sạn agoda.com (khách sạn trùng sẽ được gộp),
+25 điểm tham quan trip.com, tối đa 3 hạng phòng OTA mỗi khách sạn, 5 chuyến bay cụ thể mỗi tuyến. Toàn bộ sản phẩm
+Vinpearl luôn được lấy, cộng mọi khách sạn mang thương hiệu Vinpearl trên booking.com. Ước tính catalog cuối
+khoảng **3.000–3.500 sản phẩm**.
+
+- Đổi điểm đến: `--destinations 'Nha Trang,Đà Lạt'` (áp dụng cho cả `crawl.py` và `normalise.py`), hoặc sửa `plan.py`.
+- Đổi quy mô: `--per-destination 40` (khách sạn booking và điểm tham quan = 40, agoda = 2/3 con số đó).
+- Sau khi đổi kế hoạch, thêm `--rediscover` để tìm URL mới.
+
+## Nguồn và cách lấy
+
+| Nguồn | Cách lấy | Trình duyệt | Lấy được |
+|---|---|---|---|
+| **Vinpearl, khách sạn** | `booking-hotel-api.vinpearl.com` `/availability/rooms` cho nhiều ngày (`--price-dates`) | không | mô tả, địa chỉ, toạ độ, sao, điểm TripAdvisor, tiện nghi, ảnh; mỗi hạng phòng: mô tả, diện tích, giường, sức chứa, giá theo ngày |
+| **Vinpearl, vé/tour/combo/golf** | `booking-tour-api.vinpearl.com`, gọi từ trong trang booking.vinpearl.com | có (Cloudflare) | tên, mô tả chi tiết, bao gồm, lịch trình, giá người lớn/trẻ em, thời gian bán, nhà cung cấp (= nơi dùng vé, để suy ra toạ độ). **API không có toạ độ** |
+| **trip.com, vé máy bay** | trang sân bay `/flights/airport-<iata>/` → tuyến giữa các điểm đến → trang giá vé `/flights/<a>-to-<b>/airfares-…/` (JSON-LD) | không | giá theo tháng, khứ hồi, chuyến cụ thể (số hiệu, hãng, giờ, thời gian bay, giá) |
+| **trip.com, điểm tham quan** | `/travel-guide/attraction/<city>/tourist-attractions/` → trang điểm (`__NEXT_DATA__`) | không | giới thiệu, địa chỉ, toạ độ, **giờ mở cửa**, **thời lượng đề xuất**, giá vé, điểm, loại hình |
+| **booking.com, khách sạn** | trang tìm kiếm theo điểm đến (`order=popularity`) + sitemap lọc thương hiệu Vinpearl → trang khách sạn kèm ngày | có | mô tả tiếng Việt, toạ độ, sao, điểm, tiện nghi, hạng phòng + giá + điều kiện |
+| **agoda.com, khách sạn** | trang thành phố → trang khách sạn kèm ngày | có | mô tả tiếng Việt, toạ độ, sao, điểm, tiện nghi, giá rẻ nhất |
+| booking.com, attraction *(nguồn phụ, ngoài kế hoạch)* | sitemap → trang attraction | có | mô tả (đa phần tiếng Anh), thời lượng, bao gồm, điểm khởi hành, giá |
+
+Robots.txt được tôn trọng. Riêng trip.com cấm các trang tìm chuyến bay (`showfarefirst`, `/*-to-*/tickets-*`,
+`graphql`), nên script chỉ dùng trang giá vé theo tuyến, loại trang được phép.
+
+### Vì sao cần trình duyệt, và `--headless`
+
+Script dùng Chromium thật qua Playwright, **không** dùng stealth plugin, giả fingerprint, proxy hay giải CAPTCHA.
 Kết quả chạy thử (15/09/2026):
 
 | | Có cửa sổ (mặc định) | `--headless` |
 |---|---|---|
-| API khách sạn Vinpearl | chạy (HTTP thường, không cần trình duyệt) | chạy |
-| API tour/vé Vinpearl | chạy | **bị Cloudflare chặn** |
-| booking.com: tên, mô tả, toạ độ, tiện nghi, hạng phòng | chạy | chạy |
-| booking.com: **giá** theo hạng phòng | chạy | **không có giá**: booking.com trả bản trang không kèm ngày |
-| booking.com attractions | chạy | chạy |
+| Vinpearl khách sạn, trip.com (HTTP) | chạy | chạy |
+| Vinpearl vé/tour | chạy | **bị Cloudflare chặn** |
+| booking.com: dữ liệu khách sạn | chạy | chạy |
+| booking.com: **giá** | chạy | **không có giá** |
+| agoda.com | chạy | chưa thử |
 
-Máy không có màn hình (server) thì dùng `--headless` và chấp nhận thiếu giá booking.com cũng như tour Vinpearl.
-Nếu cửa sổ hiện ô "Xác minh bạn là con người", **bạn tự bấm** trong cửa sổ đó; script chờ tối đa
-`--manual-wait` giây (mặc định 300). Cookie được lưu trong `data/browser-profile/`, nên thường chỉ phải làm một lần.
+Nếu cửa sổ hiện ô "Xác minh bạn là con người", **bạn tự bấm** trong cửa sổ đó; script chờ tối đa `--manual-wait` giây.
+Server không có màn hình: `xvfb-run -a python crawl.py handbook`.
 
-Có thể dùng Google Chrome đã cài sẵn thay cho Chromium: `--browser-channel chrome`.
+`--fast` (không chờ trang tải xong, chặn CSS/tracker) nhanh gấp đôi với booking.com; agoda.com tự tắt chế độ này
+vì trang không render khi thiếu CSS.
 
-### Tốc độ và mức lịch sự
+## Luồng xử lý
 
-- Tối thiểu `--delay` giây giữa hai request tới cùng một host: Vinpearl 2 giây, booking.com 3 giây, cộng ngẫu nhiên thêm tới 35%.
-- Tôn trọng `robots.txt` (có hỗ trợ wildcard và `Crawl-delay`).
-- Bị chặn liên tiếp thì nghỉ tăng dần (1 → 2 → 4… phút). Sau `--max-blocks` lần liên tiếp (mặc định 8) thì
-  **tự dừng**, tiến độ được giữ lại. Nghỉ vài giờ rồi chạy lại, có thể tăng `--delay`.
-- Không tải ảnh, font, video (chỉ lưu URL ảnh), nên nhẹ cho cả hai phía.
-
-Tốc độ đo được khi chạy thử booking-hotels (chế độ có cửa sổ, `--delay 3`):
-
-| Cấu hình | Trang/phút | Toàn bộ ~33.700 chỗ ở |
-|---|---|---|
-| mặc định, 1 tab | 6 | ~4 ngày |
-| mặc định, 3 tab | 8,6 | ~2,7 ngày |
-| `--fast`, 3 tab | 16,4 | **~1,5 ngày** |
-
-`--fast` không chờ trang tải xong và chặn CSS cùng tracker quảng cáo. Dữ liệu cần lấy đã có sẵn trong HTML
-server trả về, nên kết quả parse giống hệt chế độ thường (đã đối chiếu). booking-attractions (~13.500 URL)
-chạy khoảng 10 trang/phút với 1 tab ở chế độ thường.
-
-`--concurrency` mở thêm tab nhưng vẫn chung giới hạn `--delay`. Nếu log bắt đầu báo bị chặn, hãy giảm lại.
-Có thể ưu tiên điểm đến bằng `--match`, ví dụ `--match 'nha-trang|phu-quoc|ha-long|hoi-an|da-nang'`;
-khách sạn có chữ Vinpearl trong URL luôn được crawl trước.
-
-## Chạy số lượng lớn
-
-### Thứ tự ưu tiên Vinpearl
-
-```bash
-# 1. Vinpearl: bảng giá phòng mỗi 7 ngày trong 6 tháng tới (15 khách sạn × 26 ngày ≈ 15 phút), cộng toàn bộ vé/tour/combo/golf
-python crawl.py vinpearl --price-dates "$(seq -s, 7 7 182)"
-
-# 2. Khách sạn mang thương hiệu Vinpearl trên booking.com, gồm cả những khách sạn không có trong API Vinpearl
-#    (dòng Meliá Vinpearl, Landmark 81, Tây Ninh, Thanh Hoá…), kèm giá OTA để so sánh
-python crawl.py booking-hotels --fast --match 'vinpearl|vinholidays|vinwonders'
-
-# 3. Điểm đến có Vinpearl trước (đủ dùng cho demo tuần 2)
-python crawl.py booking-hotels --fast --concurrency 3 --match 'nha-trang|cam-ranh|phu-quoc|hoi-an|ha-long|cua-lo|ha-tinh|hai-phong|bac-ninh'
-
-# 4. Phần còn lại, để chạy nền nhiều ngày
-./run_forever.sh booking-hotels --fast --concurrency 3
-./run_forever.sh booking-attractions --fast --concurrency 2
-
-python normalise.py        # chạy được bất cứ lúc nào, kể cả khi crawl còn đang chạy
+```mermaid
+flowchart LR
+  P["collectors/plan.py<br/>15 điểm đến · ngân sách"] --> CLI["crawl.py handbook"]
+  CLI --> VP["vinpearl.py"] & TR["trip.py"] & BK["booking_hotels.py"] & AG["agoda_hotels.py"]
+  BK --> BB["booking_base.py<br/>tìm URL → hàng đợi → Chromium"]
+  AG --> BB
+  VP & TR & BB -. dùng .-> CM["common.py<br/>HTTP · trình duyệt · cache · state · robots · rate limit"]
+  VP & TR & BB --> RAW[("data/raw/&lt;nguồn&gt;/<br/>đã xoá review")]
+  TR & BB --> ST[("data/state/crawl_state.sqlite")]
+  VP & TR & BB --> INT["data/interim/&lt;nguồn&gt;.jsonl"]
+  INT --> VE["crawl.py venues<br/>trip.com → OpenStreetMap"]
+  VE --> VC[("collectors/venues.csv<br/>toạ độ địa điểm, duyệt tay")]
+  INT --> N["normalise.py<br/>gộp trùng · OTA thắng giá · toạ độ · lọc theo kế hoạch"]
+  VC --> N
+  N --> OUT["products.jsonl · products.csv<br/>stats.md · dedup_report.csv"]
+  N --> MAP["map/<br/>Google My Maps CSV · places.geojson · can-kiem-tra.csv"]
 ```
 
-Mỗi bước dùng chung hàng đợi, nên URL đã xong ở bước trước sẽ không bị crawl lại ở bước sau.
+## Dữ liệu nằm ở đâu
 
-### Chạy nhiều ngày không cần canh
+Mặc định trong `data-collection/data/` (đổi bằng `--data-dir` hoặc `VOTA_DATA_DIR`):
 
-- Chạy trong `tmux` hoặc `screen` để tắt terminal hay mất SSH không làm dừng crawl:
-  `tmux new -s crawl`, chạy lệnh, rồi `Ctrl+B D` để thoát ra; `tmux attach -t crawl` để vào lại.
-- `run_forever.sh` tự chạy tiếp sau khi bị chặn (nghỉ `COOLDOWN_HOURS`, mặc định 3 giờ) hoặc sau lỗi mạng,
-  và dừng khi xong.
-- Máy chủ không có màn hình mà vẫn cần giá: `sudo apt install xvfb`, rồi
-  `xvfb-run -a ./run_forever.sh booking-hotels --fast --concurrency 3`.
-- Theo dõi tiến độ: `python crawl.py status` và `tail -f data/logs/crawl-$(date +%Y%m%d).log`.
-- Mỗi nguồn chỉ chạy **một tiến trình**; chạy trùng sẽ bị khoá chặn lại. Có thể chạy song song các nguồn khác
-  nhau, nhưng `booking-hotels` và `booking-attractions` cùng gọi www.booking.com nên tổng tốc độ cộng dồn:
-  mỗi nguồn nên để `--concurrency 2`.
+| Đường dẫn | Chứa gì |
+|---|---|
+| `raw/vinpearl/json/` | JSON gốc API Vinpearl: `api-rooms-<hotelId>-<ngày>-2a`, `api-tour-list-*`, `api-tour-detail-<slug>` |
+| `raw/trip_flights/json/`, `raw/trip_attractions/json/` | JSON-LD + dữ liệu sản phẩm của trang (review đã bỏ), kèm URL; `html/` là trang danh sách |
+| `raw/booking_hotels/html/` | trang khách sạn và trang tìm kiếm, bản gọn (~45 KB/trang, đã bỏ review); `xmlgz/` là sitemap |
+| `raw/agoda_hotels/html/` | trang khách sạn và trang thành phố (đã bỏ review) |
+| `interim/<nguồn>.jsonl` | bản ghi đã parse, mỗi nguồn một file |
+| `raw/geocode/` | kết quả tìm địa điểm trên OpenStreetMap (Photon), mỗi truy vấn chỉ gửi một lần |
+| `map/` | vị trí cho bản đồ: `mymaps-*.csv`, `places.geojson`, `can-kiem-tra.csv` |
+| `state/crawl_state.sqlite` | hàng đợi URL (`items`: trạng thái, số lần thử, điểm đến + thứ hạng trong kế hoạch) và tiến độ tìm URL (`discovery`) |
+| `browser-profile/<nguồn>/` | cookie trình duyệt |
+| `logs/crawl-YYYYMMDD.log` | log |
 
-### Giới hạn nên giữ
-
-- `--concurrency` tối đa 3–4 và giữ `--delay` ≥ 3. Tăng nữa thì bị chặn nhiều hơn chứ không nhanh hơn.
-- Không dùng proxy xoay IP hay nhiều máy để vượt giới hạn tốc độ: vừa trái điều khoản vừa dễ bị chặn cả dải IP.
-  Cần nhanh hơn nữa thì dùng nguồn chính thức (Booking.com Affiliate/Demand API, Amadeus) hoặc xin dữ liệu từ đội Vinpearl.
-- Ổ đĩa: khoảng 45 KB mỗi trang cache, tức ~1,5 GB cho toàn bộ khách sạn và ~0,5 GB cho attraction.
-  `normalise.py` với toàn bộ dữ liệu cần vài GB RAM.
-
-## Tuỳ chọn hay dùng
-
-| Lệnh | Tuỳ chọn | Ý nghĩa |
-|---|---|---|
-| mọi lệnh crawl | `--headless` | không mở cửa sổ (xem bảng ở trên) |
-| | `--delay 5` | chậm hơn, ít bị chặn hơn |
-| | `--fast` | không chờ trang tải xong, chặn CSS/tracker; nhanh gấp đôi, dữ liệu như cũ |
-| | `--data-dir /đường/dẫn` | nơi lưu dữ liệu (hoặc biến môi trường `VOTA_DATA_DIR`) |
-| `vinpearl` | `--price-dates 30,14,60` | các ngày hỏi giá phòng (số ngày kể từ hôm nay hoặc `YYYY-MM-DD`); hạng phòng hết chỗ ngày này vẫn được lấy từ ngày khác |
-| | `--skip-hotels` / `--skip-tours` | chạy riêng một phần, phần kia giữ từ lần trước |
-| | `--site-pages` | thêm đoạn giới thiệu và "giá công bố" từ vinpearl.com (có Cloudflare, thường phải tự xác minh) |
-| | `--refresh` | bỏ cache, tải lại |
-| `booking-hotels` | `--checkin 2026-10-15 --nights 1 --adults 2` | ngày lấy giá (mặc định hôm nay + 30 ngày) |
-| `booking-*` | `--limit N`, `--match REGEX` | giới hạn lượt chạy |
-| | `--concurrency 3` | số tab song song |
-| | `--rediscover` | đọc lại sitemap để thêm sản phẩm mới |
-| | `--full-cache` | lưu nguyên HTML (~450 KB/trang) thay vì bản gọn (~45 KB) |
-| `normalise.py` | `--vietnamese-only` | chỉ giữ sản phẩm có mô tả tiếng Việt |
-| | `--min-description 80` | bỏ sản phẩm có mô tả quá ngắn |
-| | `--usd-vnd 26300 --eur-vnd 30500` | tỷ giá khi booking.com không trả VND (thường gặp ở attraction) |
-| | `--keep-duplicate-rooms` | giữ hạng phòng booking.com của khách sạn đã ghép với Vinpearl |
-| | `--drop-member-variants` | bỏ các bản sao giá thành viên của vé Vinpearl (`[VIN33 - Gold]`, `[Khách hàng đặc biệt]`…); gần trùng sản phẩm gốc, dễ làm loãng gợi ý |
-
-## Cấu trúc thư mục
-
-```
-data-collection/
-├── crawl.py                    # CLI: vinpearl | booking-hotels | booking-attractions | all | status | reparse | retry-failed
-├── normalise.py                # interim → products.jsonl theo schema Product
-├── requirements.txt
-├── run_forever.sh              # chạy nhiều ngày: tự chạy tiếp sau khi bị chặn / lỗi mạng
-└── collectors/
-    ├── common.py               # cache raw, trạng thái resume, robots.txt, giới hạn tốc độ, trình duyệt
-    ├── vinpearl.py
-    ├── booking_base.py         # sitemap → hàng đợi → crawl → reparse
-    ├── booking_hotels.py
-    ├── booking_attractions.py
-    ├── geo.py                  # chuẩn hoá điểm đến (phường/tỉnh/địa danh → Nha Trang, Phú Quốc…)
-    └── textutil.py
-
-data/                           # tạo khi chạy (không commit)
-├── raw/<nguồn>/                # MỌI response gốc, gzip: HTML, JSON API, sitemap
-├── interim/<nguồn>.jsonl       # bản ghi thô đã parse, mỗi nguồn một file
-├── state/crawl_state.sqlite    # hàng đợi URL và trạng thái
-├── browser-profile/            # cookie trình duyệt (để không phải xác minh lại)
-├── logs/
-├── products.jsonl              # ← đầu ra chính
-├── products.csv
-├── dedup_report.csv
-└── stats.md
-```
+Parser sai thì sửa code rồi chạy `python crawl.py reparse <nguồn>`: parse lại từ cache, không tải lại.
 
 ## Schema đầu ra
 
-Mỗi dòng trong `products.jsonl` có đúng các trường của schema Product (§6):
+Mỗi dòng `products.jsonl` có đúng 13 trường của §6. Mọi trường khác nằm trong `attributes`, để không tự thêm
+field mà CDP thật không có.
 
 ```json
 {
   "productId": "9d5cd325-a23d-5907-90aa-7286e06d6654",
-  "name": "Vinpearl Beachfront Nha Trang - Studio Hướng Biển Giường Đôi",
+  "name": "Vinpearl Resort Nha Trang - Deluxe Giường Đôi",
   "taxonomy": "hotel",
   "destination": "Nha Trang",
-  "description": "Với diện tích 42 m², Studio Ocean View 1 Giường Đôi mang phong cách hiện đại…",
-  "attributes": { "level": "room", "starRating": 5, "oceanView": true, "familyFriendly": true,
-                  "maxOccupancy": 4, "roomSizeM2": 42, "bedType": "01 giường đôi", "parentProductId": "8b60…" },
-  "unitPrice": 2540000,
+  "description": "Với diện tích 32 m², Deluxe Giường Đôi là phòng khách sạn thiết kế hiện đại…",
+  "attributes": { "level": "room", "starRating": 5, "oceanView": null, "familyFriendly": true, "maxOccupancy": 4,
+                  "roomSizeM2": 32, "vinpearlPrice": 3040000, "otaRoomName": "…", "parentProductId": "…" },
+  "unitPrice": 2788898,
   "currency": "VND",
   "available": true,
   "availableFrom": null,
   "availableTo": null,
   "imageUrl": "https://booking-static.vinpearl.com/room_types/…jpg",
-  "sourceRef": "vinpearl:hotel:24386cea-…:room:2c4503be-…"
+  "sourceRef": "vinpearl:hotel:1dc9c659-…:room:26863e0c-…"
 }
 ```
 
-- `productId` = UUIDv5 của `sourceRef`: **ổn định giữa các lần chạy**, nên event đã sinh không bị trỏ vào sản phẩm biến mất.
-- `taxonomy`: `hotel` (cả cấp khách sạn và cấp hạng phòng), `attraction`, `combo`, `golf`. Hai nguồn này
-  **không có `flight`**; cần vé máy bay cho gợi ý chéo ở tuần 3 thì bổ sung từ trip.com hoặc Amadeus (§3).
-- Khách sạn được xuất ở hai cấp: `attributes.level = "property"` (khách sạn) và `"room"` (hạng phòng, có
-  `parentProductId`). Tên hạng phòng theo mẫu handbook: `"<Khách sạn> - <Hạng phòng>"`.
-- Mọi trường không nằm trong schema được đặt trong `attributes`, để không tự thêm field mà CDP thật không có.
+- `productId` = UUIDv5 của `sourceRef`, **ổn định giữa các lần chạy**.
+- `taxonomy`: `hotel` (`attributes.level` = `property` / `room`), `flight` (`route` / `flight`), `attraction`, `combo`, `golf`.
+- Tên theo mẫu handbook: `"<Khách sạn> - <Hạng phòng>"`, `"Vé máy bay Hà Nội - Nha Trang"`.
+- Mô tả tự sinh (vé máy bay, phòng OTA, điểm tham quan thiếu giới thiệu) được đánh dấu bằng `attributes.descriptionSource`.
 
 ### Nguồn của từng trường
 
-| Trường | Vinpearl khách sạn / hạng phòng | Vinpearl vé, tour, combo, golf | booking.com chỗ ở / hạng phòng | booking.com attraction |
-|---|---|---|---|---|
-| `name` | API `availability/rooms` → `hotel.name`; phòng: `"{khách sạn} - {roomtype.name}"` | `tour.tourName` | JSON-LD `Hotel.name`; phòng: `"{khách sạn} - {tên phòng}"` | `<h1>` |
-| `description` | `hotel.description`, `roomtype.description` (HTML → text) | `tourDetail.description` + `highlight` + `extraInfos` | `[data-testid=property-description]`; phòng: **ghép** giường, sức chứa, tiện nghi phòng + mô tả khách sạn (`attributes.descriptionSource`) | nội dung chính, đã bỏ phần huỷ vé, thời lượng và FAQ |
-| `taxonomy` | `hotel` | `golf` nếu tên có "golf"; `combo` nếu có "combo", mã `GN`, hoặc là gói nghỉ; còn lại `attraction` | `hotel` | `attraction` (`combo`/`golf` theo tên) |
-| `destination` | `geo.py` từ địa chỉ, rồi tên | `geo.py` từ tên, rồi tỉnh | `geo.py` từ breadcrumb thành phố → địa chỉ → tỉnh | `geo.py` từ tên → phụ đề → thành phố trong tiêu đề trang |
-| `unitPrice` | giá thấp nhất còn bán, 1 đêm, 2 người lớn, đã gồm thuế, tại ngày đầu trong `--price-dates` | `adultSalePrice` | giá thấp nhất trong bảng phòng, 1 đêm, 2 người lớn, VND | "Giá thấp nhất", quy đổi VND nếu cần (`attributes.priceConverted`) |
-| `available` | có ít nhất một gói giá chưa hết phòng | `isEnabled` và chưa quá `saleEndDate` | có giá cho ngày đã hỏi | có giá |
-| `availableFrom/To` | — | `saleStartDate` / `saleEndDate` | — | — |
-| `imageUrl` | ảnh đầu tiên của `hotel.media` / `roomtype.media` | `thumbImageView` | ảnh gallery (nâng lên 1024px) | gallery / `og:image` |
-| `attributes.starRating` | `hotel.star` | — | `[data-testid=rating-stars]` (`starRatingType` phân biệt sao chính thức và ước tính của booking) | — |
-| `attributes.latitude/longitude` | `hotel.latitude/longtitude` | — | `data-atlas-latlng` | — |
-| `attributes.oceanView / familyFriendly` | suy ra từ tên, mô tả, tiện nghi (regex trong `normalise.py`), sức chứa trẻ em | `tourTypes` có "Gia đình" | suy ra từ tên, mô tả, tiện nghi, sức chứa | suy ra từ mô tả |
+| Trường | Khách sạn / phòng | Vé máy bay | Điểm tham quan / vé |
+|---|---|---|---|
+| `name` | Vinpearl → booking → agoda | ghép từ tên thành phố | Vinpearl → trip.com |
+| `description` | Vinpearl → booking (nếu tiếng Việt) → agoda | tự sinh từ dữ liệu chuyến bay | Vinpearl → trip.com (giới thiệu) |
+| `destination` | `geo.py`: tên Vinpearl / thành phố / địa chỉ, tên cụ thể thắng tên tỉnh | thành phố đến | quận/huyện → địa chỉ → tỉnh |
+| `unitPrice` | **booking.com → agoda.com → Vinpearl**; phòng Vinpearl khớp tên với phòng booking.com thì lấy giá booking | giá một chiều rẻ nhất | **trip.com → Vinpearl** |
+| `available` | có giá cho ngày đã hỏi | có chuyến có giá | có giá vé (điểm công cộng không bán vé → `false`, `attributes.ticketed=false`) |
+| `availableFrom/To` | – | ngày bay sớm nhất / muộn nhất thấy được | thời gian bán của vé Vinpearl |
+| toạ độ (`latitude`, `longitude`) | nguồn chính; nghi sai hoặc thiếu thì nguồn khác | sân bay đến | vé Vinpearl: địa điểm dùng vé (`venues.csv`), rồi trip.com; điểm tham quan: trip.com |
+| sao | nguồn chính, thiếu thì nguồn khác | – | – |
+| giờ mở cửa, thời lượng | – | thời gian bay | trip.com (`openingHours`, `suggestedDuration`, `durationMinutes`) |
+| giá khác | `vinpearlPrice`, `otaPrices`, `bookingReviewScore`, `agodaReviewScore` | `monthlyPrices`, `roundTripFrom` | `vinpearlPrice`, `otaPrices` |
 
-### Gộp trùng Vinpearl ↔ booking.com
+### Gộp trùng
 
-Cùng một khách sạn Vinpearl xuất hiện ở cả hai nguồn. `normalise.py` ghép chúng bằng tên (rapidfuzz
-`token_sort_ratio ≥ 88`, sau khi bỏ dấu), với điều kiện trùng điểm đến và mỗi bên chỉ ghép một lần.
-Kết quả ghép nằm trong `dedup_report.csv`.
+- **Khách sạn**: so khớp tên (bỏ dấu, bỏ "khách sạn/khu nghỉ dưỡng/hotel", thử cả tên tiếng Anh trong ngoặc của agoda)
+  kết hợp khoảng cách toạ độ, trong cùng điểm đến. Mỗi cụm có tối đa một bản của mỗi nguồn. Ví dụ chạy thử:
+  "Vinpearl Resort Nha Trang" (Vinpearl) ↔ booking.com cách 523 m; "Hòn Tằm Resort" ↔ agoda "Khu nghỉ dưỡng Hòn Tằm (…)" cách 670 m.
+- **Điểm tham quan**: điểm trip.com trùng tên vé Vinpearl thì gộp vào vé. Các vé Vinpearl khác có chứa tên điểm đó được
+  bổ sung giờ mở cửa, thời lượng, toạ độ.
+- Mọi cặp đã gộp nằm trong `dedup_report.csv`; kiểm tra tay trước khi dùng.
 
-| Trường | Bên thắng |
+## Vị trí (toạ độ) và Google Maps
+
+Toạ độ nằm trong `attributes.latitude` / `attributes.longitude` (độ thập phân, cùng hệ với Google Maps), kèm:
+
+- `locationSource`: `vinpearl`, `booking.com`, `agoda.com`, `trip.com`, `osm`, `manual`, `ourairports`
+- `locationPrecision`: `exact` (vị trí riêng của khách sạn / điểm tham quan), `venue` (khu vui chơi, sân golf nơi dùng vé),
+  `poi` (điểm tham quan trip.com trùng tên vé), `airport` (sân bay đến; `originLatitude/originLongitude` là sân bay đi)
+- `locationWarning` (toạ độ đáng ngờ), `locationNote` (đã thay toạ độ nguồn chính), `venue` (tên địa điểm dùng vé)
+
+| Loại | Toạ độ lấy từ |
 |---|---|
-| tên, mô tả, ảnh, hạng phòng | Vinpearl (nội dung của chính công ty) |
-| giá bán | Vinpearl (kênh bán trực tiếp); thiếu thì dùng booking.com |
-| giá booking.com | lưu ở `attributes.otaPrice` để so sánh giá đối thủ |
-| toạ độ, hạng sao | Vinpearl; thiếu thì booking.com |
-| điểm đánh giá booking.com | `attributes.bookingReviewScore`, `bookingReviewCount` |
+| Khách sạn | API Vinpearl, booking.com, agoda.com. Hạng phòng dùng toạ độ khách sạn |
+| Vé, combo, golf Vinpearl | API không có toạ độ. Nhà cung cấp của vé chính là nơi dùng vé (VinWonders Nha Trang…) → `collectors/venues.csv` |
+| Điểm tham quan | trip.com |
+| Vé máy bay | sân bay đến, dữ liệu OurAirports trong `collectors/geo.py` |
 
-Khách sạn booking.com đã ghép sẽ không xuất riêng. Hạng phòng booking.com của nó cũng bị bỏ, trừ khi dùng
-`--keep-duplicate-rooms`. `attributes.fieldSources` ghi lại bên thắng cho từng trường, `attributes.sameAs`
-ghi các `sourceRef` đã gộp.
+### Toạ độ nghi sai
 
-> Handbook gợi ý mặc định "OTA thắng về giá". Ở đây giá Vinpearl được ưu tiên vì API Vinpearl trả giá bán
-> trực tiếp theo ngày, còn giá booking.com vẫn giữ lại để so sánh. Muốn đổi thì sửa `merge_property()`
-> trong `normalise.py`.
+API Vinpearl có toạ độ sai. `normalise.py` đánh dấu những toạ độ này và không dùng chúng khi ghép trùng. Nếu khách sạn có
+bản booking.com/agoda thì lấy toạ độ bên đó (ghi lý do vào `locationNote`); nếu không thì giữ và ghi `locationWarning`.
+
+- **Trùng toạ độ (≤ 30 m) với khách sạn Vinpearl khác địa chỉ.** Vinpearl Empire Nha Trang (Lê Thánh Tôn, trong thành
+  phố) trùng khít Vinpearl Luxury Nha Trang trên đảo Hòn Tre. Vinpearl Resort Nha Trang trùng Vinpearl Resort & Spa
+  Nha Trang Bay, và trùng luôn điểm "Hòn Tre" trên trip.com, tức chỉ là toạ độ chung của cả đảo.
+- **Cách tâm điểm đến xa hơn bán kính trong `geo.py`** (mặc định 40 km). Vinpearl Hà Tĩnh cách thành phố Hà Tĩnh 34 km
+  (bán kính Hà Tĩnh là 30 km).
+
+Muốn sửa tay toạ độ của bất kỳ sản phẩm nào: thêm dòng `sourceRef,latitude,longitude,note` vào
+`collectors/location_overrides.csv`, rồi chạy lại `normalise.py`. Toạ độ sửa tay thắng mọi nguồn.
+
+### Địa điểm dùng vé Vinpearl: `collectors/venues.csv`
+
+Bảng này có 23 địa điểm (VinWonders, Safari, Grand World, Aquafield, các sân golf…). Vé được khớp địa điểm theo mã nhà
+cung cấp; không có mã thì theo alias trong tên vé, ví dụ `[Vinpearl Golf Nha Trang] …`. Nếu vé khớp qua nhà cung cấp mà
+điểm đến lệch với điểm đến của địa điểm, vé nhận điểm đến của địa điểm (giá trị cũ giữ ở `attributes.originalDestination`).
+Lý do là tỉnh trong API hay sai: Vinpearl Golf Léman ở Củ Chi (TP.HCM) bị ghi Hải Phòng, vé Grand World Hà Nội bị tính
+thành Phú Quốc.
+
+`python crawl.py venues` điền toạ độ cho các dòng chưa có. Thứ tự tìm: điểm tham quan trip.com đã crawl, rồi
+OpenStreetMap (qua Photon). Kết quả chỉ được nhận khi chứa đủ mọi từ của tên cần tìm và nằm trong bán kính điểm đến; kết
+quả là trạm xe buýt hay con đường mang tên địa điểm thì bị loại. Chạy ngày 15/09/2026, 17/23 địa điểm tự tìm được toạ độ,
+6 địa điểm cần duyệt tay.
+
+| status | Nghĩa | normalise dùng? |
+|---|---|---|
+| `ok` | đã kiểm tra bằng mắt; script không bao giờ ghi đè | có |
+| `auto` | tự tìm được, qua kiểm tra | có |
+| `review` | không tìm thấy hoặc không qua kiểm tra; `note` ghi lý do, toạ độ là kết quả đã bị loại | không |
+
+Cách duyệt:
+
+1. Mở `data/map/can-kiem-tra.csv` (hoặc thẳng `collectors/venues.csv`), bấm link ở cột `googleMapsUrl` / `mapUrl` để xem ghim.
+2. Ghim sai hoặc chưa có: tìm đúng vị trí trên bản đồ, điền `latitude`, `longitude` (độ thập phân), đặt `source=manual`,
+   `status=ok`. Ghim đúng: chỉ cần đổi `status=ok`.
+3. Chạy lại `python normalise.py`.
+
+Nên sửa CSV bằng VS Code, LibreOffice hoặc Google Sheets (lưu UTF-8); Excel có thể làm hỏng dấu tiếng Việt. Muốn thêm
+địa điểm thì thêm dòng có `key, name, destination`, `suppliers` hoặc `aliases`, `queries`. Nhà cung cấp mới xuất hiện
+trong dữ liệu Vinpearl sẽ được `crawl.py venues` tự thêm dòng.
+
+### Đưa lên Google Maps: `data/map/`
+
+Mỗi địa điểm là một ghim: hạng phòng gộp vào ghim khách sạn, vé/combo gộp vào ghim địa điểm, vé máy bay gộp vào ghim
+sân bay đến.
+
+| File | Dùng cho |
+|---|---|
+| `mymaps-khach-san.csv`, `mymaps-vui-choi.csv`, `mymaps-san-bay.csv` | Google My Maps, mỗi file là một lớp. My Maps không nhận file quá 2.000 dòng, nên lớp lớn được tách thành `-2`, `-3`… |
+| `places.geojson` | web app (Maps JavaScript API); mỗi ghim có danh sách `items` gồm productId, tên, giá |
+| `can-kiem-tra.csv` | các vị trí cần xem bằng mắt |
+
+Các cột CSV: `name`, `latitude`, `longitude`, `category`, `destination`, `description` (tóm tắt số phòng/vé, giá từ),
+`products`, `priceFromVnd`, `available`, `starRating`, `url`, `imageUrl`, `locationSource`, `locationPrecision`,
+`warning`, `googleMapsUrl`, `placeKey`.
+
+Import vào Google My Maps:
+
+1. Vào [mymaps.google.com](https://mymaps.google.com), tạo bản đồ mới.
+2. Dưới lớp đầu tiên, bấm **Import** (Nhập) và chọn `mymaps-khach-san.csv`.
+3. Cột vị trí chọn `latitude` và `longitude`; cột tiêu đề chọn `name`.
+4. Thêm lớp mới, lặp lại với `mymaps-vui-choi.csv` và `mymaps-san-bay.csv`. Có thể tô màu ghim theo cột `category`
+   hoặc `warning` để thấy ngay ghim đáng ngờ.
+
+Web app:
+
+```js
+map.data.loadGeoJson("places.geojson");   // GeoJSON ghi [kinh độ, vĩ độ]
+map.data.addListener("click", (e) => console.log(e.feature.getProperty("name"), e.feature.getProperty("items")));
+```
 
 ## Kiểm tra trước khi coi là xong tuần 1
 
-1. Mở `data/stats.md`: xem số sản phẩm theo taxonomy và điểm đến, tỷ lệ có mô tả tiếng Việt, và **đọc tay
-   12 mẫu** ở cuối file.
-2. Mở `data/dedup_report.csv` và kiểm tra các cặp ghép.
-3. `grep -c '"descriptionLang": "vi"' data/products.jsonl`: mô tả tiếng Việt là tài sản giá trị nhất của bộ dữ liệu.
-4. Attraction booking.com phần lớn có mô tả tiếng Anh. Nếu nó làm lệch phép so sánh model tuần 2, chạy
-   `normalise.py --vietnamese-only`.
+1. Mở `data/stats.md`, xem bảng **Đối chiếu handbook §3** (số sản phẩm, số điểm đến, đủ loại, tỷ lệ tiếng Việt, có giá)
+   và bảng điểm đến × loại sản phẩm.
+2. Đọc tay 15 mẫu cuối `stats.md`.
+3. Xem `dedup_report.csv`.
+4. Sản phẩm Vinpearl ngoài 15 điểm đến (Bắc Ninh, Tây Ninh…) vẫn được giữ và đánh dấu *(ngoài kế hoạch)* trong bảng.
+5. Xem mục **Vị trí (toạ độ)** trong `stats.md` và duyệt `data/map/can-kiem-tra.csv`.
+
+## Tuỳ chọn hay dùng
+
+| Lệnh | Tuỳ chọn | Ý nghĩa |
+|---|---|---|
+| mọi lệnh crawl | `--destinations`, `--per-destination` | đổi kế hoạch |
+| | `--fast` | nhanh hơn (booking.com); agoda tự bỏ qua |
+| | `--headless` | không mở cửa sổ (mất giá booking.com và vé Vinpearl) |
+| | `--delay 5`, `--concurrency 2` | tốc độ |
+| | `--rediscover` | tìm URL lại sau khi đổi kế hoạch |
+| | `--limit N`, `--discover-only` | chạy thử |
+| `vinpearl` / `handbook` | `--price-dates 30,14,60` | các ngày hỏi giá phòng Vinpearl (số ngày từ hôm nay hoặc `YYYY-MM-DD`) |
+| | `--tour-limit N` | chỉ lấy chi tiết N vé/tour (chạy thử) |
+| `booking-hotels`, `agoda-hotels` | `--checkin 2026-10-15 --nights 1 --adults 2` | ngày lấy giá (mặc định hôm nay + 30) |
+| `booking-hotels` | `--all-vietnam` | thêm toàn bộ ~34.000 chỗ ở VN (ngoài handbook, vài ngày) |
+| `venues` | `--refresh` | tìm lại cả dòng `auto`/`review` (dòng `ok` luôn giữ nguyên) |
+| | `--only vinwonders-cua-hoi,hon-tam` | chỉ các địa điểm này |
+| | `--offline` | không gọi mạng: chỉ dùng trip.com đã crawl và cache |
+| `normalise.py` | `--no-plan` | giữ mọi thứ đã crawl, không lọc theo kế hoạch |
+| | `--rooms-per-hotel 3`, `--flights-per-route 5` | số phòng OTA / chuyến bay cụ thể giữ lại |
+| | `--vietnamese-only`, `--min-description 80` | lọc chất lượng mô tả |
+| | `--drop-member-variants` | bỏ bản sao giá thành viên của vé Vinpearl (`[VIN33 - Gold]`…) |
+| | `--usd-vnd 26300` | tỷ giá khi nguồn không trả VND |
+
+Chạy nhiều ngày (khi dùng `--all-vietnam`): `./run_forever.sh booking-hotels --fast --concurrency 3`. Script tự
+nghỉ và chạy tiếp khi bị chặn (mã thoát 75).
 
 ## Khi có sự cố
 
 | Hiện tượng | Cách xử lý |
 |---|---|
 | `Chưa cài trình duyệt cho Playwright` | `playwright install chromium` |
-| `Không có màn hình để mở trình duyệt` | thêm `--headless`, hoặc chạy trên máy có màn hình |
-| Log báo "Bị chặn … dừng lượt chạy" | nghỉ vài giờ, chạy lại cùng lệnh, cân nhắc `--delay 6 --concurrency 1` |
-| Cửa sổ đứng ở trang "Chờ một chút…" | bấm xác minh trong cửa sổ đó (script đang chờ) |
-| booking.com không có giá | đang chạy `--headless`, hoặc khách sạn hết phòng ngày đó → thử `--checkin` khác, rồi `retry-failed` / chạy lại |
-| Sửa parser xong muốn áp dụng cho dữ liệu cũ | `python crawl.py reparse <nguồn>` rồi `python normalise.py` |
-| Muốn thêm sản phẩm mới xuất hiện trên booking.com | `python crawl.py booking-hotels --rediscover` |
+| Log báo "Bị chặn … dừng" | nghỉ vài giờ, chạy lại cùng lệnh; cân nhắc `--delay 6` |
+| Cửa sổ đứng ở "Chờ một chút…" | bấm xác minh trong cửa sổ đó |
+| booking.com không có giá | đang `--headless`, hoặc hết phòng ngày đó → `--checkin` khác rồi `retry-failed` |
+| `Nguồn … đang được một tiến trình khác chạy` | mỗi nguồn chỉ một tiến trình; đợi tiến trình kia xong |
+| Sửa parser xong | `python crawl.py reparse <nguồn>` rồi `python normalise.py` |
+| Vé Vinpearl không có toạ độ | xem `data/map/can-kiem-tra.csv`: địa điểm đang `review`, hoặc vé chưa khớp địa điểm nào |
+| Ghim khách sạn sai chỗ | thêm dòng vào `collectors/location_overrides.csv` |
+| Log báo bản ghi Vinpearl chưa có `supplierCode` | dữ liệu crawl trước khi có trường này: `python crawl.py reparse vinpearl` (đọc cache, không tải lại; chạy ngày khác ngày crawl vẫn dùng đúng các ngày giá đã cache) |
+| `crawl.py venues` lỗi mạng / Photon trả 429 | chạy lại sau; truy vấn đã có kết quả được lưu trong `raw/geocode/` |
+| Catalog lệch khỏi 2.000–5.000 | chỉnh `--per-destination` hoặc `--destinations` rồi `--rediscover` |
 
-## Lưu ý pháp lý
+## Dữ liệu cá nhân và pháp lý
 
-- Vinpearl là dữ liệu của chính công ty. Nếu dùng lâu dài, nên xin đội kỹ thuật Vinpearl quyền truy cập API
-  hoặc bản xuất dữ liệu thay vì crawl.
-- Điều khoản sử dụng của booking.com không cho phép thu thập tự động. Dữ liệu này chỉ dùng nội bộ cho bản
-  demo thực tập, không phân phối lại. Nếu team cần một nguồn "sạch" về pháp lý, fallback là Amadeus
-  Self-Service API (§3).
+- Theo handbook: chỉ lấy dữ liệu sản phẩm. Review, tên và ảnh đại diện người đánh giá, trích dẫn review
+  ("điểm nổi bật" của agoda) bị xoá khỏi HTML/JSON **trước khi ghi đĩa**. Chỉ giữ điểm trung bình và số lượt đánh giá.
+- Vinpearl là dữ liệu của chính công ty; nếu dùng lâu dài nên xin đội kỹ thuật Vinpearl quyền truy cập API.
+- Điều khoản của booking.com và agoda.com không cho phép thu thập tự động. Dữ liệu chỉ dùng nội bộ cho demo thực tập,
+  không phân phối lại.
 - Không ghi gì vào CDP hay Insider production.
-# crawl_data_vsf
-# crawl_data_vsf
-# crawl_data_vsf
+- Toạ độ từ OpenStreetMap theo giấy phép ODbL: khi hiển thị hay chia sẻ bản đồ, ghi "© OpenStreetMap contributors".
+  Trang Photon cho phép dùng API cho dự án nếu dùng vừa phải; script lưu cache mỗi truy vấn và gửi cách nhau ≥ 1 giây.
+  robots.txt của photon.komoot.io chặn crawler trang web, còn đây là gọi API nên không kiểm tra robots.
+- Toạ độ sân bay từ OurAirports (public domain).
+- Không lấy toạ độ từ Google Geocoding/Places API để lưu vào catalog: điều khoản Google Maps Platform chỉ cho lưu tạm
+  lat/lng tối đa 30 ngày. Link Google Maps trong các file CSV chỉ để mở xem.

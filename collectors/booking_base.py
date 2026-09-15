@@ -10,7 +10,7 @@ import asyncio
 import gzip
 import logging
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from xml.etree import ElementTree as ET
 
 from .common import (
@@ -208,15 +208,22 @@ def _locs(xml_text: str) -> list[str]:
 
 
 async def crawl(paths: Paths, src: SitemapSource, opts: CrawlOptions, state: StateDB) -> dict:
-    if src.uses_sitemap(opts) and (opts.rediscover or not state.counts(src.name).get(src.name)):
-        await discover_sitemap(paths, src, opts, state)
+    if src.uses_sitemap(opts):
+        key = "sitemap:all" if opts.all_vietnam or not hasattr(src, "all_vietnam") else "sitemap:brand"
+        if opts.rediscover or not state.is_discovered(src.name, key):
+            n = await discover_sitemap(paths, src, opts, state)
+            state.mark_discovered(src.name, key, n)
 
     cache = RawCache(paths, src.name)
     limiter = HostRateLimiter(opts.delay)
     http = Http(limiter)  # robots.txt
     breaker = BlockBreaker(opts.max_blocks)
     try:
-        async with BrowserSession(paths, src.name, opts.browser) as session:
+        browser_opts = opts.browser
+        if browser_opts.fast and not getattr(src, "supports_fast", True):
+            log.info("[%s] Nguồn này không hỗ trợ --fast – chạy chế độ thường", src.name)
+            browser_opts = replace(browser_opts, fast=False)
+        async with BrowserSession(paths, src.name, browser_opts) as session:
             ctx = DiscoverContext(paths, src, opts, state, cache, session, await session.new_page(), limiter, http)
             found = await src.discover_plan(ctx)
             if found:
@@ -398,6 +405,10 @@ async def reparse(paths: Paths, src: SitemapSource, state: StateDB) -> int:
                     rec["plan"] = plan
                 writer.write(rec)
                 n += 1
+    if n == 0 and out.exists():
+        tmp.unlink(missing_ok=True)
+        log.warning("[%s] Không parse được bản ghi nào (state DB trống?) – giữ nguyên %s", src.name, out)
+        return 0
     tmp.replace(out)
     log.info("[%s] Parse lại %d trang từ cache → %s", src.name, n, out)
     return n

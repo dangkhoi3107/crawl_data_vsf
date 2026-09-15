@@ -1,7 +1,10 @@
-"""booking.com – toàn bộ chỗ ở tại Việt Nam (khoảng 34.000), trang tiếng Việt, kèm bảng hạng phòng và giá.
+"""booking.com – chỗ ở tại Việt Nam, trang tiếng Việt, kèm bảng hạng phòng và giá.
 
-Tìm URL: sitemap công khai https://www.booking.com/sitembk-hotel-index.xml → các file sitembk-hotel-vi.NNNN.xml.gz
-→ lọc /hotel/vn/. Mỗi trang được mở với ngày nhận/trả phòng để có bảng giá theo hạng phòng.
+Tìm URL (mặc định, theo handbook): với mỗi điểm đến trong collectors/plan.py, mở trang tìm kiếm
+searchresults.vi.html?ss=<điểm đến>&order=popularity và lấy N khách sạn phổ biến nhất; thêm một lượt tìm
+"Vinpearl" để không sót khách sạn thương hiệu Vinpearl.
+Tìm URL (--all-vietnam): sitemap công khai sitembk-hotel-vi.*.xml.gz → toàn bộ /hotel/vn/ (~34.000).
+Mỗi trang khách sạn được mở kèm ngày nhận/trả phòng để có bảng giá theo hạng phòng.
 """
 
 from __future__ import annotations
@@ -12,8 +15,11 @@ from urllib.parse import urlencode
 
 from bs4 import BeautifulSoup
 
-from .booking_base import SitemapSource
-from .common import now_iso
+import logging
+from urllib.parse import quote_plus, urlsplit
+
+from .booking_base import DiscoverContext, SitemapSource
+from .common import now_iso, slim_html
 from .textutil import (
     clean_text,
     first_int,
@@ -29,6 +35,8 @@ LODGING_TYPES = {
     "hotel", "lodgingbusiness", "resort", "apartment", "hostel", "motel", "bedandbreakfast",
     "campground", "vacationrental", "house", "accommodation", "guesthouse",
 }
+log = logging.getLogger("crawler.booking")
+VINPEARL_RE = re.compile(r"\b(vinpearl|vinholidays)\b")
 _COUNTRY_RE = re.compile(r"sitembk-hotel-vi\.(\d+)\.xml\.gz$")
 _HOTEL_URL_RE = re.compile(r"^https://www\.booking\.com/hotel/([a-z]{2})/[^/?#]+\.vi\.html$")
 
@@ -38,14 +46,83 @@ class BookingHotels(SitemapSource):
     sitemap_index = "https://www.booking.com/sitembk-hotel-index.xml"
     ready_selector = "#hp_hotel_name, [data-testid='property-description'], h2.pp-header__title, #hprt-table"
     expect_url = re.compile(r"/hotel/vn/")
+    people_selectors = (  # handbook: không lưu review / tên người đánh giá
+        "[data-testid='FeaturedReviewGalleryDesktop-wrapper']",
+        "[data-testid='featuredreview']",
+        "[data-testid='featuredreviewcard-text']",
+        "[data-testid='featuredreviewcard-avatar']",
+        "[data-testid='review-card']",
+        "#review_list_page_container",
+        ".c-review-block",
+    )
 
-    def __init__(self, checkin: date | None = None, nights: int = 1, adults: int = 2, currency: str = "VND"):
+    def __init__(self, checkin: date | None = None, nights: int = 1, adults: int = 2, currency: str = "VND",
+                 all_vietnam: bool = False):
+        self.all_vietnam = all_vietnam
         self.checkin = checkin or (date.today() + timedelta(days=30))
         self.nights = max(1, nights)
         self.adults = adults
         self.currency = currency
 
-    # -- discovery
+    # -- discovery theo kế hoạch
+    def uses_sitemap(self, opts) -> bool:
+        # luôn quét sitemap (chỉ ~4 file) để lấy mọi khách sạn thương hiệu Vinpearl; --all-vietnam thì lấy hết
+        return True
+
+    def search_url(self, query: str, offset: int) -> str:
+        checkout = self.checkin + timedelta(days=self.nights)
+        params = {
+            "ss": query,
+            "checkin": self.checkin.isoformat(),
+            "checkout": checkout.isoformat(),
+            "group_adults": self.adults,
+            "group_children": 0,
+            "no_rooms": 1,
+            "selected_currency": self.currency,
+            "order": "popularity",
+            "offset": offset,
+        }
+        return "https://www.booking.com/searchresults.vi.html?" + urlencode(params, quote_via=quote_plus)
+
+    async def discover_plan(self, ctx: DiscoverContext) -> int:
+        jobs = [(d.name, d.booking_query, ctx.opts.budget.booking_hotels) for d in ctx.opts.destinations]
+        total = 0
+        for dest, query, want in jobs:
+            key = f"search:{query}:{want}:{self.checkin.isoformat()}"
+            if ctx.done(key):
+                continue
+            found: list[tuple[str, str]] = []
+            offset = 0
+            for _ in range(8):
+                if len(found) >= want:
+                    break
+                res = await ctx.open(self.search_url(query, offset), "[data-testid='property-card']")
+                if res is None:
+                    break
+                ctx.cache.write(f"search-{fold(query).replace(' ', '-')}-{offset}", "html", slim_html(res.html))
+                seen = {u for u, _ in found}
+                cards = [c for c in parse_search_cards(res.html) if c[0] not in seen]
+                if not cards and offset == 0:
+                    # lần đầu qua trang thử thách, booking.com chuyển hướng làm mất tham số → mở lại một lần
+                    res = await ctx.open(self.search_url(query, offset), "[data-testid='property-card']")
+                    cards = parse_search_cards(res.html) if res else []
+                if not cards:
+                    break
+                found.extend(cards)
+                offset += 25
+            rows = []
+            for rank, (url, name) in enumerate(found[:want], 1):
+                is_vinpearl = bool(VINPEARL_RE.search(fold(name)))
+                plan = {"destination": dest, "rank": rank, "via": "booking-search", "query": query}
+                rows.append((url, 0 if is_vinpearl else rank, plan))
+            ctx.state.add_many(self.name, rows)
+            if found:  # trang tìm kiếm lỗi thì để lượt sau tìm lại
+                ctx.mark_done(key, len(rows))
+            total += len(rows)
+            log.info("[%s] %s: %d khách sạn", self.name, dest, len(rows))
+        return total
+
+    # -- discovery theo sitemap (--all-vietnam)
     def chunk_filter(self, loc: str) -> bool:
         return bool(_COUNTRY_RE.search(loc))
 
@@ -54,7 +131,10 @@ class BookingHotels(SitemapSource):
         return sorted(chunks, key=lambda c: int(_COUNTRY_RE.search(c).group(1)), reverse=True)
 
     def product_urls(self, locs: list[str]) -> list[str]:
-        return [u for u in locs if u.startswith("https://www.booking.com/hotel/vn/") and u.endswith(".vi.html")]
+        urls = [u for u in locs if u.startswith("https://www.booking.com/hotel/vn/") and u.endswith(".vi.html")]
+        if self.all_vietnam:
+            return urls
+        return [u for u in urls if re.search(r"/(vinpearl|vinholidays|melia-vinpearl)[a-z0-9-]*\.vi\.html$", u)]
 
     def stop_scan(self, locs: list[str], found: int) -> bool:
         if not found or not locs:
@@ -63,7 +143,7 @@ class BookingHotels(SitemapSource):
         return bool(countries) and max(countries) < "vn"
 
     def priority(self, url: str) -> int:
-        return 10 if re.search(r"vinpearl|vinholidays|vinwonders|melia-vinpearl", url) else 100
+        return 0 if re.search(r"/(vinpearl|vinholidays|melia-vinpearl)", url) else 100
 
     def fetch_url(self, url: str) -> tuple[str, dict]:
         checkout = self.checkin + timedelta(days=self.nights)
@@ -89,6 +169,24 @@ class BookingHotels(SitemapSource):
     # -- parsing
     def parse(self, html: str, url: str, meta: dict) -> dict | None:
         return parse_hotel_html(html, url, meta)
+
+
+def parse_search_cards(html: str) -> list[tuple[str, str]]:
+    """Trang kết quả tìm kiếm → [(URL trang khách sạn chuẩn .vi.html, tên)] theo thứ tự hiển thị."""
+    soup = BeautifulSoup(html, "lxml")
+    out: list[tuple[str, str]] = []
+    for card in soup.select("[data-testid='property-card']"):
+        link = card.select_one("a[data-testid='title-link']") or card.select_one("a[href*='/hotel/vn/']")
+        if link is None or not link.get("href"):
+            continue
+        path = urlsplit(link["href"]).path
+        m = re.match(r"^/hotel/vn/([^/.]+)(?:\.[a-z-]+)?\.html$", path)
+        if not m:
+            continue
+        url = f"https://www.booking.com/hotel/vn/{m.group(1)}.vi.html"
+        if url not in (u for u, _ in out):
+            out.append((url, node_text(card.select_one("[data-testid='title']")) or m.group(1)))
+    return out
 
 
 def parse_hotel_html(html: str, url: str, meta: dict | None = None) -> dict | None:

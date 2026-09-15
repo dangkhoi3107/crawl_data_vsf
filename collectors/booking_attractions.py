@@ -36,6 +36,7 @@ class BookingAttractions(SitemapSource):
     sitemap_index = "https://www.booking.com/sitembk-attractions-index.xml"
     ready_selector = "[data-testid='attr-content'], [data-testid='inline-ticket-config'], [data-testid='product-gallery']"
     expect_url = re.compile(r"/attractions/")
+    people_selectors = ("[data-testid='review-card']", "[data-testid='reviews-list']", "[data-testid='review-item']")
 
     def __init__(self, currency: str = "VND"):
         self.currency = currency
