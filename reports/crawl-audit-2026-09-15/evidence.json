@@ -1,0 +1,13 @@
+{
+  "snapshotAt": "2026-09-15T17:15:23.655329+07:00",
+  "canonicalDataDir": "/home/dangkhoi/code/vsf/data-collection/data",
+  "files": [
+    {
+      "source": "/home/dangkhoi/code/vsf/data-collection/data/interim/vinpearl.jsonl",
+      "snapshot": "/home/dangkhoi/code/vsf/data-collection/reports/crawl-audit-2026-09-15/snapshot/interim/vinpearl.jsonl",
+      "bytes": 2282429,
+      "sourceModifiedAt": "2026-09-15T16:50:05.388570+07:00",
+      "sha256": "876c8ea441a8ca670ed89301626976c7337d6eb84b87d125d9a4d0636edac491"
+    }
+  ]
+}

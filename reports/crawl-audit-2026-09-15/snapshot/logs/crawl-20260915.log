@@ -1,0 +1,3 @@
+2026-09-15 17:15:23,894 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-15 17:15:24,115 INFO    normalise Ghép 0 khách sạn Vinpearl với booking.com
+2026-09-15 17:15:24,168 INFO    normalise Đã ghi 508 sản phẩm → /home/dangkhoi/code/vsf/data-collection/reports/crawl-audit-2026-09-15/snapshot/products.jsonl (+ products.csv, dedup_report.csv, stats.md)
