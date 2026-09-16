@@ -323,33 +323,100 @@ def vinpearl_taxonomy(r: dict) -> str:
 
 
 POLICY_TITLE_RE = re.compile(r"điều khoản|chính sách|hoàn\s*h|hướng dẫn|lưu ý|quy định|terms|cancellation|how to use|policy", re.I)
+# API Vinpearl thường để điều khoản trong khối mang tiêu đề "Mô tả" / "Description", nên phải nhận ra
+# theo cả nội dung: trước khi có bước này, 344 vé dùng chung vài đoạn điều khoản làm mô tả.
+POLICY_BODY_RE = re.compile(
+    r"^\W{0,3}(lưu ý quan trọng|important note|vé (?:chỉ|có giá trị|đã mua|không được)|"
+    r"ticket(?:s)? (?:need|are|is|valid)|the voucher|instructions for use|vui lòng lựa chọn ngày|"
+    r"children under|regulations for applying|guests? between|quy định để áp dụng|"
+    r"quý khách hàng cao dưới)", re.I)
+MEMBER_PREFIX_RE = re.compile(r"^\[(?:VIN\s*33|VinClub|Khách hàng đặc biệt)[^\]]*\]\s*-?\s*", re.I)
+MIN_TICKET_DESCRIPTION = 120
+
+
+def base_ticket_name(name: str | None) -> str:
+    """Bỏ nhãn hạng thành viên và nhãn đối tượng ưu đãi, giữ tên địa điểm để còn phân biệt được vé."""
+    return MEMBER_PREFIX_RE.sub("", ticket_place_name(name or "")).strip()
+
+
+def split_policy_lines(text: str) -> tuple[str, str]:
+    """Tách một khối thành (nội dung, chính sách) theo từng dòng.
+
+    Khối "Thông tin chung" của Vinpearl hay mở đầu bằng một đoạn điều khoản rồi mới tới phần giới thiệu thật;
+    loại cả khối là mất tới bảy nghìn ký tự nội dung dùng được cho embedding.
+    """
+    keep, policy = [], []
+    for line in text.split("\n"):
+        s = line.strip()
+        if not s:
+            keep.append("")
+        elif POLICY_BODY_RE.match(s):
+            policy.append(s)
+        else:
+            keep.append(s)
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(keep)).strip(), "\n".join(policy).strip()
+
+
+def _ticket_blocks(r: dict) -> tuple[list[tuple[str, str]], dict[str, str]]:
+    """Tách "trải nghiệm" (Mô tả, Thông tin chung, Bao gồm) khỏi "chính sách" (Điều khoản, Hoàn huỷ, Hướng dẫn).
+
+    Mô tả dùng để embedding chỉ nên nói về sản phẩm; điều khoản đi vào attributes.policies.
+    """
+    content, policies = [], {}
+    for block in r.get("extraInfos") or []:
+        title, text = block.get("title") or "", (block.get("text") or "").strip()
+        if not text:
+            continue
+        if POLICY_TITLE_RE.search(title):
+            policies.setdefault(title or "Điều khoản", text[:2000])
+            continue
+        body, policy = split_policy_lines(text)
+        if policy:
+            policies.setdefault(f"{title} (trích từ mô tả)" if title else "Điều khoản", policy[:2000])
+        if body:
+            content.append((title, body))
+    return content, policies
+
+
+def ticket_description(r: dict, name: str, content: list[tuple[str, str]], price, audience: list[str]) -> tuple[str | None, str | None]:
+    """Mô tả vé/combo Vinpearl. Luôn mở đầu bằng tên vé: nhiều vé của cùng một khu vui chơi dùng chung
+    đúng một đoạn giới thiệu địa điểm, thiếu dòng này thì vector của chúng gần như trùng nhau."""
+    vi_content = [b for b in content if detect_lang(b[1]) == "vi"]
+    content = vi_content or content  # có bản tiếng Việt thì bỏ bản tiếng Anh trùng nội dung
+    sections = [f"{t}\n{x}" if t and fold(t) in ("bao gom", "includes") else x for t, x in content]
+    body = [x for x in [r.get("description"), r.get("highlight")] + sections if x]
+    lead = base_ticket_name(name)
+    joined = "\n\n".join(body)
+    if len(joined) >= MIN_TICKET_DESCRIPTION:
+        return "\n\n".join([lead] + body), None
+    facts = []
+    if r.get("lengthOfTour") not in (None, "", "0", 0):
+        facts.append(f"Thời lượng: {r['lengthOfTour']}")
+    if r.get("serviceIncluded"):
+        facts.append(f"Bao gồm: {r['serviceIncluded']}")
+    if audience:
+        facts.append("Phù hợp: " + ", ".join(audience))
+    if r.get("destinationName"):
+        facts.append(f"Địa điểm: {r['destinationName']}")
+    if price:
+        facts.append("Giá từ " + _fmt_vnd(price))
+    text = "\n\n".join([lead] + body + ([". ".join(facts)] if facts else []))
+    if not body:
+        return (text or r.get("shortDescription")), "derived: tên vé, thời lượng, đối tượng, địa điểm, giá"
+    return text, "derived: mô tả gốc quá ngắn, bổ sung từ thông tin vé"
 
 
 def vinpearl_tour_product(r: dict, today: date) -> dict | None:
     name = r.get("name")
     if not name:
         return None
-    # Tách "trải nghiệm" (Mô tả, Thông tin chung, Bao gồm) khỏi "chính sách" (Điều khoản, Hoàn huỷ, Hướng dẫn sử dụng):
-    # mô tả dùng để embedding chỉ nên nói về sản phẩm.
-    content, policies = [], {}
-    for block in r.get("extraInfos") or []:
-        title, text = block.get("title") or "", block.get("text") or ""
-        if not text:
-            continue
-        if POLICY_TITLE_RE.search(title):
-            policies.setdefault(title, text[:2000])
-        else:
-            content.append((title, text))
-    vi_content = [b for b in content if detect_lang(b[1]) == "vi"]
-    content = vi_content or content  # có bản tiếng Việt thì bỏ bản tiếng Anh trùng nội dung
-    sections = [f"{t}\n{x}" if t and fold(t) in ("bao gom", "includes") else x for t, x in content]
-    parts = [r.get("description"), r.get("highlight")] + sections
-    description = "\n\n".join(x for x in parts if x) or r.get("shortDescription")
+    content, policies = _ticket_blocks(r)
     sale_end = iso_date(r.get("saleEndDate"))
     price = next((p for p in (r.get("adultSalePrice"), r.get("adultOriginalPrice")) if isinstance(p, (int, float)) and p > 0), None)
+    audience = r.get("audience") or []
+    description, description_source = ticket_description(r, name, content, price, audience)
     # giá 0 / thiếu trang chi tiết: không coi là miễn phí hay đặt được
     available = (price is not None and bool(r.get("isEnabled", True)) and (sale_end is None or sale_end >= today.isoformat()))
-    audience = r.get("audience") or []
     text_blob = " ".join([name, description or ""] + audience)
     return make_product(
         meta={"src": "vinpearl", "supplierCode": r.get("supplierCode"), "supplierName": r.get("supplierName"),
@@ -383,6 +450,7 @@ def vinpearl_tour_product(r: dict, today: date) -> dict | None:
             "detailMissing": True if not r.get("hasDetail") else None,
             "priceMissing": True if price is None else None,
             "policies": policies,
+            "descriptionSource": description_source,
             "descriptionLang": detect_lang(description),
             "fieldSources": {"unitPrice": "vinpearl"},
         },
@@ -635,19 +703,22 @@ def trip_attraction_product(r: dict) -> dict | None:
     plan = r.get("plan") or {}
     tags = r.get("tags") or []
     description = r.get("introduction")
-    derived = False
+    facts = [name]
+    if tags:
+        facts.append("Loại hình: " + ", ".join(tags))
+    if r.get("address"):
+        facts.append("Địa chỉ: " + r["address"])
+    if r.get("openingHours"):
+        facts.append("Giờ mở cửa: " + r["openingHours"])
+    if r.get("suggestedDuration"):
+        facts.append("Thời gian tham quan đề xuất: " + r["suggestedDuration"])
+    derived = None
+    # mô tả dưới ngưỡng thì embedding gần như không có tín hiệu; bù bằng dữ liệu có cấu trúc đã crawl
     if not description:
-        facts = [name]
-        if tags:
-            facts.append("Loại hình: " + ", ".join(tags))
-        if r.get("address"):
-            facts.append("Địa chỉ: " + r["address"])
-        if r.get("openingHours"):
-            facts.append("Giờ mở cửa: " + r["openingHours"])
-        if r.get("suggestedDuration"):
-            facts.append("Thời gian tham quan đề xuất: " + r["suggestedDuration"])
-        description = ". ".join(facts)
-        derived = True
+        description, derived = ". ".join(facts), "derived: loại hình, địa chỉ, giờ mở cửa, thời lượng"
+    elif len(description) < MIN_TICKET_DESCRIPTION and len(facts) > 1:
+        description = description + "\n\n" + ". ".join(facts[1:])
+        derived = "derived: mô tả gốc quá ngắn, bổ sung loại hình, địa chỉ, giờ mở cửa"
     fname = fold(name)
     text_blob = " ".join([name, description] + tags + [r.get("rankInfo") or ""])
     lat, lng = clean_coords(r.get("latitude"), r.get("longitude"))
@@ -679,7 +750,7 @@ def trip_attraction_product(r: dict) -> dict | None:
             "familyFriendly": bool(FAMILY_RE.search(text_blob)) or None,
             "images": r.get("images"),
             "url": r.get("url"),
-            "descriptionSource": "derived: loại hình, địa chỉ, giờ mở cửa, thời lượng" if derived else None,
+            "descriptionSource": derived,
             "descriptionLang": detect_lang(description),
             "fieldSources": {"name": "trip.com", "description": "trip.com", "unitPrice": "trip.com"},
         },
@@ -1268,7 +1339,139 @@ def finalize_locations(products: list[dict]) -> None:
                 a["locationWarning"] = f"cách tâm {p['destination']} {km:.0f} km"
 
 
+# ---------------------------------------------------------------------- mô tả tiếng Việt
+
+
+VI_PROPERTY_TYPE = {
+    "resort": "khu nghỉ dưỡng", "hotel": "khách sạn", "apartment": "căn hộ", "aparthotel": "căn hộ khách sạn",
+    "villa": "biệt thự", "homestay": "homestay", "hostel": "nhà nghỉ", "guesthouse": "nhà khách",
+    "condotel": "condotel", "motel": "nhà nghỉ", "bed and breakfast": "nhà nghỉ kèm bữa sáng",
+}
+
+
+def vietnamese_description(p: dict) -> str | None:
+    """Dựng mô tả tiếng Việt từ thuộc tính có cấu trúc.
+
+    Tiện ích của booking.com và agoda.com vốn đã là tiếng Việt, nên phần lớn nội dung vẫn là chữ của nguồn
+    chứ không phải chữ tự nghĩ ra.
+    """
+    a = p["attributes"]
+    where = a.get("city") or a.get("province") or p.get("destination")
+    parts = []
+    if p["taxonomy"] in ("attraction", "combo", "golf"):
+        parts.append(f"{p['name']} tại {where}." if where else f"{p['name']}.")
+        if a.get("tags"):
+            parts.append("Loại hình: " + ", ".join(a["tags"]) + ".")
+        if a.get("openingHours"):
+            parts.append(f"Giờ mở cửa: {a['openingHours']}.")
+        if a.get("suggestedDuration"):
+            parts.append(f"Thời gian tham quan đề xuất: {a['suggestedDuration']}.")
+    elif a.get("level") == "room":
+        opening = a.get("roomName") or p["name"]
+        if a.get("hotelName"):
+            opening += f" thuộc {a['hotelName']}"
+        if where:
+            opening += f", {where}"
+        parts.append(opening + ".")
+        detail = []
+        if a.get("roomSizeM2"):
+            detail.append(f"diện tích {a['roomSizeM2']} m²")
+        if a.get("maxOccupancy"):
+            detail.append(f"sức chứa tối đa {a['maxOccupancy']} khách")
+        if a.get("bed"):
+            detail.append(str(a["bed"]).strip().lower())
+        if detail:
+            parts.append("Phòng " + ", ".join(detail) + ".")
+    else:
+        kind = VI_PROPERTY_TYPE.get(fold(a.get("propertyType") or ""), "cơ sở lưu trú")
+        star = f" {a['starRating']:g} sao" if isinstance(a.get("starRating"), (int, float)) else ""
+        parts.append(f"{p['name']} là {kind}{star}" + (f" tại {where}." if where else "."))
+    if a.get("address"):
+        parts.append(f"Địa chỉ: {a['address']}.")
+    amenities = [x for x in (a.get("amenities") or []) if x][:12]
+    if amenities:
+        parts.append("Tiện ích: " + ", ".join(amenities) + ".")
+    if a.get("reviewScore"):
+        scale = a.get("reviewScoreScale") or 10
+        count = f" từ {a['reviewCount']} lượt đánh giá" if a.get("reviewCount") else ""
+        parts.append(f"Điểm đánh giá {a['reviewScore']:g}/{scale:g}{count}.")
+    text = " ".join(parts)
+    return text if len(text) >= 80 else None
+
+
+def localise_descriptions(products: list[dict]) -> int:
+    """Sản phẩm mà nguồn chỉ có mô tả tiếng Anh được dựng lại mô tả tiếng Việt từ thuộc tính có cấu trúc.
+
+    Văn bản gốc không bị xoá: nó chuyển sang attributes.descriptionOriginal để còn đối chiếu.
+    Hạng phòng ghép mô tả từ khách sạn cha nên cũng được dựng lại, không chỉ riêng cơ sở lưu trú.
+    """
+    localised = 0
+    for p in products:
+        a = p["attributes"]
+        if a.get("descriptionLang") == "vi":
+            continue
+        text = vietnamese_description(p)
+        if not text or detect_lang(text) != "vi":
+            continue
+        a["descriptionOriginal"] = p.get("description")
+        p["description"] = text
+        a["descriptionSource"] = "derived: dựng tiếng Việt từ thuộc tính (mô tả gốc không phải tiếng Việt)"
+        a["descriptionLang"] = "vi"
+        localised += 1
+    return localised
+
+
+# ---------------------------------------------------------------------- biến thể giá thành viên
+
+
+def merge_member_variants(products: list[dict]) -> tuple[list[dict], int]:
+    """Gộp [VIN33 - Gold/Platinum/Diamond] về một sản phẩm, giá từng hạng giữ lại trong attributes.memberPrices.
+
+    Không xoá thẳng mọi biến thể: 5 trong 18 vé chỉ tồn tại dưới dạng biến thể thành viên, xoá hết là mất
+    sản phẩm thật. Vé nào không có bản không-hạng thì giữ lại hạng giá cao nhất (gần giá công bố nhất).
+    """
+    by_base: dict[tuple[str, str], list[dict]] = defaultdict(list)
+    for p in products:
+        if p["attributes"].get("memberTier"):
+            by_base[(base_ticket_name(p["name"]), p["destination"])].append(p)
+    plain = {(base_ticket_name(p["name"]), p["destination"]): p
+             for p in products if not p["attributes"].get("memberTier")}
+    dropped_ids: set[str] = set()
+    for key, variants in by_base.items():
+        keeper = plain.get(key)
+        if keeper is None:
+            keeper = max(variants, key=lambda v: (v.get("unitPrice") or 0))
+            keeper["name"] = key[0]
+            keeper["attributes"].pop("memberTier", None)
+        prices = {v["attributes"]["memberTier"]: v.get("unitPrice")
+                  for v in variants if v.get("unitPrice") and v["attributes"].get("memberTier")}
+        if prices:
+            keeper["attributes"]["memberPrices"] = prices
+        dropped_ids.update(v["productId"] for v in variants if v is not keeper)
+    return [p for p in products if p["productId"] not in dropped_ids], len(dropped_ids)
+
+
 # ---------------------------------------------------------------------- kế hoạch
+
+
+def drop_unsellable(products: list[dict]) -> tuple[list[dict], int]:
+    """Bỏ sản phẩm không có giá mà nguồn cũng không cung cấp được: không đặt được, mô tả gần như trống.
+
+    Đã thử lấy lại bằng `crawl.py retry-missing`; API chi tiết của Vinpearl trả HTTP 500 cho các vé này và
+    agoda không trả giá cho nhiều ngày nhận phòng khác nhau.
+
+    Không áp dụng cho điểm công cộng không bán vé (`attributes.ticketed = False`) — với chúng, không có giá
+    là dữ liệu đúng chứ không phải dữ liệu thiếu. Hạng phòng của khách sạn bị loại do apply_plan dọn theo.
+    """
+    keep, removed = [], 0
+    for p in products:
+        a = p["attributes"]
+        if (p.get("unitPrice") is None and a.get("ticketed") is not False
+                and a.get("level") not in ("room", "flight")):
+            removed += 1
+            continue
+        keep.append(p)
+    return keep, removed
 
 
 def apply_plan(products: list[dict], plan_names: set[str], budget: Budget, dropped: Counter) -> list[dict]:
@@ -1349,7 +1552,9 @@ def write_quality_review(products: list[dict], path: Path) -> None:
         for p in products:
             a, issues = p["attributes"], []
             if p.get("unitPrice") is None:
-                issues.append("thiếu giá: cần đối chiếu nguồn")
+                # điểm công cộng không bán vé thì không có giá là đúng, không phải lỗi cần đối chiếu
+                issues.append("điểm công cộng không bán vé, không có giá"
+                              if a.get("ticketed") is False else "thiếu giá: cần đối chiếu nguồn")
             if not p.get("description"):
                 issues.append("thiếu mô tả")
             elif a.get("descriptionLang") != "vi":
@@ -1401,6 +1606,8 @@ def write_stats(products: list[dict], path: Path, merged: int, dropped: Counter,
         "",
         "Nhãn ngôn ngữ được ước lượng từ tỷ lệ ký tự có dấu trong mô tả; không xác nhận tên hoặc toàn bộ nội dung đã là tiếng Việt. Cần đọc tay các mẫu bên dưới.",
         "Cờ available được suy ra từ dữ liệu nguồn và giá tại thời điểm crawl; chưa xác minh đặt chỗ hiện tại. Các trường còn thiếu được liệt kê trong `quality_review.csv`.",
+        (f"Trong {n - len(priced)} sản phẩm không có giá, {sum(1 for p in products if p['attributes'].get('ticketed') is False)} "
+         "là điểm công cộng không bán vé (không có giá là đúng); phần còn lại mới là thiếu giá cần đối chiếu nguồn."),
         "",
         "## Điểm đến × loại sản phẩm",
         "",
@@ -1488,7 +1695,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--match-threshold", type=float, default=88.0, help="điểm giống tên tối thiểu để ghép khách sạn giữa các nguồn")
     ap.add_argument("--min-description", type=int, default=0, help="loại sản phẩm có mô tả ngắn hơn N ký tự")
     ap.add_argument("--vietnamese-only", action="store_true", help="loại sản phẩm có mô tả không phải tiếng Việt")
-    ap.add_argument("--drop-member-variants", action="store_true", help="bỏ biến thể giá thành viên của Vinpearl ([VIN33 - Gold]…)")
+    ap.add_argument("--keep-unsellable", action="store_true",
+                    help="giữ cả sản phẩm không có giá mà nguồn không cung cấp được; mặc định loại bỏ")
+    ap.add_argument("--keep-member-variants", action="store_true",
+                    help="giữ nguyên từng biến thể giá thành viên Vinpearl ([VIN33 - Gold]…); mặc định gộp về một sản phẩm")
     ap.add_argument("--usd-vnd", type=float, default=26300.0, help="tỷ giá dùng khi trang không trả VND")
     ap.add_argument("--eur-vnd", type=float, default=30500.0)
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -1577,6 +1787,11 @@ def main(argv: list[str] | None = None) -> int:
     for r in raw.get("trip_flights", []):
         products.extend(trip_route_products(r, budget.flights_per_route))
 
+    if not a.keep_unsellable:
+        products, unsellable = drop_unsellable(products)
+        if unsellable:
+            dropped["không có giá và nguồn không cung cấp được (không đặt được)"] += unsellable
+
     if not a.no_plan:
         products = apply_plan(products, plan_names, budget, dropped)
 
@@ -1592,14 +1807,20 @@ def main(argv: list[str] | None = None) -> int:
         if a.min_description and len(p.get("description") or "") < a.min_description:
             dropped[f"mô tả < {a.min_description} ký tự"] += 1
             continue
-        if a.drop_member_variants and p["attributes"].get("memberTier"):
-            dropped["biến thể giá thành viên Vinpearl"] += 1
-            continue
         if a.vietnamese_only and p["attributes"].get("descriptionLang") != "vi":
             dropped["mô tả không phải tiếng Việt"] += 1
             continue
         seen.add(p["productId"])
         final.append(p)
+
+    localised = localise_descriptions(final)
+    if localised:
+        log.info("Dựng mô tả tiếng Việt từ thuộc tính cho %d sản phẩm (bản gốc giữ ở descriptionOriginal)", localised)
+
+    if not a.keep_member_variants:
+        final, merged_variants = merge_member_variants(final)
+        if merged_variants:
+            dropped["biến thể giá thành viên Vinpearl (đã gộp, giá từng hạng giữ trong memberPrices)"] += merged_variants
 
     finalize_locations(final)
     write_outputs(final, paths.data, report_rows, dropped, plan_names, location_stats, venues)

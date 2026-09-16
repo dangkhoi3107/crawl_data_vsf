@@ -16,6 +16,7 @@ Hoặc từng nguồn:
 Tiện ích:
   python crawl.py status                # tiến độ từng nguồn
   python crawl.py reparse booking-hotels
+  python crawl.py retry-missing vinpearl     # chỉ lấy lại trường còn thiếu của bản ghi đã lưu
   python crawl.py retry-failed agoda-hotels
 
 Dừng bất kỳ lúc nào bằng Ctrl+C; chạy lại đúng lệnh đó để tiếp tục.
@@ -28,10 +29,11 @@ import asyncio
 import logging
 import re
 import sys
+from collections import Counter
 from datetime import date, timedelta
 from pathlib import Path
 
-from collectors import booking_base, trip, venues, vinpearl
+from collectors import booking_base, retry_missing, trip, venues, vinpearl
 from collectors.agoda_hotels import AgodaHotels
 from collectors.booking_attractions import BookingAttractions
 from collectors.booking_hotels import BookingHotels
@@ -225,6 +227,31 @@ async def cmd_reparse(paths: Paths, a: argparse.Namespace) -> None:
         state.close()
 
 
+async def cmd_retry_missing(paths: Paths, a: argparse.Namespace) -> dict:
+    """Lấy lại đúng những trường còn thiếu của bản ghi đã lưu, không tải lại cả nguồn.
+
+    Bản ghi cũ được sao lưu trước khi ghi đè và chỉ trường đang trống mới bị thay; thời điểm crawl của các
+    trường đã có được giữ nguyên.
+    """
+    source = _name(a.source)
+    selected = retry_missing.select_missing(paths, source, getattr(a, "limit", None))
+    if not selected:
+        print(f"{source}: không có bản ghi nào thiếu trường cần bổ sung.")
+        return {}
+    reasons = Counter(f for r in selected for f in retry_missing.missing_fields(r, source))
+    log.info("%s: %d bản ghi cần bổ sung (%s)", source, len(selected),
+             ", ".join(f"{k} {v}" for k, v in reasons.most_common()))
+    if source == "vinpearl":
+        opts = vinpearl.VinpearlOptions(browser=_browser_opts(a), delay=a.delay if a.delay is not None else 2.0,
+                                        max_blocks=a.max_blocks, price_dates=_price_dates(a))
+        result = await retry_missing.retry_vinpearl(paths, selected, opts)
+    else:
+        result = await retry_missing.retry_agoda(paths, selected, _crawl_opts(a, 4.0), checkin=_checkin(a),
+                                                 nights=getattr(a, "nights", 1), adults=getattr(a, "adults", 2))
+    log.info("retry-missing %s: %s", source, result)
+    return result
+
+
 def cmd_retry_failed(paths: Paths, a: argparse.Namespace) -> None:
     state = StateDB(paths)
     n = state.reset_failed(_name(a.source))
@@ -302,6 +329,9 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("status", help="xem tiến độ")
     r = sub.add_parser("reparse", parents=[browser, dates], help="parse lại từ cache raw")
     r.add_argument("source", choices=SOURCES)
+    rm = sub.add_parser("retry-missing", parents=[browser, crawl, dates],
+                        help="lấy lại đúng trường còn thiếu (giá, mô tả, toạ độ) của bản ghi đã lưu")
+    rm.add_argument("source", choices=["vinpearl", "agoda-hotels"])
     rf = sub.add_parser("retry-failed", help="đưa URL lỗi về hàng đợi")
     rf.add_argument("source", choices=SOURCES[1:])
     return p
@@ -332,6 +362,9 @@ def main(argv: list[str] | None = None) -> int:
         elif a.cmd == "reparse":
             with RunLock(paths, _name(a.source)):
                 asyncio.run(cmd_reparse(paths, a))
+        elif a.cmd == "retry-missing":
+            with RunLock(paths, _name(a.source)):
+                result = asyncio.run(cmd_retry_missing(paths, a))
         elif a.cmd == "retry-failed":
             cmd_retry_failed(paths, a)
     except KeyboardInterrupt:

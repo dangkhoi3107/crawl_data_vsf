@@ -51,10 +51,13 @@ python crawl.py booking-hotels --fast --concurrency 2
 python crawl.py agoda-hotels
 python crawl.py venues              # toạ độ địa điểm vé Vinpearl (chỉ gọi mạng cho địa điểm chưa có toạ độ)
 python normalise.py
+python make_template.py             # tài liệu schema kèm ví dụ thật, sinh từ catalog vừa chuẩn hoá
+python make_sample.py               # bộ mẫu 50 sản phẩm cho người khác chạy thử
 ```
 
 Kết quả: `data/products.jsonl`, `data/products.csv`, `data/stats.md` (có bảng **đối chiếu mục tiêu handbook**),
-`data/dedup_report.csv` và thư mục `data/map/` (bản đồ).
+`data/template.json`, `data/SCHEMA.md`, `data/sample/`, `data/quality_review.csv`, `data/dedup_report.csv`
+và thư mục `data/map/` (bản đồ).
 
 Ctrl+C lúc nào cũng được: chạy lại đúng lệnh cũ sẽ tiếp tục từ chỗ dừng. `python crawl.py status` xem tiến độ.
 
@@ -190,7 +193,21 @@ field mà CDP thật không có.
 - `productId` = UUIDv5 của `sourceRef`, **ổn định giữa các lần chạy**.
 - `taxonomy`: `hotel` (`attributes.level` = `property` / `room`), `flight` (`route` / `flight`), `attraction`, `combo`, `golf`.
 - Tên theo mẫu handbook: `"<Khách sạn> - <Hạng phòng>"`, `"Vé máy bay Hà Nội - Nha Trang"`.
-- Mô tả tự sinh (vé máy bay, phòng OTA, điểm tham quan thiếu giới thiệu) được đánh dấu bằng `attributes.descriptionSource`.
+- Mô tả tự sinh (vé máy bay, phòng OTA, vé và điểm tham quan thiếu giới thiệu) được đánh dấu bằng `attributes.descriptionSource`.
+- **Điều khoản vé không nằm trong `description`.** API Vinpearl trả điều khoản, chính sách hoàn huỷ và hướng
+  dẫn sử dụng lẫn trong khối nội dung, kể cả khối mang tiêu đề "Mô tả". `normalise.py` lọc theo từng dòng
+  (`split_policy_lines`) và đẩy phần điều khoản sang `attributes.policies`; mô tả dùng để embedding chỉ nói về
+  sản phẩm. Không có bước này thì 344 vé dùng chung vài đoạn điều khoản làm mô tả và vector của chúng gần như
+  trùng nhau.
+- Mô tả vé luôn mở đầu bằng tên vé, vì nhiều vé của cùng một khu vui chơi dùng chung đúng một đoạn giới thiệu
+  địa điểm. Mô tả ngắn hơn 120 ký tự được bổ sung từ dữ liệu có cấu trúc (thời lượng, đối tượng, địa điểm, giá).
+- Biến thể giá thành viên (`[VIN33 - Gold/Platinum/Diamond]`) được gộp về sản phẩm gốc, giá từng hạng giữ trong
+  `attributes.memberPrices`. Vé nào không có bản không-hạng thì giữ lại một biến thể và đổi tên về tên gốc.
+- Sản phẩm mà nguồn chỉ có mô tả tiếng Anh được dựng mô tả tiếng Việt từ thuộc tính có cấu trúc (tên, loại
+  hình, hạng sao, địa chỉ, tiện ích, điểm đánh giá); văn bản gốc chuyển sang `attributes.descriptionOriginal`.
+- **Sản phẩm không có giá mà nguồn không cung cấp được sẽ bị loại** (mặc định; `--keep-unsellable` để giữ).
+  Không áp dụng cho điểm công cộng không bán vé — với chúng, không có giá là dữ liệu đúng. Số lượng bị loại
+  luôn ghi trong mục "Bị loại" của `stats.md`.
 
 ### Nguồn của từng trường
 
@@ -361,7 +378,8 @@ Kiểm tra hồi quy offline: `python -m unittest test_quality -v`.
 | `normalise.py` | `--no-plan` | giữ mọi thứ đã crawl, không lọc theo kế hoạch |
 | | `--rooms-per-hotel 3`, `--flights-per-route 5` | số phòng OTA / chuyến bay cụ thể giữ lại |
 | | `--vietnamese-only`, `--min-description 80` | lọc chất lượng mô tả |
-| | `--drop-member-variants` | bỏ bản sao giá thành viên của vé Vinpearl (`[VIN33 - Gold]`…) |
+| | `--keep-member-variants` | giữ nguyên từng bản giá thành viên của vé Vinpearl (`[VIN33 - Gold]`…); mặc định gộp về một sản phẩm |
+| | `--keep-unsellable` | giữ cả sản phẩm không có giá mà nguồn không cung cấp được; mặc định loại bỏ |
 | | `--usd-vnd 26300` | tỷ giá khi nguồn không trả VND |
 
 Chạy nhiều ngày (khi dùng `--all-vietnam`): `./run_forever.sh booking-hotels --fast --concurrency 3`. Script tự

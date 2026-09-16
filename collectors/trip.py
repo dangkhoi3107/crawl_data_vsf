@@ -398,6 +398,12 @@ def parse_attraction(payload: dict, url: str) -> dict | None:
     tickets = overview.get("ticketsAndToursInfo") or {}
     coord = basic.get("coordinate") or {}
     images = product.get("image") if isinstance(product.get("image"), list) else ([product["image"]] if product.get("image") else [])
+    if not images:
+        # Điểm không bán vé không có node Product trong JSON-LD, nhưng ảnh vẫn nằm trong dữ liệu trang.
+        images = [x.get("imageUrl") for x in (poi.get("poiImage") or []) if isinstance(x, dict)]
+        images += [x for x in ((overview.get("imageInfo") or {}).get("imageList") or []) if isinstance(x, str)]
+        if poi.get("defaultUrl"):
+            images.append(poi["defaultUrl"])
     crumbs = [clean_text(x.get("name")) for x in (overview.get("districtPathInfo") or poi.get("districtPathInfo") or []) if isinstance(x, dict)]
     return {
         "recordType": "trip_attraction",

@@ -1,0 +1,1471 @@
+{
+  "_doc": "Template schema catalog du lịch V-OTA. Mô tả 13 trường CDP, các khoá trong attributes theo từng loại sản phẩm, và một bản ghi thật làm ví dụ cho mỗi loại. Sinh tự động từ data/products.jsonl.",
+  "_ban": "2026-09-16",
+  "_tong_san_pham": 2225,
+  "_doc_them": "BANGIAO.md (cùng thư mục) và README.md của repo crawl_data_vsf",
+  "schema": {
+    "productId": {
+      "kieu": "string (UUIDv5 của sourceRef)",
+      "do_phu": "100.0%",
+      "y_nghia": "Khoá chính. Ổn định giữa các lần chạy lại, dùng làm khoá ngoại được."
+    },
+    "name": {
+      "kieu": "string",
+      "do_phu": "100.0%",
+      "y_nghia": "Tên hiển thị. Hạng phòng theo mẫu \"<Khách sạn> - <Hạng phòng>\", vé máy bay \"Vé máy bay <A> - <B>\"."
+    },
+    "taxonomy": {
+      "kieu": "string enum",
+      "do_phu": "100.0%",
+      "y_nghia": "hotel | flight | attraction | combo | golf"
+    },
+    "destination": {
+      "kieu": "string",
+      "do_phu": "100.0%",
+      "y_nghia": "Nhãn điểm đến du lịch (Nha Trang, Phú Quốc…), không phải tỉnh hành chính."
+    },
+    "description": {
+      "kieu": "string",
+      "do_phu": "100.0%",
+      "y_nghia": "Văn bản để embedding. Nếu attributes.descriptionSource có giá trị thì đây là mô tả tự sinh."
+    },
+    "attributes": {
+      "kieu": "object",
+      "do_phu": "100.0%",
+      "y_nghia": "Mọi trường ngoài 13 trường CDP. Khoá thay đổi theo taxonomy, xem attributes_by_taxonomy."
+    },
+    "unitPrice": {
+      "kieu": "number | null",
+      "do_phu": "93.4%",
+      "y_nghia": "Khách sạn: giá 1 đêm. null nghĩa là chưa lấy được giá, không phải miễn phí."
+    },
+    "currency": {
+      "kieu": "string",
+      "do_phu": "100.0%",
+      "y_nghia": "Luôn là \"VND\"."
+    },
+    "available": {
+      "kieu": "boolean",
+      "do_phu": "100.0%",
+      "y_nghia": "true = có giá tại thời điểm crawl. KHÔNG phải xác nhận còn phòng/vé hiện tại."
+    },
+    "availableFrom": {
+      "kieu": "string (YYYY-MM-DD) | null",
+      "do_phu": "24.4%",
+      "y_nghia": "Vé Vinpearl: ngày bắt đầu bán. Vé máy bay: ngày bay sớm nhất thấy được."
+    },
+    "availableTo": {
+      "kieu": "string (YYYY-MM-DD) | null",
+      "do_phu": "24.4%",
+      "y_nghia": "Vé Vinpearl: ngày hết hạn bán. Vé máy bay: ngày bay muộn nhất thấy được."
+    },
+    "imageUrl": {
+      "kieu": "string (URL) | null",
+      "do_phu": "89.0%",
+      "y_nghia": "Ảnh chính. Ảnh phụ nằm trong attributes.images."
+    },
+    "sourceRef": {
+      "kieu": "string",
+      "do_phu": "100.0%",
+      "y_nghia": "Định danh gốc: \"<nguồn>:<loại>:<id>\". Nguồn: vinpearl | booking | agoda | trip."
+    }
+  },
+  "attributes_by_taxonomy": {
+    "hotel/room": {
+      "so_san_pham": 907,
+      "attributes": {
+        "level": {
+          "do_phu": "100%",
+          "y_nghia": "property = khách sạn, room = hạng phòng; flight: route = tuyến, flight = chuyến cụ thể"
+        },
+        "hotelName": {
+          "do_phu": "100%",
+          "y_nghia": "tên khách sạn cha"
+        },
+        "roomName": {
+          "do_phu": "100%",
+          "y_nghia": "tên hạng phòng"
+        },
+        "parentProductId": {
+          "do_phu": "100%",
+          "y_nghia": "productId của khách sạn cha (hạng phòng) hoặc tuyến bay cha"
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "amenities": {
+          "do_phu": "100%",
+          "y_nghia": "tiện ích, đã gộp từ nhiều nguồn nên có thể trùng ý"
+        },
+        "priceDate": {
+          "do_phu": "100%",
+          "y_nghia": "ngày nhận phòng đã dùng để hỏi giá"
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "roomSizeM2": {
+          "do_phu": "96%",
+          "y_nghia": "diện tích phòng (m2)"
+        },
+        "maxOccupancy": {
+          "do_phu": "92%",
+          "y_nghia": "số khách tối đa"
+        },
+        "descriptionSource": {
+          "do_phu": "87%",
+          "y_nghia": "có mặt nghĩa là mô tả được tự sinh, không phải văn bản gốc của nguồn"
+        },
+        "province": {
+          "do_phu": "87%",
+          "y_nghia": "tỉnh/thành theo địa chỉ, khác với destination (nhãn điểm đến du lịch)"
+        },
+        "city": {
+          "do_phu": "87%",
+          "y_nghia": "thành phố theo địa chỉ"
+        },
+        "address": {
+          "do_phu": "87%",
+          "y_nghia": "địa chỉ nguồn cung cấp"
+        },
+        "roomId": {
+          "do_phu": "87%",
+          "y_nghia": ""
+        },
+        "conditions": {
+          "do_phu": "87%",
+          "y_nghia": "điều kiện đặt phòng / sử dụng vé"
+        },
+        "priceNights": {
+          "do_phu": "87%",
+          "y_nghia": "số đêm của unitPrice (luôn là 1)"
+        },
+        "bed": {
+          "do_phu": "86%",
+          "y_nghia": "loại giường"
+        },
+        "starRating": {
+          "do_phu": "75%",
+          "y_nghia": "hạng sao 1–5"
+        },
+        "starRatingType": {
+          "do_phu": "63%",
+          "y_nghia": "official = hạng sao chính thức, estimated = do nguồn tự xếp"
+        },
+        "propertyType": {
+          "do_phu": "36%",
+          "y_nghia": "khách sạn / resort / căn hộ / homestay…"
+        },
+        "familyFriendly": {
+          "do_phu": "21%",
+          "y_nghia": "phù hợp gia đình có trẻ nhỏ"
+        },
+        "oceanView": {
+          "do_phu": "18%",
+          "y_nghia": "phòng hướng biển"
+        },
+        "brand": {
+          "do_phu": "16%",
+          "y_nghia": "thương hiệu (Vinpearl, Meliá…)"
+        },
+        "roomCode": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        },
+        "maxAdult": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        },
+        "maxChild": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        },
+        "bedrooms": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        },
+        "ratePlans": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        },
+        "pricesByDate": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        },
+        "images": {
+          "do_phu": "13%",
+          "y_nghia": "ảnh phụ; ảnh chính nằm ở trường imageUrl cấp trên"
+        },
+        "bookingUrl": {
+          "do_phu": "13%",
+          "y_nghia": ""
+        }
+      }
+    },
+    "hotel/property": {
+      "so_san_pham": 559,
+      "attributes": {
+        "level": {
+          "do_phu": "100%",
+          "y_nghia": "property = khách sạn, room = hạng phòng; flight: route = tuyến, flight = chuyến cụ thể"
+        },
+        "address": {
+          "do_phu": "100%",
+          "y_nghia": "địa chỉ nguồn cung cấp"
+        },
+        "priceDate": {
+          "do_phu": "100%",
+          "y_nghia": "ngày nhận phòng đã dùng để hỏi giá"
+        },
+        "priceNights": {
+          "do_phu": "100%",
+          "y_nghia": "số đêm của unitPrice (luôn là 1)"
+        },
+        "priceAdults": {
+          "do_phu": "100%",
+          "y_nghia": "số người lớn đã dùng để hỏi giá"
+        },
+        "images": {
+          "do_phu": "100%",
+          "y_nghia": "ảnh phụ; ảnh chính nằm ở trường imageUrl cấp trên"
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "otaPrices": {
+          "do_phu": "100%",
+          "y_nghia": "giá cùng sản phẩm ở các OTA khác, để so sánh"
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "city": {
+          "do_phu": "99%",
+          "y_nghia": "thành phố theo địa chỉ"
+        },
+        "amenities": {
+          "do_phu": "97%",
+          "y_nghia": "tiện ích, đã gộp từ nhiều nguồn nên có thể trùng ý"
+        },
+        "reviewScore": {
+          "do_phu": "94%",
+          "y_nghia": "điểm đánh giá trung bình — KHÔNG có nội dung hay tên người đánh giá"
+        },
+        "reviewScoreScale": {
+          "do_phu": "94%",
+          "y_nghia": "thang điểm của reviewScore (10 hoặc 5)"
+        },
+        "reviewCount": {
+          "do_phu": "94%",
+          "y_nghia": "số lượt đánh giá"
+        },
+        "starRating": {
+          "do_phu": "82%",
+          "y_nghia": "hạng sao 1–5"
+        },
+        "starRatingType": {
+          "do_phu": "82%",
+          "y_nghia": "official = hạng sao chính thức, estimated = do nguồn tự xếp"
+        },
+        "familyFriendly": {
+          "do_phu": "80%",
+          "y_nghia": "phù hợp gia đình có trẻ nhỏ"
+        },
+        "roomTypeCount": {
+          "do_phu": "57%",
+          "y_nghia": ""
+        },
+        "province": {
+          "do_phu": "57%",
+          "y_nghia": "tỉnh/thành theo địa chỉ, khác với destination (nhãn điểm đến du lịch)"
+        },
+        "highlights": {
+          "do_phu": "49%",
+          "y_nghia": ""
+        },
+        "oceanView": {
+          "do_phu": "35%",
+          "y_nghia": "phòng hướng biển"
+        },
+        "nameEn": {
+          "do_phu": "26%",
+          "y_nghia": ""
+        },
+        "propertyType": {
+          "do_phu": "25%",
+          "y_nghia": "khách sạn / resort / căn hộ / homestay…"
+        }
+      }
+    },
+    "attraction": {
+      "so_san_pham": 416,
+      "attributes": {
+        "province": {
+          "do_phu": "100%",
+          "y_nghia": "tỉnh/thành theo địa chỉ, khác với destination (nhãn điểm đến du lịch)"
+        },
+        "images": {
+          "do_phu": "100%",
+          "y_nghia": "ảnh phụ; ảnh chính nằm ở trường imageUrl cấp trên"
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "address": {
+          "do_phu": "62%",
+          "y_nghia": "địa chỉ nguồn cung cấp"
+        },
+        "openingHours": {
+          "do_phu": "62%",
+          "y_nghia": "giờ mở cửa, nguồn trip.com"
+        },
+        "familyFriendly": {
+          "do_phu": "53%",
+          "y_nghia": "phù hợp gia đình có trẻ nhỏ"
+        },
+        "popularityScore": {
+          "do_phu": "52%",
+          "y_nghia": ""
+        },
+        "ticketed": {
+          "do_phu": "52%",
+          "y_nghia": "false = điểm công cộng không bán vé"
+        },
+        "district": {
+          "do_phu": "51%",
+          "y_nghia": ""
+        },
+        "descriptionSource": {
+          "do_phu": "51%",
+          "y_nghia": "có mặt nghĩa là mô tả được tự sinh, không phải văn bản gốc của nguồn"
+        },
+        "venue": {
+          "do_phu": "49%",
+          "y_nghia": "địa điểm sử dụng vé, xem collectors/venues.csv"
+        },
+        "brand": {
+          "do_phu": "48%",
+          "y_nghia": "thương hiệu (Vinpearl, Meliá…)"
+        },
+        "tourCode": {
+          "do_phu": "48%",
+          "y_nghia": "mã tour/vé của Vinpearl"
+        },
+        "adultOriginalPrice": {
+          "do_phu": "48%",
+          "y_nghia": "giá gốc người lớn trước khuyến mãi"
+        },
+        "childPrice": {
+          "do_phu": "48%",
+          "y_nghia": "giá trẻ em"
+        },
+        "promo": {
+          "do_phu": "48%",
+          "y_nghia": "nội dung khuyến mãi"
+        },
+        "audience": {
+          "do_phu": "48%",
+          "y_nghia": "đối tượng phù hợp do nguồn gắn nhãn"
+        },
+        "soldQuantity": {
+          "do_phu": "48%",
+          "y_nghia": "số lượng đã bán do nguồn công bố"
+        },
+        "supplier": {
+          "do_phu": "48%",
+          "y_nghia": "đơn vị cung cấp dịch vụ"
+        },
+        "vinpearlType": {
+          "do_phu": "48%",
+          "y_nghia": "mã loại sản phẩm nội bộ Vinpearl"
+        },
+        "salesChannels": {
+          "do_phu": "48%",
+          "y_nghia": "kênh bán nội bộ Vinpearl"
+        },
+        "hasDetail": {
+          "do_phu": "48%",
+          "y_nghia": "đã lấy được trang chi tiết hay chỉ có dữ liệu trang danh sách"
+        },
+        "policies": {
+          "do_phu": "47%",
+          "y_nghia": ""
+        },
+        "suggestedDuration": {
+          "do_phu": "44%",
+          "y_nghia": "thời lượng gợi ý dạng chữ"
+        },
+        "durationMinutes": {
+          "do_phu": "44%",
+          "y_nghia": "thời lượng tham quan hoặc thời gian bay (phút)"
+        },
+        "nameEn": {
+          "do_phu": "43%",
+          "y_nghia": ""
+        },
+        "rating": {
+          "do_phu": "39%",
+          "y_nghia": ""
+        },
+        "ratingScale": {
+          "do_phu": "39%",
+          "y_nghia": ""
+        },
+        "reviewCount": {
+          "do_phu": "39%",
+          "y_nghia": "số lượt đánh giá"
+        },
+        "tags": {
+          "do_phu": "39%",
+          "y_nghia": ""
+        },
+        "ranking": {
+          "do_phu": "26%",
+          "y_nghia": ""
+        },
+        "openingHoursDetail": {
+          "do_phu": "16%",
+          "y_nghia": ""
+        }
+      }
+    },
+    "flight/flight": {
+      "so_san_pham": 184,
+      "attributes": {
+        "level": {
+          "do_phu": "100%",
+          "y_nghia": "property = khách sạn, room = hạng phòng; flight: route = tuyến, flight = chuyến cụ thể"
+        },
+        "parentProductId": {
+          "do_phu": "100%",
+          "y_nghia": "productId của khách sạn cha (hạng phòng) hoặc tuyến bay cha"
+        },
+        "flightNumber": {
+          "do_phu": "100%",
+          "y_nghia": "số hiệu chuyến bay"
+        },
+        "airline": {
+          "do_phu": "100%",
+          "y_nghia": "hãng bay"
+        },
+        "airlineCode": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originCity": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "destinationCity": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originDestination": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originAirport": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "destinationAirport": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "departureTimeLocal": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "arrivalTimeLocal": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "nonstop": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "destinationAirportName": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "originLatitude": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originLongitude": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "datesSeen": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "priceObservedAt": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "descriptionSource": {
+          "do_phu": "100%",
+          "y_nghia": "có mặt nghĩa là mô tả được tự sinh, không phải văn bản gốc của nguồn"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "durationMinutes": {
+          "do_phu": "98%",
+          "y_nghia": "thời lượng tham quan hoặc thời gian bay (phút)"
+        }
+      }
+    },
+    "combo": {
+      "so_san_pham": 93,
+      "attributes": {
+        "brand": {
+          "do_phu": "100%",
+          "y_nghia": "thương hiệu (Vinpearl, Meliá…)"
+        },
+        "tourCode": {
+          "do_phu": "100%",
+          "y_nghia": "mã tour/vé của Vinpearl"
+        },
+        "province": {
+          "do_phu": "100%",
+          "y_nghia": "tỉnh/thành theo địa chỉ, khác với destination (nhãn điểm đến du lịch)"
+        },
+        "adultOriginalPrice": {
+          "do_phu": "100%",
+          "y_nghia": "giá gốc người lớn trước khuyến mãi"
+        },
+        "childPrice": {
+          "do_phu": "100%",
+          "y_nghia": "giá trẻ em"
+        },
+        "promo": {
+          "do_phu": "100%",
+          "y_nghia": "nội dung khuyến mãi"
+        },
+        "audience": {
+          "do_phu": "100%",
+          "y_nghia": "đối tượng phù hợp do nguồn gắn nhãn"
+        },
+        "familyFriendly": {
+          "do_phu": "100%",
+          "y_nghia": "phù hợp gia đình có trẻ nhỏ"
+        },
+        "soldQuantity": {
+          "do_phu": "100%",
+          "y_nghia": "số lượng đã bán do nguồn công bố"
+        },
+        "supplier": {
+          "do_phu": "100%",
+          "y_nghia": "đơn vị cung cấp dịch vụ"
+        },
+        "vinpearlType": {
+          "do_phu": "100%",
+          "y_nghia": "mã loại sản phẩm nội bộ Vinpearl"
+        },
+        "salesChannels": {
+          "do_phu": "100%",
+          "y_nghia": "kênh bán nội bộ Vinpearl"
+        },
+        "images": {
+          "do_phu": "100%",
+          "y_nghia": "ảnh phụ; ảnh chính nằm ở trường imageUrl cấp trên"
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "hasDetail": {
+          "do_phu": "100%",
+          "y_nghia": "đã lấy được trang chi tiết hay chỉ có dữ liệu trang danh sách"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "venue": {
+          "do_phu": "100%",
+          "y_nghia": "địa điểm sử dụng vé, xem collectors/venues.csv"
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "policies": {
+          "do_phu": "91%",
+          "y_nghia": ""
+        },
+        "openingHours": {
+          "do_phu": "27%",
+          "y_nghia": "giờ mở cửa, nguồn trip.com"
+        },
+        "address": {
+          "do_phu": "27%",
+          "y_nghia": "địa chỉ nguồn cung cấp"
+        },
+        "poiRef": {
+          "do_phu": "27%",
+          "y_nghia": ""
+        },
+        "poiName": {
+          "do_phu": "27%",
+          "y_nghia": ""
+        },
+        "tripRating": {
+          "do_phu": "27%",
+          "y_nghia": ""
+        },
+        "tripReviewCount": {
+          "do_phu": "27%",
+          "y_nghia": ""
+        },
+        "descriptionSource": {
+          "do_phu": "26%",
+          "y_nghia": "có mặt nghĩa là mô tả được tự sinh, không phải văn bản gốc của nguồn"
+        },
+        "suggestedDuration": {
+          "do_phu": "25%",
+          "y_nghia": "thời lượng gợi ý dạng chữ"
+        },
+        "durationMinutes": {
+          "do_phu": "25%",
+          "y_nghia": "thời lượng tham quan hoặc thời gian bay (phút)"
+        },
+        "openingHoursDetail": {
+          "do_phu": "23%",
+          "y_nghia": ""
+        },
+        "tags": {
+          "do_phu": "17%",
+          "y_nghia": ""
+        }
+      }
+    },
+    "flight/route": {
+      "so_san_pham": 60,
+      "attributes": {
+        "level": {
+          "do_phu": "100%",
+          "y_nghia": "property = khách sạn, room = hạng phòng; flight: route = tuyến, flight = chuyến cụ thể"
+        },
+        "originCity": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "destinationCity": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originDestination": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originAirports": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "destinationAirports": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "airlines": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "durationMinutes": {
+          "do_phu": "100%",
+          "y_nghia": "thời lượng tham quan hoặc thời gian bay (phút)"
+        },
+        "roundTripFrom": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "flightCount": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "destinationAirportName": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "originLatitude": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "originLongitude": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "priceObservedAt": {
+          "do_phu": "100%",
+          "y_nghia": ""
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "descriptionSource": {
+          "do_phu": "100%",
+          "y_nghia": "có mặt nghĩa là mô tả được tự sinh, không phải văn bản gốc của nguồn"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "monthlyPrices": {
+          "do_phu": "70%",
+          "y_nghia": ""
+        },
+        "cheapestMonth": {
+          "do_phu": "70%",
+          "y_nghia": ""
+        }
+      }
+    },
+    "golf": {
+      "so_san_pham": 6,
+      "attributes": {
+        "province": {
+          "do_phu": "100%",
+          "y_nghia": "tỉnh/thành theo địa chỉ, khác với destination (nhãn điểm đến du lịch)"
+        },
+        "images": {
+          "do_phu": "100%",
+          "y_nghia": "ảnh phụ; ảnh chính nằm ở trường imageUrl cấp trên"
+        },
+        "url": {
+          "do_phu": "100%",
+          "y_nghia": "trang nguồn của sản phẩm"
+        },
+        "descriptionLang": {
+          "do_phu": "100%",
+          "y_nghia": "vi / en — đoán theo tỷ lệ ký tự có dấu, không phải kiểm tra ngôn ngữ đầy đủ"
+        },
+        "fieldSources": {
+          "do_phu": "100%",
+          "y_nghia": "trường nào lấy từ nguồn nào, dùng để truy nguồn"
+        },
+        "latitude": {
+          "do_phu": "100%",
+          "y_nghia": "vĩ độ WGS84"
+        },
+        "longitude": {
+          "do_phu": "100%",
+          "y_nghia": "kinh độ WGS84"
+        },
+        "locationSource": {
+          "do_phu": "100%",
+          "y_nghia": "booking.com / agoda.com / trip.com / vinpearl / osm / ourairports / manual"
+        },
+        "locationPrecision": {
+          "do_phu": "100%",
+          "y_nghia": "exact = vị trí riêng của sản phẩm; venue = khu vui chơi dùng vé; airport = sân bay đến; poi = điểm tham quan trip.com"
+        },
+        "brand": {
+          "do_phu": "83%",
+          "y_nghia": "thương hiệu (Vinpearl, Meliá…)"
+        },
+        "tourCode": {
+          "do_phu": "83%",
+          "y_nghia": "mã tour/vé của Vinpearl"
+        },
+        "adultOriginalPrice": {
+          "do_phu": "83%",
+          "y_nghia": "giá gốc người lớn trước khuyến mãi"
+        },
+        "childPrice": {
+          "do_phu": "83%",
+          "y_nghia": "giá trẻ em"
+        },
+        "promo": {
+          "do_phu": "83%",
+          "y_nghia": "nội dung khuyến mãi"
+        },
+        "audience": {
+          "do_phu": "83%",
+          "y_nghia": "đối tượng phù hợp do nguồn gắn nhãn"
+        },
+        "familyFriendly": {
+          "do_phu": "83%",
+          "y_nghia": "phù hợp gia đình có trẻ nhỏ"
+        },
+        "lengthOfTour": {
+          "do_phu": "83%",
+          "y_nghia": ""
+        },
+        "soldQuantity": {
+          "do_phu": "83%",
+          "y_nghia": "số lượng đã bán do nguồn công bố"
+        },
+        "vinpearlType": {
+          "do_phu": "83%",
+          "y_nghia": "mã loại sản phẩm nội bộ Vinpearl"
+        },
+        "salesChannels": {
+          "do_phu": "83%",
+          "y_nghia": "kênh bán nội bộ Vinpearl"
+        },
+        "hasDetail": {
+          "do_phu": "83%",
+          "y_nghia": "đã lấy được trang chi tiết hay chỉ có dữ liệu trang danh sách"
+        },
+        "policies": {
+          "do_phu": "83%",
+          "y_nghia": ""
+        },
+        "venue": {
+          "do_phu": "83%",
+          "y_nghia": "địa điểm sử dụng vé, xem collectors/venues.csv"
+        },
+        "originalDestination": {
+          "do_phu": "17%",
+          "y_nghia": "nhãn điểm đến trước khi sửa theo bằng chứng"
+        },
+        "nameEn": {
+          "do_phu": "17%",
+          "y_nghia": ""
+        },
+        "address": {
+          "do_phu": "17%",
+          "y_nghia": "địa chỉ nguồn cung cấp"
+        },
+        "district": {
+          "do_phu": "17%",
+          "y_nghia": ""
+        },
+        "openingHours": {
+          "do_phu": "17%",
+          "y_nghia": "giờ mở cửa, nguồn trip.com"
+        },
+        "popularityScore": {
+          "do_phu": "17%",
+          "y_nghia": ""
+        },
+        "ticketed": {
+          "do_phu": "17%",
+          "y_nghia": "false = điểm công cộng không bán vé"
+        },
+        "descriptionSource": {
+          "do_phu": "17%",
+          "y_nghia": "có mặt nghĩa là mô tả được tự sinh, không phải văn bản gốc của nguồn"
+        }
+      }
+    }
+  },
+  "vi_du": {
+    "hotel/property": {
+      "productId": "a3967a35-37ad-5e4b-8d89-16c3bf163da4",
+      "name": "Vinpearl Resort & Golf Nam Hội An",
+      "taxonomy": "hotel",
+      "destination": "Hội An",
+      "description": "Trong dáng hình đôi cánh buồm mang màu sắc huyền thoại đặt bên bờ biển Bình Minh nguyên sơ dài 1.300m, Vinpearl Resort & Golf Nam Hội An là tâm điểm của quần thể du lịch và nghỉ dưỡng mới nhất của Vinpearl tại miền di sản. Dù yêu thích nghỉ dưỡng biệt lập hay khám phá bất tận, du khách đều sẽ hài lòng với bể bơi tràn bờ hình con sò tuyệt đẹp rộng tới 2.300m2 nối dài ra bờ biển cát trắng phau rộng mênh mang, công viên giải trí công nghệ cao VinWonders, vườn thú du khảo trên sông độc đáo và sân golf 18 hố tiêu chuẩn quốc tế. Toàn bộ các villa ở đây đều hướng biển, giúp du khách tận hưởng không gian tươi mới, khoáng đạt đặc trưng của đại dương vào mọi thời khắc trong ngày. Như một nét chấm phá duyên dáng trong khuôn viên khu nghỉ dưỡng, nhà hàng An với kiến trúc độc đáo lấy cảm hứng từ làng chài ven biển miền Trung luôn sẵn sàng phục vụ du khách với các món đặc sản tươi ngon mang đậm phong vị phố cổ Hội An như cao lầu, mì Quảng, cơm gà...",
+      "attributes": {
+        "level": "property",
+        "brand": "Vinpearl",
+        "hotelCode": "VPNHARG",
+        "address": "Đường Võ Chí Công, xã Thăng An, TP Đà Nẵng",
+        "starRating": 5.0,
+        "starRatingType": "official",
+        "tripAdvisorRating": 4.9,
+        "tripAdvisorReviewCount": 3815,
+        "amenities": [
+          "Bãi biển riêng",
+          "Bể bơi ngoài trời",
+          "Sân Golf",
+          "Nhà hàng",
+          "Spa",
+          "Phòng Gym",
+          "Xông hơi, bể sục",
+          "Sân Tennis",
+          "Dịch vụ trông trẻ",
+          "Bar",
+          "Spa & trung tâm chăm sóc sức khỏe",
+          "Bồn tắm nóng/bể sục (Jacuzzi)",
+          "Giáp biển",
+          "Dịch vụ phòng",
+          "Massage",
+          "Hồ bơi ngoài trời",
+          "Sân vườn",
+          "Xe đạp",
+          "Trung tâm thể dục",
+          "Bữa sáng xuất sắc"
+        ],
+        "policy": "Phòng khách sạn: Tối đa 4 người trong một phòng (3 người lớn 1 trẻ em hoặc 2 người lớn và 2 trẻ em)\nVilla: Mỗi phòng ngủ trong villa tối đa 2 người lớn và 2 trẻ em\nTrẻ em dưới 4 tuổi: Miễn phí\nNgười lớn thứ 3 và trẻ em (từ 4-11 tuổi) phụ thu theo quy định của khách sạn\nGiường phụ có tính phí, được cung cấp tùy thuộc khả năng cung ứng của khách sạn và điều kiện của từng hạng phòng. Mỗi phòng khách sạn kê tối đa 01 giường phụ. Không kê giường phụ trong villa",
+        "roomTypeCount": 8,
+        "oceanView": true,
+        "familyFriendly": true,
+        "priceDate": "2026-10-15",
+        "priceNights": 1,
+        "priceAdults": 2,
+        "images": [
+          "https://booking-static.vinpearl.com/hotels/2013e96eca114b65865d8a51c571952b_Bể%20bơi%20vỏ%20sò.jpg",
+          "https://booking-static.vinpearl.com/hotels/a442a6c46210489b9ddeadacbace9402_DJI_0647.jpg",
+          "https://booking-static.vinpearl.com/hotels/77bbd592b93148d987d40df41ed0be88__D8H6978.jpg",
+          "https://booking-static.vinpearl.com/hotels/efae5c7eb7a34b75872e2bc4c41d52c7_DJI_0555.jpg",
+          "https://booking-static.vinpearl.com/hotels/20133e074674477c81804179f9586da9_DJI_0566.jpg",
+          "https://booking-static.vinpearl.com/hotels/c37ba5584e5b428fbf430a2cd00f7cfe__D8H4806.jpg",
+          "https://booking-static.vinpearl.com/hotels/5d6d90b3944446b8b3384b4a41e557ff__D8H0269.jpg",
+          "https://booking-static.vinpearl.com/hotels/ceace47a705a4917bf347318fc4ac88c__D8H5910.jpg",
+          "https://booking-static.vinpearl.com/hotels/ccacc190cbf449528faef491d05c2ce2__D8H7351.jpg",
+          "https://booking-static.vinpearl.com/hotels/846ab702bea449efb43ce615b5b15700_2.jpg",
+          "https://booking-static.vinpearl.com/hotels/9afdb843c2134d939f7087bcaebaa4d9__D8H7554.jpg",
+          "https://booking-static.vinpearl.com/hotels/6f3495cd358c49a7b0d19d0e3fc34039__D8H8633%20copy.jpg",
+          "https://booking-static.vinpearl.com/hotels/a67762ec00e6429291bce25db0a15e0b_Untitled-1.jpg",
+          "https://booking-static.vinpearl.com/hotels/f588fb6b3dfb4b16a2eb75ea25994536_Untitled-%20ghép%20trơi.jpg",
+          "https://booking-static.vinpearl.com/hotels/6dc07088f40b4a5486981357ecf34ec6__D8H7331.jpg",
+          "https://booking-static.vinpearl.com/hotels/65ab01274f2a477da0ccf336bb3caa17__D8H6955.jpg",
+          "https://booking-static.vinpearl.com/hotels/fb28a2cf40294806a1893172414d297a__D8H7865.jpg",
+          "https://booking-static.vinpearl.com/hotels/108aa8a42be546bd991ca46b7bb8eed3_3.jpg",
+          "https://booking-static.vinpearl.com/hotels/fb3229bb8cec492292d51f895bd2c514_3%20(1).jpg",
+          "https://booking-static.vinpearl.com/hotels/0ea081d59f824bceb9b4a3ed1391fddd_2%20(1).jpg"
+        ],
+        "url": "https://vinpearl.com/vi/hotels/vinpearl-resort-golf-nam-hoi-an",
+        "bookingUrl": "https://booking.vinpearl.com/vi-VND/hotel/2c2389a5-947f-4dc9-79fc-6d7d6b7521bb",
+        "descriptionLang": "vi",
+        "fieldSources": {
+          "name": "vinpearl",
+          "description": "vinpearl",
+          "unitPrice": "booking.com",
+          "available": "booking.com",
+          "province": "booking.com",
+          "city": "booking.com",
+          "propertyType": "booking.com"
+        },
+        "vinpearlPrice": 2710000,
+        "otaPrices": {
+          "booking.com": 2194786
+        },
+        "latitude": 15.797401155475349,
+        "longitude": 108.42072476214602,
+        "locationSource": "vinpearl",
+        "locationPrecision": "exact",
+        "province": "Quảng Nam",
+        "city": "Hội An",
+        "propertyType": "resort",
+        "bookingReviewScore": 8.7,
+        "bookingReviewCount": 390,
+        "sameAs": [
+          "booking:hotel:3079005"
+        ],
+        "bookingComUrl": "https://www.booking.com/hotel/vn/vinpearl-nam-hoi-an-resort-and-villas.vi.html"
+      },
+      "unitPrice": 2194786,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": null,
+      "availableTo": null,
+      "imageUrl": "https://booking-static.vinpearl.com/hotels/2013e96eca114b65865d8a51c571952b_Bể%20bơi%20vỏ%20sò.jpg",
+      "sourceRef": "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb"
+    },
+    "combo": {
+      "productId": "d2c3522b-6bce-5a35-8e6f-048b63ff6823",
+      "name": "[Combo 02 ngày] - Vinpearl Safari + VinWonders Phú Quốc + Tặng Tour Grand World + Tặng Voucher Ẩm Thực",
+      "taxonomy": "combo",
+      "destination": "Phú Quốc",
+      "description": "[Combo 02 ngày] - Vinpearl Safari + VinWonders Phú Quốc + Tặng Tour Grand World + Tặng Voucher Ẩm Thực\n\n- Combo vé tiêu chuẩn vào cửa trực tiếp VinWonders và Vinpearl Safari Phú Quốc, sử dụng trong 02 ngày liên tiếp, mỗi phân khu ra vào 01 lần\n\nBao gồm\n- Combo vé tiêu chuẩn vào cửa trực tiếp VinWonders và Vinpearl Safari Phú Quốc trong vòng 02 ngày liên tiếp, mỗi phân khu ra vào 01 lần\n- Lưu ý: Quý khách cần chụp ảnh FaceID khi lần đầu qua cổng kiểm soát, để được nhận diện khuôn mặt vào cửa các khu vực tham quan khác",
+      "attributes": {
+        "brand": "Vinpearl",
+        "tourCode": "VW01632",
+        "province": "Kiên Giang",
+        "adultOriginalPrice": 1700000.0,
+        "childPrice": 0.0,
+        "promo": "► Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé\n► Vé không được hoàn, hủy",
+        "audience": [
+          "Nhóm bạn",
+          "Gia đình",
+          "Cặp đôi"
+        ],
+        "familyFriendly": true,
+        "soldQuantity": 0,
+        "supplier": "VINPEARL SAFARI PHÚ QUỐC",
+        "vinpearlType": 7,
+        "salesChannels": [
+          10,
+          11
+        ],
+        "images": [
+          "https://booking-static.vinpearl.com/tours/9175cf1ff7224758896b676084a2fa70_s52MIKya-SpikeDay-8824_1920x1080_no-text-1_Combo-ve-vao-cua-vinwonders-safari.jpg",
+          "https://booking-static.vinpearl.com/tours/1bcce66305fc42669642e00609217614_s52MIKya-SpikeDay-8824_1920x1080_no-text-1_Combo-ve-vao-cua-vinwonders-safari.jpg",
+          "https://booking-static.vinpearl.com/tours/23de47183b1740429492887309e99990_cb2d%203_Combo-ve-vao-cua-vinwonders-safari.jpeg",
+          "https://booking-static.vinpearl.com/tours/c36df78626454e43aae15f946cfb9199_bảo%20tàng%20gấu%201%202_Combo-ve-vao-cua-vinwonders-safari.jpg",
+          "https://booking-static.vinpearl.com/tours/ed4fa6f505534f33b52f69269f2919bf_cb2d%203%20(1)_Combo-ve-vao-cua-vinwonders-safari.jpeg",
+          "https://booking-static.vinpearl.com/tours/7a5e08cb930c48b8a7aab0a89186b711_cb2d%202_Combo-ve-vao-cua-vinwonders-safari.jpg",
+          "https://booking-static.vinpearl.com/tours/f19f3d355aa2476088055b00deca9b07_safari%202_Combo-ve-vao-cua-vinwonders-safari.jpg"
+        ],
+        "url": "https://booking.vinpearl.com/vi-VND/tour/copy-combo-vinpearl-safari-vinwonders-phu-quoc-ve-vao-cua-02-ngay-tieu-chuan-tang-ve-bao-tang-gau-vw01632",
+        "hasDetail": true,
+        "policies": {
+          "Mô tả (trích từ mô tả)": "LƯU Ý QUAN TRỌNG: Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé. Vui lòng lựa chọn ngày sử dụng và kiểm tra kỹ thông tin ngày sử dụng trong quá trình đặt vé.\n- Vé chỉ có hiệu lực trong thời gian sử dụng ghi trên vé\n- Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n- Quý khách hàng cao dưới 100 cm được miễn phí.\n- Quy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\n- Quy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh",
+          "Bao gồm (trích từ mô tả)": "- Vé chỉ có hiệu lực trong thời gian sử dụng ghi trên vé\n- Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n- Quý khách hàng cao dưới 100 cm được miễn phí.\n- Quy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\n- Quy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh",
+          "Điều khoản": "- Voucher cần được thanh toán ngay, không được hoàn lại hoặc quy đổi ra tiền mặt.\n- Thời gian mở cửa khu vui chơi VinWonders: Từ 09h00 đến 19h30; khu Safari: Từ 9h00 đến 16h00\n- Xe buýt đưa đón từ thị trấn Đông Dương theo thời gian & địa điểm theo lịch trình cố định.\n- Quý khách hàng cao dưới 100 cm được miễn phí.\n- Quy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\n- Quy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh.\n- Không áp dụng đồng thời các chương trình ưu đãi, khuyến mại, giảm giá.\n- Không áp dụng tích điểm VinID.",
+          "Chính sách hoàn huỷ": "- Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n- Trường hợp phát sinh vấn đề đổi ngày, đổi loại vé hoặc hoàn hủy do trường hợp bất khả kháng (khu vui chơi buộc phải đóng cửa và không có cơ sở thay thế) chúng tôi sẽ áp dụng theo chính sách tại thời điểm sử dụng dịch vụ.",
+          "Hướng dẫn sử dụng": "- Khách hàng có thể xuất trình voucher in sẵn hoặc voucher điện tử này tại cổng khu vui chơi để được vào cửa\n- Voucher chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\n- Đối với vé người cao tuổi, vui lòng xuất trình CMND bản gốc hoặc hộ chiếu cùng với voucher cho nhân viên tại cổng vào\n- Vé không được hoàn, hủy, thay đổi hoặc quy đổi thành dịch vụ khác\n- Trường hợp phát sinh vấn đề đổi ngày, đổi loại vé hoặc hoàn hủy do trường hợp bất khả kháng do khu vui chơi buộc phải đóng cửa và không có cơ sở thay thế, chúng tôi sẽ áp dụng theo chính sách tại thời điểm sử dụng dịch vụ."
+        },
+        "descriptionLang": "vi",
+        "fieldSources": {
+          "unitPrice": "vinpearl"
+        },
+        "venue": "Vinpearl Safari Phú Quốc",
+        "latitude": 10.337043,
+        "longitude": 103.891448,
+        "locationSource": "trip.com",
+        "locationPrecision": "venue",
+        "openingHours": "Mở cửa quanh năm, 24/7",
+        "suggestedDuration": "2–4 tiếng đồng hồ",
+        "durationMinutes": 120,
+        "address": "Bãi Dài, Gành Dầu, Phú Quốc, Kiên Giang, Việt Nam",
+        "tags": [
+          "Tour đi thuyền",
+          "Cảnh đêm"
+        ],
+        "poiRef": "trip:attraction:25487733",
+        "poiName": "Vinpearl Safari Phú Quốc",
+        "tripRating": 4.7,
+        "tripReviewCount": 2505,
+        "openingHoursDetail": "Phố Châu Âu: 09:00 – 19:30\nThế Giới Cổ Tích: 10:00 – 18:00\nLàng Viking Bí Ẩn: 10:00 – 17:30\nThế Giới Phiêu Lưu: 10:00 – 18:00\nThế Giới Bão Táp: 10:00 – 17:30\nVỏ Sò Biển: 10:00 – 18:00"
+      },
+      "unitPrice": 1700000,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": "2026-03-18",
+      "availableTo": "2026-09-30",
+      "imageUrl": "https://booking-static.vinpearl.com/tours/9175cf1ff7224758896b676084a2fa70_s52MIKya-SpikeDay-8824_1920x1080_no-text-1_Combo-ve-vao-cua-vinwonders-safari.jpg",
+      "sourceRef": "vinpearl:tour:VW01632"
+    },
+    "attraction": {
+      "productId": "a2cec5b4-295f-57ea-98e0-8f43866828b6",
+      "name": "[VinWonders Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực",
+      "taxonomy": "attraction",
+      "destination": "Phú Quốc",
+      "description": "[VinWonders Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực\n\nVé vào cửa trực tiếp khu vui chơi Vinpearl Safari Phú Quốc sử dụng trong ngày dành cho 01 người\n\nBao gồm\nVé vào cửa trực tiếp khu vui chơi Vinpearl Safari Phú Quốc sử dụng trong ngày dành cho 01 người",
+      "attributes": {
+        "brand": "Vinpearl",
+        "tourCode": "VW02812",
+        "province": "Kiên Giang",
+        "adultOriginalPrice": 950000.0,
+        "childPrice": 490000.0,
+        "promo": "► Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé\n► Vé không được hoàn, hủy",
+        "audience": [
+          "Nhóm bạn",
+          "Gia đình",
+          "Cặp đôi",
+          "Doanh nhân"
+        ],
+        "familyFriendly": true,
+        "soldQuantity": 0,
+        "supplier": "VINWONDERS PHÚ QUỐC",
+        "vinpearlType": 7,
+        "salesChannels": [
+          10,
+          11
+        ],
+        "images": [
+          "https://booking-static.vinpearl.com/tours/52222f24a8134d99824f2627b82e4f0e_4_vinpearl-safari-phu-quoc-ve-vao-cua.jpg",
+          "https://booking-static.vinpearl.com/tours/71c95fb2362d455888651ef337911049_tieu%20chuan%200%20_vinpearl-safari-phu-quoc-ve-vao-cua.jpg",
+          "https://booking-static.vinpearl.com/tours/15e2674bf36e49f6baf86da1c67b489f_tieu%20chuan%203_vinpearl-safari-phu-quoc-ve-vao-cua.jpg",
+          "https://booking-static.vinpearl.com/tours/5907b286de834a9ba6bf081370b823bb_tieu%20chuan%201_vinpearl-safari-phu-quoc-ve-vao-cua.jpg"
+        ],
+        "url": "https://booking.vinpearl.com/vi-VND/tour/copy-vinwonders-phu-quoc-ve-vao-cua-tieu-chuan-tang-voucher-am-thuc-vw02812",
+        "hasDetail": true,
+        "policies": {
+          "Mô tả (trích từ mô tả)": "LƯU Ý QUAN TRỌNG: Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé. Vui lòng lựa chọn ngày sử dụng và kiểm tra kỹ thông tin ngày sử dụng trong quá trình đặt vé.\nVé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nQuý khách hàng cao dưới 100 cm được miễn phí.\nQuy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\nQuy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh",
+          "Bao gồm (trích từ mô tả)": "Vé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nQuý khách hàng cao dưới 100 cm được miễn phí.\nQuy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\nQuy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh",
+          "Điều khoản": "- Thời gian mở cửa khu Safari: Từ 9h00 đến 16h00 tất cả các ngày trong tuần\n- Khu Safari ngừng nhận khách từ sau 14h00\n- Xe buýt đưa đón từ thị trấn Đông Dương theo thời gian & địa điểm theo lịch trình cố định. Lịch trình có thể thay đổi mà không báo trước.\n- Quý khách hàng cao dưới 100 cm được miễn phí.\n- Quy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140cm\n- Quy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh.\n- Không áp dụng đồng thời các chương trình ưu đãi, khuyến mại, giảm giá.\n- Không áp dụng tích điểm VinID.",
+          "Chính sách hoàn huỷ": "Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nTrường hợp phát sinh vấn đề đổi ngày, đổi loại vé hoặc hoàn hủy do trường hợp bất khả kháng (khu vui chơi buộc phải đóng cửa và không có cơ sở thay thế) chúng tôi sẽ áp dụng theo chính sách tại thời điểm sử dụng dịch vụ.",
+          "Hướng dẫn sử dụng": "- Khách hàng có thể xuất trình voucher in sẵn hoặc voucher điện tử này tại cổng để vào cửa\n- Voucher chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé"
+        },
+        "descriptionLang": "vi",
+        "fieldSources": {
+          "unitPrice": "vinpearl"
+        },
+        "venue": "VinWonders Phú Quốc",
+        "latitude": 10.340735,
+        "longitude": 103.854047,
+        "locationSource": "trip.com",
+        "locationPrecision": "venue",
+        "openingHours": "09:00–19:30 (Thời gian nhận khách kết thúc vào 18:30)",
+        "openingHoursDetail": "Phố Châu Âu: 09:00 – 19:30\nThế Giới Cổ Tích: 10:00 – 18:00\nLàng Viking Bí Ẩn: 10:00 – 17:30\nThế Giới Phiêu Lưu: 10:00 – 18:00\nThế Giới Bão Táp: 10:00 – 17:30\nVỏ Sò Biển: 10:00 – 18:00",
+        "suggestedDuration": "1 ngày",
+        "durationMinutes": 480,
+        "address": "Khu Bãi Dài, Phú Quốc, Kiên Giang 92512, Việt Nam",
+        "tags": [
+          "Công viên giải trí"
+        ],
+        "poiRef": "trip:attraction:18832359",
+        "poiName": "VinWonders Phú Quốc",
+        "tripRating": 4.5,
+        "tripReviewCount": 2349,
+        "memberPrices": {
+          "VIN33 - Diamond": 807500,
+          "VIN33 - Platinum": 864500
+        }
+      },
+      "unitPrice": 893000,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": "2026-07-31",
+      "availableTo": "2026-09-30",
+      "imageUrl": "https://booking-static.vinpearl.com/tours/52222f24a8134d99824f2627b82e4f0e_4_vinpearl-safari-phu-quoc-ve-vao-cua.jpg",
+      "sourceRef": "vinpearl:tour:VW02812"
+    },
+    "golf": {
+      "productId": "83b5cf28-6d82-5037-9b05-f4bf2feb6edb",
+      "name": "[Vinpearl Golf Nha Trang] - Voucher Golf không giới hạn",
+      "taxonomy": "golf",
+      "destination": "Nha Trang",
+      "description": "[Vinpearl Golf Nha Trang] - Voucher Golf không giới hạn\n\nTUYỆT TÁC SÂN GOLF TRÊN ĐẢO THIÊN ĐƯỜNG\nTọa lạc trên hòn đảo được mệnh danh \"quanh năm 360 ngày nắng đẹp\", Vinpearl Golf Nha Trang sở hữu địa hình tựa sơn hướng thủy độc đáo, xung quanh được bao bọc bởi đồi xanh, trước mặt ôm trọn vẻ đẹp bao la của vịnh biển thiên đường. Thiết kế bởi IMG Worldwide, sân golf giữ được tối đa vẻ đẹp của thiên nhiên nguyên bản, sở hữu địa hình đặc trưng với những fairway rộng, lượn sóng và nhấp nhô dọc theo sườn đồi, hứa hẹn sẽ là điểm đến lý tưởng cho những cú swing đầy thách thức thú vị và cảm hứng bất tận.\nThông số:\nChiều dài 6.787 yards, par 71\nLoại cỏ:\n- Fairways/Rough/Tee: Seashore Paspalum\n- Green: Seashore Paspalum\nTee time: 06:00 - 13:30",
+      "attributes": {
+        "brand": "Vinpearl",
+        "tourCode": "GN02640",
+        "province": "Hải Phòng",
+        "adultOriginalPrice": 2428571.0,
+        "childPrice": 0.0,
+        "promo": "Chương trình ưu đãi hấp dẫn, áp dụng linh hoạt cho nhiều khung giờ",
+        "audience": [
+          "Nhóm bạn",
+          "Gia đình",
+          "Cặp đôi",
+          "Doanh nhân"
+        ],
+        "familyFriendly": true,
+        "lengthOfTour": "2.1",
+        "soldQuantity": 13,
+        "vinpearlType": 1,
+        "salesChannels": [
+          1,
+          2,
+          3
+        ],
+        "images": [
+          "https://booking-static.vinpearl.com/tours/91cb05caafef4787865b47a58102dd6f_Screenshot_6_VinpearlGolf.png",
+          "https://booking-static.vinpearl.com/tours/126cb36eb6034b3e85e313ed2f55f8dc_Screenshot_1_VinpearlGolf.png",
+          "https://booking-static.vinpearl.com/tours/ca8218d4807d430f845fc841ed118b0f_Screenshot_2_VinpearlGolf.png",
+          "https://booking-static.vinpearl.com/tours/bffffb0111dd4b4c98ccaf3c5f16d14c_Screenshot_3_VinpearlGolf.png",
+          "https://booking-static.vinpearl.com/tours/8e1ed3754ed9439098dfbbc25faba0cb_Screenshot_4_VinpearlGolf.png",
+          "https://booking-static.vinpearl.com/tours/353680e881664b95ba6ee9cd52d73a6c_Screenshot_7_VinpearlGolf.png"
+        ],
+        "url": "https://booking.vinpearl.com/vi-VND/tour/copy-vinpearl-golf-nam-hoi-an-khong-gioi-han-so-ho-gn02640",
+        "hasDetail": true,
+        "policies": {
+          "Điều khoản và Thời gian sử dụng": "LƯU Ý QUAN TRỌNG: Vé chỉ có hiệu lực sử dụng 1 lần tương ứng với 1 Tee time và không bao gồm đêm nghỉ. Chi tiết áp dụng như sau:\nLoại voucher\nNội dung\nĐiều khoản/ thời gian sử dụng voucher\n\nSunrise- Tee-time trước 8:00\n- Áp dụng cho nhóm từ 02 khách\n- Chỉ áp dụng ngày trong tuần từ thứ 2 - thứ 6.\n- Thời gian mua voucher: Từ nay đến 31/10/2026\n- Thời gian sử dụng: Từ nay đến 31/10/2026\nLưu ý:\n- Không áp dụng cho ngày lễ (30/4, 01/05, 29/08 - 02/09)\n- Đặt trước tối thiểu 01 ngày\n\nUnilimited - Chơi không giới hạn hố- Chơi không hạn chế số hố từ thứ 2 đến thứ 6\n- Bao gồm 02 chai nước suối\n- Thời hạn: đến 31/10/2026\nTwilight - Áp dụng Tee-time sau 14:00 cho nhóm từ 02 khách.\n-Từ thứ 2 đến thứ 6\n- Không áp dụng với 9 hố\n- Hạn: 31/10/2026",
+          "Chính sách hoàn huỷ": "Vé không được hoàn, hủy hay quy đổi thành dịch vụ khác\nTrường hợp phát sinh vấn đề đổi ngày, đổi loại vé hoặc hoàn hủy do trường hợp bất khả kháng (sân golf buộc phải đóng cửa và không có cơ sở thay thế) chúng tôi sẽ áp dụng theo chính sách tại thời điểm sử dụng dịch vụ",
+          "Hướng dẫn sử dụng": "- Sau khi thanh toán, Quý khách sẽ nhận được email xác nhận giao dịch thành công, kèm mã voucher để đặt dịch vụ.\n- Quý khách vui lòng đặt dịch vụ theo đúng quy định tại mục Thời hạn sử dụng voucher thuộc phần điều khoản của Voucher\n- Quý khách hàng vui lòng quét mã QR code và điền đầy đủ thông tin tại đường link đăng ký đặt dịch vụ hoặc gửi yêu cầu đặt dịch vụ kèm mã voucher sử dụng tới Bộ phận Xử Lý Đơn Hàng (xulydonhang@vinpearl.com) ngay khi có kế hoạch và đảm bảo Thời hạn tối thiểu đặt trước ngày sử dụng dịch vụ. Voucher của Quý khách sẽ hết hiệu lực sử dụng nếu vượt quá hạn cuối đặt dịch vụ nêu trên. Yêu cầu đặt dịch vụ của Quý khách sẽ được chúng tôi xác nhận theo tình trạng đáp ứng dịch vụ tại thời điểm đặt.\n- Việc đặt dịch vụ sẽ chưa được xác nhận hợp lệ khi Quý khách chưa nhận được thư Xác nhận từ Vinpearl Golf"
+        },
+        "descriptionLang": "vi",
+        "fieldSources": {
+          "unitPrice": "vinpearl"
+        },
+        "venue": "Vinpearl Golf Nha Trang",
+        "latitude": 12.212541,
+        "longitude": 109.259051,
+        "locationSource": "osm",
+        "locationPrecision": "venue"
+      },
+      "unitPrice": 1700000,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": "2026-03-27",
+      "availableTo": "2026-10-31",
+      "imageUrl": "https://booking-static.vinpearl.com/tours/91cb05caafef4787865b47a58102dd6f_Screenshot_6_VinpearlGolf.png",
+      "sourceRef": "vinpearl:tour:GN02640"
+    },
+    "flight/route": {
+      "productId": "d56c7774-0b75-5b48-ac4e-88e81d0f87c4",
+      "name": "Vé máy bay Hà Nội - Đà Lạt",
+      "taxonomy": "flight",
+      "destination": "Đà Lạt",
+      "description": "Vé máy bay một chiều từ Hà Nội (HAN) đến Đà Lạt (DLI). Hãng khai thác: Vietravel Airlines. Thời gian bay khoảng 1 giờ 45 phút. Giá một chiều từ 810.000₫, khứ hồi từ 1.557.000₫. Tháng có giá trung bình rẻ nhất: 2026-09.",
+      "attributes": {
+        "level": "route",
+        "originCity": "Hà Nội",
+        "destinationCity": "Đà Lạt",
+        "originDestination": "Hà Nội",
+        "originAirports": [
+          "HAN"
+        ],
+        "destinationAirports": [
+          "DLI"
+        ],
+        "airlines": [
+          "Vietravel Airlines"
+        ],
+        "durationMinutes": 105,
+        "roundTripFrom": 1557000,
+        "monthlyPrices": {
+          "2027-05": 2478000,
+          "2027-06": 2624000,
+          "2027-07": 2292000,
+          "2027-08": 1911000,
+          "2026-09": 1510000,
+          "2026-10": 1804000,
+          "2026-11": 1884000,
+          "2026-12": 1878000,
+          "2027-01": 1770000,
+          "2027-02": 2088000,
+          "2027-03": 2368000,
+          "2027-04": 2115000
+        },
+        "cheapestMonth": "2026-09",
+        "flightCount": 1,
+        "latitude": 11.750556,
+        "longitude": 108.366997,
+        "destinationAirportName": "Sân bay Liên Khương",
+        "locationSource": "ourairports",
+        "locationPrecision": "airport",
+        "originLatitude": 21.221201,
+        "originLongitude": 105.806999,
+        "priceObservedAt": "2026-09-15",
+        "url": "https://vn.trip.com/flights/hanoi-to-dalat/airfares-han-dli/",
+        "descriptionSource": "derived: dữ liệu chuyến bay trip.com",
+        "descriptionLang": "vi",
+        "fieldSources": {
+          "unitPrice": "trip.com"
+        }
+      },
+      "unitPrice": 810000,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": "2026-09-22",
+      "availableTo": "2026-10-21",
+      "imageUrl": null,
+      "sourceRef": "trip:route:han-dli"
+    },
+    "hotel/room": {
+      "productId": "0ba93435-f8bd-5523-9228-f48b7eb9b3e9",
+      "name": "SOL Center Hotel - Phòng Có Giường Cỡ King",
+      "taxonomy": "hotel",
+      "destination": "Huế",
+      "description": "Phòng Có Giường Cỡ King. 1 giường đôi lớn. Tối đa 2 khách. Phòng. 20 m². Máy điều hòa. Phòng tắm riêng. TV màn hình phẳng. Cách âm. WiFi miễn phí.\n\nChỗ Nghỉ Thoải Mái:\nKhách sạn SOL Center ở Huế cung cấp các phòng kiểu căn hộ với điều hòa không khí, phòng tắm riêng và WiFi miễn phí. Mỗi phòng đều có bàn làm việc, TV và cách âm để đảm bảo sự thoải mái cho khách.\n\nTiện Nghi Thuận Lợi:\nDu khách có thể tận hưởng phòng chờ, bồn tắm công cộng, thang máy, lễ tân 24 giờ, dịch vụ concierge, dịch vụ dọn phòng hàng ngày, khu vực ngồi ngoài trời, phòng gia đình, bảo mật suốt cả ngày, nhận phòng và trả phòng nhanh, dịch vụ phòng, quầy thông tin du lịch và dịch vụ lưu trữ hành lý.\n\nVị Trí Đắc Địa:\nKhách sạn nằm cách cầu Tràng Tiền 9 phút, cách chợ Đông Ba 1,4 km và cách Bảo tàng Cổ vật Hoàng gia 2 km. Sân bay quốc tế Phú Bài cách đó 13 km. Các hoạt động tham quan gần đó bao gồm cung An Định và chùa Thiên Mụ.",
+      "attributes": {
+        "level": "room",
+        "province": "Thừa Thiên - Huế",
+        "city": "Huế",
+        "address": "23 Đội Cung, Huế, Việt Nam",
+        "latitude": 16.468554,
+        "longitude": 107.5940779,
+        "starRating": 3,
+        "starRatingType": "booking_estimate",
+        "propertyType": "căn hộ",
+        "hotelName": "SOL Center Hotel",
+        "roomName": "Phòng Có Giường Cỡ King",
+        "roomId": "1438264401",
+        "parentProductId": "06e27af3-bbb8-5d73-9916-c9c5425f460c",
+        "bed": "1 giường đôi lớn",
+        "maxOccupancy": 2,
+        "roomSizeM2": 20,
+        "amenities": [
+          "Phòng",
+          "20 m²",
+          "Máy điều hòa",
+          "Phòng tắm riêng",
+          "TV màn hình phẳng",
+          "Cách âm",
+          "WiFi miễn phí"
+        ],
+        "conditions": [
+          "Miễn phí hủy bất kỳ lúc nào",
+          "Không cần thanh toán trước - thanh toán tại chỗ nghỉ",
+          "Không cần thẻ tín dụng",
+          "– Có thể có giảm giá",
+          "• Chúng tôi còn 5 căn"
+        ],
+        "priceDate": "2026-10-15",
+        "priceNights": 1,
+        "descriptionSource": "derived: thông tin phòng + mô tả khách sạn",
+        "descriptionLang": "vi",
+        "url": "https://www.booking.com/hotel/vn/sol-center.vi.html",
+        "fieldSources": {
+          "unitPrice": "booking.com"
+        },
+        "locationSource": "booking.com",
+        "locationPrecision": "exact"
+      },
+      "unitPrice": 431244,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": null,
+      "availableTo": null,
+      "imageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/722798998.jpg?k=7fea194ca0375c50d8514fa06788a5354f81779e3a306063922d92c3067eda9d&o=&hp=1",
+      "sourceRef": "booking:hotel:14382644:room:1438264401"
+    },
+    "flight/flight": {
+      "productId": "87b231b7-acff-53dd-9bf9-74b6aadf26c8",
+      "name": "Sun PhuQuoc Airways 9G1206: Phú Quốc - Hà Nội (02:00)",
+      "taxonomy": "flight",
+      "destination": "Hà Nội",
+      "description": "Chuyến bay thẳng Sun PhuQuoc Airways 9G1206 từ Sân Bay Phú Quốc (PQC) đến Cảng hàng không quốc tế Nội Bài (HAN), cất cánh 02:00, hạ cánh 04:05, thời gian bay 2 giờ 5 phút. Giá một chiều từ 694.000₫ (ngày 2026-09-24).",
+      "attributes": {
+        "level": "flight",
+        "parentProductId": "bb26b7b5-0346-57ae-bcd8-878d0b6f8408",
+        "flightNumber": "9G1206",
+        "airline": "Sun PhuQuoc Airways",
+        "airlineCode": "9G",
+        "originCity": "Phú Quốc",
+        "destinationCity": "Hà Nội",
+        "originDestination": "Phú Quốc",
+        "originAirport": "PQC",
+        "destinationAirport": "HAN",
+        "departureTimeLocal": "02:00",
+        "arrivalTimeLocal": "04:05",
+        "durationMinutes": 125,
+        "nonstop": true,
+        "latitude": 21.221201,
+        "longitude": 105.806999,
+        "destinationAirportName": "Sân bay quốc tế Nội Bài",
+        "locationSource": "ourairports",
+        "locationPrecision": "airport",
+        "originLatitude": 10.169783,
+        "originLongitude": 103.99353,
+        "datesSeen": [
+          "2026-09-24",
+          "2026-09-26"
+        ],
+        "priceObservedAt": "2026-09-15",
+        "url": "https://vn.trip.com/flights/phu-quoc-island-to-hanoi/airfares-pqc-han/",
+        "descriptionSource": "derived: dữ liệu chuyến bay trip.com",
+        "descriptionLang": "vi",
+        "fieldSources": {
+          "unitPrice": "trip.com"
+        }
+      },
+      "unitPrice": 694000,
+      "currency": "VND",
+      "available": true,
+      "availableFrom": "2026-09-24",
+      "availableTo": "2026-09-26",
+      "imageUrl": null,
+      "sourceRef": "trip:flight:PQC-HAN:9G1206"
+    }
+  }
+}
