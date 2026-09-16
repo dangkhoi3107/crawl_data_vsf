@@ -1,0 +1,196 @@
+{
+  "backup": "/home/dangkhoi/code/vsf/data-collection/data/backups/quality-fix-20260916-qkn9nzwt",
+  "checks": {
+    "raw_unchanged": true,
+    "other_interim_unchanged": true,
+    "unique_product_ids": true,
+    "no_existing_coordinates_lost": true,
+    "unit_tests": "7 passed; includes real listing-only image URL regression",
+    "agoda_reparse": "300 records preserved; minPrice/priceQuery/crawledAt/coordinates unchanged; recovered 4 descriptions and 4 source addresses"
+  },
+  "metrics": {
+    "products": 2327,
+    "missing_price": 197,
+    "missing_description": 0,
+    "missing_coordinates": 72,
+    "languages": {
+      "vi": 2275,
+      "en": 52
+    },
+    "destinations": {
+      "Nha Trang": 257,
+      "Phú Quốc": 271,
+      "Nghệ An": 149,
+      "Hà Tĩnh": 98,
+      "Bắc Ninh": 7,
+      "Hội An": 142,
+      "Hạ Long": 70,
+      "Đà Nẵng": 139,
+      "Thanh Hóa": 4,
+      "Huế": 131,
+      "Quảng Bình": 4,
+      "Ninh Bình": 4,
+      "Tây Ninh": 4,
+      "TP. Hồ Chí Minh": 169,
+      "Hải Phòng": 191,
+      "Hà Nội": 212,
+      "Đà Lạt": 131,
+      "Quy Nhơn": 121,
+      "Sa Pa": 107,
+      "Phan Thiết": 116
+    }
+  },
+  "destination_changes": [
+    {
+      "sourceRef": "trip:attraction:95477",
+      "name": "Hòn Ti Tốp",
+      "before": "Hải Phòng",
+      "after": "Hạ Long"
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02446",
+      "name": "[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Voucher Ẩm thực 300.000 VNĐ",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "trip:attraction:55813428",
+      "name": "Bãi biển Ti Tốp",
+      "before": "Hải Phòng",
+      "after": "Hạ Long"
+    },
+    {
+      "sourceRef": "trip:attraction:50714614",
+      "name": "Ký Ức Hội An",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "trip:attraction:137170972",
+      "name": "Mũi Kê Gà",
+      "before": "Đà Lạt",
+      "after": "Phan Thiết"
+    },
+    {
+      "sourceRef": "trip:attraction:84706",
+      "name": "Mỹ Sơn",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "trip:attraction:95478",
+      "name": "Hòn Gà Chọi",
+      "before": "Hải Phòng",
+      "after": "Hạ Long"
+    },
+    {
+      "sourceRef": "agoda:hotel:vedana-lagoon-wellness-resort-spa:hue",
+      "name": "Vedana Lagoon Wellness Resort & Spa",
+      "before": "Đà Nẵng",
+      "after": "Huế"
+    },
+    {
+      "sourceRef": "trip:attraction:84669",
+      "name": "Phố cổ Hội An",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02447",
+      "name": "[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Buggy & Voucher Ẩm thực 300.000 VNĐ",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "trip:attraction:137069524",
+      "name": "Hạnh Coconut Basket Boat",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "trip:attraction:134100373",
+      "name": "Hacoconut Coconut Basket Boat",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    },
+    {
+      "sourceRef": "trip:attraction:98753",
+      "name": "Đồi cát Du lịch Hòa Thắng",
+      "before": "Đà Lạt",
+      "after": "Phan Thiết"
+    },
+    {
+      "sourceRef": "trip:attraction:28376898",
+      "name": "Hang Sửng Sốt",
+      "before": "Hải Phòng",
+      "after": "Hạ Long"
+    },
+    {
+      "sourceRef": "trip:attraction:55836519",
+      "name": "Đảo Ký ức Hội An",
+      "before": "Đà Nẵng",
+      "after": "Hội An"
+    }
+  ],
+  "price_changes_from_existing_sources": [
+    {
+      "sourceRef": "vinpearl:tour:VW01861",
+      "name": "VinWonders Nam Hội An",
+      "before": 300000,
+      "after": 650000,
+      "fieldSources": {
+        "unitPrice": "trip.com"
+      }
+    }
+  ],
+  "added_sources": [
+    "agoda:hotel:the-apec-mandala-ocean-view-condotel:phan-thiet",
+    "agoda:hotel:can-ho-2-ngu-doc-dao-nhat-vinhome-marina:haiphong",
+    "agoda:hotel:flc-sea-tower-quy-nhon-jennny-nguyen:quy-nhon-binh-dinh",
+    "agoda:hotel:flc-sea-tower-quy-nhon-enochnguyen:quy-nhon-binh-dinh"
+  ],
+  "merged_sources": [
+    "trip:attraction:50961574"
+  ],
+  "coordinate_evidence": {
+    "vinpearl-golf-leman": {
+      "latitude": 10.9253018,
+      "longitude": 106.5054727,
+      "source": "https://vinpearl.com/en/vinpearl-golf-leman-ho-chi-minh-city",
+      "evidence": "Google Maps iframe pin and destination of the linked directions both give the same coordinates (not viewport center)."
+    }
+  },
+  "remaining_venue_reviews": [
+    {
+      "key": "vinpearl-harbour",
+      "name": "Vinpearl Harbour Nha Trang",
+      "reason": "chưa đạt kiểm tra: kết quả 'Vinpearl Resort Nha Trang' thiếu từ: harbour"
+    },
+    {
+      "key": "vinpearl-golf-phu-quoc",
+      "name": "Vinpearl Golf Phú Quốc",
+      "reason": "chưa đạt kiểm tra: kết quả 'Meliá Vinpearl Phu Quoc' thiếu từ: golf"
+    },
+    {
+      "key": "cong-vien-nuoc-ha-tinh",
+      "name": "Công viên nước Hà Tĩnh",
+      "reason": "chưa đạt kiểm tra: kết quả 'Công Viên' thiếu từ: nuoc"
+    },
+    {
+      "key": "vinwonders-wave-park",
+      "name": "VinWonders Wave Park & Water Park",
+      "reason": "chưa đạt kiểm tra: kết quả 'VinWonders Olympic Swimming Pool_Bể bơi' thiếu từ: wave"
+    },
+    {
+      "key": "show-dat-nuoc-thien-hung-ca",
+      "name": "Show \"Đất nước thiên hùng ca\"",
+      "reason": "chưa đạt kiểm tra: kết quả 'Điểm Vui Chơi Cầu Trượt Nước' thiếu từ: ca dat"
+    }
+  ],
+  "limitations": [
+    "Remaining coordinates could not be independently confirmed. Photon returned HTTP 403; existing review status retained.",
+    "Missing prices remain null; no assumed free tickets or invented amounts.",
+    "Language detection remains a character-ratio heuristic.",
+    "Availability is source-derived; it is not live booking confirmation."
+  ]
+}

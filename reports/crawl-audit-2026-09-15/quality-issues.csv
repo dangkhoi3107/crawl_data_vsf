@@ -1,0 +1,169 @@
+﻿issue,sourceRef,productId,name,taxonomy,destination,unitPrice,available
+description_under_80,vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd:room:00edfd2d-8e24-43d9-bd54-9b211c21c3f6,578925f9-bb93-5862-a4ee-db8661b832c1,Vinpearl Resort & Spa Hạ Long - Deluxe Sân Vườn Giường Đôi,hotel,Hạ Long,4280000,True
+non_vi_or_undetected,vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd:room:81cb3113-0830-42fd-818e-7c7e5a0afab2,b49d821a-c54c-512f-8fb4-2137f681a571,Vinpearl Resort & Spa Hạ Long - Deluxe Sân Vườn 2 Giường Đơn,hotel,Hạ Long,4280000,True
+description_under_80,vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd:room:81cb3113-0830-42fd-818e-7c7e5a0afab2,b49d821a-c54c-512f-8fb4-2137f681a571,Vinpearl Resort & Spa Hạ Long - Deluxe Sân Vườn 2 Giường Đơn,hotel,Hạ Long,4280000,True
+no_positive_price,vinpearl:tour:VW02886,a4801188-c110-5c9a-ac45-ef6de2eb59b2,[VinWonders Water Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Nước,attraction,Hà Nội,0,True
+zero_price_available,vinpearl:tour:VW02886,a4801188-c110-5c9a-ac45-ef6de2eb59b2,[VinWonders Water Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Nước,attraction,Hà Nội,0,True
+detail_fallback,vinpearl:tour:VW02886,a4801188-c110-5c9a-ac45-ef6de2eb59b2,[VinWonders Water Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Nước,attraction,Hà Nội,0,True
+description_under_80,vinpearl:tour:VW02886,a4801188-c110-5c9a-ac45-ef6de2eb59b2,[VinWonders Water Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Nước,attraction,Hà Nội,0,True
+no_positive_price,vinpearl:tour:VW02885,deb85c3d-51d5-5cbc-b29b-73a970f88fae,[VinWonders Wave Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Sóng,attraction,Hà Nội,0,True
+zero_price_available,vinpearl:tour:VW02885,deb85c3d-51d5-5cbc-b29b-73a970f88fae,[VinWonders Wave Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Sóng,attraction,Hà Nội,0,True
+detail_fallback,vinpearl:tour:VW02885,deb85c3d-51d5-5cbc-b29b-73a970f88fae,[VinWonders Wave Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Sóng,attraction,Hà Nội,0,True
+description_under_80,vinpearl:tour:VW02885,deb85c3d-51d5-5cbc-b29b-73a970f88fae,[VinWonders Wave Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Sóng,attraction,Hà Nội,0,True
+member_variant,vinpearl:tour:VW02874,025b714e-049e-578e-bc6a-bce3162e4b13,[VIN33 - Diamond] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc,combo,Phú Quốc,1275000,True
+member_variant,vinpearl:tour:VW02873,68cef331-76bd-5073-8012-eaacd8fae836,[VIN33 - Platinum] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc,combo,Phú Quốc,1365000,True
+member_variant,vinpearl:tour:VW02872,8f1d24af-8cf1-5750-a25f-d109ab6aa59d,[VIN33 - Diamond] - [Vinpearl Safari Phú Quốc] - Vé Vào Cửa Tiêu Chuẩn,attraction,Phú Quốc,807500,True
+member_variant,vinpearl:tour:VW02871,f58f09c9-c8bc-53c0-b5f5-d704dbc0b04e,[VIN33 - Platinum] - [Vinpearl Safari Phú Quốc] - Vé Vào Cửa Tiêu Chuẩn,attraction,Phú Quốc,864500,True
+member_variant,vinpearl:tour:VW02870,908accd5-e891-519b-bd32-dd296322ced8,[VIN33 - Diamond] - [VinWonders Phú Quốc] - Vé Vào Cửa Tiêu Chuẩn,attraction,Phú Quốc,892500,True
+member_variant,vinpearl:tour:VW02869,64254f74-4122-5293-8542-ce1bc25fc884,[VIN33 - Platinum] - [VinWonders Phú Quốc] - Vé Vào Cửa Tiêu Chuẩn,attraction,Phú Quốc,955500,True
+member_variant,vinpearl:tour:VW02868,737be10f-b0d9-52e9-8b69-941931da8954,[VIN33 - Diamond] - [VinWonders Cửa Hội] - Combo Phá Đảo 04 Khu,combo,Nghệ An,442000,True
+member_variant,vinpearl:tour:VW02867,2ed5c3c2-43e2-5151-a6d5-829a50a6839a,[VIN33 - Platinum] - [VinWonders Cửa Hội] - Combo Phá Đảo 04 Khu,combo,Nghệ An,473200,True
+member_variant,vinpearl:tour:VW02866,9d126607-e844-51f1-854e-3ac9d779577d,[VIN33 - Gold] - [VinWonders Cửa Hội] - Combo Phá Đảo 04 Khu,combo,Nghệ An,488800,True
+non_vi_or_undetected,vinpearl:tour:VW02865,5c82253d-095b-5b87-a334-2264482010ed,[VIN33 - Diamond] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,161500,True
+member_variant,vinpearl:tour:VW02865,5c82253d-095b-5b87-a334-2264482010ed,[VIN33 - Diamond] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,161500,True
+non_vi_or_undetected,vinpearl:tour:VW02864,c0580640-927d-52be-b301-8aae7524b73a,[VIN33 - Platinum] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,172900,True
+member_variant,vinpearl:tour:VW02864,c0580640-927d-52be-b301-8aae7524b73a,[VIN33 - Platinum] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,172900,True
+non_vi_or_undetected,vinpearl:tour:VW02863,8de3c564-375c-528f-8ace-7535acc4f10b,[VIN33 - Gold] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,178600,True
+member_variant,vinpearl:tour:VW02863,8de3c564-375c-528f-8ace-7535acc4f10b,[VIN33 - Gold] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,178600,True
+member_variant,vinpearl:tour:VW02862,7da702d9-100f-58f7-9eba-9f226aa2ab38,[VIN33 - Diamond] - [VinWonders Cửa Hội] - Công Viên Nước Thiên Đường Nhiệt Đới,attraction,Nghệ An,204000,True
+member_variant,vinpearl:tour:VW02861,f809fe43-faf2-501e-8653-37d872339f5c,[VIN33 - Platinum] - [VinWonders Cửa Hội] - Công Viên Nước Thiên Đường Nhiệt Đới,attraction,Nghệ An,218400,True
+member_variant,vinpearl:tour:VW02860,062c8638-0b1d-5e37-b34c-d6519001db25,[VIN33 - Gold] - [VinWonders Cửa Hội] - Công Viên Nước Thiên Đường Nhiệt Đới,attraction,Nghệ An,235000,True
+non_vi_or_undetected,vinpearl:tour:VW02859,d9456f06-488b-50c4-b912-f69b3e044fab,[VIN33 - Diamond] - [VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,212500,True
+member_variant,vinpearl:tour:VW02859,d9456f06-488b-50c4-b912-f69b3e044fab,[VIN33 - Diamond] - [VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,212500,True
+non_vi_or_undetected,vinpearl:tour:VW02858,14a14727-5f1f-55b3-b83f-691a7bd2265b,[VIN33 - Platinum] - [VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,227500,True
+member_variant,vinpearl:tour:VW02858,14a14727-5f1f-55b3-b83f-691a7bd2265b,[VIN33 - Platinum] - [VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,227500,True
+non_vi_or_undetected,vinpearl:tour:VW02857,9f7f8569-dc08-5b33-816c-a47142753899,[VIN33 - Gold] - [VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,235000,True
+member_variant,vinpearl:tour:VW02857,9f7f8569-dc08-5b33-816c-a47142753899,[VIN33 - Gold] - [VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,235000,True
+member_variant,vinpearl:tour:VW02856,6ff68826-9c7f-528c-b59e-365d8eef5e9f,[VIN33 - Diamond] - [VinWonders Vũ Yên] - Combo 03 khu: Vườn Thú + Trò Chơi + Công Viên Nước,combo,Hải Phòng,382500,True
+member_variant,vinpearl:tour:VW02855,ab2a5f90-e0fb-5321-b1ca-8dc4d12c2ab5,[VIN33 - Platinum] - [VinWonders Vũ Yên] - Combo 03 khu: Vườn Thú + Trò Chơi + Công Viên Nước,combo,Hải Phòng,409500,True
+member_variant,vinpearl:tour:VW02854,a14545a5-b194-53b9-a8fb-ee8701ba804e,[VIN33 - Diamond] - [VinWonders Nam Hội An] Vé vào cửa sau 14:00,attraction,Hội An,382500,True
+member_variant,vinpearl:tour:VW02853,ab7b9481-92bc-57f2-9155-e09534c48bd8,[VIN33 - Platinum] - [VinWonders Nam Hội An] Vé vào cửa sau 14:00,attraction,Hội An,409500,True
+member_variant,vinpearl:tour:VW02850,2b2d8e48-cf2f-5b82-86fc-017151456004,[VIN33 - Gold] - [VinWonders Vũ Yên] - Combo 03 khu: Vườn Thú + Trò Chơi + Công Viên Nước,combo,Hải Phòng,423000,True
+member_variant,vinpearl:tour:VW02849,756262f3-e4ce-56eb-8c47-18195101ea19,[VIN33 - Diamond] - [VinWonders Vũ Yên] - Vé vào cửa Công Viên Nước,attraction,Hải Phòng,170000,True
+member_variant,vinpearl:tour:VW02848,841ce009-501c-50ee-8f47-5d0e308480a6,[VIN33 - Platinum] - [VinWonders Vũ Yên] - Vé vào cửa Công Viên Nước,attraction,Hải Phòng,182000,True
+member_variant,vinpearl:tour:VW02847,17240845-a931-5577-849f-b506fe570424,[VIN33 - Gold] - [VinWonders Vũ Yên] - Vé vào cửa Công Viên Nước,attraction,Hải Phòng,188000,True
+member_variant,vinpearl:tour:VW02846,927cdb10-f535-5527-8c09-1cda8d434c9c,[VIN33 - Diamond] - [VinWonders Vũ Yên] - Combo Tiêu Chuẩn: Vườn Thú + Khu Trò Chơi,combo,Hải Phòng,340000,True
+member_variant,vinpearl:tour:VW02845,217b4156-7f68-5170-808f-da543b214f55,[VIN33 - Platinum] - [VinWonders Vũ Yên] - Combo Tiêu Chuẩn: Vườn Thú + Khu Trò Chơi,combo,Hải Phòng,364000,True
+member_variant,vinpearl:tour:VW02844,5f7f9ea0-a046-58bb-986f-ddaaa9cf725f,[VIN33 - Gold] - [VinWonders Vũ Yên] - Combo Tiêu Chuẩn: Vườn Thú + Khu Trò Chơi,combo,Hải Phòng,376000,True
+member_variant,vinpearl:tour:VW02843,933a5087-85f3-5e9e-8604-279b2f288afb,[VIN33 - Diamond] - [VinWonders Nam Hội An] Vé vào cửa tiêu chuẩn | TẶNG Voucher Ẩm thực,attraction,Hội An,552500,True
+member_variant,vinpearl:tour:VW02842,14b5f7fd-fee8-5c46-b7e4-7f5e290f1469,[VIN33 - Platinum] - [VinWonders Nam Hội An] Vé vào cửa tiêu chuẩn | TẶNG Voucher Ẩm thực,attraction,Hội An,591500,True
+member_variant,vinpearl:tour:VW02840,9e4e7e81-8866-540e-85f4-70d14696ed01,[VIN33 - Gold] - [VinWonders Nam Hội An] Vé vào cửa sau 14:00,attraction,Hội An,423000,True
+member_variant,vinpearl:tour:VW02839,c3ced672-c909-554d-9fde-cdabc0ffbf4e,[VIN33 - Gold] - [VinWonders Nam Hội An] Vé vào cửa tiêu chuẩn | TẶNG Voucher Ẩm thực,attraction,Hội An,611000,True
+member_variant,vinpearl:tour:VW02838,d987d8fe-c633-5d38-98c7-ef4d70f18556,[VIN33 - Diamond] - [Grand World Phú Quốc] - Vé Tinh Hoa Việt Nam,attraction,Phú Quốc,255000,True
+member_variant,vinpearl:tour:VW02837,3c3c13d4-e02c-58ec-a9d3-3e79375b2a1a,[VIN33 - Platinum] - [Grand World Phú Quốc] - Vé Tinh Hoa Việt Nam,attraction,Phú Quốc,273000,True
+member_variant,vinpearl:tour:VW02836,ffe73b4b-4cc4-59e6-b528-151b7dfb1b58,[VIN33 - Platinum] - [Grand World Phú Quốc] - Bảo Tàng Gấu Teddy Bear Museum,attraction,Phú Quốc,182000,True
+member_variant,vinpearl:tour:VW02835,699ac96c-636e-5e02-b178-3b123a5eb9c3,[VIN33 - Diamond] - [Grand World Phú Quốc] - Bảo Tàng Gấu Teddy Bear Museum,attraction,Phú Quốc,170000,True
+member_variant,vinpearl:tour:VW02834,f61856e6-7973-50ea-9d9a-45e485999d08,[VIN33 - Diamond] - [Grand World Phú Quốc] - Vé đi thuyền Venice (Water Taxi),attraction,Phú Quốc,170000,True
+member_variant,vinpearl:tour:VW02833,f540ef2f-f1de-54dc-a98d-c3cee180f0d4,[VIN33 - Platinum] - [Grand World Phú Quốc] - Vé đi thuyền Venice (Water Taxi),attraction,Phú Quốc,182000,True
+member_variant,vinpearl:tour:VW02832,c4bd8c43-4c12-57eb-a625-aa7157245e3a,[VIN33 - Diamond] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc + Tặng Voucher Ẩm Thực,combo,Phú Quốc,1275000,True
+member_variant,vinpearl:tour:VW02831,ae017078-3283-59b5-bcee-73343b411e25,[VIN33 - Platinum] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc + Tặng Voucher Ẩm Thực,combo,Phú Quốc,1365000,True
+member_variant,vinpearl:tour:VW02824,5bad5eed-6b13-506f-bf63-e4bdf218676b,[VIN33 - Diamond] - [Vinpearl Safari Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực,attraction,Phú Quốc,722500,True
+member_variant,vinpearl:tour:VW02823,033fe2db-2789-55b7-b04b-1f3e2a4f29cb,[VIN33 - Platinum] - [Vinpearl Safari Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực,attraction,Phú Quốc,773500,True
+member_variant,vinpearl:tour:VW02822,83d81cf9-bafc-55ab-aafd-b994f365e832,[VIN33 - Diamond] - [VinWonders Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực,attraction,Phú Quốc,807500,True
+member_variant,vinpearl:tour:VW02821,5df6a5ae-7f94-5111-ae5d-113a05e832ba,[VIN33 - Platinum] - [VinWonders Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực,attraction,Phú Quốc,864500,True
+member_variant,vinpearl:tour:VW02820,84ac6fa0-f87b-5b96-8745-2b1fe1a13d34,[VIN33 - Gold] - [Grand World Phú Quốc] - Vé Tinh Hoa Việt Nam,attraction,Phú Quốc,282000,True
+member_variant,vinpearl:tour:VW02819,bceffc48-8927-586f-b875-6c9712c44e70,[VIN33 - Gold] - [Grand World Phú Quốc] - Bảo Tàng Gấu Teddy Bear Museum,attraction,Phú Quốc,188000,True
+member_variant,vinpearl:tour:VW02818,e35d0af0-91c4-55b8-a74f-aaaffea153f8,[VIN33 - Gold] - [Grand World Phú Quốc] - Vé đi thuyền Venice (Water Taxi),attraction,Phú Quốc,188000,True
+member_variant,vinpearl:tour:VW02817,94948214-7190-5680-a346-a675116500bd,[VIN33 - Gold] - [Vinpearl Safari Phú Quốc] - Vé Vào Cửa Tiêu Chuẩn,attraction,Phú Quốc,893000,True
+member_variant,vinpearl:tour:VW02816,0f42d97b-e5f9-517a-abf8-f574338e3363,[VIN33 - Gold] - [Vinpearl Safari Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực,attraction,Phú Quốc,799000,True
+member_variant,vinpearl:tour:VW02815,c9cd24bb-17e2-558c-b3b2-718bbf05e44a,[VIN33 - Gold] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc,combo,Phú Quốc,1410000,True
+member_variant,vinpearl:tour:VW02814,1ccd5c8c-d304-5bac-b797-989a2b6dd6d0,[VIN33 - Gold] - [VinWonders Phú Quốc] - Vé Vào Cửa Tiêu Chuẩn,attraction,Phú Quốc,987000,True
+member_variant,vinpearl:tour:VW02813,d15d16eb-a79d-5b6f-a314-3867aa10bdd3,[VIN33 - Gold] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc + Tặng Voucher Ẩm Thực,combo,Phú Quốc,1410000,True
+member_variant,vinpearl:tour:VW02812,a2cec5b4-295f-57ea-98e0-8f43866828b6,[VIN33 - Gold] - [VinWonders Phú Quốc] - Vé Vào Cửa + Tặng Voucher Ẩm Thực,attraction,Phú Quốc,893000,True
+member_variant,vinpearl:tour:VW02804,2e09f893-adf5-58d1-9d3c-04680e56768d,[Khách hàng đặc biệt] Vé Hạng Non Sông Gấm Vóc | Tặng Voucher Ẩm thực / Quà lưu niệm,attraction,Hà Nội,200000,True
+member_variant,vinpearl:tour:VW02803,ec569bf9-fa9d-535d-ad06-456230ec186d,[Khách hàng đặc biệt] Vé Hạng Cổ Loa | Tặng Voucher Ẩm thực / Quà lưu niệm,attraction,Hà Nội,250000,True
+member_variant,vinpearl:tour:VW02802,9a78f6e6-2807-5e42-9f69-b996c5b98ed7,[Khách hàng đặc biệt] Vé Hạng Thăng Long | Tặng Voucher Ẩm thực / Quà lưu niệm,attraction,Hà Nội,300000,True
+member_variant,vinpearl:tour:VW02801,3ae090ea-5c0e-5f3a-89df-c6eae4ead8a4,[Khách hàng đặc biệt] Vé Hạng Văn Lang | Tặng Voucher Ẩm thực / Quà lưu niệm,attraction,Hà Nội,350000,True
+member_variant,vinpearl:tour:VW02800,0bbc94fc-f61e-562f-af2e-f6d310162166,[Khách hàng đặc biệt] Vé Hạng Lạc Hồng | Tặng Voucher Ẩm thực / Quà lưu niệm,attraction,Hà Nội,500000,True
+non_vi_or_undetected,vinpearl:tour:VW02699,36776ecf-745f-5118-9bce-39886b2ba5ff,[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Xúc xích chiên + Nước ngọt,combo,Hà Tĩnh,150000,True
+non_vi_or_undetected,vinpearl:tour:VW02698,d137f498-56c2-5e31-ac97-11af93e4c2e4,[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Pizza rau củ/nấm/cà chua,combo,Hà Tĩnh,150000,True
+non_vi_or_undetected,vinpearl:tour:VW02697,99021e06-31cc-5dfc-a7c3-21c787f79012,[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Đùi gà chiên + Nước ngọt,combo,Hà Tĩnh,150000,True
+non_vi_or_undetected,vinpearl:tour:VW02696,5e325d4d-71b9-589b-9b4e-fbf76971bee1,[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Túi tote,combo,Hà Tĩnh,160000,True
+non_vi_or_undetected,vinpearl:tour:VW02695,f751a108-420a-5322-923f-f4925c4c915d,[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Mũ lưỡi trai xinh xắn,combo,Hà Tĩnh,175000,True
+non_vi_or_undetected,vinpearl:tour:VW02694,e916cefa-b08b-5569-875f-226d6f4a8319,"[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Túi Vải + Dầu gội, dầu xả",combo,Hà Tĩnh,110000,True
+no_positive_price,vinpearl:tour:VW02687,6fa9992a-21ee-542f-88d7-39f7b2473aec,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Trẻ Em),attraction,Hà Tĩnh,0,True
+zero_price_available,vinpearl:tour:VW02687,6fa9992a-21ee-542f-88d7-39f7b2473aec,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Trẻ Em),attraction,Hà Tĩnh,0,True
+detail_fallback,vinpearl:tour:VW02687,6fa9992a-21ee-542f-88d7-39f7b2473aec,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Trẻ Em),attraction,Hà Tĩnh,0,True
+description_under_80,vinpearl:tour:VW02687,6fa9992a-21ee-542f-88d7-39f7b2473aec,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Trẻ Em),attraction,Hà Tĩnh,0,True
+no_positive_price,vinpearl:tour:VW02683,209be655-b122-50d6-89b4-e91ef5507e67,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Người Lớn),attraction,Hà Tĩnh,0,True
+zero_price_available,vinpearl:tour:VW02683,209be655-b122-50d6-89b4-e91ef5507e67,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Người Lớn),attraction,Hà Tĩnh,0,True
+detail_fallback,vinpearl:tour:VW02683,209be655-b122-50d6-89b4-e91ef5507e67,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Người Lớn),attraction,Hà Tĩnh,0,True
+description_under_80,vinpearl:tour:VW02683,209be655-b122-50d6-89b4-e91ef5507e67,[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Người Lớn),attraction,Hà Tĩnh,0,True
+non_vi_or_undetected,vinpearl:tour:VW02659,a556a3a0-996e-507d-a310-cb57ca1fec63,[Người địa phương] - Combo Cáp Treo + Games trên Đảo - Cửa Hội,combo,Nghệ An,220000,True
+non_vi_or_undetected,vinpearl:tour:VW02658,eb83c3a2-c892-5cb4-a667-f67b93f343ef,[Người địa phương] - Cáp Treo 2 Chiều - Cửa Hội,attraction,Nghệ An,140000,True
+no_positive_price,vinpearl:tour:VW02475,df4470f5-43ab-52c4-a76b-9e05da7a838f,[Công Viên Grand Park] [Ưu đãi Gia đình] Combo Công Viên Nước + Games Khu Vườn Mộng Mơ,combo,TP. Hồ Chí Minh,0,True
+zero_price_available,vinpearl:tour:VW02475,df4470f5-43ab-52c4-a76b-9e05da7a838f,[Công Viên Grand Park] [Ưu đãi Gia đình] Combo Công Viên Nước + Games Khu Vườn Mộng Mơ,combo,TP. Hồ Chí Minh,0,True
+detail_fallback,vinpearl:tour:VW02475,df4470f5-43ab-52c4-a76b-9e05da7a838f,[Công Viên Grand Park] [Ưu đãi Gia đình] Combo Công Viên Nước + Games Khu Vườn Mộng Mơ,combo,TP. Hồ Chí Minh,0,True
+no_positive_price,vinpearl:tour:VW02447,492fc56a-4b33-5941-b714-9b21012321ca,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Buggy & Voucher Ẩm thực 300.000 VNĐ,attraction,Đà Nẵng,0,True
+zero_price_available,vinpearl:tour:VW02447,492fc56a-4b33-5941-b714-9b21012321ca,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Buggy & Voucher Ẩm thực 300.000 VNĐ,attraction,Đà Nẵng,0,True
+detail_fallback,vinpearl:tour:VW02447,492fc56a-4b33-5941-b714-9b21012321ca,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Buggy & Voucher Ẩm thực 300.000 VNĐ,attraction,Đà Nẵng,0,True
+no_positive_price,vinpearl:tour:VW02446,3fe95956-563a-5a42-9969-1e956b5503c9,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Voucher Ẩm thực 300.000 VNĐ,attraction,Đà Nẵng,0,True
+zero_price_available,vinpearl:tour:VW02446,3fe95956-563a-5a42-9969-1e956b5503c9,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Voucher Ẩm thực 300.000 VNĐ,attraction,Đà Nẵng,0,True
+detail_fallback,vinpearl:tour:VW02446,3fe95956-563a-5a42-9969-1e956b5503c9,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn & Voucher Ẩm thực 300.000 VNĐ,attraction,Đà Nẵng,0,True
+no_positive_price,vinpearl:tour:VW02445,49600cea-4581-5f2c-9c34-7c33d8216f3e,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn VinWonders Nam Hội An,attraction,Hội An,0,True
+zero_price_available,vinpearl:tour:VW02445,49600cea-4581-5f2c-9c34-7c33d8216f3e,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn VinWonders Nam Hội An,attraction,Hội An,0,True
+detail_fallback,vinpearl:tour:VW02445,49600cea-4581-5f2c-9c34-7c33d8216f3e,[Ưu Đãi Người Đà Nẵng] [Mua 2 Tặng 1] Vé vào cửa tiêu chuẩn VinWonders Nam Hội An,attraction,Hội An,0,True
+non_vi_or_undetected,vinpearl:tour:VW02409,c030892f-e7da-5c3d-be21-b1e218acb577,[VinWonders Cửa Hội] - Tiệc tối BBQ bên biển Cửa Lò (350k),attraction,Nghệ An,350000,True
+no_positive_price,vinpearl:tour:VW02310,912a02c5-2f58-5b69-9f60-06b1ccf5e7c6,[04 Người Lớn] - Combo Vườn Thú + Khu Trò Chơi Vũ Yên + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+zero_price_available,vinpearl:tour:VW02310,912a02c5-2f58-5b69-9f60-06b1ccf5e7c6,[04 Người Lớn] - Combo Vườn Thú + Khu Trò Chơi Vũ Yên + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+detail_fallback,vinpearl:tour:VW02310,912a02c5-2f58-5b69-9f60-06b1ccf5e7c6,[04 Người Lớn] - Combo Vườn Thú + Khu Trò Chơi Vũ Yên + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+no_positive_price,vinpearl:tour:VW02309,eb2974d0-7ad8-544d-bb8c-695b75f82747,[VinWonders Vũ Yên] - [02 Người Lớn + 02 Trẻ Em] - Combo Vườn Thú + Khu Trò Chơi + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+zero_price_available,vinpearl:tour:VW02309,eb2974d0-7ad8-544d-bb8c-695b75f82747,[VinWonders Vũ Yên] - [02 Người Lớn + 02 Trẻ Em] - Combo Vườn Thú + Khu Trò Chơi + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+detail_fallback,vinpearl:tour:VW02309,eb2974d0-7ad8-544d-bb8c-695b75f82747,[VinWonders Vũ Yên] - [02 Người Lớn + 02 Trẻ Em] - Combo Vườn Thú + Khu Trò Chơi + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+no_positive_price,vinpearl:tour:VW02308,0c98ee85-b8c0-5616-833b-414a2bd7b49f,[02 Người Lớn + 01 Trẻ Em] - Combo Vườn Thú + Khu Trò Chơi Vũ Yên + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+zero_price_available,vinpearl:tour:VW02308,0c98ee85-b8c0-5616-833b-414a2bd7b49f,[02 Người Lớn + 01 Trẻ Em] - Combo Vườn Thú + Khu Trò Chơi Vũ Yên + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+detail_fallback,vinpearl:tour:VW02308,0c98ee85-b8c0-5616-833b-414a2bd7b49f,[02 Người Lớn + 01 Trẻ Em] - Combo Vườn Thú + Khu Trò Chơi Vũ Yên + Tặng 01 Túi Tote,combo,Hải Phòng,0,True
+no_positive_price,vinpearl:tour:VW02287,b466e092-108b-542b-b03d-ce2b10fab738,[Combo Lãng Mạn Cho Cặp Đôi] - Vé Jjimjilbang tiêu chuẩn & Dịch vụ Spa cao cấp TẶNG 01 Bingsu,combo,Hà Nội,0,True
+zero_price_available,vinpearl:tour:VW02287,b466e092-108b-542b-b03d-ce2b10fab738,[Combo Lãng Mạn Cho Cặp Đôi] - Vé Jjimjilbang tiêu chuẩn & Dịch vụ Spa cao cấp TẶNG 01 Bingsu,combo,Hà Nội,0,True
+detail_fallback,vinpearl:tour:VW02287,b466e092-108b-542b-b03d-ce2b10fab738,[Combo Lãng Mạn Cho Cặp Đôi] - Vé Jjimjilbang tiêu chuẩn & Dịch vụ Spa cao cấp TẶNG 01 Bingsu,combo,Hà Nội,0,True
+no_positive_price,vinpearl:tour:VW02277,9b42c4b1-1c39-5a6b-8e66-662152a316d2,[Combo Gia Đình Siêu Tiết Kiệm] - Combo Vé Xông hơi Jjimjilbang và Set Ẩm thực 200k chuẩn Hàn dành cho cả gia đình,combo,Hà Nội,0,True
+zero_price_available,vinpearl:tour:VW02277,9b42c4b1-1c39-5a6b-8e66-662152a316d2,[Combo Gia Đình Siêu Tiết Kiệm] - Combo Vé Xông hơi Jjimjilbang và Set Ẩm thực 200k chuẩn Hàn dành cho cả gia đình,combo,Hà Nội,0,True
+detail_fallback,vinpearl:tour:VW02277,9b42c4b1-1c39-5a6b-8e66-662152a316d2,[Combo Gia Đình Siêu Tiết Kiệm] - Combo Vé Xông hơi Jjimjilbang và Set Ẩm thực 200k chuẩn Hàn dành cho cả gia đình,combo,Hà Nội,0,True
+description_under_80,vinpearl:tour:VW02277,9b42c4b1-1c39-5a6b-8e66-662152a316d2,[Combo Gia Đình Siêu Tiết Kiệm] - Combo Vé Xông hơi Jjimjilbang và Set Ẩm thực 200k chuẩn Hàn dành cho cả gia đình,combo,Hà Nội,0,True
+no_positive_price,vinpearl:tour:VW02171,cfa73d80-0e6b-5559-86e9-87a422239b5c,[-20%] [Ưu đãi Học sinh - Sinh viên] - Combo 2 công viên Hòn Đảo Nhiệt Đới & Khu vườn Mộng mơ,combo,TP. Hồ Chí Minh,0,True
+zero_price_available,vinpearl:tour:VW02171,cfa73d80-0e6b-5559-86e9-87a422239b5c,[-20%] [Ưu đãi Học sinh - Sinh viên] - Combo 2 công viên Hòn Đảo Nhiệt Đới & Khu vườn Mộng mơ,combo,TP. Hồ Chí Minh,0,True
+detail_fallback,vinpearl:tour:VW02171,cfa73d80-0e6b-5559-86e9-87a422239b5c,[-20%] [Ưu đãi Học sinh - Sinh viên] - Combo 2 công viên Hòn Đảo Nhiệt Đới & Khu vườn Mộng mơ,combo,TP. Hồ Chí Minh,0,True
+no_positive_price,vinpearl:tour:VW02170,7a9b6397-b797-54e7-9399-336b60fd0287,[-20%] [Ưu đãi Học sinh - Sinh viên] - Vé Công Viên Nước Hòn Đảo Nhiệt Đới,attraction,TP. Hồ Chí Minh,0,True
+zero_price_available,vinpearl:tour:VW02170,7a9b6397-b797-54e7-9399-336b60fd0287,[-20%] [Ưu đãi Học sinh - Sinh viên] - Vé Công Viên Nước Hòn Đảo Nhiệt Đới,attraction,TP. Hồ Chí Minh,0,True
+detail_fallback,vinpearl:tour:VW02170,7a9b6397-b797-54e7-9399-336b60fd0287,[-20%] [Ưu đãi Học sinh - Sinh viên] - Vé Công Viên Nước Hòn Đảo Nhiệt Đới,attraction,TP. Hồ Chí Minh,0,True
+description_under_80,vinpearl:tour:VW02170,7a9b6397-b797-54e7-9399-336b60fd0287,[-20%] [Ưu đãi Học sinh - Sinh viên] - Vé Công Viên Nước Hòn Đảo Nhiệt Đới,attraction,TP. Hồ Chí Minh,0,True
+no_positive_price,vinpearl:tour:VW02168,eb3fac5d-aea1-51f6-b733-84b67c1aa8e6,"[-30%] Ưu đãi HS Tiểu học, Mầm non - Vé Công Viên Nước Grand Park",attraction,TP. Hồ Chí Minh,0,True
+zero_price_available,vinpearl:tour:VW02168,eb3fac5d-aea1-51f6-b733-84b67c1aa8e6,"[-30%] Ưu đãi HS Tiểu học, Mầm non - Vé Công Viên Nước Grand Park",attraction,TP. Hồ Chí Minh,0,True
+detail_fallback,vinpearl:tour:VW02168,eb3fac5d-aea1-51f6-b733-84b67c1aa8e6,"[-30%] Ưu đãi HS Tiểu học, Mầm non - Vé Công Viên Nước Grand Park",attraction,TP. Hồ Chí Minh,0,True
+description_under_80,vinpearl:tour:VW02168,eb3fac5d-aea1-51f6-b733-84b67c1aa8e6,"[-30%] Ưu đãi HS Tiểu học, Mầm non - Vé Công Viên Nước Grand Park",attraction,TP. Hồ Chí Minh,0,True
+no_positive_price,vinpearl:tour:VW02063,ad27a1ea-ac4a-556a-9cb5-155ab6567ee8,x [Hòn Tằm] - Chèo thuyền Kayak 30 phút (01-02 người),attraction,Nha Trang,0,True
+zero_price_available,vinpearl:tour:VW02063,ad27a1ea-ac4a-556a-9cb5-155ab6567ee8,x [Hòn Tằm] - Chèo thuyền Kayak 30 phút (01-02 người),attraction,Nha Trang,0,True
+detail_fallback,vinpearl:tour:VW02063,ad27a1ea-ac4a-556a-9cb5-155ab6567ee8,x [Hòn Tằm] - Chèo thuyền Kayak 30 phút (01-02 người),attraction,Nha Trang,0,True
+no_positive_price,vinpearl:tour:VW02062,f8c95351-2562-5195-90fc-518edf82eff5,[Hòn Tằm] - Cano kéo dù bay (Dù đôi cho 02 người),attraction,Nha Trang,0,True
+zero_price_available,vinpearl:tour:VW02062,f8c95351-2562-5195-90fc-518edf82eff5,[Hòn Tằm] - Cano kéo dù bay (Dù đôi cho 02 người),attraction,Nha Trang,0,True
+detail_fallback,vinpearl:tour:VW02062,f8c95351-2562-5195-90fc-518edf82eff5,[Hòn Tằm] - Cano kéo dù bay (Dù đôi cho 02 người),attraction,Nha Trang,0,True
+no_positive_price,vinpearl:tour:VW02060,890d0903-4394-5b3e-8034-f912d9619a10,[Hòn Tằm] - Phao chuối (05 người),attraction,Nha Trang,0,True
+zero_price_available,vinpearl:tour:VW02060,890d0903-4394-5b3e-8034-f912d9619a10,[Hòn Tằm] - Phao chuối (05 người),attraction,Nha Trang,0,True
+detail_fallback,vinpearl:tour:VW02060,890d0903-4394-5b3e-8034-f912d9619a10,[Hòn Tằm] - Phao chuối (05 người),attraction,Nha Trang,0,True
+non_vi_or_undetected,vinpearl:tour:VW01946,4c1aad27-5651-554c-8d8f-20a9fe3d921f,[VinWonders Cửa Hội] [Combo phiêu lưu] - Cáp Treo + Games trên Đảo,combo,Nghệ An,360000,True
+non_vi_or_undetected,vinpearl:tour:VW01945,da3bb972-51c9-5f4b-ba0a-40e3dfa7a23a,[VinWonders Cửa Hội] - Combo 03 Games trên Đảo,combo,Nghệ An,190000,True
+non_vi_or_undetected,vinpearl:tour:VW01915,768b8e19-3a7d-5e8a-be25-537bacae999c,[Wonder Ngon] [All-in-one] - Combo Phá Đảo 04 Khu Cửa Hội + Ẩm thực,combo,Nghệ An,740000,True
+non_vi_or_undetected,vinpearl:tour:VW01821,b87310b1-8956-5e44-84ee-6c5066496b5e,[Wonder Ngon] - Combo Cáp treo Cửa Hội + Games Đảo + Ẩm thực,combo,Nghệ An,510000,True
+non_vi_or_undetected,vinpearl:tour:VW01817,db2df34c-4255-5fff-a09d-a38104413492,[Wonder Ngon] - Combo Cáp treo + Công viên nước Cửa Hội + Ẩm thực,combo,Nghệ An,570000,True
+non_vi_or_undetected,vinpearl:tour:VW01730,10671599-c49f-5603-8c36-f57aec2f451a,[Công Viên Nước Hà Tĩnh] - Combo Công viên nước + Vòng Quay Thời Gian,combo,Hà Tĩnh,100000,True
+non_vi_or_undetected,vinpearl:tour:VW01729,dba9bee5-7c29-5aa8-ad0f-8d7d34343193,[Công Viên Nước Hà Tĩnh] - Vé chơi Vòng Quay Thời Gian,attraction,Hà Tĩnh,30000,True
+no_positive_price,vinpearl:tour:VW01656,c4d57fa1-5289-5766-bdc0-b4cbdd8973a6,HSSV - Combo vé vào cửa 2 khu: Thuỷ Cung & VinKE Times City Hà Nội,combo,Hà Nội,0,True
+zero_price_available,vinpearl:tour:VW01656,c4d57fa1-5289-5766-bdc0-b4cbdd8973a6,HSSV - Combo vé vào cửa 2 khu: Thuỷ Cung & VinKE Times City Hà Nội,combo,Hà Nội,0,True
+detail_fallback,vinpearl:tour:VW01656,c4d57fa1-5289-5766-bdc0-b4cbdd8973a6,HSSV - Combo vé vào cửa 2 khu: Thuỷ Cung & VinKE Times City Hà Nội,combo,Hà Nội,0,True
+no_positive_price,vinpearl:tour:VW01186,783c2f74-abcf-58e2-a5d6-d998cdc24ac8,[Vinpearl Harbour] - Combo 02 người: Cáp treo 02 chiều + Xe đôi GoKart,combo,Nha Trang,0,True
+zero_price_available,vinpearl:tour:VW01186,783c2f74-abcf-58e2-a5d6-d998cdc24ac8,[Vinpearl Harbour] - Combo 02 người: Cáp treo 02 chiều + Xe đôi GoKart,combo,Nha Trang,0,True
+detail_fallback,vinpearl:tour:VW01186,783c2f74-abcf-58e2-a5d6-d998cdc24ac8,[Vinpearl Harbour] - Combo 02 người: Cáp treo 02 chiều + Xe đôi GoKart,combo,Nha Trang,0,True
+no_positive_price,vinpearl:tour:VW01185,34bbbf93-12c5-582f-9c9b-f3e58d558f0c,[Vinpearl Harbour] [Combo 04 người] - Cáp treo 2 chiều + Xe đơn GoKart,combo,Nha Trang,0,True
+zero_price_available,vinpearl:tour:VW01185,34bbbf93-12c5-582f-9c9b-f3e58d558f0c,[Vinpearl Harbour] [Combo 04 người] - Cáp treo 2 chiều + Xe đơn GoKart,combo,Nha Trang,0,True
+detail_fallback,vinpearl:tour:VW01185,34bbbf93-12c5-582f-9c9b-f3e58d558f0c,[Vinpearl Harbour] [Combo 04 người] - Cáp treo 2 chiều + Xe đơn GoKart,combo,Nha Trang,0,True
+no_positive_price,vinpearl:tour:VW01167,90ce6937-6773-5d29-9508-4887e7dbf13c,[VinWonders Cửa Hội] - Xe đơn GoKart đua xe F1,attraction,Nghệ An,0,True
+zero_price_available,vinpearl:tour:VW01167,90ce6937-6773-5d29-9508-4887e7dbf13c,[VinWonders Cửa Hội] - Xe đơn GoKart đua xe F1,attraction,Nghệ An,0,True
+detail_fallback,vinpearl:tour:VW01167,90ce6937-6773-5d29-9508-4887e7dbf13c,[VinWonders Cửa Hội] - Xe đơn GoKart đua xe F1,attraction,Nghệ An,0,True
+non_vi_or_undetected,vinpearl:tour:VW01108,40c5fa48-c149-5555-8a0b-c53999e4a0aa,[VinWonders Cửa Hội] - Cáp Treo 2 Chiều Tiêu Chuẩn,attraction,Nghệ An,200000,True
+no_positive_price,vinpearl:tour:VW01055,e7eb56db-e90f-55bc-a4c2-093f61585602,[Vinpearl Harbour] - Combo 01 người: Cáp treo 02 chiều + Xe đơn GoKart,combo,Nha Trang,0,True
+zero_price_available,vinpearl:tour:VW01055,e7eb56db-e90f-55bc-a4c2-093f61585602,[Vinpearl Harbour] - Combo 01 người: Cáp treo 02 chiều + Xe đơn GoKart,combo,Nha Trang,0,True
+detail_fallback,vinpearl:tour:VW01055,e7eb56db-e90f-55bc-a4c2-093f61585602,[Vinpearl Harbour] - Combo 01 người: Cáp treo 02 chiều + Xe đơn GoKart,combo,Nha Trang,0,True
+no_positive_price,vinpearl:tour:VW00932,45544d29-d68b-5081-a851-f7ea073bd02d,[Times City Hà Nội] [Thuỷ Cung Vinpearl Aquarium] Combo 2 Vé Người Lớn & Dịch vụ tỏ tình/ cầu hôn/ sinh nhật,combo,Hà Nội,0,True
+zero_price_available,vinpearl:tour:VW00932,45544d29-d68b-5081-a851-f7ea073bd02d,[Times City Hà Nội] [Thuỷ Cung Vinpearl Aquarium] Combo 2 Vé Người Lớn & Dịch vụ tỏ tình/ cầu hôn/ sinh nhật,combo,Hà Nội,0,True
+detail_fallback,vinpearl:tour:VW00932,45544d29-d68b-5081-a851-f7ea073bd02d,[Times City Hà Nội] [Thuỷ Cung Vinpearl Aquarium] Combo 2 Vé Người Lớn & Dịch vụ tỏ tình/ cầu hôn/ sinh nhật,combo,Hà Nội,0,True
+description_under_80,vinpearl:tour:VW00474,9f34cb20-5df8-5fd7-bf62-7555bc7b053e,[Workshop nhí] - Teddy Junior Adventure - Nhà thám hiểm Bảo Tàng Gấu,attraction,Phú Quốc,500000,True

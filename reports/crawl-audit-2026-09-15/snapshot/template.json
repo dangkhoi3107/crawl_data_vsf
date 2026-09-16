@@ -1,0 +1,30 @@
+{
+    "productId": "4d74e680-5a04-52ae-82e8-e161d3c2bcf6", 
+    "name": "[Safari Adventure] - 05 trạm tương tác động vật + Đóng dấu hộ chiếu", 
+    "taxonomy": "attraction", 
+    "destination": "Phú Quốc", 
+    "description": "Điều khoản\nThời gian mở cửa khu Safari: Từ 9:00 đến 16:00 tất cả các ngày trong tuần\nKhu Safari ngừng nhận khách từ sau 14:00\nQuý khách hàng cao dưới 100 cm được miễn phí.\nQuy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140cm\nQuy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh.\nKhông áp dụng đồng thời các chương trình ưu đãi, khuyến mại, giảm giá.\n\nChính sách hoàn huỷ\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nTrường hợp phát sinh vấn đề đổi ngày, đổi loại vé hoặc hoàn hủy do trường hợp bất khả kháng (khu vui chơi buộc phải đóng cửa và không có cơ sở thay thế) chúng tôi sẽ áp dụng theo chính sách tại thời điểm sử dụng dịch vụ.\n\nHướng dẫn sử dụng\nKhách hàng có thể xuất trình voucher in sẵn hoặc voucher điện tử này để được nhân viên hỗ trợ sử dụng dịch vụ\nVoucher chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé", 
+    "attributes": {
+        "brand": "Vinpearl", 
+        "tourCode": "VW00466", 
+        "province": "Kiên Giang", 
+        "adultOriginalPrice": 390000.0, 
+        "childPrice": 490000.0, 
+        "promo": "► Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé\n► Vé không được hoàn, hủy", "audience": ["Nhóm bạn", "Gia đình", "Cặp đôi", "Doanh nhân"], 
+        "familyFriendly": true, 
+        "soldQuantity": 0, 
+        "supplier": "VINPEARL SAFARI PHÚ QUỐC", 
+        "vinpearlType": 7, 
+        "salesChannels": [10, 11], 
+        "images": ["https://booking-static.vinpearl.com/tours/SAFARI%20ADVENTURE%20VPT_vinpearl-safari-phu-quoc-ve-vao-cua.png", "https://booking-static.vinpearl.com/tours/SAFARI%20ADVENTURE%20VPT_vinpearl-safari-phu-quoc.png", "https://booking-static.vinpearl.com/tours/safari%20adventure%203_vinpearl-safari-phu-quoc.jpg", "https://booking-static.vinpearl.com/tours/SFR%20adventure%201_vinpearl-safari-phu-quoc.jpg", "https://booking-static.vinpearl.com/tours/safari%20adventure%202_vinpearl-safari-phu-quoc.jpg", "https://booking-static.vinpearl.com/tours/safari%20adventure%204_vinpearl-safari-phu-quoc.jpg"], 
+        "url": "https://booking.vinpearl.com/vi-VND/tour/ve-vao-cua-truc-tiep-vinpearl-safari-phu-quoc-vw00466", "hasDetail": true, 
+        "descriptionLang": "vi"}, 
+        
+    "unitPrice": 390000, 
+    "currency": "VND", 
+    "available": true, 
+    "availableFrom": "2026-09-11", 
+    "availableTo": "2026-12-31", 
+    "imageUrl": "https://booking-static.vinpearl.com/tours/SAFARI%20ADVENTURE%20VPT_vinpearl-safari-phu-quoc-ve-vao-cua.png", 
+    "sourceRef": "vinpearl:tour:VW00466"
+}

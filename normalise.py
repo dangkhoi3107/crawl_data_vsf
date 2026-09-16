@@ -39,10 +39,10 @@ from pathlib import Path
 
 from collectors import mapexport
 from collectors.common import Paths, default_data_dir, read_jsonl, setup_logging
-from collectors.geo import AIRPORTS, clean_coords, destination_in_text, destination_radius_km, km_from_destination, normalise_destination
+from collectors.geo import AIRPORTS, DESTINATION_ALIASES, clean_coords, destination_in_text, destination_radius_km, km_from_destination, normalise_destination
 from collectors.plan import TARGET_MAX, TARGET_MIN, Budget, budget_with, select_destinations
 from collectors.textutil import clean_text, detect_lang, first_int, fold, iso_date, uniq
-from collectors.venues import Venue, VenueMatcher, load_venues
+from collectors.venues import Venue, VenueMatcher, load_venues, ticket_image_slug, ticket_place_name
 
 log = logging.getLogger("normalise")
 
@@ -353,10 +353,10 @@ def vinpearl_tour_product(r: dict, today: date) -> dict | None:
     text_blob = " ".join([name, description or ""] + audience)
     return make_product(
         meta={"src": "vinpearl", "supplierCode": r.get("supplierCode"), "supplierName": r.get("supplierName"),
-              "imageUrlSlug": r.get("imageUrlSlug")},
+              "imageUrlSlug": ticket_image_slug(r)},
         name=name,
         taxonomy=vinpearl_taxonomy(r),
-        destination=normalise_destination(name, r.get("destinationName")),
+        destination=normalise_destination(ticket_place_name(name), r.get("destinationName")),
         description=description,
         attributes={
             "brand": "Vinpearl",
@@ -458,7 +458,7 @@ def booking_hotel(r: dict, rates: dict[str, float]) -> tuple[dict | None, list[d
             "priceConverted": converted_any or None,
             "images": r.get("images"),
             "url": r.get("url"),
-            "descriptionLang": detect_lang(r.get("description")),
+            "descriptionLang": detect_lang(r.get("description") or r.get("descriptionShort")),
             "fieldSources": {"name": "booking.com", "description": "booking.com", "unitPrice": "booking.com"},
         },
         unitPrice=min(room_prices) if room_prices else None,
@@ -507,6 +507,7 @@ def booking_hotel(r: dict, rates: dict[str, float]) -> tuple[dict | None, list[d
                     "priceDate": price_query.get("checkin"),
                     "priceNights": _nights(price_query),
                     "descriptionSource": "derived: thông tin phòng + mô tả khách sạn",
+                    "descriptionLang": detect_lang(room_desc),
                     "url": r.get("url"),
                     "fieldSources": {"unitPrice": "booking.com"},
                 },
@@ -846,7 +847,8 @@ def cluster_hotels(props: list[dict], threshold: float) -> tuple[list[list[dict]
     """Ghép khách sạn giữa Vinpearl / booking / agoda. Mỗi cụm có tối đa 1 bản của mỗi nguồn.
     Ghép khi (luôn cùng điểm đến): cách nhau ≤ 300 m và tên giống ≥ 75; ≤ 1 km và tên giống ≥ threshold;
     ≤ 5 km và tên gần như trùng (≥ 97, toạ độ các nguồn có thể lệch vài km); thiếu toạ độ (hoặc toạ độ nghi sai, xem
-    flag_suspect_hotel_coords) và tên giống ≥ threshold + 4."""
+    flag_suspect_hotel_coords) và tên giống ≥ threshold + 4.
+    Căn hộ/condotel có thể cùng toà nhà nhưng khác chủ: luôn yêu cầu tên giống ≥ threshold."""
     keys = {p["productId"]: name_keys(p["name"], p["attributes"].get("nameEn")) for p in props}
     by_dest: dict[str | None, list[dict]] = defaultdict(list)
     for p in props:
@@ -859,6 +861,10 @@ def cluster_hotels(props: list[dict], threshold: float) -> tuple[list[list[dict]
                     continue
                 score = name_score(keys[a["productId"]], keys[b["productId"]])
                 if score < 75:
+                    continue
+                shared_building = any(re.search(r"\b(apartment|can ho|condotel|vinhomes|flc sea tower|apec)\b", fold(p["name"]))
+                                      for p in (a, b))
+                if shared_building and score < threshold:
                     continue
                 dist = haversine_m(a["attributes"], b["attributes"]) if _coords_trusted(a) and _coords_trusted(b) else None
                 ok = (
@@ -972,6 +978,7 @@ def merge_hotel_cluster(members: list[dict], rooms_of: dict[str, list[dict]], ro
     else:
         rooms = []
     for room in rooms:
+        room["destination"] = out["destination"]
         ra = room["attributes"]
         ra["parentProductId"] = out["productId"]
         for field in LOCATION_FIELDS:  # hạng phòng luôn theo toạ độ khách sạn đã chọn
@@ -1091,9 +1098,42 @@ def merge_pois(tickets: list[dict], pois: list[dict]) -> tuple[list[dict], list[
 
 
 LOCATION_OVERRIDES_CSV = Path(__file__).resolve().parent / "collectors" / "location_overrides.csv"
+DESTINATION_OVERRIDES_CSV = Path(__file__).resolve().parent / "collectors" / "destination_overrides.csv"
 LOCATION_SOURCE = {"vinpearl": "vinpearl", "booking": "booking.com", "agoda": "agoda.com", "trip_attraction": "trip.com",
                    "booking_attraction": "booking.com"}
 LOCATION_FIELDS = ("latitude", "longitude", "locationSource", "locationPrecision", "locationWarning")
+
+
+def load_destination_overrides(path: Path | None = None) -> dict[str, tuple[str, str]]:
+    """Điểm đến du lịch đã đối chiếu theo sourceRef; bắt buộc ghi bằng chứng, không đoán từ tên đường."""
+    path = path or DESTINATION_OVERRIDES_CSV
+    if not path.exists():
+        return {}
+    out = {}
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        for n, row in enumerate(csv.DictReader(f), 2):
+            ref, dest, evidence = (str(row.get(k) or "").strip() for k in ("sourceRef", "destination", "evidence"))
+            if not ref or dest not in DESTINATION_ALIASES or not evidence:
+                log.warning("%s dòng %d: thiếu sourceRef/bằng chứng hoặc điểm đến không hợp lệ – bỏ qua", path.name, n)
+                continue
+            out[ref] = (dest, evidence)
+    return out
+
+
+def apply_destination_overrides(products: list[dict], overrides: dict[str, tuple[str, str]]) -> int:
+    changed = 0
+    for p in products:
+        if p["sourceRef"] not in overrides:
+            continue
+        dest, evidence = overrides[p["sourceRef"]]
+        a = p["attributes"]
+        if p["destination"] != dest:
+            a["originalDestination"] = p["destination"]
+            p["destination"] = dest
+            changed += 1
+        a["destinationSource"] = "reviewed: collectors/destination_overrides.csv"
+        a["destinationEvidence"] = evidence
+    return changed
 
 
 def load_location_overrides(path: Path | None = None) -> dict[str, tuple[float, float]]:
@@ -1185,7 +1225,7 @@ def assign_venue_locations(tickets: list[dict], venues: list[Venue]) -> Counter:
             continue
         a["venue"] = venue.name
         venue.tickets += 1
-        if venue.destination and venue.destination != t["destination"] and (how == "supplier" or not destination_in_text(t["name"])):
+        if venue.destination and venue.destination != t["destination"] and (how == "supplier" or not destination_in_text(ticket_place_name(t["name"]))):
             a["originalDestination"] = t["destination"]
             t["destination"] = venue.destination
             stats["vé đổi điểm đến theo địa điểm"] += 1
@@ -1294,8 +1334,33 @@ def write_outputs(products: list[dict], data: Path, report_rows: list[list], dro
         w.writerow(["kind", "score", "distance_m", "destination", "kept_name", "kept_sourceRef", "merged_name", "merged_sourceRef"])
         w.writerows(report_rows)
     map_info = mapexport.write_map(clean, data / "map", venues or [])
+    write_quality_review(clean, data / "quality_review.csv")
     write_stats(clean, data / "stats.md", len(report_rows), dropped, plan_names, location_stats or Counter(), map_info)
-    log.info("Đã ghi %d sản phẩm → %s (+ products.csv, dedup_report.csv, stats.md, map/)", len(clean), jl)
+    log.info("Đã ghi %d sản phẩm → %s (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)", len(clean), jl)
+
+
+def write_quality_review(products: list[dict], path: Path) -> None:
+    """Danh sách kiểm tra cập nhật cùng catalog; thiếu giá không đồng nghĩa miễn phí hoặc hết vé."""
+    fields = ["issues", "name", "taxonomy", "level", "destination", "sourceRef", "url", "descriptionLang",
+              "unitPrice", "latitude", "longitude"]
+    with open(path, "w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+        for p in products:
+            a, issues = p["attributes"], []
+            if p.get("unitPrice") is None:
+                issues.append("thiếu giá: cần đối chiếu nguồn")
+            if not p.get("description"):
+                issues.append("thiếu mô tả")
+            elif a.get("descriptionLang") != "vi":
+                issues.append("cần đọc lại ngôn ngữ mô tả")
+            if a.get("latitude") is None or a.get("longitude") is None:
+                issues.append("thiếu tọa độ")
+            if a.get("locationWarning"):
+                issues.append(a["locationWarning"])
+            if issues:
+                writer.writerow({"issues": "; ".join(issues), **{k: p.get(k) for k in ("name", "taxonomy", "destination", "sourceRef", "unitPrice")},
+                                 **{k: a.get(k) for k in ("level", "url", "descriptionLang", "latitude", "longitude")}})
 
 
 def write_stats(products: list[dict], path: Path, merged: int, dropped: Counter, plan_names: set[str],
@@ -1328,11 +1393,14 @@ def write_stats(products: list[dict], path: Path, merged: int, dropped: Counter,
         f"| 2.000–5.000 sản phẩm | {n} | {ok(TARGET_MIN <= n <= TARGET_MAX)} |",
         f"| 10–15 điểm đến (≥ 20 sản phẩm mỗi nơi) | {len(dest_ok)} | {ok(10 <= len(dest_ok) <= 15)} |",
         f"| Đủ hotel, flight, attraction, combo | {', '.join(sorted(by_tax))} | {ok(tax_needed <= set(by_tax))} |",
-        f"| Tên + mô tả tiếng Việt | {len(vi_desc)} ({_pct(len(vi_desc), n)}) | {ok(len(vi_desc) >= 0.7 * n)} |",
+        f"| Mô tả được nhận diện là tiếng Việt | {len(vi_desc)} ({_pct(len(vi_desc), n)}) | {ok(len(vi_desc) >= 0.7 * n)} |",
         f"| Có giá | {len(priced)} ({_pct(len(priced), n)}) | {ok(len(priced) >= 0.8 * n)} |",
-        f"| Còn bán / đặt được (§12 availability ≥ 95% trong gợi ý) | {len(available)} ({_pct(len(available), n)}) | |",
+        f"| Được đánh dấu available trong dữ liệu | {len(available)} ({_pct(len(available), n)}) | |",
         f"| Có toạ độ | {len(coords)} ({_pct(len(coords), n)}) | |",
         f"| Sản phẩm trùng giữa các nguồn đã gộp | {merged} | |",
+        "",
+        "Nhãn ngôn ngữ được ước lượng từ tỷ lệ ký tự có dấu trong mô tả; không xác nhận tên hoặc toàn bộ nội dung đã là tiếng Việt. Cần đọc tay các mẫu bên dưới.",
+        "Cờ available được suy ra từ dữ liệu nguồn và giá tại thời điểm crawl; chưa xác minh đặt chỗ hiện tại. Các trường còn thiếu được liệt kê trong `quality_review.csv`.",
         "",
         "## Điểm đến × loại sản phẩm",
         "",
@@ -1471,7 +1539,10 @@ def main(argv: list[str] | None = None) -> int:
             props.append(prop)
 
     pois = [p for p in (trip_attraction_product(r) for r in raw.get("trip_attractions", [])) if p]
+    n_destination = apply_destination_overrides(props + tickets + pois, load_destination_overrides())
     location_stats = flag_suspect_hotel_coords(props)  # trước khi sửa tay: toạ độ gốc vẫn là bằng chứng cho khách sạn kia
+    if n_destination:
+        location_stats["điểm đến sửa theo bằng chứng (destination_overrides.csv)"] = n_destination
     n_override = apply_location_overrides(props + tickets + pois, load_location_overrides())
     if n_override:
         location_stats["toạ độ sửa tay (location_overrides.csv)"] = n_override

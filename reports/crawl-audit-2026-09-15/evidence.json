@@ -9,5 +9,26 @@
       "sourceModifiedAt": "2026-09-15T16:50:05.388570+07:00",
       "sha256": "876c8ea441a8ca670ed89301626976c7337d6eb84b87d125d9a4d0636edac491"
     }
-  ]
+  ],
+  "scope": "Handbook §3: ~2,000–5,000 Products, 10–15 destinations, hotel/flight/attraction/combo; deadline 2026-09-16T07:00:00+07:00",
+  "processObservation": {
+    "at": "2026-09-15T17:15:07+07:00",
+    "method": "Host /proc cmdline, exact basename match among first three argv tokens",
+    "names": [
+      "crawl.py",
+      "run_forever.sh",
+      "normalise.py",
+      "tmux",
+      "screen"
+    ],
+    "matches": [],
+    "limitation": "Snapshot only; remote hosts and differently named launchers not established"
+  },
+  "codeHashes": {
+    "normalise.py": "848516e3821bbe47e422ad5506220278e1f9d770d9cfea725e78b49f9b6e73ef",
+    "collectors/geo.py": "32191173f3213c668faa9560745a67009f7efaf17d1be147dc14fa25140e1000",
+    "collectors/textutil.py": "b2cdbdabef5da56badd558e305fdf57272c8fdd399fad3cf97447275de53c068",
+    "crawl.py": "d74de559788c59b784b76ee56b550552c024e8f9f95f64c9bf477e8c544e97d8"
+  },
+  "qualityFilterNote": "404 provisional candidates; semantic validation still needed. The >=80 character threshold and member-variant filter are audit choices, not numeric handbook requirements."
 }

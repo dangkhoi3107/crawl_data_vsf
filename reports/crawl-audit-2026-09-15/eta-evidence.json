@@ -1,0 +1,291 @@
+{
+  "snapshot_reference_ict": "2026-09-15T17:15:00+07:00",
+  "audit_measured_ict": "2026-09-15T17:17:33.724897+07:00",
+  "deadline_ict": "2026-09-16T07:00:00+07:00",
+  "crawl_cutoff_for_qa_ict": "2026-09-16T06:00:00+07:00",
+  "qa_reserved_hours": 1,
+  "process_status": {
+    "state": "no_active_crawler_seen",
+    "evidence": "Root agent read host /proc via approved require_escalated at 17:15; no crawl.py, run_forever.sh, normalise.py, tmux or screen process.",
+    "conclusion": "No overnight accumulation is occurring unless an operator starts an appropriate crawl; all projected times are conditional on starting at 17:15 and continuous successful processing."
+  },
+  "canonical_baseline": {
+    "products": 508,
+    "snapshot_ict": "2026-09-15T17:15:00+07:00",
+    "provenance": "Root agent canonical normalized snapshot; separate from alternate testdata."
+  },
+  "alternate_data_path": "/tmp/claude-1000/-home-dangkhoi-code-vsf/724c49e5-4579-4675-a82c-b6cda0439200/scratchpad/testdata",
+  "alternate_state": {
+    "booking_attractions": {
+      "done": {
+        "url_count": 3,
+        "attempts_sum": 0,
+        "first_updated_utc": "2026-09-15T08:54:07Z",
+        "last_updated_utc": "2026-09-15T08:54:17Z"
+      },
+      "pending": {
+        "url_count": 13526,
+        "attempts_sum": 0,
+        "first_updated_utc": "2026-09-15T08:53:59Z",
+        "last_updated_utc": "2026-09-15T08:54:00Z"
+      }
+    },
+    "booking_hotels": {
+      "done": {
+        "url_count": 54,
+        "attempts_sum": 1,
+        "first_updated_utc": "2026-09-15T08:38:45Z",
+        "last_updated_utc": "2026-09-15T09:36:10Z"
+      },
+      "pending": {
+        "url_count": 33665,
+        "attempts_sum": 0,
+        "first_updated_utc": "2026-09-15T08:34:18Z",
+        "last_updated_utc": "2026-09-15T08:34:20Z"
+      }
+    }
+  },
+  "alternate_interim": {
+    "booking_attractions": {
+      "rows": 3,
+      "embedded_rooms": 0,
+      "file_modified_ict": "2026-09-15T15:56:40.189903+07:00"
+    },
+    "booking_hotels": {
+      "rows": 54,
+      "embedded_rooms": 308,
+      "file_modified_ict": "2026-09-15T16:38:55.330758+07:00",
+      "unique_hotel_ids": 54,
+      "missing_min_price": 13,
+      "last30_embedded_rooms": 116,
+      "last15_embedded_rooms": 48,
+      "last_network_crawl_utc": "2026-09-15T09:36:10Z"
+    },
+    "vinpearl": {
+      "rows": 392,
+      "embedded_rooms": 116,
+      "file_modified_ict": "2026-09-15T16:16:52.347181+07:00"
+    }
+  },
+  "alternate_normalised_export": {
+    "products": 600,
+    "file_modified_ict": "2026-09-15T16:20:14.373727+07:00",
+    "taxonomy": {
+      "hotel": 220,
+      "combo": 121,
+      "attraction": 254,
+      "golf": 5
+    },
+    "destination_count": 11,
+    "warning": "600-product normalized export used 24 hotel rows at 16:20; current interim contains 54. Do not sum this export with canonical 508 because both include same Vinpearl products."
+  },
+  "observed_benchmarks": [
+    {
+      "label": "hotel default 1 worker",
+      "source": "booking_hotels",
+      "urls": 4,
+      "start_ict": "2026-09-15T15:34:22.433+07:00",
+      "end_ict": "2026-09-15T15:35:01.878+07:00",
+      "urls_per_min": 6.08
+    },
+    {
+      "label": "hotel default 1 worker slow sample",
+      "source": "booking_hotels",
+      "urls": 4,
+      "start_ict": "2026-09-15T15:38:10.793+07:00",
+      "end_ict": "2026-09-15T15:39:23.138+07:00",
+      "urls_per_min": 3.32
+    },
+    {
+      "label": "hotel default 2 workers",
+      "source": "booking_hotels",
+      "urls": 12,
+      "start_ict": "2026-09-15T16:00:51.259+07:00",
+      "end_ict": "2026-09-15T16:02:20.394+07:00",
+      "urls_per_min": 8.08
+    },
+    {
+      "label": "hotel default 3 workers",
+      "source": "booking_hotels",
+      "urls": 15,
+      "start_ict": "2026-09-15T16:33:29.814+07:00",
+      "end_ict": "2026-09-15T16:35:14.334+07:00",
+      "urls_per_min": 8.61
+    },
+    {
+      "label": "hotel fast 3 workers (mode identified by README benchmark)",
+      "source": "booking_hotels",
+      "urls": 15,
+      "start_ict": "2026-09-15T16:35:15.464+07:00",
+      "end_ict": "2026-09-15T16:36:10.475+07:00",
+      "urls_per_min": 16.36
+    },
+    {
+      "label": "attraction default 1 worker",
+      "source": "booking_attractions",
+      "urls": 3,
+      "start_ict": "2026-09-15T15:54:00.093+07:00",
+      "end_ict": "2026-09-15T15:54:17.318+07:00",
+      "urls_per_min": 10.45
+    }
+  ],
+  "full_discovery_scope": {
+    "hotel_urls": 33719,
+    "attraction_urls": 13529,
+    "total_discovered_urls": 47248,
+    "done_urls": 57,
+    "pending_urls": 47191,
+    "done_percent": 0.1206,
+    "hotel_done_percent": 0.1601,
+    "attraction_done_percent": 0.0222,
+    "note": "Counts are discovered page URLs, not normalized products or proof of exhaustive Vietnam inventory."
+  },
+  "full_scope_scenarios": [
+    {
+      "source": "booking_hotels",
+      "remaining_urls": 33665,
+      "urls_per_min": 6,
+      "continuous_hours": 93.514,
+      "conditional_finish_ict": "2026-09-19T14:45:50+07:00",
+      "max_additional_urls_by_0700": 4950
+    },
+    {
+      "source": "booking_hotels",
+      "remaining_urls": 33665,
+      "urls_per_min": 8.61,
+      "continuous_hours": 65.166,
+      "conditional_finish_ict": "2026-09-18T10:24:59.303136+07:00",
+      "max_additional_urls_by_0700": 7103
+    },
+    {
+      "source": "booking_hotels",
+      "remaining_urls": 33665,
+      "urls_per_min": 16.36,
+      "continuous_hours": 34.296,
+      "conditional_finish_ict": "2026-09-17T03:32:45.770171+07:00",
+      "max_additional_urls_by_0700": 13497
+    },
+    {
+      "source": "booking_attractions",
+      "remaining_urls": 13526,
+      "urls_per_min": 10.45,
+      "continuous_hours": 21.573,
+      "conditional_finish_ict": "2026-09-16T14:49:21.244019+07:00",
+      "max_additional_urls_by_0700": 8621
+    }
+  ],
+  "full_scope_fast_sequential_hours": 55.869,
+  "full_scope_conclusion": "Cannot complete by 07:00; fastest observed hotel sample alone implies 34.3 hours, before discovery, blocks, restart delays or quality checks.",
+  "handbook_scope": {
+    "target_products_min": 2000,
+    "target_products_max": 5000,
+    "target_destinations_min": 10,
+    "target_destinations_max": 15,
+    "required_verticals": [
+      "hotel",
+      "flight",
+      "attraction",
+      "combo"
+    ],
+    "source": "/home/dangkhoi/code/vsf/recsys-internship-handbook-v3.vi.md:106"
+  },
+  "handbook_scenarios": [
+    {
+      "target_products": 2000,
+      "canonical_base_products": 508,
+      "additional_usable_products_needed": 1492,
+      "assumed_usable_products_per_url": 1,
+      "additional_urls_needed": 1492,
+      "planning_urls_per_min": 6,
+      "network_processing_hours": 4.144,
+      "conditional_finish_ict": "2026-09-15T21:23:40+07:00",
+      "headroom_to_0600_minutes": 516.3,
+      "hours_at_slow_sample_3_32_urls_per_min": 7.49,
+      "hours_at_fast_sample_16_36_urls_per_min": 1.52
+    },
+    {
+      "target_products": 2000,
+      "canonical_base_products": 508,
+      "additional_usable_products_needed": 1492,
+      "assumed_usable_products_per_url": 2,
+      "additional_urls_needed": 746,
+      "planning_urls_per_min": 6,
+      "network_processing_hours": 2.072,
+      "conditional_finish_ict": "2026-09-15T19:19:20+07:00",
+      "headroom_to_0600_minutes": 640.7,
+      "hours_at_slow_sample_3_32_urls_per_min": 3.745,
+      "hours_at_fast_sample_16_36_urls_per_min": 0.76
+    },
+    {
+      "target_products": 2000,
+      "canonical_base_products": 508,
+      "additional_usable_products_needed": 1492,
+      "assumed_usable_products_per_url": 4,
+      "additional_urls_needed": 373,
+      "planning_urls_per_min": 6,
+      "network_processing_hours": 1.036,
+      "conditional_finish_ict": "2026-09-15T18:17:10+07:00",
+      "headroom_to_0600_minutes": 702.8,
+      "hours_at_slow_sample_3_32_urls_per_min": 1.872,
+      "hours_at_fast_sample_16_36_urls_per_min": 0.38
+    },
+    {
+      "target_products": 5000,
+      "canonical_base_products": 508,
+      "additional_usable_products_needed": 4492,
+      "assumed_usable_products_per_url": 1,
+      "additional_urls_needed": 4492,
+      "planning_urls_per_min": 6,
+      "network_processing_hours": 12.478,
+      "conditional_finish_ict": "2026-09-16T05:43:40+07:00",
+      "headroom_to_0600_minutes": 16.3,
+      "hours_at_slow_sample_3_32_urls_per_min": 22.55,
+      "hours_at_fast_sample_16_36_urls_per_min": 4.576
+    },
+    {
+      "target_products": 5000,
+      "canonical_base_products": 508,
+      "additional_usable_products_needed": 4492,
+      "assumed_usable_products_per_url": 2,
+      "additional_urls_needed": 2246,
+      "planning_urls_per_min": 6,
+      "network_processing_hours": 6.239,
+      "conditional_finish_ict": "2026-09-15T23:29:20+07:00",
+      "headroom_to_0600_minutes": 390.7,
+      "hours_at_slow_sample_3_32_urls_per_min": 11.275,
+      "hours_at_fast_sample_16_36_urls_per_min": 2.288
+    },
+    {
+      "target_products": 5000,
+      "canonical_base_products": 508,
+      "additional_usable_products_needed": 4492,
+      "assumed_usable_products_per_url": 4,
+      "additional_urls_needed": 1123,
+      "planning_urls_per_min": 6,
+      "network_processing_hours": 3.119,
+      "conditional_finish_ict": "2026-09-15T20:22:10+07:00",
+      "headroom_to_0600_minutes": 577.8,
+      "hours_at_slow_sample_3_32_urls_per_min": 5.638,
+      "hours_at_fast_sample_16_36_urls_per_min": 1.144
+    }
+  ],
+  "handbook_conclusion": "Lower target 2,000 is plausible in a targeted run tonight; 5,000 is conditional on enough usable products per URL and stable crawl. Volume alone does not meet handbook: destination diversity, flight coverage, deduplication and field quality must also pass. Start by limiting selection across 10–15 destinations and track normalized usable product counts, not queue URLs.",
+  "caveats": [
+    "6 URLs/min is a transparent planning assumption near one-worker benchmark, not a guaranteed rate; a different one-worker batch measured only 3.32 URLs/min.",
+    "16.36 URLs/min comes from only 15 pages in 55 seconds, so it is an optimistic capacity indication, not a sustained overnight measurement.",
+    "Attraction estimate comes from just 3 pages in 17 seconds, so it is particularly uncertain.",
+    "Hotels can expand into property + room products, but exact usable yield changes with room availability, deduplication and caps; a large count of hotel rooms cannot substitute for missing verticals.",
+    "Latest 30 hotel records contain 116 rooms (4.87 raw expanded rows/property); latest 15 contain 48 rooms (4.2). These are small selected samples, not sufficient for a guaranteed 4-products/URL forecast.",
+    "Hotel and attraction crawlers share booking.com; separate per-process rate limiters do not establish a shared host-level allowance. Do not sum both advertised throughputs without a validated shared rate policy.",
+    "No data sources, crawler state, processes or canonical products were changed by this audit."
+  ],
+  "evidence_files": [
+    "/tmp/claude-1000/-home-dangkhoi-code-vsf/724c49e5-4579-4675-a82c-b6cda0439200/scratchpad/testdata/logs/crawl-20260915.log",
+    "/tmp/claude-1000/-home-dangkhoi-code-vsf/724c49e5-4579-4675-a82c-b6cda0439200/scratchpad/testdata/state/crawl_state.sqlite",
+    "/tmp/claude-1000/-home-dangkhoi-code-vsf/724c49e5-4579-4675-a82c-b6cda0439200/scratchpad/testdata/interim/booking_hotels.jsonl",
+    "/tmp/claude-1000/-home-dangkhoi-code-vsf/724c49e5-4579-4675-a82c-b6cda0439200/scratchpad/testdata/interim/booking_attractions.jsonl",
+    "/tmp/claude-1000/-home-dangkhoi-code-vsf/724c49e5-4579-4675-a82c-b6cda0439200/scratchpad/testdata/products.jsonl",
+    "/home/dangkhoi/code/vsf/data-collection/README.md:79",
+    "/home/dangkhoi/code/vsf/recsys-internship-handbook-v3.vi.md:106"
+  ]
+}

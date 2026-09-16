@@ -1,0 +1,77 @@
+2026-09-15 16:30:10,805 INFO    crawler.vinpearl Vinpearl: 15 khách sạn
+2026-09-15 16:30:20,078 INFO    crawler.vinpearl Vinpearl 1/15: Hòn Tằm Resort – 9 hạng phòng
+2026-09-15 16:30:25,598 INFO    crawler.vinpearl Vinpearl 2/15: VinHolidays Fiesta Phú Quốc – 7 hạng phòng
+2026-09-15 16:30:33,665 INFO    crawler.vinpearl Vinpearl 3/15: Vinpearl Beachfront Nha Trang – 9 hạng phòng
+2026-09-15 16:30:40,075 INFO    crawler.vinpearl Vinpearl 4/15: Vinpearl Cửa Hội Resort, Affiliated by Meliá – 11 hạng phòng
+2026-09-15 16:30:46,723 INFO    crawler.vinpearl Vinpearl 5/15: Vinpearl Cửa Sót Resort, Affiliated by Meliá – 3 hạng phòng
+2026-09-15 16:30:53,666 INFO    crawler.vinpearl Vinpearl 6/15: Vinpearl Empire Nha Trang, Affiliated by Meliá – 4 hạng phòng
+2026-09-15 16:31:05,268 INFO    crawler.vinpearl Vinpearl 7/15: Vinpearl Hotel Bắc Ninh – 6 hạng phòng
+2026-09-15 16:31:13,138 INFO    crawler.vinpearl Vinpearl 8/15: Vinpearl Hà Tĩnh, Affiliated by Meliá – 8 hạng phòng
+2026-09-15 16:31:25,746 INFO    crawler.vinpearl Vinpearl 9/15: Vinpearl Luxury Nha Trang – 5 hạng phòng
+2026-09-15 16:31:33,264 INFO    crawler.vinpearl Vinpearl 10/15: Vinpearl Resort & Golf Nam Hội An – 8 hạng phòng
+2026-09-15 16:31:40,190 INFO    crawler.vinpearl Vinpearl 11/15: Vinpearl Resort & Spa Hạ Long – 8 hạng phòng
+2026-09-15 16:31:51,804 INFO    crawler.vinpearl Vinpearl 12/15: Vinpearl Resort & Spa Nha Trang Bay – 13 hạng phòng
+2026-09-15 16:32:00,059 INFO    crawler.vinpearl Vinpearl 13/15: Vinpearl Resort & Spa Phú Quốc – 7 hạng phòng
+2026-09-15 16:32:12,008 INFO    crawler.vinpearl Vinpearl 14/15: Vinpearl Resort Nha Trang – 10 hạng phòng
+2026-09-15 16:32:24,946 INFO    crawler.vinpearl Vinpearl 15/15: Vinpearl Wonderworld Phú Quốc – 8 hạng phòng
+2026-09-15 16:33:07,043 INFO    crawler.vinpearl Vinpearl: 377 sản phẩm tour/vé/combo/golf (API báo tổng 377)
+2026-09-15 16:34:09,363 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=10
+2026-09-15 16:34:11,226 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=11
+2026-09-15 16:34:16,219 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=10
+2026-09-15 16:34:18,357 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=11
+2026-09-15 16:35:22,478 INFO    crawler.vinpearl Vinpearl tour: 50/377
+2026-09-15 16:37:20,542 INFO    crawler.vinpearl Vinpearl tour: 100/377
+2026-09-15 16:38:45,128 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=10
+2026-09-15 16:38:47,140 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=11
+2026-09-15 16:38:52,182 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=10
+2026-09-15 16:38:54,060 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=11
+2026-09-15 16:39:26,528 INFO    crawler.vinpearl Vinpearl tour: 150/377
+2026-09-15 16:39:58,765 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=10
+2026-09-15 16:40:01,424 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=11
+2026-09-15 16:40:29,446 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=10
+2026-09-15 16:40:32,002 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=11
+2026-09-15 16:40:36,850 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=10
+2026-09-15 16:40:39,437 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=11
+2026-09-15 16:40:44,298 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=10
+2026-09-15 16:40:46,674 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=11
+2026-09-15 16:41:42,623 INFO    crawler.vinpearl Vinpearl tour: 200/377
+2026-09-15 16:42:01,332 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=10
+2026-09-15 16:42:03,900 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=11
+2026-09-15 16:42:08,291 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=10
+2026-09-15 16:42:10,584 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=11
+2026-09-15 16:42:15,759 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=10
+2026-09-15 16:42:18,236 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=11
+2026-09-15 16:42:22,759 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=10
+2026-09-15 16:42:24,981 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=11
+2026-09-15 16:42:40,939 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=10
+2026-09-15 16:42:43,397 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=11
+2026-09-15 16:43:11,374 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=10
+2026-09-15 16:43:13,213 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=11
+2026-09-15 16:43:17,674 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=10
+2026-09-15 16:43:19,901 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=11
+2026-09-15 16:43:24,592 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=10
+2026-09-15 16:43:27,044 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=11
+2026-09-15 16:43:48,046 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=10
+2026-09-15 16:43:50,465 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=11
+2026-09-15 16:43:54,801 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=10
+2026-09-15 16:43:57,559 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=11
+2026-09-15 16:44:04,010 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=10
+2026-09-15 16:44:06,076 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=11
+2026-09-15 16:44:29,976 INFO    crawler.vinpearl Vinpearl tour: 250/377
+2026-09-15 16:46:13,044 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=10
+2026-09-15 16:46:15,461 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=11
+2026-09-15 16:46:42,038 INFO    crawler.vinpearl Vinpearl tour: 300/377
+2026-09-15 16:48:14,850 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=10
+2026-09-15 16:48:17,357 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=11
+2026-09-15 16:48:21,762 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=10
+2026-09-15 16:48:24,003 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=11
+2026-09-15 16:48:35,247 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=10
+2026-09-15 16:48:37,842 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=11
+2026-09-15 16:48:52,521 INFO    crawler.vinpearl Vinpearl tour: 350/377
+2026-09-15 16:49:11,276 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=10
+2026-09-15 16:49:13,205 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=11
+2026-09-15 16:49:24,746 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=10
+2026-09-15 16:49:27,198 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=11
+2026-09-15 16:50:05,389 INFO    crawler.vinpearl Vinpearl: 25 sản phẩm không lấy được trang chi tiết – dùng thông tin từ danh sách
+2026-09-15 16:50:05,511 INFO    crawler.vinpearl Đã ghi /home/dangkhoi/code/vsf/data-collection/data/interim/vinpearl.jsonl
+2026-09-15 16:50:05,511 INFO    crawler Vinpearl: {'hotels': 15, 'rooms': 116, 'tours': 377}

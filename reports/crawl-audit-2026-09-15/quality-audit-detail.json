@@ -1,0 +1,550 @@
+{
+  "timestamp": "2026-09-15T17:15:42.857809",
+  "source": "/home/dangkhoi/code/vsf/data-collection/data/interim/vinpearl.jsonl",
+  "raw_lines": 392,
+  "raw_errors": [],
+  "raw_record_types": {
+    "vinpearl_hotel": 15,
+    "vinpearl_tour": 377
+  },
+  "raw_unique_keys": 392,
+  "raw_duplicate_keys": {},
+  "raw_missing_keys": 0,
+  "raw_crawled_first": "2026-09-15T09:30:10Z",
+  "raw_crawled_last": "2026-09-15T09:33:07Z",
+  "products_before_source_dedup": 508,
+  "duplicate_ids": {},
+  "all": {
+    "count": 508,
+    "description": 508,
+    "description_80": 498,
+    "description_200": 477,
+    "description_length_median": 1476.0,
+    "description_vi": 484,
+    "description_lang": {
+      "vi": 484,
+      "(empty)": 1,
+      "en": 23
+    },
+    "priced": 483,
+    "price_zero": 25,
+    "available": 508,
+    "images": 508,
+    "destination": 508,
+    "destinations": {
+      "Nha Trang": 131,
+      "Phú Quốc": 133,
+      "Nghệ An": 48,
+      "Hà Tĩnh": 23,
+      "Bắc Ninh": 7,
+      "Đà Nẵng": 11,
+      "Hạ Long": 9,
+      "Hội An": 32,
+      "Hải Phòng": 31,
+      "Hà Nội": 74,
+      "TP. Hồ Chí Minh": 9
+    },
+    "taxonomy": {
+      "hotel": 131,
+      "combo": 121,
+      "attraction": 251,
+      "golf": 5
+    },
+    "coordinates": 131,
+    "member_variants": 59,
+    "has_detail": {
+      "None": 131,
+      "True": 352,
+      "False": 25
+    }
+  },
+  "by_group": {
+    "property": {
+      "count": 15,
+      "description": 15,
+      "description_80": 15,
+      "description_200": 15,
+      "description_length_median": 607,
+      "description_vi": 15,
+      "description_lang": {
+        "vi": 15
+      },
+      "priced": 15,
+      "price_zero": 0,
+      "available": 15,
+      "images": 15,
+      "destination": 15,
+      "destinations": {
+        "Nha Trang": 6,
+        "Phú Quốc": 3,
+        "Nghệ An": 1,
+        "Hà Tĩnh": 2,
+        "Bắc Ninh": 1,
+        "Đà Nẵng": 1,
+        "Hạ Long": 1
+      },
+      "taxonomy": {
+        "hotel": 15
+      },
+      "coordinates": 15,
+      "member_variants": 0,
+      "has_detail": {
+        "None": 15
+      }
+    },
+    "room": {
+      "count": 116,
+      "description": 116,
+      "description_80": 114,
+      "description_200": 111,
+      "description_length_median": 304.0,
+      "description_vi": 115,
+      "description_lang": {
+        "vi": 115,
+        "(empty)": 1
+      },
+      "priced": 116,
+      "price_zero": 0,
+      "available": 116,
+      "images": 116,
+      "destination": 116,
+      "destinations": {
+        "Nha Trang": 50,
+        "Phú Quốc": 22,
+        "Nghệ An": 11,
+        "Hà Tĩnh": 11,
+        "Bắc Ninh": 6,
+        "Đà Nẵng": 8,
+        "Hạ Long": 8
+      },
+      "taxonomy": {
+        "hotel": 116
+      },
+      "coordinates": 116,
+      "member_variants": 0,
+      "has_detail": {
+        "None": 116
+      }
+    },
+    "attraction": {
+      "count": 251,
+      "description": 251,
+      "description_80": 244,
+      "description_200": 237,
+      "description_length_median": 1826,
+      "description_vi": 244,
+      "description_lang": {
+        "vi": 244,
+        "en": 7
+      },
+      "priced": 238,
+      "price_zero": 13,
+      "available": 251,
+      "images": 251,
+      "destination": 251,
+      "destinations": {
+        "Nha Trang": 52,
+        "Phú Quốc": 75,
+        "Hà Nội": 57,
+        "Hội An": 23,
+        "Nghệ An": 19,
+        "Hải Phòng": 14,
+        "TP. Hồ Chí Minh": 6,
+        "Hà Tĩnh": 3,
+        "Đà Nẵng": 2
+      },
+      "taxonomy": {
+        "attraction": 251
+      },
+      "coordinates": 0,
+      "member_variants": 41,
+      "has_detail": {
+        "True": 238,
+        "False": 13
+      }
+    },
+    "combo": {
+      "count": 121,
+      "description": 121,
+      "description_80": 120,
+      "description_200": 109,
+      "description_length_median": 2243,
+      "description_vi": 105,
+      "description_lang": {
+        "vi": 105,
+        "en": 16
+      },
+      "priced": 109,
+      "price_zero": 12,
+      "available": 121,
+      "images": 121,
+      "destination": 121,
+      "destinations": {
+        "Phú Quốc": 32,
+        "Nha Trang": 22,
+        "Hà Nội": 17,
+        "Nghệ An": 17,
+        "Hải Phòng": 15,
+        "TP. Hồ Chí Minh": 3,
+        "Hội An": 8,
+        "Hà Tĩnh": 7
+      },
+      "taxonomy": {
+        "combo": 121
+      },
+      "coordinates": 0,
+      "member_variants": 18,
+      "has_detail": {
+        "True": 109,
+        "False": 12
+      }
+    },
+    "golf": {
+      "count": 5,
+      "description": 5,
+      "description_80": 5,
+      "description_200": 5,
+      "description_length_median": 2618,
+      "description_vi": 5,
+      "description_lang": {
+        "vi": 5
+      },
+      "priced": 5,
+      "price_zero": 0,
+      "available": 5,
+      "images": 5,
+      "destination": 5,
+      "destinations": {
+        "Hội An": 1,
+        "Hải Phòng": 2,
+        "Phú Quốc": 1,
+        "Nha Trang": 1
+      },
+      "taxonomy": {
+        "golf": 5
+      },
+      "coordinates": 0,
+      "member_variants": 0,
+      "has_detail": {
+        "True": 5
+      }
+    }
+  },
+  "schema_errors": [],
+  "normalized_base_name_duplicates": {
+    "vé hạng cổ loa": 2,
+    "[combo 01 ngày] - vinwonders + vinpearl safari phú quốc": 3,
+    "[vinpearl safari phú quốc] - vé vào cửa tiêu chuẩn": 3,
+    "[vinwonders phú quốc] - vé vào cửa tiêu chuẩn": 3,
+    "[vinwonders cửa hội] - combo phá đảo 04 khu": 3,
+    "[vinwonders cửa hội] - combo 03 games trên đảo": 3,
+    "[vinwonders cửa hội] - công viên nước thiên đường nhiệt đới": 3,
+    "[vinwonders cửa hội] - cáp treo 2 chiều tiêu chuẩn": 3,
+    "[vinwonders vũ yên] - combo 03 khu: vườn thú + trò chơi + công viên nước": 3,
+    "[vinwonders nam hội an] vé vào cửa sau 14:00": 3,
+    "[vinwonders vũ yên] - vé vào cửa công viên nước": 3,
+    "[vinwonders vũ yên] - combo tiêu chuẩn: vườn thú + khu trò chơi": 3,
+    "[vinwonders nam hội an] vé vào cửa tiêu chuẩn | tặng voucher ẩm thực": 3,
+    "[grand world phú quốc] - vé tinh hoa việt nam": 3,
+    "[grand world phú quốc] - bảo tàng gấu teddy bear museum": 3,
+    "[grand world phú quốc] - vé đi thuyền venice (water taxi)": 3,
+    "[combo 01 ngày] - vinwonders + vinpearl safari phú quốc + tặng voucher ẩm thực": 3,
+    "[vinpearl safari phú quốc] - vé vào cửa + tặng voucher ẩm thực": 3,
+    "[vinwonders phú quốc] - vé vào cửa + tặng voucher ẩm thực": 3,
+    "vé hạng non sông gấm vóc | tặng voucher ẩm thực / quà lưu niệm": 2,
+    "vé hạng cổ loa | tặng voucher ẩm thực / quà lưu niệm": 2,
+    "vé hạng thăng long | tặng voucher ẩm thực / quà lưu niệm": 2,
+    "vé hạng văn lang | tặng voucher ẩm thực / quà lưu niệm": 2,
+    "vé hạng lạc hồng | tặng voucher ẩm thực / quà lưu niệm": 2,
+    "fastpass cáp treo (01 chiều bờ - đảo)": 2,
+    "vé xông hơi jjimjilbang tiêu chuẩn": 2,
+    "vinwonders + vinpearl safari + tour grand world + tặng voucher ẩm thực": 2,
+    "combo vườn thú + khu trò chơi vũ yên + tặng 01 túi tote": 2,
+    "vinpearl safari + vinwonders phú quốc + bảo tàng gấu teddy": 3,
+    "vinwonders + vinpearl safari phú quốc + bảo tàng gấu teddy": 3,
+    "vinpearl safari + vinwonders + tour grand world + tặng voucher ẩm thực": 2,
+    "vé vào cửa tiêu chuẩn + tặng voucher ẩm thực": 2,
+    "vé vào cửa + mũ thú độc quyền + tặng voucher ẩm thực": 2,
+    "vé vào cửa tiêu chuẩn": 2,
+    "vé tinh hoa việt nam": 2
+  },
+  "exact_duplicate_names": {},
+  "short_description_samples": [
+    {
+      "sourceRef": "vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd:room:00edfd2d-8e24-43d9-bd54-9b211c21c3f6",
+      "name": "Vinpearl Resort & Spa Hạ Long - Deluxe Sân Vườn Giường Đôi",
+      "description": "Deluxe Sân Vườn 2 Giường Đôi",
+      "taxonomy": "hotel",
+      "raw_line": null
+    },
+    {
+      "sourceRef": "vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd:room:81cb3113-0830-42fd-818e-7c7e5a0afab2",
+      "name": "Vinpearl Resort & Spa Hạ Long - Deluxe Sân Vườn 2 Giường Đơn",
+      "description": "Deluxe Twin Terrace",
+      "taxonomy": "hotel",
+      "raw_line": null
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02886",
+      "name": "[VinWonders Water Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Nước",
+      "description": "[VinWonders Water Park] Vé Công Viên Nước + Buffet 250.000 VNĐ",
+      "taxonomy": "attraction",
+      "raw_line": 38
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02885",
+      "name": "[VinWonders Wave Park] [MUA 2 TẶNG 1] - Vé vào cửa tiêu chuẩn Công viên Sóng",
+      "description": "[VinWonders Water Park] Vé Công Viên Nước + Buffet 250.000 VNĐ",
+      "taxonomy": "attraction",
+      "raw_line": 39
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02687",
+      "name": "[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Trẻ Em)",
+      "description": "Vé Công Viên Nước Hà Tĩnh",
+      "taxonomy": "attraction",
+      "raw_line": 151
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02683",
+      "name": "[MUA 1 TẶNG 1] - Vé Công viên nước Hà Tĩnh (Người Lớn)",
+      "description": "Vé vào cửa Công Viên Nước Hà Tĩnh",
+      "taxonomy": "attraction",
+      "raw_line": 152
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02277",
+      "name": "[Combo Gia Đình Siêu Tiết Kiệm] - Combo Vé Xông hơi Jjimjilbang và Set Ẩm thực 200k chuẩn Hàn dành cho cả gia đình",
+      "description": "[Family Pass] – Combo Gia Đình Siêu Tiết Kiệm",
+      "taxonomy": "combo",
+      "raw_line": 232
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02170",
+      "name": "[-20%] [Ưu đãi Học sinh - Sinh viên] - Vé Công Viên Nước Hòn Đảo Nhiệt Đới",
+      "description": "[-20%] [Ưu đãi Học sinh - Sinh viên] - Vé Công Viên Nước Hòn Đảo Nhiệt Đới",
+      "taxonomy": "attraction",
+      "raw_line": 244
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02168",
+      "name": "[-30%] Ưu đãi HS Tiểu học, Mầm non - Vé Công Viên Nước Grand Park",
+      "description": "[-30%] Ưu đãi HS Tiểu học, Mầm non - Vé Công Viên Nước Grand Park",
+      "taxonomy": "attraction",
+      "raw_line": 245
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW00474",
+      "name": "[Workshop nhí] - Teddy Junior Adventure - Nhà thám hiểm Bảo Tàng Gấu",
+      "description": "Mô tả\n[Grand World Phú Quốc] - Thuyền Water Taxi + Bảo Tàng Gấu",
+      "taxonomy": "attraction",
+      "raw_line": 389
+    }
+  ],
+  "missing_destination_samples": [],
+  "samples": [
+    {
+      "sourceRef": "vinpearl:hotel:668bb33b-09b0-4d7a-a5ba-38ae1f9abf17",
+      "name": "Hòn Tằm Resort",
+      "destination": "Nha Trang",
+      "description": "Với vẻ đẹp của thiên nhiên kết hợp cùng kiến trúc bungalow và villa sang trọng, Hòn Tằm Resort Nha Trang mang đến cho du khách một kỳ nghỉ đẳng cấp, riêng tư và ấn tượng khó quên. Khu nghỉ dưỡng được bao phủ bởi cảnh quan xanh mát, yên ả của rừng và biển giúp thư giãn cả cơ thể lẫn tâm trí. Bên cạnh đó du khách cũng có thể kết hợp chăm sóc sức khỏe cùng bùn khoáng, tham gia các hoạt động thể thao nước đầy năng lượng hay khám phá thiên nhiên hoang sơ tuyệt đẹp trên đảo Hòn Tằm.",
+      "taxonomy": "hotel",
+      "unitPrice": 2630000,
+      "available": true,
+      "availableFrom": null,
+      "availableTo": null,
+      "raw_line": 1
+    },
+    {
+      "sourceRef": "vinpearl:hotel:0f0e60af-baaf-4066-b3d2-41a45414bbef:room:53eaff8f-cc6f-46b5-b65f-94380f9fb359",
+      "name": "Vinpearl Cửa Sót Resort, Affiliated by Meliá - Biệt Thự 3 Phòng Ngủ Với Hồ Bơi Riêng",
+      "destination": "Hà Tĩnh",
+      "description": "Biệt thự 3 phòng ngủ là lựa chọn hoàn hảo cho các gia đình nhiều thế hệ hoặc nhóm bạn đông người. Không gian rộng rãi với phòng khách biệt lập, khu vực ăn uống và hồ bơi riêng mang đến sự thoải mái và riêng tư tuyệt đối cho kỳ nghỉ trọn vẹn bên biển.",
+      "taxonomy": "hotel",
+      "unitPrice": 5020000,
+      "available": true,
+      "availableFrom": null,
+      "availableTo": null,
+      "raw_line": null
+    },
+    {
+      "sourceRef": "vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd:room:5ca1fbb6-333e-4ca7-828a-e8837eb70569",
+      "name": "Vinpearl Resort & Spa Hạ Long - Deluxe Hướng Biển Giường Đôi",
+      "destination": "Hạ Long",
+      "description": "Với diện tích 38 m², Deluxe Hướng Biển Giường Đôi là phòng khách sạn thiết kế hiện đại với giường đôi sang trọng, tích hợp đầy đủ tiện nghi cho kỳ lưu trú của bạn. Tầm nhìn đẹp và thoáng hướng ra bờ biển, vị trí đắc địa ngay tại Bãi Cháy, đây sẽ là lựa chọn lý tưởng dành cho các cặp đôi, gia đình nhỏ nghỉ dưỡng.",
+      "taxonomy": "hotel",
+      "unitPrice": 3640000,
+      "available": true,
+      "availableFrom": null,
+      "availableTo": null,
+      "raw_line": null
+    },
+    {
+      "sourceRef": "vinpearl:hotel:f89849e9-0a10-17c0-16e7-7abaa8f06808:room:526068a4-9a4b-44e1-9188-fe1c660daed5",
+      "name": "Vinpearl Wonderworld Phú Quốc - Biệt thự Ocean Haven 3 phòng ngủ hướng biển",
+      "destination": "Phú Quốc",
+      "description": "Biệt thự 3 phòng ngủ rộng từ 279 m², thiết kế hiện đại với hồ bơi riêng và tầm nhìn ra biển cùng vườn xanh. Tại đây, bạn có thể ngắm bình minh, hoàng hôn, tận hưởng BBQ riêng, chiếu phim tại phòng hay tự pha cà phê sáng. Lựa chọn lý tưởng cho gia đình và nhóm bạn tìm kiếm kỳ nghỉ sang trọng, thư thái.",
+      "taxonomy": "hotel",
+      "unitPrice": 12460000,
+      "available": true,
+      "availableFrom": null,
+      "availableTo": null,
+      "raw_line": null
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02864",
+      "name": "[VIN33 - Platinum] - [VinWonders Cửa Hội] - Combo 03 Games trên Đảo",
+      "destination": "Nghệ An",
+      "description": "Description\nIMPORTANT NOTE: Please select your preferred usage date and carefully check the date information during the booking process.\n- Direct entry ticket to VinWonders Cua Hoi amusement park for same-day use.\n- Ticket valid for single use within the specified usage period.\n- Tickets are non-refundable, non-cancellable, and non-exchangeable.\n- Children under 100cm tall are free of charge.\n- Regulations for applying ticket prices for children: Guests between 100cm and under 140cm tall.\n\nTerms and Conditions\n- Ticket needs to be paid immediately, non-refundable or exchangeable for cash.\n- Opening time of amusement park: From 9:00 am to 7:00 pm.\n- The amusement park will stop accepting guests after 6:00 pm.\n- Customers under 100 cm tall can enter for free\n- Child ticket price: applicable to children from 100cm to under 140cm.\n- Elderly ticket price: visitors aged 60 and above, with photo ID documents\n- Not applicable simultaneously with other promotions and discounts.\n- Not applicable for VinID points.\n\nCancellation Policy\n- Tickets are non-refundable, non-changeable, and non-exchangeable for other services.\n\nHow to Use\nINSTRUCTIONS FOR USE\n- The voucher is valid only once within ",
+      "taxonomy": "combo",
+      "unitPrice": 172900,
+      "available": true,
+      "availableFrom": "2026-07-31",
+      "availableTo": "2026-12-31",
+      "raw_line": 53
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02813",
+      "name": "[VIN33 - Gold] - [Combo 01 ngày] - VinWonders + Vinpearl Safari Phú Quốc + Tặng Voucher Ẩm Thực",
+      "destination": "Phú Quốc",
+      "description": "Mô tả\nLƯU Ý QUAN TRỌNG: Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé. Vui lòng lựa chọn ngày sử dụng và kiểm tra kỹ thông tin ngày sử dụng trong quá trình đặt vé.\n- Combo vé tiêu chuẩn vào cửa trực tiếp VinWonders và Vinpearl Safari Phú Quốc trong 01 ngày\n- Vé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\n- Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n- Quý khách hàng cao dưới 100 cm được miễn phí.\n- Quy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\n- Quy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh\n\nBao gồm\n- Combo vé tiêu chuẩn vào cửa trực tiếp VinWonders và Vinpearl Safari Phú Quốc\n- Vé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\n- Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n- Quý khách hàng cao dưới 100 cm được miễn phí.\n- Quy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\n- Quy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh\n\nĐiều khoản\n- Voucher cần được thanh toán ng",
+      "taxonomy": "combo",
+      "unitPrice": 1410000,
+      "available": true,
+      "availableFrom": "2026-07-31",
+      "availableTo": "2026-09-30",
+      "raw_line": 95
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02717",
+      "name": "[Wonder Ngon] - Vé VinWonders + Fastpass Cáp Treo (01 chiều bờ - đảo) | Tặng Voucher ẩm thực",
+      "destination": "Nha Trang",
+      "description": "Mô tả\nLƯU Ý QUAN TRỌNG: Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé. Vui lòng lựa chọn ngày sử dụng và kiểm tra kỹ thông tin ngày sử dụng trong quá trình đặt vé.\nVé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n\nĐiều khoản\n+ Thời gian mở cửa khu vui chơi: Từ 8:00 sáng đến 8:00 tối.\n+ Khu vui chơi ngừng nhận khách từ sau 7:00 tối.\n+ Không áp dụng đồng thời các chương trình ưu đãi, khuyến mại, giảm giá.\n\nChính sách hoàn huỷ\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nTrường hợp phát sinh vấn đề đổi ngày, đổi loại vé hoặc hoàn hủy do trường hợp bất khả kháng (khu vui chơi buộc phải đóng cửa và không có cơ sở thay thế) chúng tôi sẽ áp dụng theo chính sách tại thời điểm sử dụng dịch vụ.\n\nHướng dẫn sử dụng\n+ Khách hàng có thể xuất trình voucher in sẵn hoặc voucher điện tử này tại cổng để vào cửa\n+ Voucher chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\n+ Đối với vé người cao tuổi, vui lòng xuất trình CMND bản gốc hoặc hộ chiếu cùng với voucher cho nhân viên tại cổng vào\n+ Vé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\n+ Trường hợp đổi ngày, đổi loại vé hoặc hoàn hủy do tr",
+      "taxonomy": "attraction",
+      "unitPrice": 1150000,
+      "available": true,
+      "availableFrom": "2025-12-31",
+      "availableTo": "2028-01-31",
+      "raw_line": 137
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02475",
+      "name": "[Công Viên Grand Park] [Ưu đãi Gia đình] Combo Công Viên Nước + Games Khu Vườn Mộng Mơ",
+      "destination": "TP. Hồ Chí Minh",
+      "description": "► Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé\n► Vé không được hoàn, hủy, đổi trả",
+      "taxonomy": "combo",
+      "unitPrice": 0,
+      "available": true,
+      "availableFrom": "2025-12-30",
+      "availableTo": "2026-12-31",
+      "raw_line": 179
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02335",
+      "name": "[Vinpearl Safari Phú Quốc] - Vé Vào Cửa + Fastpass qua cổng + Xe điện",
+      "destination": "Phú Quốc",
+      "description": "Mô tả\nLƯU Ý QUAN TRỌNG: Vé chỉ có hiệu lực 1 lần trong thời gian sử dụng ghi trên vé. Vui lòng lựa chọn ngày sử dụng và kiểm tra kỹ thông tin ngày sử dụng trong quá trình đặt vé.\nVé vào cửa trực tiếp khu vui chơi VinWonders Phú Quốc sử dụng trong ngày dành cho 01 người\nTặng combo voucher Grand World trị giá 200.000 VNĐ/vé người lớn, 100.000 VNĐ/vé trẻ em hoặc người cao tuổi khi mua vé vào cửa tiêu chuẩn áp dụng từ 10/04/2023 - 31/05/2023. Thông tin chi tiết chương trình và hướng dẫn nhận voucher Grand World tại đây\nVé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nQuý khách hàng cao dưới 100 cm được miễn phí.\nQuy định để áp dụng giá vé cho trẻ em: Khách hàng cao từ 100cm đến dưới 140 cm\nQuy định để áp dụng giá vé cho người cao tuổi: Là người có độ tuổi từ 60 tuổi trở lên và có mang theo giấy tờ tuỳ thân có hình ảnh để chứng minh\n\nBao gồm\nVé vào cửa trực tiếp khu vui chơi VinWonders Phú Quốc sử dụng trong ngày dành cho 01 người\nVé chỉ có hiệu lực 01 lần trong thời gian sử dụng ghi trên vé\nVé không được hoàn, hủy hoặc quy đổi thành dịch vụ khác\nQuý khách hàng cao dưới 100 cm được miễn phí.\nQuy định để áp dụng giá vé ",
+      "taxonomy": "attraction",
+      "unitPrice": 1100000,
+      "available": true,
+      "availableFrom": "2026-04-08",
+      "availableTo": "2026-12-31",
+      "raw_line": 221
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW02007",
+      "name": "[VinWonders Vũ Yên] - [Wonder Ngon] - Combo 03 khu: Vườn Thú + Khu Trò Chơi + Công Viên Nước + Buffet",
+      "destination": "Hải Phòng",
+      "description": "Thông tin chung\nVinWonders Vũ Yên – Thiên đường giải trí và khám phá bậc nhất miền Bắc!\nTọa lạc trên đảo Vũ Yên xinh đẹp thuộc thành phố Hải Phòng, VinWonders Vũ Yên là tổ hợp công viên giải trí – vườn thú quy mô lớn nhất khu vực phía Bắc, được kiến tạo như một “vũ trụ giải trí all-in-one” – nơi hội tụ của cảm xúc, bất ngờ và những khoảnh khắc bùng nổ cho mọi lứa tuổi.\nVới tổng diện tích lên đến 480 hecta, VinWonders Vũ Yên không chỉ là một điểm đến vui chơi đơn thuần mà còn là một thành phố giải trí đầy màu sắc, nơi mọi thành viên trong gia đình đều tìm thấy niềm vui riêng – từ những bạn nhỏ lần đầu gặp gỡ thế giới động vật hoang dã, đến các bạn trẻ đam mê cảm giác mạnh, hay những gia đình đang tìm kiếm một hành trình vui chơi kết hợp nghỉ dưỡng trọn vẹn.\nKhám phá 5 miền thế giới kỳ diệu tại VinWonders Vũ Yên\nChuyến hành trình đưa bạn băng qua rừng hoang, lướt trên sóng nước Hawaii, lạc vào thế giới cổ tích và chạm tay vào những điều chưa từng tưởng tượng...\n1. VƯƠNG QUỐC MUÔNG THÚ – Vườn thú Safari đầu tiên tại miền Bắc\nBước chân vào Vương quốc Muông Thú, bạn như đang mở cánh cửa bước vào thế giới hoang dã. Đây là vườn thú bán hoang dã đầu tiên và lớn nhất tại miền Bắc, nơi quy t",
+      "taxonomy": "combo",
+      "unitPrice": 750000,
+      "available": true,
+      "availableFrom": "2026-05-21",
+      "availableTo": "2026-12-31",
+      "raw_line": 263
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW01670",
+      "name": "[Aquafield] - [Nam] - Xông hơi chuẩn Hàn 4 tiếng",
+      "destination": "Nha Trang",
+      "description": "Mô tả\n► Jjimjilbang là tổ hợp xông hơi trị liệu truyền thống và đặc trưng của Hàn Quốc với các bồn tắm nóng xen kẽ các bồn tắm lạnh và các phòng xông khô sử dụng các nguyên liệu chuyên dụng khác nhau để mang lại hiệu quả thải độc cơ thể, thư giãn.\n► Ra đời từ thời đại Joseon (khoảng cuối thế kỷ 14 đến đầu thế kỷ 19) với hệ thống nước dẫn từ các nguồn suối khoáng tự nhiên, Jjimjilbang truyền thống ban đầu được xem là một bí kíp chữ bệnh, dưỡng sinh và làm đẹp của tầng lớp thượng lưu.\n► Mô hình Jjimjilbang hiện đại bắt đầu phát triển từ những năm 1990 ở Busan. Với không gian cộng đồng thú vị, trải nghiệm các phòng xông đa dạng, nhiều tiện ích và dịch vụ chất lượng cao, mang lại hiệu quả thư giãn và sảng khoái tức thì, Jjimjilbang nhanh chóng trở thành một nét văn hóa đại chúng mới, một trải nghiệm nhất định phải thử khi tới Hàn Quốc.\n\nBao gồm\n8 phòng trị liệu \"Chuẩn Hàn\" với các chức năng chuyên biệt\nThư giãn – Làm đẹp – Trẻ hóa\nGiảm đau – Chữa lành – Ngừa bệnh\nThanh lọc – Thải độc\nĐa dạng không gian trải nghiệm\nKhông gian thư giãn riêng tư, tinh tế\nĐa dạng trải nghiệm cho cả gia đình\n\nĐiều khoản\nVé vào cửa (Vé Jjimjilbang - JJB) tương ứng sử dụng trong vòng 04 tiếng\nKhách < 100 cm c",
+      "taxonomy": "attraction",
+      "unitPrice": 400000,
+      "available": true,
+      "availableFrom": "2025-04-03",
+      "availableTo": "2027-12-30",
+      "raw_line": 305
+    },
+    {
+      "sourceRef": "vinpearl:tour:VW01311",
+      "name": "[Aquafield] - Combo Cáp treo + Xông hơi chuẩn Hàn + Spa trị liệu toàn thân",
+      "destination": "Nha Trang",
+      "description": "Mô tả\n► Jjimjilbang là tổ hợp xông hơi trị liệu truyền thống và đặc trưng của Hàn Quốc với các bồn tắm nóng xen kẽ các bồn tắm lạnh và các phòng xông khô sử dụng các nguyên liệu chuyên dụng khác nhau để mang lại hiệu quả thải độc cơ thể, thư giãn.\n► Ra đời từ thời đại Joseon (khoảng cuối thế kỷ 14 đến đầu thế kỷ 19) với hệ thống nước dẫn từ các nguồn suối khoáng tự nhiên, Jjimjilbang truyền thống ban đầu được xem là một bí kíp chữ bệnh, dưỡng sinh và làm đẹp của tầng lớp thượng lưu.\n► Mô hình Jjimjilbang hiện đại bắt đầu phát triển từ những năm 1990 ở Busan. Với không gian cộng đồng thú vị, trải nghiệm các phòng xông đa dạng, nhiều tiện ích và dịch vụ chất lượng cao, mang lại hiệu quả thư giãn và sảng khoái tức thì, Jjimjilbang nhanh chóng trở thành một nét văn hóa đại chúng mới, một trải nghiệm nhất định phải thử khi tới Hàn Quốc.\n\nBao gồm\n8 phòng trị liệu \"Chuẩn Hàn\" với các chức năng chuyên biệt\nThư giãn – Làm đẹp – Trẻ hóa\nGiảm đau – Chữa lành – Ngừa bệnh\nThanh lọc – Thải độc\nĐa dạng không gian trải nghiệm\nKhông gian thư giãn riêng tư, tinh tế\nĐa dạng trải nghiệm cho cả gia đình\n\nĐiều khoản\nVé vào cửa (Vé Jjimjilbang - JJB) tương ứng sử dụng trong vòng 04 tiếng\nKhách < 100 cm c",
+      "taxonomy": "combo",
+      "unitPrice": 1730000,
+      "available": true,
+      "availableFrom": "2024-12-30",
+      "availableTo": "2027-12-31",
+      "raw_line": 347
+    }
+  ],
+  "semantic_audit": {
+    "geo_consistency": {
+      "affected_count": 9,
+      "source_refs": [
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:14c34024-4151-4ea5-87f7-b0e20516f02a",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:55381122-2f4c-48a2-a4ac-9e586f497952",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:5addd18c-e273-4d99-a32f-ff14195f95e4",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:758fdb2c-28bf-4424-bc98-d2dbaadf7b84",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:15f49fc4-1ed1-4b4a-9ff3-22d5bf6c7177",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:1c72409f-5e68-4fae-b2e2-aca727584f6a",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:18aa60fe-bca5-48f6-bc31-6fc39aaf3f51",
+        "vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb:room:f165748c-aa63-4b89-85db-b8e590e2a9bb"
+      ],
+      "normalized_destination": "Đà Nẵng",
+      "raw_line": 10
+    },
+    "duplicate_description": {
+      "groups": 60,
+      "rows": 337,
+      "additional_occurrences": 277
+    },
+    "curated_counts": {
+      "nonmember": 449,
+      "positive_price_nonmember": 424,
+      "vi80_positive_price_nonmember": 404
+    },
+    "manual_examples": [
+      {
+        "raw_line": 39,
+        "sourceRef": "vinpearl:tour:VW02885",
+        "finding": "Wave Park offer name but fallback description says Water Park + Buffet 250,000 VND; no detail, validate offer before use."
+      },
+      {
+        "raw_line": 221,
+        "sourceRef": "vinpearl:tour:VW02335",
+        "finding": "Safari offer name but detail says VinWonders Phu Quoc and includes dated 2023 promotion; provenance uncertain, needs manual review."
+      },
+      {
+        "raw_line": 291,
+        "sourceRef": "vinpearl:tour:VW01730",
+        "finding": "Ha Tinh Water Park offer name but English description says VinWonders Cua Hoi; generic/reused detail, validate."
+      },
+      {
+        "raw_line": 292,
+        "sourceRef": "vinpearl:tour:VW01729",
+        "finding": "Ha Tinh Water Park offer name but English description says VinWonders Cua Hoi; generic/reused detail, validate."
+      },
+      {
+        "raw_line": 11,
+        "finding": "Two garden-room descriptions are only 18 and 26 characters and one differs in bed count wording from room name."
+      },
+      {
+        "raw_line": 95,
+        "sourceRef": "vinpearl:tour:VW02813",
+        "finding": "Long description dominated by ticket usage, terms, refund and policy; description length is not semantic-content coverage."
+      }
+    ]
+  }
+}

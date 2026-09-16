@@ -28,7 +28,7 @@ import re
 from collections import Counter
 from dataclasses import dataclass, field, fields
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import unquote, urlencode, urlsplit
 
 from .common import HostRateLimiter, Http, Paths, RawCache, read_jsonl
 from .geo import (
@@ -145,6 +145,19 @@ def save_venues(venues: list[Venue], path: Path = VENUES_CSV) -> None:
 # ---------------------------------------------------------------------- khớp vé → địa điểm
 
 
+def ticket_place_name(name: str | None) -> str:
+    """Bỏ nhãn đối tượng ưu đãi; giữ tên địa điểm như [Grand World] để phân biệt vé."""
+    return re.sub(r"\[ưu đãi người[^\]]*\]", "", name or "", flags=re.I).strip()
+
+
+def ticket_image_slug(record: dict) -> str | None:
+    """Một số vé thiếu trường slug riêng nhưng URL ảnh vẫn chứa tên địa điểm."""
+    if record.get("imageUrlSlug"):
+        return record["imageUrlSlug"]
+    image = next((x for x in record.get("images") or [] if isinstance(x, str) and x), None)
+    return unquote(urlsplit(image).path.rsplit("/", 1)[-1]) if image else None
+
+
 class VenueMatcher:
     """Mã nhà cung cấp → địa điểm; không có mã thì tìm alias trong tên nhà cung cấp, tên vé, slug ảnh (theo thứ tự)."""
 
@@ -164,7 +177,7 @@ class VenueMatcher:
         dùng để phân định); vẫn nhập nhằng thì thử chuỗi tiếp theo, hết chuỗi thì không đoán."""
         if supplier_code and supplier_code.upper() in self.by_supplier:
             return self.by_supplier[supplier_code.upper()], "supplier"
-        named = destination_in_text(name)
+        named = destination_in_text(ticket_place_name(name))
         for how, text in (("supplier", supplier_name), ("name", name), ("slug", (slug or "").replace("-", " "))):
             f = fold(text)
             if not f:
@@ -189,8 +202,8 @@ def ticket_fields(record: dict) -> dict:
         "supplier_code": record.get("supplierCode"),
         "supplier_name": record.get("supplierName"),
         "name": record.get("name"),
-        "slug": record.get("imageUrlSlug"),
-        "destination_hint": normalise_destination(record.get("name"), record.get("destinationName")),
+        "slug": ticket_image_slug(record),
+        "destination_hint": normalise_destination(ticket_place_name(record.get("name")), record.get("destinationName")),
     }
 
 

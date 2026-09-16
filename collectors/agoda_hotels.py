@@ -135,7 +135,11 @@ def parse_agoda_html(html: str, url: str, meta: dict | None = None) -> dict | No
     if cm:
         lat, lng = float(cm.group(1)), float(cm.group(2))
 
-    description = clean_text(ld.get("description"))
+    description = clean_text(ld.get("description")) or node_text(
+        soup.select_one("[data-element-name='property-short-description']")
+    )
+    if not address.get("streetAddress"):
+        address["streetAddress"] = node_text(soup.select_one("[data-selenium='hotel-address-map']"))
     stars = _star_rating(soup, description)
 
     nav = soup.select_one("[data-element-name='cheapest-room-price-property-nav-bar']")

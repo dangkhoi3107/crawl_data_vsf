@@ -314,6 +314,32 @@ map.data.addListener("click", (e) => console.log(e.feature.getProperty("name"), 
 3. Xem `dedup_report.csv`.
 4. Sản phẩm Vinpearl ngoài 15 điểm đến (Bắc Ninh, Tây Ninh…) vẫn được giữ và đánh dấu *(ngoài kế hoạch)* trong bảng.
 5. Xem mục **Vị trí (toạ độ)** trong `stats.md` và duyệt `data/map/can-kiem-tra.csv`.
+6. Xem `data/quality_review.csv`: danh sách thiếu giá, mô tả, toạ độ, cảnh báo vị trí và ngôn ngữ cần đọc lại.
+   File này được tạo mới mỗi lần normalise; chỉnh sửa báo cáo không làm thay đổi catalog.
+
+### Áp dụng bản sửa chất lượng vào dữ liệu đã crawl
+
+```bash
+conda activate vsf
+cd /home/dangkhoi/code/vsf/data-collection
+python crawl.py reparse agoda-hotels && python normalise.py
+python crawl.py status
+cat data/stats.md
+```
+
+`reparse` đọc lại HTML trong `data/raw/`, giữ ngày lấy giá đã lưu và ghi lại dữ liệu trung gian;
+`normalise.py` xuất lại catalog. Các lệnh trên không tải lại website. Nên sao lưu `data/interim/` và các file
+catalog trước khi áp dụng bản sửa parser mới; bản sửa ngày 16/09/2026 đã có bản sao trong `data/backups/`.
+
+- Mô tả Agoda thiếu JSON-LD được lấy từ phần `property-short-description` trên chính trang đã lưu.
+- `collectors/destination_overrides.csv` lưu các điểm đến du lịch đã đối chiếu theo `sourceRef`, kèm bằng chứng.
+  Khi áp dụng, catalog giữ `originalDestination`, `destinationSource`, `destinationEvidence` để truy nguồn.
+  Không suy điểm đến từ một tên đường trùng tên địa danh ở tỉnh khác.
+- Căn hộ/condotel cùng toà nhà cần đạt ngưỡng giống tên như các khách sạn khác; khoảng cách gần không đủ để gộp.
+- Nhãn `[Ưu Đãi Người ...]` là đối tượng hưởng ưu đãi, không phải địa điểm sử dụng vé.
+- Giá hoặc toạ độ chưa xác minh vẫn để thiếu/cần kiểm tra; `available` chưa phải xác nhận còn phòng/vé hiện tại.
+
+Kiểm tra hồi quy offline: `python -m unittest test_quality -v`.
 
 ## Tuỳ chọn hay dùng
 

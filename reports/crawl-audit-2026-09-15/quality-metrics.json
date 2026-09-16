@@ -1,0 +1,58 @@
+{
+  "total": 508,
+  "unique_ids": 508,
+  "unique_source_refs": 508,
+  "taxonomy": {
+    "hotel": 131,
+    "combo": 121,
+    "attraction": 251,
+    "golf": 5
+  },
+  "destinations": {
+    "Nha Trang": 131,
+    "Phú Quốc": 133,
+    "Nghệ An": 48,
+    "Hà Tĩnh": 23,
+    "Bắc Ninh": 7,
+    "Đà Nẵng": 11,
+    "Hạ Long": 9,
+    "Hội An": 32,
+    "Hải Phòng": 31,
+    "Hà Nội": 74,
+    "TP. Hồ Chí Minh": 9
+  },
+  "image_nonempty": 508,
+  "missing_names": 0,
+  "schema_errors": 0,
+  "issue_counts": {
+    "description_under_80": 10,
+    "non_vi_or_undetected": 24,
+    "no_positive_price": 25,
+    "zero_price_available": 25,
+    "detail_fallback": 25,
+    "member_variant": 59
+  },
+  "preliminary_quality_subset": 404,
+  "preliminary_quality_taxonomy": {
+    "hotel": 129,
+    "combo": 78,
+    "attraction": 192,
+    "golf": 5
+  },
+  "preliminary_quality_destinations": {
+    "Nha Trang": 125,
+    "Phú Quốc": 105,
+    "Nghệ An": 26,
+    "Hà Tĩnh": 13,
+    "Bắc Ninh": 7,
+    "Đà Nẵng": 9,
+    "Hạ Long": 7,
+    "Hội An": 25,
+    "Hải Phòng": 19,
+    "Hà Nội": 63,
+    "TP. Hồ Chí Minh": 5
+  },
+  "preliminary_quality_filter": "available=true, unitPrice>0, descriptionLang=vi (heuristic), description length>=80, no memberTier; not semantic correctness certification",
+  "duplicate_exact_name_groups": 0,
+  "repeated_description_groups": 60
+}
