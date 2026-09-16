@@ -1,0 +1,54 @@
+﻿kind,score,distance_m,destination,kept_name,kept_sourceRef,merged_name,merged_sourceRef
+hotel,100.0,,Nha Trang,"Vinpearl Empire Nha Trang, Affiliated by Meliá",vinpearl:hotel:1f9eea3d-74a2-4ef1-8628-f299b21e8eef,"Vinpearl Empire Nha Trang, Affiliated by Meliá",booking:hotel:2682850
+hotel,100.0,,Nha Trang,Vinpearl Luxury Nha Trang,vinpearl:hotel:e894baa6-4bc4-0911-4a08-2d89d2d093cb,Vinpearl Luxury Nha Trang,booking:hotel:304564
+hotel,100.0,,Nha Trang,Vinpearl Resort & Spa Nha Trang Bay,vinpearl:hotel:8ad87144-51ba-24bc-5d79-6aa98dd275ab,Vinpearl Resort & Spa Nha Trang Bay,booking:hotel:1278041
+hotel,100.0,,Nha Trang,Vinpearl Resort & Spa Nha Trang Bay,vinpearl:hotel:8ad87144-51ba-24bc-5d79-6aa98dd275ab,Vinpearl Resort & Spa Nha Trang Bay,agoda:hotel:vinpearl-resort-spa-nha-trang-bay:nha-trang
+hotel,100.0,,Nha Trang,Vinpearl Resort Nha Trang,vinpearl:hotel:1dc9c659-8c61-0370-20b3-1234f6664721,Vinpearl Resort Nha Trang,booking:hotel:256084
+hotel,100.0,,Nha Trang,Vinpearl Resort Nha Trang,vinpearl:hotel:1dc9c659-8c61-0370-20b3-1234f6664721,Vinpearl Resort Nha Trang,agoda:hotel:vinpearl-resort-nha-trang:nha-trang
+hotel,100.0,,Hà Tĩnh,"Vinpearl Hà Tĩnh, Affiliated by Meliá",vinpearl:hotel:6d2b0b55-30d5-4dcd-a96f-354f1044416c,"Vinpearl Ha Tinh, Affiliated by Meliá",booking:hotel:2682902
+hotel,100.0,,Hà Tĩnh,"Vinpearl Hà Tĩnh, Affiliated by Meliá",vinpearl:hotel:6d2b0b55-30d5-4dcd-a96f-354f1044416c,"Vinpearl Hà Tĩnh, Affiliated by Meliá (Vinpearl Ha Tinh, Affiliated by Meliá)",agoda:hotel:vinpearl-hotel-ha-tinh:ha-tinh
+hotel,100.0,,Hà Tĩnh,Songlam Waterfront Hotel - 藍江酒店,booking:hotel:8006308,Khách sạn Sông Lam Waterfront (SongLam Waterfront Hotel),agoda:hotel:songlam-waterfront-hotel:ha-tinh
+hotel,100.0,0,Hà Tĩnh,BMC Ha Tinh hotel,booking:hotel:11649537,BMC Ha Tinh hotel,agoda:hotel:bmc-ha-tinh-hotel:ha-tinh
+hotel,100.0,0,Sa Pa,Silk Path Grand Sapa Resort & Spa,booking:hotel:2674437,Khu nghỉ dưỡng & Spa Silk Path Grand Sapa (Silk Path Grand Sapa Resort & Spa),agoda:hotel:silk-path-grand-resort-spa-sapa:sapa
+hotel,100.0,0,Hải Phòng,"Wink Hai Phong Centre, Unscripted by Hyatt - 24 Hours stay",booking:hotel:13294493,"Khách sạn Wink Hải Phòng Centre, Unscripted by Hyatt - lưu trú 24 giờ (Wink Hai Phong Centre, Unscripted by Hyatt - 24 hours stay)",agoda:hotel:wink-hai-phong-centre-unscripted-by-hyatt-24-hours-stay-h67096990:haiphong
+hotel,100.0,1,Nha Trang,Diamond Blue Hotel Nha Trang,booking:hotel:16383354,Khách sạn Diamond Blue Nha Trang (Diamond Blue Hotel Nha Trang),agoda:hotel:diamond-blue-nha-trang-hotel:nha-trang
+hotel,100.0,1,Hà Tĩnh,Phương Phương 2 Hotel,booking:hotel:3248793,Khách sạn Phương Phương 2 (Phương Phương 2 Hotel),agoda:hotel:phuong-phuong-2-hotel_2:ha-tinh
+hotel,100.0,1,Quy Nhơn,Homestay Nhà Muội,booking:hotel:6739030,Nha Muoi Homestay,agoda:hotel:nha-muoi-homestay:quy-nhon-binh-dinh
+hotel,100.0,2,Hà Tĩnh,Chạm homestay,booking:hotel:16243881,Chạm homestay,agoda:hotel:cham-homestay:ha-tinh
+hotel,100.0,2,Hà Tĩnh,Top apartment,booking:hotel:13619249,Top apartment,agoda:hotel:top-apartment:ha-tinh
+hotel,100.0,4,Hà Tĩnh,"Vinpearl Cua Sot Resort, Affiliated by Meliá",booking:hotel:2186853,"Vinpearl Cửa Sót Resort, Affiliated by Meliá (Vinpearl Cua Sot Resort, Affiliated by Meliá)",agoda:hotel:vinpearl-discovery-ha-tinh:ha-tinh
+hotel,100.0,6,Hà Tĩnh,Khách sạn Thanh Bình 2,booking:hotel:16633170,Khách sạn Thanh Bình 2,agoda:hotel:khach-s-n-thanh-binh-2:ha-tinh
+hotel,100.0,9,Nha Trang,Khách sạn Golden Beach Nha Trang,booking:hotel:14751666,Khách sạn Golden Beach Nha Trang (Khach san Golden Beach Nha Trang),agoda:hotel:khach-san-golden-beach-nha-trang:nha-trang
+hotel,100.0,9,Hội An,"Riverside Hoi An, Dolphins Hostel",booking:hotel:13142656,Dolphins Hostel - Riverside Hoi An,agoda:hotel:dolphins-hostel:hoi-an
+hotel,100.0,12,Hội An,Allegro Hoi An . A Little Luxury Hotel & Spa,booking:hotel:2835988,Allegro Hội An . Một Khách Sạn & Spa Nhỏ Sang Trọng (Allegro Hoi An . A Little Luxury Hotel & Spa),agoda:hotel:allegro-hoi-an-a-little-luxury-hotel-spa:hoi-an
+hotel,100.0,14,Hội An,La Siesta Hoi An Resort & Spa,booking:hotel:2214694,La Siesta Hoi An Resort & Spa,agoda:hotel:la-siesta-hoi-an-resort-spa:hoi-an
+hotel,100.0,16,Nha Trang,Dolphin Bay Hotel Nha Trang,booking:hotel:15393273,Khách sạn Dolphin Bay Nha Trang (Dolphin Bay Hotel Nha Trang),agoda:hotel:dolphin-bay-hotel-nha-trang:nha-trang
+hotel,100.0,20,Hà Tĩnh,Seabird Hotel Thien Cam,booking:hotel:9794880,Khách sạn Seabird Thiên Cầm (Seabird Hotel Thien Cam),agoda:hotel:seabird-hotel-thien-cam:ha-tinh
+hotel,100.0,33,Hà Tĩnh,Eagle Hotel,booking:hotel:3906017,Eagle Hotel,agoda:hotel:eagle-hotel_2:ha-tinh
+hotel,100.0,38,Hạ Long,Vinpearl Resort & Spa Hạ Long,vinpearl:hotel:9f474bc1-62f4-666b-1c63-7e7330412cfd,Vinpearl Resort & Spa Hạ Long (Vinpearl Resort & Spa Ha Long),agoda:hotel:vinpearl-resort-spa-h-long:halong
+hotel,100.0,49,Nha Trang,Vinpearl Beachfront Nha Trang,vinpearl:hotel:24386cea-907e-93d5-0755-b4b1d8f5858a,Vinpearl Beachfront Nha Trang,booking:hotel:3938078
+hotel,100.0,52,Phú Quốc,Vinpearl Wonderworld Phú Quốc,vinpearl:hotel:f89849e9-0a10-17c0-16e7-7abaa8f06808,Vinpearl Wonderworld Phu Quoc,booking:hotel:4395583
+hotel,100.0,52,Nha Trang,VANDA Hotel Nha Trang,booking:hotel:1148521,Khách sạn Vanda Nha Trang (Vanda Hotel Nha Trang),agoda:hotel:vanda-hotel-nha-trang_2:nha-trang
+hotel,100.0,66,Đà Nẵng,Meliá Danang Beach Resort,booking:hotel:1012795,Khu Nghỉ Dưỡng Bãi Biển Melia Đà Nẵng (Melia Danang Beach Resort),agoda:hotel:melia-danang-resort_2:da-nang
+hotel,100.0,69,Nha Trang,Meliá Vinpearl Cam Ranh Beach Resort,booking:hotel:2195058,Khu nghỉ dưỡng bãi biển Meliá Vinpearl Cam Ranh (Meliá Vinpearl Cam Ranh Beach Resort),agoda:hotel:vinpearl-resort-spa-long-beach-nha-trang:nha-trang
+hotel,100.0,75,Phú Quốc,Sheraton Phu Quoc Long Beach Resort,booking:hotel:1482843,Khu nghỉ dưỡng Sheraton Phu Quoc Long Beach (Sheraton Phu Quoc Long Beach Resort),agoda:hotel:sheraton-phu-quoc-long-beach-resort:phu-qu-c-island
+hotel,100.0,76,Phú Quốc,VinHolidays Fiesta Phú Quốc,vinpearl:hotel:5ef5c725-d49d-4413-a9ce-3f5966906972,Vinholidays Fiesta Phu Quoc,booking:hotel:6744856
+hotel,100.0,110,Phú Quốc,Vinpearl Resort & Spa Phu Quoc,booking:hotel:1079726,Vinpearl Resort & Spa Phú Quốc,agoda:hotel:vinpearl-resort-spa-phu-qu-c:phu-quoc-island
+hotel,100.0,117,Hải Phòng,Hotel Nikko Hai Phong,booking:hotel:6348452,Khách Sạn Nikko Hải Phòng (Hotel Nikko Hai Phong),agoda:hotel:hotel-nikko-hai-phong:haiphong
+hotel,100.0,141,Hà Tĩnh,"Vinpearl Cửa Sót Resort, Affiliated by Meliá",vinpearl:hotel:0f0e60af-baaf-4066-b3d2-41a45414bbef,"Vinpearl Cửa Sót Resort, Affiliated by Meliá (Vinpearl Cua Sot Resort, Affiliated by Meliá)",agoda:hotel:vinpearl-discovery-ha-tinh:ha-tinh
+hotel,100.0,149,Hà Tĩnh,Bình Minh Hotel,booking:hotel:4664445,Binh Minh Hotel,agoda:hotel:binh-minh-hotel:ha-tinh
+hotel,100.0,163,Quy Nhơn,Casa Marina Resort,booking:hotel:2754000,CASA MARINA RESORT,agoda:hotel:casa-marina-resort:quy-nhon-binh-dinh
+hotel,100.0,217,Nha Trang,Hòn Tằm Resort,vinpearl:hotel:668bb33b-09b0-4d7a-a5ba-38ae1f9abf17,Hon Tam Resort,booking:hotel:271816
+hotel,100.0,391,Huế,Angsana Lang Co,booking:hotel:426581,Angsana Lang Co,agoda:hotel:angsana-lang-co:hue
+hotel,100.0,413,Hội An,Vinpearl Resort & Golf Nam Hội An,vinpearl:hotel:2c2389a5-947f-4dc9-79fc-6d7d6b7521bb,Vinpearl Resort & Golf Nam Hoi An,booking:hotel:3079005
+hotel,100.0,541,Nha Trang,Hon Tam Resort,booking:hotel:271816,Khu nghỉ dưỡng Hòn Tằm (tên trước đây Khu nghỉ dưỡng Merperle Hòn Tằm) (Hon Tam Resort (former name Merperle Hon Tam Resort)),agoda:hotel:merperle-hon-tam-resort:nha-trang
+hotel,100.0,750,Phú Quốc,Vinpearl Resort & Spa Phú Quốc,vinpearl:hotel:bb871f8a-9159-a65b-a2cd-f39a19030afa,Vinpearl Resort & Spa Phu Quoc,booking:hotel:1079726
+hotel,100.0,769,Quy Nhơn,FLC Luxury Hotel Quy Nhon,booking:hotel:2005193,FLC Luxury Hotel Quy Nhơn (FLC Luxury Hotel Quy Nhon),agoda:hotel:flc-luxury-hotel-quy-nhon:quy-nhon-binh-dinh
+hotel,100.0,1482,Hải Phòng,Somerset Central TD Hai Phong City,booking:hotel:1278982,Somerset Central TD Hải Phòng (Somerset Central TD Hai Phong City),agoda:hotel:somerset-central-td-haiphong:haiphong
+hotel,100.0,1821,Hạ Long,Vinpearl Resort & Spa Ha Long,booking:hotel:1456596,Vinpearl Resort & Spa Hạ Long (Vinpearl Resort & Spa Ha Long),agoda:hotel:vinpearl-resort-spa-h-long:halong
+hotel,100.0,3040,Bắc Ninh,Vinpearl Hotel Bắc Ninh,vinpearl:hotel:e686d097-3d70-48af-aec7-708918d6cb2c,Vinpearl Hotel Bắc Ninh,booking:hotel:14448200
+hotel,86.3,290,Nghệ An,"Vinpearl Cửa Hội Resort, Affiliated by Meliá",vinpearl:hotel:de8c4ee8-b14c-4339-9add-dd24c796e5aa,"Vinpearl Cua Hoi, Affiliated by Meliá",booking:hotel:2186841
+attraction,100.0,,Nha Trang,VinWonders Nha Trang,vinpearl:tour:VW01392,VinWonders Nha Trang,trip:attraction:23029423
+attraction,100.0,,Phú Quốc,VinWonders Phú Quốc,vinpearl:tour:VW00616,VinWonders Phú Quốc,trip:attraction:18832359
+attraction,100.0,,Phú Quốc,Vinpearl Safari Phú Quốc,vinpearl:tour:VW00614,Vinpearl Safari Phú Quốc,trip:attraction:25487733
+attraction,100.0,,Hội An,VinWonders Nam Hội An,vinpearl:tour:VW01861,VinWonders Nam Hội An,trip:attraction:50961574
