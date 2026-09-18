@@ -33,7 +33,7 @@ from collections import Counter
 from datetime import date, timedelta
 from pathlib import Path
 
-from collectors import booking_base, retry_missing, trip, venues, vinpearl
+from collectors import booking_base, booking_flights, retry_missing, trip, venues, vinpearl
 from collectors.agoda_hotels import AgodaHotels
 from collectors.booking_attractions import BookingAttractions
 from collectors.booking_hotels import BookingHotels
@@ -44,7 +44,7 @@ log = logging.getLogger("crawler")
 
 BROWSER_SOURCES = ("booking-hotels", "agoda-hotels", "booking-attractions")
 TRIP_SOURCES = ("trip-flights", "trip-attractions")
-SOURCES = ("vinpearl",) + TRIP_SOURCES + BROWSER_SOURCES
+SOURCES = ("vinpearl",) + TRIP_SOURCES + BROWSER_SOURCES + ("booking-flights",)
 EXIT_BLOCKED = 75  # bị chặn liên tiếp nên tự dừng: nghỉ vài giờ rồi chạy lại (xem run_forever.sh)
 
 
@@ -214,6 +214,9 @@ def cmd_status(paths: Paths) -> None:
 
 
 async def cmd_reparse(paths: Paths, a: argparse.Namespace) -> None:
+    if a.source == "booking-flights":
+        log.info("Booking flights reparse: %s", booking_flights.reparse(paths))
+        return
     if a.source == "vinpearl":
         await cmd_vinpearl(paths, a, offline=True)
         return
@@ -321,6 +324,18 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("agoda-hotels", parents=[browser, plan, crawl, dates], help="agoda.com – khách sạn theo điểm đến")
     sub.add_parser("booking-attractions", parents=[browser, crawl], help="booking.com – vé tham quan (nguồn phụ, ngoài kế hoạch)")
 
+    bf = sub.add_parser("booking-flights", parents=[browser, plan], help="Booking Flights – chuyến cụ thể và giá theo ngày/tháng")
+    bf.add_argument("--routes", help="cặp IATA có hướng, vd. SGN-HAN,HAN-CXR; mặc định giữa sân bay trong kế hoạch")
+    bf.add_argument("--months", help="mọi ngày của tháng, vd. 2026-10,2026-11")
+    bf.add_argument("--depart-dates", help="ngày bay YYYY-MM-DD, cách nhau dấu phẩy; mặc định hôm nay + 30")
+    bf.add_argument("--adults", type=int, default=1)
+    bf.add_argument("--cabin", choices=["ECONOMY", "PREMIUM_ECONOMY", "BUSINESS", "FIRST"], default="ECONOMY")
+    bf.add_argument("--limit", type=int, help="giới hạn số trang tìm kiếm mỗi lượt; không coi là đã lấy hết")
+    bf.add_argument("--max-pages", type=int, default=0, help="giới hạn trang/tuyến/ngày; 0 là tất cả trang nguồn trả")
+    bf.add_argument("--max-attempts", type=int, default=3)
+    bf.add_argument("--discover-only", action="store_true", help="xếp hàng offline, chưa mở mạng/trình duyệt")
+    bf.add_argument("--refresh", action="store_true", help="lấy snapshot giá mới cho phạm vi được chọn")
+
     ve = sub.add_parser("venues", help="toạ độ địa điểm vé/combo/golf Vinpearl: trip.com → OpenStreetMap, ghi collectors/venues.csv")
     ve.add_argument("--refresh", action="store_true", help="tìm lại cả dòng auto/review (không bao giờ ghi đè dòng status=ok)")
     ve.add_argument("--only", default=None, help="chỉ các key này, cách nhau bằng dấu phẩy")
@@ -343,7 +358,22 @@ def main(argv: list[str] | None = None) -> int:
     setup_logging(paths, a.verbose)
     result = None
     try:
-        if a.cmd == "vinpearl":
+        if a.cmd == "booking-flights":
+            try:
+                if not 1 <= a.adults <= 9 or a.max_pages < 0 or a.max_attempts < 1 or (a.limit is not None and a.limit < 1):
+                    raise ValueError("adults: 1..9; max-pages >= 0; max-attempts và limit > 0")
+                opts = booking_flights.Options(
+                    browser=_browser_opts(a), routes=booking_flights.flight_routes(a.routes, select_destinations(a.destinations)),
+                    dates=booking_flights.flight_dates(a.months, a.depart_dates), adults=a.adults, cabin=a.cabin,
+                    delay=a.delay if a.delay is not None else 4, max_attempts=a.max_attempts,
+                    max_pages=a.max_pages, limit=a.limit, discover_only=a.discover_only, refresh=a.refresh)
+            except ValueError as exc:
+                log.error("%s", exc)
+                return 2
+            with RunLock(paths, "booking_flights"):
+                result = asyncio.run(booking_flights.run(paths, opts))
+            log.info("Booking flights: %s", result)
+        elif a.cmd == "vinpearl":
             with RunLock(paths, "vinpearl"):
                 result = asyncio.run(cmd_vinpearl(paths, a))
         elif a.cmd in TRIP_SOURCES:
@@ -372,6 +402,8 @@ def main(argv: list[str] | None = None) -> int:
         return 130
     if isinstance(result, dict) and result.get("stopped") == "blocked":
         return EXIT_BLOCKED
+    if a.cmd == "booking-flights" and result and (result.get("failed") or result.get("skipped")):
+        return 2
     return 0
 
 

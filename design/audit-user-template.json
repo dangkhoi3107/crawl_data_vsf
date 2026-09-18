@@ -1,0 +1,108 @@
+{
+  "input": "/home/dangkhoi/.codex/attachments/88525b97-e049-4a35-bf94-2d80dc829af5/pasted-text.txt",
+  "products": 6,
+  "taxonomy_and_level": {
+    "hotel:room": 1,
+    "hotel:property": 1,
+    "flight:route": 1,
+    "flight:flight": 1,
+    "attraction:-": 1,
+    "combo:-": 1
+  },
+  "null_counts": {
+    "availableFrom": 2,
+    "availableTo": 2,
+    "imageUrl": 2
+  },
+  "duplicates": {
+    "productId": {},
+    "sourceRef": {}
+  },
+  "finding_counts": {
+    "room_without_parent": 1,
+    "no_quote_observation_time_in_product": 4,
+    "missing_image": 2,
+    "parent_absent_from_this_file": 1,
+    "flight_without_dated_departureAt": 1,
+    "selected_price_above_stored_vinpearl_price_review_context": 1,
+    "combo_without_structured_components": 1
+  },
+  "findings": {
+    "room_without_parent": [
+      {
+        "productId": "6c36a4fd-7bc0-5688-9d3d-3fc74fcbb41d",
+        "name": "Vinpearl Resort & Spa Phú Quốc - Junior Suite Hướng Vườn Giường Đôi",
+        "sourceRef": "vinpearl:hotel:bb871f8a-9159-a65b-a2cd-f39a19030afa:room:3adc38ea-0643-4636-92f9-b1e95369a62f"
+      }
+    ],
+    "no_quote_observation_time_in_product": [
+      {
+        "productId": "6c36a4fd-7bc0-5688-9d3d-3fc74fcbb41d",
+        "name": "Vinpearl Resort & Spa Phú Quốc - Junior Suite Hướng Vườn Giường Đôi",
+        "sourceRef": "vinpearl:hotel:bb871f8a-9159-a65b-a2cd-f39a19030afa:room:3adc38ea-0643-4636-92f9-b1e95369a62f"
+      },
+      {
+        "productId": "cd8e4033-19d2-5fb1-9dea-20e003ba61ac",
+        "name": "Meliá Vinpearl Danang Riverfront",
+        "sourceRef": "booking:hotel:3457161"
+      },
+      {
+        "productId": "5febedf3-74ba-5200-a5ec-2a6ab5162acb",
+        "name": "VinWonders Nha Trang",
+        "sourceRef": "vinpearl:tour:VW01392"
+      },
+      {
+        "productId": "1a49c701-4d5f-5711-a290-3b8c386a8bdd",
+        "name": "Combo Vé vào cửa VinWonders + Vinpearl Safari Phú Quốc",
+        "sourceRef": "vinpearl:tour:VW00623"
+      }
+    ],
+    "missing_image": [
+      {
+        "productId": "404ff51a-6de7-5013-b048-ac7468cfc726",
+        "name": "Vé máy bay Nha Trang - Hà Nội",
+        "sourceRef": "trip:route:nha-han"
+      },
+      {
+        "productId": "ee18724d-ad50-5b93-899d-46bd7acc9751",
+        "name": "Sun PhuQuoc Airways 9G2953: Nha Trang - Phú Quốc (06:30)",
+        "sourceRef": "trip:flight:CXR-PQC:9G2953"
+      }
+    ],
+    "parent_absent_from_this_file": [
+      {
+        "productId": "ee18724d-ad50-5b93-899d-46bd7acc9751",
+        "name": "Sun PhuQuoc Airways 9G2953: Nha Trang - Phú Quốc (06:30)",
+        "sourceRef": "trip:flight:CXR-PQC:9G2953"
+      }
+    ],
+    "flight_without_dated_departureAt": [
+      {
+        "productId": "ee18724d-ad50-5b93-899d-46bd7acc9751",
+        "name": "Sun PhuQuoc Airways 9G2953: Nha Trang - Phú Quốc (06:30)",
+        "sourceRef": "trip:flight:CXR-PQC:9G2953"
+      }
+    ],
+    "selected_price_above_stored_vinpearl_price_review_context": [
+      {
+        "productId": "5febedf3-74ba-5200-a5ec-2a6ab5162acb",
+        "name": "VinWonders Nha Trang",
+        "sourceRef": "vinpearl:tour:VW01392"
+      }
+    ],
+    "combo_without_structured_components": [
+      {
+        "productId": "1a49c701-4d5f-5711-a290-3b8c386a8bdd",
+        "name": "Combo Vé vào cửa VinWonders + Vinpearl Safari Phú Quốc",
+        "sourceRef": "vinpearl:tour:VW00623"
+      }
+    ]
+  },
+  "interpretation": [
+    "Findings are review signals, not proof of incorrect source data.",
+    "Missing parents may exist outside a partial sample.",
+    "A smaller stored price is not necessarily comparable: date, occupancy, room and policies must match.",
+    "Missing observation timestamps in Product may still exist in raw/interim data.",
+    "No network calls, product mutations or current availability verification were performed."
+  ]
+}

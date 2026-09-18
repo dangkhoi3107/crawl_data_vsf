@@ -34,7 +34,7 @@ import re
 import sys
 import uuid
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 from collectors import mapexport
@@ -921,6 +921,105 @@ def trip_route_products(r: dict, flights_per_route: int) -> list[dict]:
 # ---------------------------------------------------------------------- gộp khách sạn
 
 
+def merge_booking_flight_products(products: list[dict], records: list[dict], now=None) -> list[dict]:
+    """Booking dated observations are primary; preserve existing Trip IDs on exact service matches.
+
+    This does not compare Trip route/monthly prices with Booking offers. Full quotes
+    stay in booking_flight_offers.jsonl; Product is a representative display view.
+    """
+    from collectors.booking_flights import AIRPORT_CITIES, digest
+
+    now = now or datetime.now(timezone.utc)
+    route_existing, flight_existing = {}, {}
+    for p in products:
+        if p["taxonomy"] != "flight":
+            continue
+        a = p["attributes"]
+        if a.get("level") == "route" and len(a.get("originAirports", [])) == len(a.get("destinationAirports", [])) == 1:
+            route_existing[(a["originAirports"][0], a["destinationAirports"][0])] = p
+        if a.get("level") == "flight" and a.get("flightNumber"):
+            flight_existing[(a.get("originAirport"), a.get("destinationAirport"), a["flightNumber"])] = p
+
+    grouped = defaultdict(list)
+    for record in latest_by_key(records):
+        for offer in record.get("offers", []):
+            grouped[offer["serviceKey"]].append(offer)
+    by_route = defaultdict(list)
+    replacements = {}
+    for service, offers in grouped.items():
+        # Deduplicate repeated observations of exactly the same itinerary/conditions,
+        # selecting the newest quote first, never the historical lowest price.
+        latest = {}
+        for o in sorted(offers, key=lambda x: x["observedAt"]):
+            k = digest([o["context"], o["segments"], o.get("includedBaggage"), o.get("cardText")])
+            latest[k] = o
+        offers = list(latest.values())
+        def fresh(o):
+            observed = datetime.fromisoformat(o["observedAt"].replace("Z", "+00:00"))
+            return (timedelta(0) <= now - observed <= timedelta(hours=24)
+                    and datetime.fromisoformat(o["departureAt"]) > now)
+        # Default display context first. Never label the representative quote a
+        # globally cheapest ticket across passengers, cabins or dates.
+        chosen = min(offers, key=lambda o: (not fresh(o), o["context"]["adults"] != 1,
+                                           o["context"]["cabinClass"] != "ECONOMY", o["departureAt"], o["totalPrice"]))
+        c = chosen["context"]
+        origin, destination = c["originAirport"], c["destinationAirport"]
+        route_key = (origin, destination)
+        old_route = route_existing.get(route_key)
+        route_ref = old_route["sourceRef"] if old_route else f"booking:route:{origin}-{destination}"
+        legs = chosen["segments"]
+        old = flight_existing.get((origin, destination, legs[0]["flightNumber"])) if len(legs) == 1 else None
+        own_ref = f"booking:flight:{service}"
+        ref = old["sourceRef"] if old else own_ref
+        numbers = ", ".join(l["flightNumber"] for l in legs)
+        from_city, to_city = AIRPORT_CITIES[origin], AIRPORT_CITIES[destination]
+        desc = (f"Hành trình một chiều {from_city} ({origin}) đến {to_city} ({destination}), "
+                f"{'bay thẳng' if len(legs) == 1 else str(len(legs) - 1) + ' điểm dừng'}, "
+                f"các chuyến {numbers}. Hãng bay: {', '.join(uniq(l.get('airline') for l in legs if l.get('airline')))}.")
+        attrs = {"level": "flight", "parentProductId": product_id(route_ref),
+                 "flightNumber": legs[0]["flightNumber"] if len(legs) == 1 else None,
+                 "flightNumbers": [l["flightNumber"] for l in legs], "segments": legs,
+                 "originAirport": origin, "destinationAirport": destination,
+                 "originCity": from_city, "destinationCity": to_city, "originDestination": from_city,
+                 "departureAt": chosen["departureAt"], "arrivalAt": chosen["arrivalAt"],
+                 "datesSeen": sorted({o["departureAt"][:10] for o in offers}),
+                 "nonstop": chosen["nonstop"], "bookable": True,
+                 "priceContext": c, "priceUnit": "party_itinerary", "priceKind": "quote",
+                 "selectedOfferId": chosen["offerId"], "offerIds": [o["offerId"] for o in offers],
+                 "priceObservedAt": chosen["observedAt"], "availabilityStatus": "available" if fresh(chosen) else "stale",
+                 "url": chosen["bookingUrl"], "bookingUrl": chosen["bookingUrl"],
+                 "fieldSources": {k: "booking.com" for k in ("description", "unitPrice", "available", "bookingUrl")},
+                 "descriptionSource": "derived: lịch bay thực tế Booking.com", "descriptionLang": "vi",
+                 "sameAs": [own_ref] if old else None,
+                 **airport_location(destination, origin)}
+        p = make_product(meta={"src": "booking_flight", "fromDestination": from_city},
+                         name=f"{numbers}: {from_city} - {to_city}", taxonomy="flight", destination=to_city,
+                         description=desc, attributes=attrs, unitPrice=chosen["totalPrice"], currency=chosen["currency"],
+                         available=fresh(chosen), availableFrom=None, availableTo=None, imageUrl=None, sourceRef=ref)
+        replacements[p["productId"]] = p
+        by_route[route_key].append(p)
+    for (origin, destination), flights in by_route.items():
+        old = route_existing.get((origin, destination))
+        ref = old["sourceRef"] if old else f"booking:route:{origin}-{destination}"
+        best = min(flights, key=lambda p: (not p["available"], p["attributes"]["priceContext"]["adults"] != 1,
+                                         p["attributes"]["priceContext"]["cabinClass"] != "ECONOMY", p["unitPrice"]))
+        attrs = copy.deepcopy(best["attributes"])
+        for key in ("parentProductId", "flightNumber", "flightNumbers", "segments", "departureAt", "arrivalAt", "nonstop", "sameAs"):
+            attrs.pop(key, None)
+        attrs.update(level="route", bookable=False, priceKind="from", originAirports=[origin],
+                     destinationAirports=[destination], flightCount=len(flights))
+        if old:
+            attrs["sameAs"] = [f"booking:route:{origin}-{destination}"]
+        p = make_product(meta={"src": "booking_flight", "fromDestination": AIRPORT_CITIES[origin]},
+                         name=f"Vé máy bay {AIRPORT_CITIES[origin]} - {AIRPORT_CITIES[destination]}",
+                         taxonomy="flight", destination=AIRPORT_CITIES[destination],
+                         description=f"Tuyến bay một chiều từ {AIRPORT_CITIES[origin]} ({origin}) đến {AIRPORT_CITIES[destination]} ({destination}). Chọn chuyến và ngày cụ thể để xem báo giá Booking.com.",
+                         attributes=attrs, unitPrice=best["unitPrice"], currency=best["currency"], available=best["available"],
+                         availableFrom=None, availableTo=None, imageUrl=None, sourceRef=ref)
+        replacements[p["productId"]] = p
+    return [replacements.pop(p["productId"], p) for p in products] + list(replacements.values())
+
+
 def cluster_hotels(props: list[dict], threshold: float) -> tuple[list[list[dict]], list[tuple]]:
     """Ghép khách sạn giữa Vinpearl / booking / agoda. Mỗi cụm có tối đa 1 bản của mỗi nguồn.
     Ghép khi (luôn cùng điểm đến): cách nhau ≤ 300 m và tên giống ≥ 75; ≤ 1 km và tên giống ≥ threshold;
@@ -1566,7 +1665,7 @@ def apply_plan(products: list[dict], plan_names: set[str], budget: Budget, dropp
             keep.append(p)
             kept_ids.add(p["productId"])
             continue
-        if src == "trip_flight":
+        if src in ("trip_flight", "booking_flight"):
             if p["destination"] in plan_names and p["_meta"].get("fromDestination") in plan_names:
                 keep.append(p)
                 kept_ids.add(p["productId"])
@@ -1866,6 +1965,12 @@ def main(argv: list[str] | None = None) -> int:
     # vé máy bay
     for r in raw.get("trip_flights", []):
         products.extend(trip_route_products(r, budget.flights_per_route))
+    products = merge_booking_flight_products(products, raw.get("booking_flights", []))
+    if raw.get("booking_flights"):
+        with open(paths.data / "booking_flight_offers.jsonl", "w", encoding="utf-8") as f:
+            for r in raw["booking_flights"]:
+                for offer in r.get("offers", []):
+                    f.write(json.dumps(offer, ensure_ascii=False) + "\n")
 
     excluded = load_excluded_products()
     if excluded:
