@@ -1,0 +1,66 @@
+2026/09/16-12:21:39.215 4b18 Reusing MANIFEST /home/dangkhoi/code/vsf/data-collection/data/browser-profile/agoda_hotels/Default/IndexedDB/https_www.agoda.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/09/16-12:21:39.215 4b18 Recovering log #128
+2026/09/16-12:21:39.218 4b18 Reusing old log /home/dangkhoi/code/vsf/data-collection/data/browser-profile/agoda_hotels/Default/IndexedDB/https_www.agoda.com_0.indexeddb.leveldb/000128.log 
+2026/09/16-12:21:39.218 4b18 Delete type=2 #127
+2026/09/16-12:21:39.218 4b18 Delete type=2 #129
+2026/09/16-12:24:50.116 4b19 Level-0 table #133: started
+2026/09/16-12:24:50.145 4b19 Level-0 table #133: 1176305 bytes OK
+2026/09/16-12:24:50.149 4b19 Delete type=0 #128
+2026/09/16-12:24:50.947 4b19 Compacting 1@1 + 1@2 files
+2026/09/16-12:24:50.956 4b19 Generated table #134@1: 257 keys, 24569 bytes
+2026/09/16-12:24:50.956 4b19 Compacted 1@1 + 1@2 files => 24569 bytes
+2026/09/16-12:24:50.958 4b19 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/16-12:24:50.958 4b19 Delete type=2 #130
+2026/09/16-12:24:50.959 4b19 Delete type=2 #133
+2026/09/16-12:25:30.663 4b1a Level-0 table #136: started
+2026/09/16-12:25:30.677 4b1a Level-0 table #136: 1179536 bytes OK
+2026/09/16-12:25:30.681 4b1a Delete type=0 #132
+2026/09/16-12:25:31.921 4b19 Compacting 1@1 + 1@2 files
+2026/09/16-12:25:31.943 4b19 Generated table #137@1: 198 keys, 32923 bytes
+2026/09/16-12:25:31.943 4b19 Compacted 1@1 + 1@2 files => 32923 bytes
+2026/09/16-12:25:31.945 4b19 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/16-12:26:26.189 4b1a Level-0 table #139: started
+2026/09/16-12:26:26.225 4b1a Level-0 table #139: 1176555 bytes OK
+2026/09/16-12:26:26.227 4b1a Delete type=2 #134
+2026/09/16-12:26:26.227 4b1a Delete type=2 #136
+2026/09/16-12:26:26.227 4b1a Delete type=0 #135
+2026/09/16-12:26:26.601 4b19 Compacting 1@1 + 1@2 files
+2026/09/16-12:26:26.609 4b19 Generated table #140@1: 630 keys, 54442 bytes
+2026/09/16-12:26:26.609 4b19 Compacted 1@1 + 1@2 files => 54442 bytes
+2026/09/16-12:26:26.611 4b19 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/16-12:27:28.877 4b1a Level-0 table #142: started
+2026/09/16-12:27:28.889 4b1a Level-0 table #142: 1177120 bytes OK
+2026/09/16-12:27:28.892 4b1a Delete type=2 #137
+2026/09/16-12:27:28.892 4b1a Delete type=2 #139
+2026/09/16-12:27:28.892 4b1a Delete type=0 #138
+2026/09/16-12:27:28.893 4b19 Compacting 1@1 + 1@2 files
+2026/09/16-12:27:28.902 4b19 Generated table #143@1: 397 keys, 47340 bytes
+2026/09/16-12:27:28.902 4b19 Compacted 1@1 + 1@2 files => 47340 bytes
+2026/09/16-12:27:28.904 4b19 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/16-12:28:21.733 4b19 Level-0 table #145: started
+2026/09/16-12:28:21.765 4b19 Level-0 table #145: 1175088 bytes OK
+2026/09/16-12:28:21.768 4b19 Delete type=0 #141
+2026/09/16-12:28:21.769 4b19 Delete type=2 #140
+2026/09/16-12:28:21.769 4b19 Delete type=2 #142
+2026/09/16-12:28:28.568 4b19 Compacting 1@1 + 1@2 files
+2026/09/16-12:28:28.575 4b19 Generated table #146@1: 124 keys, 14141 bytes
+2026/09/16-12:28:28.575 4b19 Compacted 1@1 + 1@2 files => 14141 bytes
+2026/09/16-12:28:28.577 4b19 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/16-12:28:28.577 4b19 Delete type=2 #145
+2026/09/16-12:28:28.577 4b19 Delete type=2 #143
+2026/09/16-12:29:21.770 4b19 Level-0 table #148: started
+2026/09/16-12:29:21.784 4b19 Level-0 table #148: 1188504 bytes OK
+2026/09/16-12:29:21.789 4b19 Delete type=0 #144
+2026/09/16-12:29:22.989 4b19 Compacting 1@1 + 1@2 files
+2026/09/16-12:29:23.011 4b19 Generated table #149@1: 469 keys, 52804 bytes
+2026/09/16-12:29:23.011 4b19 Compacted 1@1 + 1@2 files => 52804 bytes
+2026/09/16-12:29:23.013 4b19 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/09/16-12:29:23.013 4b19 Delete type=2 #148
+2026/09/16-12:29:23.013 4b19 Delete type=2 #146
+2026/09/16-12:30:21.886 4b1a Level-0 table #151: started
+2026/09/16-12:30:21.920 4b1a Level-0 table #151: 1183451 bytes OK
+2026/09/16-12:30:21.923 4b1a Delete type=0 #147
+2026/09/16-12:30:23.771 4b1a Compacting 1@1 + 1@2 files
+2026/09/16-12:30:23.786 4b1a Generated table #152@1: 684 keys, 76918 bytes
+2026/09/16-12:30:23.786 4b1a Compacted 1@1 + 1@2 files => 76918 bytes
+2026/09/16-12:30:23.789 4b1a compacted to: files[ 0 0 1 0 0 0 0 ]

@@ -1,5 +1,4 @@
 ﻿productId,name,taxonomy,destination,unitPrice,currency,available,imageUrl,sourceRef,description,level,latitude,longitude,starRating,parentProductId
-bf305cbf-a7b8-5e52-bc67-97639cf95fdf,Hòn Ti Tốp,attraction,Hạ Long,,VND,False,https://ak-d.tripcdn.com/images/0104u120008i7cmuj482F.jpg,trip:attraction:95477,"Hòn Ti Tốp. Địa chỉ: Hạ Long Bay, Quảng Ninh province, Vietnam. Giờ mở cửa: Mở cửa cả ngày. Thời gian tham quan đề xuất: 3–5 tiếng đồng hồ",,20.859076,107.080151,,
 c1cc2937-0cfa-5def-b18f-1d5a46c14115,VinWonders Nam Hội An,attraction,Hội An,650000,VND,True,https://booking-static.vinpearl.com/tours/ece6e58a02fd48de9eba9d3f4689f77a_Hinh-anh-VinWonders-Nam-Hoi-An-River-Safari-3x2-so-1%20(1)_vinwonders-nam-hoi-an-ve-vao-cua.jpg,vinpearl:tour:VW01861,"VinWonders Nam Hội An
 
 VinWonders Nam Hội An là điểm đến hội tụ những điều kỳ thú được xây dựng theo chủ đề giao thoa văn hóa Đông Tây ấn tượng. Đây cũng là nơi duy trì và phát triển những giá trị lịch sử, nét đẹp nghệ thuật, văn hóa truyền thống Việt Nam và mang đến các hoạt động giải trí 5 châu đầy mới mẻ, sôi động và hấp dẫn hàng đầu thế giới.
@@ -100,6 +99,12 @@ Với vô vàn trò chơi đỉnh cao, không gian rực rỡ, show diễn ngo�
 
 Bao gồm
 Vé vào cửa trực tiếp khu vui chơi VinWonders Phú Quốc sử dụng trong ngày dành cho 01 người",,10.340735,103.854047,,
+0d926cc0-a22c-5e58-beff-9c8874e9c392,Vé Hạng Cổ Loa | Tặng Voucher Ẩm thực / Quà lưu niệm,attraction,Hà Nội,700000,VND,True,https://booking-static.vinpearl.com/tours/dc65aacd98fd43e0a1cf09994dfbe482_Screenshot_4_07092024_8wonder.png,vinpearl:tour:VW02784,"Vé Hạng Cổ Loa | Tặng Voucher Ẩm thực / Quà lưu niệm
+
+► Vé tham dự Show diễn ""Đất Nước Thiên Hùng Ca"".
+► Vui lòng tham khảo sơ đồ chỗ ngồi trước khi đặt vé.
+
+Phù hợp: Nhóm bạn, Gia đình, Cặp đôi. Địa điểm: Hà Nội. Giá từ 700.000₫",,20.951815905926242,105.97453466741665,,
 8c935f2b-2bc7-5f3c-9fa9-5a8e7438597d,Vịnh Hạ Long,attraction,Hạ Long,,VND,False,https://ak-d.tripcdn.com/images/0101i120008iiuc8yB59E.jpg,trip:attraction:81458,"• Một danh lam thắng cảnh nổi tiếng của Việt Nam đã được đưa vào Danh sách Di sản thiên nhiên thế giới
 • Hơn 2.000 khối đá đa dạng mọc lên từ mặt nước biển tĩnh lặng
 • Đi thuyền tham quan và tận hưởng quang cảnh biển và núi đẹp như tranh vẽ giữa các đảo nhỏ

@@ -1,0 +1,249 @@
+2026-09-16 00:59:10,870 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 00:59:10,893 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 00:59:10,897 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 00:59:10,906 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 00:59:10,923 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 00:59:13,061 INFO    normalise Khách sạn: 632 bản ghi → 579 sau khi gộp
+2026-09-16 00:59:13,731 INFO    normalise Đã ghi 2324 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, stats.md, map/)
+2026-09-16 06:54:22,547 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 06:54:22,570 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 06:54:22,573 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 06:54:22,581 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 06:54:22,598 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 06:54:24,366 INFO    normalise Khách sạn: 632 bản ghi → 579 sau khi gộp
+2026-09-16 06:54:25,054 INFO    normalise Đã ghi 2324 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, stats.md, map/)
+2026-09-16 07:11:16,262 INFO    crawler.browser [agoda_hotels] Parse lại 300 trang từ cache → /home/dangkhoi/code/vsf/data-collection/data/interim/agoda_hotels.jsonl
+2026-09-16 07:11:48,730 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 07:11:48,752 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 07:11:48,756 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 07:11:48,763 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 07:11:48,780 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 07:11:50,567 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 07:11:51,250 INFO    normalise Đã ghi 2327 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 07:15:18,172 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 07:15:18,195 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 07:15:18,199 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 07:15:18,207 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 07:15:18,225 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 07:15:20,020 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 07:15:20,691 INFO    normalise Đã ghi 2327 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 07:17:32,011 INFO    crawler.browser [agoda_hotels] Parse lại 300 trang từ cache → data/interim/agoda_hotels.jsonl
+2026-09-16 07:17:32,239 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 07:17:32,263 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 07:17:32,269 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 07:17:32,278 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 07:17:32,296 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 07:17:34,093 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 07:17:34,773 INFO    normalise Đã ghi 2327 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ VinWonders Nha Trang                   Nha Trang          36 vé  12.21705,109.24087     VinWonders Nha Trang (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Vinpearl Harbour Nha Trang             Nha Trang          13 vé  12.20330,109.21704     Cáp Treo Vinpearl Harbour Nha Trang (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Hòn Tằm                                Nha Trang          14 vé  12.17589,109.24301     Hòn Tằm (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Aquafield Nha Trang                    Nha Trang          11 vé  12.21460,109.24094     Aquafield (leisure=sauna)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Vinpearl Golf Nha Trang                Nha Trang           1 vé  12.21254,109.25905     Vinpearl Golf Nha Trang (leisure=golf_course)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ VinWonders Phú Quốc                    Phú Quốc           42 vé  10.34074,103.85405     VinWonders Phú Quốc (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Vinpearl Safari Phú Quốc               Phú Quốc           38 vé  10.33704,103.89145     Vinpearl Safari Phú Quốc (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Grand World Phú Quốc                   Phú Quốc           25 vé  10.32848,103.86295     Grand World Phú Quốc (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ! Vinpearl Golf Phú Quốc                 Phú Quốc            1 vé  10.35804,103.84952     chưa đạt kiểm tra: kết quả 'Meliá Vinpearl Phu Quoc' thiếu từ: golf
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ VinWonders Nam Hội An                  Hội An             33 vé  15.78599,108.40764     VinWonders Nam Hội An (trip.com)
+2026-09-16 09:52:05,444 INFO    crawler.venues ~ Vinpearl Golf Nam Hội An               Hội An              1 vé  15.79402,108.41228     Vin Pearl Golf Course (leisure=golf_course)
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ VinWonders Cửa Hội                     Nghệ An            36 vé  18.77295,105.75134     VinWonders Cửa Hội (trip.com)
+2026-09-16 09:52:05,445 INFO    crawler.venues ! Công viên nước Hà Tĩnh                 Hà Tĩnh            10 vé  18.34276,105.89863     chưa đạt kiểm tra: kết quả 'Công Viên' thiếu từ: nuoc
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ VinWonders Vũ Yên                      Hải Phòng          21 vé  20.87057,106.74929     VinWonders Vũ Yên (trip.com)
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ Học viện cưỡi ngựa Vinpearl Vũ Yên     Hải Phòng           8 vé  20.87321,106.74637     Học viện cưỡi ngựa Vinpearl Vũ Yên (leisure=horse_riding)
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ Vinpearl Golf Hải Phòng                Hải Phòng           1 vé  20.87056,106.73321     Vinpearl Golf Haiphong (leisure=golf_course)
+2026-09-16 09:52:05,445 INFO    crawler.venues ! VinWonders Wave Park & Water Park      Hà Nội             14 vé  20.95647,105.97655     chưa đạt kiểm tra: kết quả 'VinWonders Olympic Swimming Pool_Bể bơi' thiếu từ: wave
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ Aquafield Ocean City                   Hà Nội             13 vé  20.95160,105.97504     Aquafield Ocean City (shop=beauty)
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ Mega Grand World Hà Nội                Hà Nội              6 vé  20.95544,105.97997     Mega Grand World Hà Nội (landuse=retail)
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ VinKE & Vinpearl Aquarium Times City   Hà Nội             10 vé  20.99637,105.86789     Vinpearl Aquarium Times City (tourism=aquarium)
+2026-09-16 09:52:05,445 INFO    crawler.venues ! Show "Đất nước thiên hùng ca"          Hà Nội             33 vé  20.95680,105.97742     chưa đạt kiểm tra: kết quả 'Điểm Vui Chơi Cầu Trượt Nước' thiếu từ: ca dat
+2026-09-16 09:52:05,445 INFO    crawler.venues ~ Công viên Grand Park                   TP. Hồ Chí Minh     9 vé  10.83994,106.84728     Công viên nước Grand Park (leisure=water_park)
+2026-09-16 09:52:05,445 INFO    crawler.venues ✓ Vinpearl Golf Léman                    TP. Hồ Chí Minh     1 vé  10.92530,106.50547     Vinpearl Golf Léman
+2026-09-16 09:52:05,445 INFO    crawler.venues Địa điểm: {'auto': 18, 'review': 4, 'ok (đã duyệt)': 1}. Đã ghi /home/dangkhoi/code/vsf/data-collection/collectors/venues.csv
+2026-09-16 09:52:05,445 WARNING crawler.venues 4 địa điểm có vé nhưng chưa có toạ độ dùng được: Vinpearl Golf Phú Quốc, Công viên nước Hà Tĩnh, VinWonders Wave Park & Water Park, Show "Đất nước thiên hùng ca". Mở venues.csv, xem cột mapUrl/note, điền latitude, longitude đúng rồi đặt status=ok.
+2026-09-16 09:52:55,619 INFO    crawler [agoda_hotels] Giá lấy cho 2026-11-20, 1 đêm, 2 người lớn (VND)
+2026-09-16 09:52:56,721 INFO    crawler.browser [agoda_hotels] Không còn URL nào cần crawl. Trạng thái: {'done': 300}
+2026-09-16 09:52:56,852 INFO    crawler [agoda_hotels] Trạng thái: {'done': 300}
+2026-09-16 09:53:27,232 INFO    crawler.trip [trip_attractions] Nha Trang: 16 điểm tham quan
+2026-09-16 09:53:45,986 WARNING crawler Đã dừng theo yêu cầu. Tiến độ đã lưu – chạy lại cùng lệnh để tiếp tục.
+2026-09-16 10:05:34,403 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 10:05:34,423 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 10:05:34,427 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 10:05:34,435 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 10:05:34,452 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 10:05:36,182 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 10:05:36,914 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 10:08:16,130 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 10:08:16,151 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 10:08:16,155 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 10:08:16,162 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 10:08:16,179 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 10:08:17,910 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 10:08:18,708 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 10:09:13,541 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 10:09:13,560 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 10:09:13,564 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 10:09:13,571 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 10:09:13,586 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 10:09:15,184 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 10:09:15,938 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 11:52:35,145 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 11:52:35,165 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 11:52:35,169 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 11:52:35,177 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 11:52:35,192 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 11:52:36,980 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 11:52:37,677 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 12:03:36,086 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 12:03:36,107 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 12:03:36,110 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 12:03:36,118 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 12:03:36,136 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 12:03:37,941 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 12:03:38,214 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 12:03:38,652 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 12:08:02,574 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 12:08:02,595 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 12:08:02,600 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 12:08:02,607 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 12:08:02,624 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 12:08:04,270 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 12:08:04,513 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 12:08:04,935 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 12:18:18,373 INFO    crawler vinpearl: 25 bản ghi cần bổ sung (price 25, detail 25)
+2026-09-16 12:18:18,376 INFO    crawler.retry_missing Đã sao lưu: data/backups/retry-missing-vinpearl-pil8hsg4
+2026-09-16 12:18:26,869 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=10
+2026-09-16 12:18:29,088 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=11
+2026-09-16 12:18:31,962 INFO    crawler.retry_missing tour:VW02886 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:18:33,641 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=10
+2026-09-16 12:18:35,710 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=11
+2026-09-16 12:18:38,337 INFO    crawler.retry_missing tour:VW02885 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:18:41,050 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=10
+2026-09-16 12:18:43,696 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=11
+2026-09-16 12:18:45,948 INFO    crawler.retry_missing tour:VW02687 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:18:48,348 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=10
+2026-09-16 12:18:50,811 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=11
+2026-09-16 12:18:52,990 INFO    crawler.retry_missing tour:VW02683 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:18:55,419 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=10
+2026-09-16 12:18:57,871 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=11
+2026-09-16 12:19:00,214 INFO    crawler.retry_missing tour:VW02475 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:02,998 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=10
+2026-09-16 12:19:05,260 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=11
+2026-09-16 12:19:07,196 INFO    crawler.retry_missing tour:VW02447 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:09,643 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=10
+2026-09-16 12:19:11,765 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=11
+2026-09-16 12:19:14,157 INFO    crawler.retry_missing tour:VW02446 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:16,822 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=10
+2026-09-16 12:19:19,110 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=11
+2026-09-16 12:19:21,425 INFO    crawler.retry_missing tour:VW02445 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:24,174 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=10
+2026-09-16 12:19:26,045 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=11
+2026-09-16 12:19:28,385 INFO    crawler.retry_missing tour:VW02310 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:30,950 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=10
+2026-09-16 12:19:32,551 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=11
+2026-09-16 12:19:35,026 INFO    crawler.retry_missing tour:VW02309 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:37,838 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=10
+2026-09-16 12:19:39,448 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=11
+2026-09-16 12:19:41,770 INFO    crawler.retry_missing tour:VW02308 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:44,483 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=10
+2026-09-16 12:19:46,511 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=11
+2026-09-16 12:19:49,197 INFO    crawler.retry_missing tour:VW02287 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:51,744 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=10
+2026-09-16 12:19:53,689 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=11
+2026-09-16 12:19:56,036 INFO    crawler.retry_missing tour:VW02277 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:19:58,758 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=10
+2026-09-16 12:20:00,917 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=11
+2026-09-16 12:20:03,388 INFO    crawler.retry_missing tour:VW02171 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:06,773 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=10
+2026-09-16 12:20:08,398 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=11
+2026-09-16 12:20:10,952 INFO    crawler.retry_missing tour:VW02170 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:13,667 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=10
+2026-09-16 12:20:15,609 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=11
+2026-09-16 12:20:18,286 INFO    crawler.retry_missing tour:VW02168 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:20,942 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=10
+2026-09-16 12:20:23,070 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=11
+2026-09-16 12:20:25,179 INFO    crawler.retry_missing tour:VW02063 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:27,886 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=10
+2026-09-16 12:20:30,254 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=11
+2026-09-16 12:20:32,456 INFO    crawler.retry_missing tour:VW02062 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:35,154 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=10
+2026-09-16 12:20:37,111 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=11
+2026-09-16 12:20:39,420 INFO    crawler.retry_missing tour:VW02060 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:41,813 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=10
+2026-09-16 12:20:43,496 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=11
+2026-09-16 12:20:46,213 INFO    crawler.retry_missing tour:VW01656 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:49,390 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=10
+2026-09-16 12:20:51,128 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=11
+2026-09-16 12:20:53,162 INFO    crawler.retry_missing tour:VW01186 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:20:55,551 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=10
+2026-09-16 12:20:57,255 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=11
+2026-09-16 12:20:59,522 INFO    crawler.retry_missing tour:VW01185 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:21:03,213 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=10
+2026-09-16 12:21:04,521 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=11
+2026-09-16 12:21:06,674 INFO    crawler.retry_missing tour:VW01167 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:21:09,252 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=10
+2026-09-16 12:21:11,412 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=11
+2026-09-16 12:21:13,672 INFO    crawler.retry_missing tour:VW01055 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:21:16,376 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=10
+2026-09-16 12:21:18,645 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=11
+2026-09-16 12:21:20,938 INFO    crawler.retry_missing tour:VW00932 vẫn chưa lấy được chi tiết; giữ bản ghi cũ
+2026-09-16 12:21:21,086 INFO    crawler retry-missing vinpearl: {'selected': 25, 'attempted': 25, 'improved': 0, 'failed': 25}
+2026-09-16 12:21:37,098 INFO    crawler agoda_hotels: 29 bản ghi cần bổ sung (price 26, coordinates 3)
+2026-09-16 12:21:37,120 INFO    crawler.retry_missing Đã sao lưu: data/backups/retry-missing-agoda_hotels-lm8bowp5
+2026-09-16 12:21:37,938 INFO    crawler.browser [agoda_hotels] Bắt đầu 29 URL · 1 worker · tối thiểu 5.0s/request
+2026-09-16 12:22:21,179 INFO    crawler [agoda_hotels] 2/29 xong · 0 lỗi · 0 bỏ qua · 2.78 trang/phút · còn ~9m
+2026-09-16 12:23:11,670 INFO    crawler [agoda_hotels] 5/29 xong · 0 lỗi · 0 bỏ qua · 3.20 trang/phút · còn ~7m
+2026-09-16 12:23:55,871 INFO    crawler [agoda_hotels] 7/29 xong · 0 lỗi · 0 bỏ qua · 3.04 trang/phút · còn ~7m
+2026-09-16 12:24:45,932 INFO    crawler [agoda_hotels] 10/29 xong · 0 lỗi · 0 bỏ qua · 3.19 trang/phút · còn ~5m
+2026-09-16 12:25:36,260 INFO    crawler [agoda_hotels] 13/29 xong · 0 lỗi · 0 bỏ qua · 3.27 trang/phút · còn ~4m
+2026-09-16 12:26:18,990 INFO    crawler [agoda_hotels] 15/29 xong · 0 lỗi · 0 bỏ qua · 3.20 trang/phút · còn ~4m
+2026-09-16 12:27:02,427 INFO    crawler [agoda_hotels] 17/29 xong · 0 lỗi · 0 bỏ qua · 3.14 trang/phút · còn ~3m
+2026-09-16 12:27:45,302 INFO    crawler [agoda_hotels] 19/29 xong · 0 lỗi · 0 bỏ qua · 3.10 trang/phút · còn ~3m
+2026-09-16 12:28:28,547 INFO    crawler [agoda_hotels] 21/29 xong · 0 lỗi · 0 bỏ qua · 3.07 trang/phút · còn ~2m
+2026-09-16 12:29:11,168 INFO    crawler [agoda_hotels] 23/29 xong · 0 lỗi · 0 bỏ qua · 3.04 trang/phút · còn ~1m
+2026-09-16 12:29:54,964 INFO    crawler [agoda_hotels] 25/29 xong · 0 lỗi · 0 bỏ qua · 3.02 trang/phút · còn ~1m
+2026-09-16 12:30:38,216 INFO    crawler [agoda_hotels] 27/29 xong · 0 lỗi · 0 bỏ qua · 3.00 trang/phút · còn ~0m
+2026-09-16 12:30:55,180 INFO    crawler [agoda_hotels] 29/29 xong · 0 lỗi · 0 bỏ qua · 3.12 trang/phút · còn ~0m
+2026-09-16 12:30:55,345 INFO    crawler retry-missing agoda_hotels: {'done': 300, 'selected': 29, 'improved': 4}
+2026-09-16 12:31:31,850 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 12:31:31,870 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 12:31:31,874 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 12:31:31,881 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 12:31:31,897 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 12:31:33,464 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 12:31:33,703 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 12:31:34,129 INFO    normalise Đã ghi 2273 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 12:36:07,959 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 12:36:07,978 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 12:36:07,981 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 12:36:07,989 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 12:36:08,004 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 12:36:09,591 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 12:36:09,838 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 12:36:10,218 INFO    normalise Đã ghi 2225 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 13:29:13,964 INFO    crawler.trip [trip_attractions] Parse lại 221 trang từ cache → data/interim/trip_attractions.jsonl
+2026-09-16 13:29:14,189 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 13:29:14,212 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 13:29:14,216 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 13:29:14,224 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 13:29:14,242 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 13:29:16,188 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 13:29:16,440 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 13:29:16,864 INFO    normalise Đã ghi 2225 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 13:49:20,556 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 13:49:20,577 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 13:49:20,581 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 13:49:20,589 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 13:49:20,604 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 13:49:22,210 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 13:49:22,456 INFO    normalise Chuẩn hoá thuộc tính: {'tỉnh/thành đưa về tên chuẩn': 316, 'bỏ giá trị không phải tỉnh': 84, 'diện tích phòng về một kiểu số': 115}
+2026-09-16 13:49:22,457 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 13:49:22,845 INFO    normalise Đã ghi 2216 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)
+2026-09-16 13:55:57,590 INFO    normalise Đọc agoda_hotels.jsonl: 300 bản ghi
+2026-09-16 13:55:57,614 INFO    normalise Đọc booking_hotels.jsonl: 317 bản ghi
+2026-09-16 13:55:57,619 INFO    normalise Đọc trip_attractions.jsonl: 221 bản ghi
+2026-09-16 13:55:57,628 INFO    normalise Đọc trip_flights.jsonl: 61 bản ghi
+2026-09-16 13:55:57,647 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-16 13:55:59,622 INFO    normalise Khách sạn: 632 bản ghi → 583 sau khi gộp
+2026-09-16 13:55:59,903 INFO    normalise Chuẩn hoá thuộc tính: {'tỉnh/thành đưa về tên chuẩn': 316, 'bỏ giá trị không phải tỉnh': 84, 'diện tích phòng về một kiểu số': 115}
+2026-09-16 13:55:59,904 INFO    normalise Dựng mô tả tiếng Việt từ thuộc tính cho 29 sản phẩm (bản gốc giữ ở descriptionOriginal)
+2026-09-16 13:56:00,382 INFO    normalise Đã ghi 2216 sản phẩm → data/products.jsonl (+ products.csv, dedup_report.csv, quality_review.csv, stats.md, map/)

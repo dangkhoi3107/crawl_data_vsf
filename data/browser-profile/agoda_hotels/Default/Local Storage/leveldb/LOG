@@ -1,0 +1,6 @@
+2026/09/16-12:21:37.710 4b50 Reusing MANIFEST /home/dangkhoi/code/vsf/data-collection/data/browser-profile/agoda_hotels/Default/Local Storage/leveldb/MANIFEST-000001
+2026/09/16-12:21:37.714 4b50 Recovering log #19
+2026/09/16-12:21:37.714 4b50 Reusing old log /home/dangkhoi/code/vsf/data-collection/data/browser-profile/agoda_hotels/Default/Local Storage/leveldb/000019.log 
+2026/09/16-12:27:10.286 4b50 Level-0 table #23: started
+2026/09/16-12:27:10.289 4b50 Level-0 table #23: 15678 bytes OK
+2026/09/16-12:27:10.296 4b50 Delete type=0 #19

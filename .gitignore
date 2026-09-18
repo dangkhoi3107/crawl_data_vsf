@@ -1,14 +1,4 @@
-data/*
-!data/BANGIAO.md
-!data/products.jsonl
-!data/products.csv
-!data/stats.md
-!data/quality_review.csv
-!data/dedup_report.csv
 !data/map/
 .venv/
 __pycache__/
 *.pyc
-!data/template.json
-!data/SCHEMA.md
-!data/sample/

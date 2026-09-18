@@ -1,0 +1,7 @@
+2026/09/15-23:05:18.852 6c33 Creating DB /home/dangkhoi/code/vsf/data-collection/data/browser-profile/booking_hotels/Default/Local Storage/leveldb since it was missing.
+2026/09/15-23:05:18.862 6c33 Reusing MANIFEST /home/dangkhoi/code/vsf/data-collection/data/browser-profile/booking_hotels/Default/Local Storage/leveldb/MANIFEST-000001
+2026/09/15-23:06:18.866 6c3b Level-0 table #5: started
+2026/09/15-23:06:18.868 6c3b Level-0 table #5: 44150 bytes OK
+2026/09/15-23:06:18.870 6c3b Delete type=0 #3
+2026/09/15-23:33:17.456 6c33 Level-0 table #7: started
+2026/09/15-23:33:17.460 6c33 Level-0 table #7: 64599 bytes OK

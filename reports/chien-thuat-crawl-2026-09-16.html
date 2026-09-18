@@ -1,0 +1,1069 @@
+<title>Chiến thuật crawl V-OTA</title>
+<meta name="description" content="Báo cáo chiến thuật crawl và làm sạch catalog du lịch V-OTA, 15–16/09/2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F2F5F6; --surface:#FFFFFF; --sunken:#E7EEF0;
+  --ink:#11232A; --ink-2:#33464E; --muted:#5A6D75;
+  --rule:#D4DEE1; --rule-strong:#A9BBC1;
+  --accent:#0B6973; --accent-soft:#DCEDEE;
+  --ok:#2B7247; --ok-soft:#DFF0E5;
+  --warn:#8A5B00; --warn-soft:#F5EBD3;
+  --bad:#A93427; --bad-soft:#F7E1DD;
+  --sans:"Be Vietnam Pro","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D161A; --surface:#132026; --sunken:#0A1216;
+    --ink:#DCE8EB; --ink-2:#B7C8CD; --muted:#8CA1A8;
+    --rule:#24363D; --rule-strong:#3B525A;
+    --accent:#56B9C1; --accent-soft:#16343A;
+    --ok:#74C793; --ok-soft:#15301F;
+    --warn:#E3AE4A; --warn-soft:#352912;
+    --bad:#F08A7C; --bad-soft:#3A1B17;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D161A; --surface:#132026; --sunken:#0A1216;
+  --ink:#DCE8EB; --ink-2:#B7C8CD; --muted:#8CA1A8;
+  --rule:#24363D; --rule-strong:#3B525A;
+  --accent:#56B9C1; --accent-soft:#16343A;
+  --ok:#74C793; --ok-soft:#15301F;
+  --warn:#E3AE4A; --warn-soft:#352912;
+  --bad:#F08A7C; --bad-soft:#3A1B17;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 15.5px/1.65 var(--sans);padding-inline:20px;padding-block:0 72px}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+code{font-family:var(--mono);font-size:.86em;background:var(--sunken);color:var(--ink);padding:.08em .38em;border-radius:4px;overflow-wrap:anywhere}
+strong,b{font-weight:600}
+.wrap{max-width:1220px;margin-inline:auto}
+
+.masthead{padding-block:52px 34px;border-bottom:1px solid var(--rule);display:grid;gap:14px}
+.eyebrow{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{font-size:clamp(28px,4.2vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:0;max-width:24ch;text-wrap:balance}
+.lede{font-size:17.5px;line-height:1.6;color:var(--ink-2);max-width:66ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:4px 0 0;padding:0;list-style:none;font:400 12.5px/1.5 var(--mono);color:var(--muted)}
+.meta b{font-weight:500;color:var(--ink-2)}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr);column-gap:56px}
+@media (min-width:1100px){.layout{grid-template-columns:196px minmax(0,1fr)}}
+.toc{padding-block:26px 0}
+.toc p{font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:2px 18px}
+.toc a{color:var(--ink-2);text-decoration:none;font-size:14px;display:block;padding:4px 0}
+.toc a:hover{color:var(--accent)}
+@media (min-width:1100px){
+  .toc{position:sticky;top:0;align-self:start;padding-block:46px 24px;max-height:100vh;overflow:auto}
+  .toc ol{flex-direction:column;gap:0}
+  .toc a{padding:6px 0 6px 12px;border-left:1px solid var(--rule)}
+  .toc a:hover{border-left-color:var(--accent)}
+}
+main{min-width:0;max-width:940px}
+.sec{padding-block:46px;border-top:1px solid var(--rule)}
+.sec:first-child{border-top:0}
+.flow>*{margin-block:0}
+.flow>*+*{margin-block-start:1em}
+.flow>h3{margin-block-start:2.3em}
+.flow>h2+*{margin-block-start:.8em}
+h2{font-size:27px;line-height:1.25;letter-spacing:-.015em;font-weight:700;text-wrap:balance}
+h3{font-size:18.5px;line-height:1.35;font-weight:600;letter-spacing:-.005em;text-wrap:balance}
+p,li{max-width:70ch}
+.flow ul{padding-left:1.2em}
+.flow ul li+li{margin-top:.45em}
+.note{font-size:14px;color:var(--muted)}
+
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5}
+table.wide{min-width:760px}
+th{font-weight:600;font-size:12.5px;color:var(--muted);text-align:left;padding:10px 14px;background:var(--sunken);white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--rule);vertical-align:top}
+td li,td p{max-width:none}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{font-weight:600;background:var(--sunken)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.stat{background:var(--surface);padding:16px 18px;display:grid;gap:4px;align-content:start}
+.stat b{font-size:30px;line-height:1.1;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted);line-height:1.45}
+
+.decisions{list-style:none;padding:0!important;display:grid;gap:14px}
+.decisions li{padding-left:22px;position:relative;max-width:74ch;margin:0!important}
+.decisions li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;background:var(--accent);border-radius:2px}
+
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--sans);padding:5px 9px 5px 8px;border-radius:999px;white-space:nowrap;vertical-align:middle}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.s-done{color:var(--ok);background:var(--ok-soft)}
+.s-part{color:var(--warn);background:var(--warn-soft)}
+.s-part::before{background:transparent;box-shadow:inset 0 0 0 2px currentColor}
+.s-open{color:var(--bad);background:var(--bad-soft)}
+.s-open::before{border-radius:1px;width:6px;height:6px;transform:rotate(45deg)}
+
+.sbar{display:flex;gap:3px;height:12px;border-radius:6px;overflow:hidden;max-width:620px}
+.sbar span{display:block;height:100%}
+.b-done{background:var(--ok)} .b-part{background:var(--warn)} .b-open{background:var(--bad)}
+.slegend{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;padding:0!important;font-size:14px}
+.slegend li{display:flex;align-items:center;gap:8px;margin:0!important}
+.slegend b{font-variant-numeric:tabular-nums}
+
+figure{margin:0}
+.dgwrap{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;padding:14px 12px;background:var(--ground)}
+.dg{display:block;width:100%;min-width:900px;height:auto}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:80ch}
+.dg text{font-family:var(--sans);fill:var(--ink)}
+.dg .t{font-size:14px;font-weight:600}
+.dg .s{font-size:12.5px;fill:var(--muted)}
+.dg .st{font-size:12px;fill:var(--ink-2)}
+.dg .m{font-family:var(--mono);font-size:13px;font-weight:600}
+.dg .mm{font-family:var(--mono);font-size:11.5px;font-weight:500;fill:var(--ink-2)}
+.dg .n{font-family:var(--mono);font-size:12px;fill:var(--muted)}
+.dg .l{font-size:12.5px;fill:var(--muted)}
+.dg .la{font-size:12.5px;fill:var(--accent);font-weight:500}
+.dg .box{fill:var(--surface);stroke:var(--rule-strong);stroke-width:1.2}
+.dg .key{stroke:var(--accent);stroke-width:1.8}
+.dg .manual{fill:var(--sunken)}
+.dg .ln{fill:none;stroke:var(--ink-2);stroke-width:1.3}
+.dg .loop{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:6 4}
+.dg .hd{fill:var(--ink-2)}
+.dg .hda{fill:var(--accent)}
+.dg .rl{stroke:var(--rule);stroke-width:1}
+
+.tl-legend{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;padding:0!important;font-size:13.5px;color:var(--muted)}
+.tl-legend li{display:flex;align-items:center;gap:8px;margin:0!important}
+.dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--muted);background:var(--ground);flex:none}
+.dot.k-norm{background:var(--accent);border-color:var(--accent)}
+.dot.k-check{background:var(--warn-soft);border-color:var(--warn);border-radius:2px;transform:rotate(45deg);width:10px;height:10px}
+.tl-day{font:600 12.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tl{list-style:none;padding:0!important}
+.tl li{display:grid;grid-template-columns:104px 20px minmax(0,1fr) 86px;column-gap:14px;max-width:none;margin:0!important}
+.tl time{font:500 13px/1.5 var(--mono);color:var(--muted);padding-block:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl .rail{position:relative}
+.tl .rail::before{content:"";position:absolute;left:9px;top:0;bottom:0;width:1px;background:var(--rule-strong)}
+.tl li:first-child .rail::before{top:22px}
+.tl li:last-child .rail::before{bottom:auto;height:22px}
+.tl .rail::after{content:"";position:absolute;left:4px;top:18px;width:11px;height:11px;border-radius:50%;background:var(--ground);border:2px solid var(--muted);box-sizing:border-box}
+.tl .k-norm .rail::after{background:var(--accent);border-color:var(--accent)}
+.tl .k-check .rail::after{background:var(--warn-soft);border-color:var(--warn);border-radius:2px;transform:rotate(45deg);width:10px;height:10px;left:5px}
+.tl .body{padding-block:12px;min-width:0}
+.tl .body strong{display:block;font-size:15px;line-height:1.45}
+.tl .body p{margin:2px 0 0;font-size:14.5px;color:var(--ink-2);max-width:66ch}
+.tl .count{padding-block:12px;text-align:right}
+.tl .count span{display:inline-block;font:500 12.5px/1 var(--mono);padding:5px 8px;border:1px solid var(--rule-strong);border-radius:999px;background:var(--surface);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:680px){
+  .tl li{grid-template-columns:20px minmax(0,1fr);column-gap:12px}
+  .tl .rail{grid-column:1;grid-row:1/span 3}
+  .tl time{grid-column:2;padding-block:12px 0}
+  .tl .body{grid-column:2;padding-block:2px 0}
+  .tl .count{grid-column:2;text-align:left;padding-block:6px 12px}
+}
+
+.steps{list-style:none;padding:0!important;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding-block:12px;border-top:1px solid var(--rule);max-width:none;margin:0!important}
+.steps li:first-child{border-top:0}
+.steps li::before{content:counter(s,decimal-leading-zero);font:500 13px/1.7 var(--mono);color:var(--accent)}
+.steps p{margin:2px 0 0;color:var(--ink-2);font-size:14.5px;max-width:70ch}
+
+.filters{display:grid;gap:10px;padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:8px}
+.frow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.frow>span{font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:84px}
+.chip{font:500 13.5px/1 var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule-strong);border-radius:999px;padding:7px 11px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.chip .n{font:500 12px/1 var(--mono);color:var(--muted)}
+.chip:hover{border-color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.chip[aria-pressed="true"] .n{color:inherit;opacity:.75}
+#issue-count{font:400 13px/1.4 var(--mono);color:var(--muted)}
+.igroup{display:grid}
+.igroup>h3{margin:28px 0 4px}
+.issue{padding-block:18px;border-top:1px solid var(--rule);display:grid;gap:10px}
+.issue header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px}
+.issue h4{margin:0;font-size:16.5px;line-height:1.4;font-weight:600;flex:1 1 320px;text-wrap:balance}
+.issue dl{display:grid;grid-template-columns:104px minmax(0,1fr);gap:7px 16px;margin:0}
+.issue dt{font-size:13px;color:var(--muted);font-weight:500;padding-top:2px}
+.issue dd{margin:0;font-size:14.5px;line-height:1.6;max-width:72ch}
+@media (max-width:620px){
+  .issue dl{grid-template-columns:minmax(0,1fr);gap:1px}
+  .issue dd{margin-bottom:8px}
+}
+
+pre{margin:0;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;overflow-x:auto;font:400 13px/1.7 var(--mono);color:var(--ink)}
+pre code{background:none;padding:0;font-size:inherit;overflow-wrap:normal}
+pre .c{color:var(--muted)}
+.foot{margin-top:8px;padding-top:20px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">V-OTA · Mảng Data · Tuần 1</p>
+  <h1>Chiến thuật crawl và làm sạch catalog V-OTA</h1>
+  <p class="lede">Báo cáo toàn bộ luồng thu thập và làm sạch catalog du lịch trong hai ngày 15–16/09/2026: dữ liệu lấy từ đâu và bằng cách nào, đã gặp những vấn đề gì, xử lý ra sao, và còn lại gì. Mọi số liệu được đọc trực tiếp từ log, <code>crawl_state.sqlite</code> và <code>products.jsonl</code>.</p>
+  <ul class="meta">
+    <li><b>Dữ liệu tới</b> 16/09 13:56</li>
+    <li><b>Catalog</b> 2.216 SP (chưa commit)</li>
+    <li><b>HEAD</b> bf35ffc · 2.225 SP</li>
+    <li><b>Đối chiếu</b> handbook §3</li>
+  </ul>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Mục lục">
+  <p>Nội dung</p>
+  <ol>
+    <li><a href="#tom-tat">Tóm tắt</a></li>
+    <li><a href="#luong">Luồng xử lý</a></li>
+    <li><a href="#crawl">Chiến thuật crawl</a></li>
+    <li><a href="#dong-thoi-gian">Dòng thời gian</a></li>
+    <li><a href="#lam-sach">Làm sạch dữ liệu</a></li>
+    <li><a href="#van-de">Vấn đề và cách xử lý</a></li>
+    <li><a href="#con-ton">Còn tồn</a></li>
+    <li><a href="#phu-luc">Phụ lục kỹ thuật</a></li>
+  </ol>
+</nav>
+
+<main>
+<section class="sec flow" id="tom-tat">
+  <h2>Tóm tắt</h2>
+  <p>Catalog hiện có <strong>2.216 sản phẩm trên 15 điểm đến</strong> theo kế hoạch, cộng thêm 23 sản phẩm Vinpearl ở 5 điểm ngoài kế hoạch. Dữ liệu lấy từ 4 nguồn và có đủ các loại hotel, flight, attraction, combo, golf, nên catalog đã đạt các mốc số lượng của handbook §3. Crawl chạy ổn định: cả 899 URL trong hàng đợi đều hoàn tất, riêng booking.com và agoda.com không lỗi URL nào. Phần tốn công nhất là làm sạch: nguồn trả điều khoản lẫn vào mô tả, toạ độ và tỉnh bị sai, nhiều vé không có giá, và một số cơ sở bị xếp nhầm danh mục.</p>
+  <p><strong>Chưa nên báo là đã nghiệm thu.</strong> Còn 7 vấn đề chưa sửa. Nặng nhất là 140 sản phẩm thiếu giá đang bị gắn nhãn “không bán vé” mà không có căn cứ. Bản 2.216 sản phẩm cũng chưa được commit. Lúc 16:19, chạy lại 14 test offline trên code hiện tại thì đều đạt, nhưng các test này không bắt được những lỗi dữ liệu trên.</p>
+
+  <div class="stats">
+    <div class="stat"><b>2.216</b><span>sản phẩm, dựng từ 1.291 bản ghi nguồn</span></div>
+    <div class="stat"><b>15 + 5</b><span>điểm đến theo kế hoạch + ngoài kế hoạch</span></div>
+    <div class="stat"><b>899/899</b><span>URL crawl xong; 0 lỗi ở booking.com và agoda.com</span></div>
+    <div class="stat"><b>169</b><span>bản ghi đã gộp hoặc loại, đều được ghi lý do</span></div>
+  </div>
+
+  <h3>Đối chiếu handbook §3</h3>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Tiêu chí</th><th>Thực tế</th><th>Đánh giá</th></tr></thead>
+      <tbody>
+        <tr><td>2.000–5.000 sản phẩm</td><td>2.216</td><td><span class="pill s-done">Đạt</span></td></tr>
+        <tr><td>10–15 điểm đến, đủ dày</td><td>15 điểm đến; ít nhất là Hạ Long với 67 sản phẩm</td><td><span class="pill s-done">Đạt</span></td></tr>
+        <tr><td>Đủ hotel, flight, attraction, combo</td><td>Đủ cả bốn loại, thêm golf. Hạ Long, Hội An, Hà Tĩnh, Sa Pa, Phan Thiết không có vé máy bay</td><td><span class="pill s-part">Lưu ý</span></td></tr>
+        <tr><td>Tên, mô tả tiếng Việt dùng được cho embedding</td><td>100% theo ước lượng ký tự có dấu; 57,5% mô tả là tự sinh</td><td><span class="pill s-part">Lưu ý</span></td></tr>
+        <tr><td>Có giá</td><td>2.076 sản phẩm (93,7%). 140 sản phẩm còn lại bị gắn “không bán vé” khi chưa có căn cứ</td><td><span class="pill s-open">Chưa chắc</span></td></tr>
+        <tr><td>Toạ độ (nếu có)</td><td>100%; trong đó 297 là vị trí khu vui chơi, 244 là sân bay đến</td><td><span class="pill s-done">Đạt</span></td></tr>
+        <tr><td>Vinpearl ưu tiên, khử trùng đa nguồn</td><td>Vinpearl thắng tên và mô tả, OTA thắng giá; 53 cặp đã gộp</td><td><span class="pill s-done">Đạt</span></td></tr>
+        <tr><td>Chỉ dữ liệu sản phẩm, cache raw</td><td>Review và tên người đánh giá bị xoá trước khi ghi đĩa; cache khoảng 43 MB</td><td><span class="pill s-done">Đạt</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Chiến thuật trong sáu quyết định</h3>
+  <ul class="decisions">
+    <li><strong>Crawl theo kế hoạch, không crawl theo sitemap.</strong> 15 điểm đến trong <code>plan.py</code>, mỗi điểm đến có ngân sách riêng. Bỏ ý định crawl khoảng 34.000 khách sạn trên booking.com, vì ở tốc độ đo được nhanh nhất, riêng 33.665 URL còn lại đã tốn khoảng 34 giờ. Cách cũ vẫn giữ dưới cờ <code>--all-vietnam</code>.</li>
+    <li><strong>Vinpearl quyết định nội dung, OTA quyết định giá.</strong> Tên và mô tả lấy theo thứ tự Vinpearl → booking.com → agoda.com. Giá lấy theo thứ tự booking.com → agoda.com → Vinpearl; giá Vinpearl vẫn được giữ trong <code>vinpearlPrice</code>.</li>
+    <li><strong>Ưu tiên dữ liệu có cấu trúc.</strong> Lấy từ API Vinpearl, JSON-LD và <code>__NEXT_DATA__</code> của trip.com, JSON-LD của booking.com. Chỉ parse HTML khi các nguồn này thiếu.</li>
+    <li><strong>Lưu thô trước, parse sau.</strong> Mọi response được ghi vào <code>data/raw/</code> sau khi đã xoá review. Khi parser sai, chỉ cần <code>reparse</code> từ cache mà không tải lại web. Lỗi mô tả agoda được sửa theo cách này, không gửi request nào.</li>
+    <li><strong>Crawl lịch sự, không lách chặn.</strong> Tuân thủ robots.txt, mỗi host tối thiểu 4 giây một request, tự dừng khi bị chặn liên tiếp. Không dùng stealth, proxy hay giải CAPTCHA; khi cần, chạy Chromium có cửa sổ để người thật tự bấm xác minh.</li>
+    <li><strong>Mọi quyết định sửa tay nằm trong CSV kèm bằng chứng.</strong> <code>venues.csv</code>, <code>destination_overrides.csv</code>, <code>location_overrides.csv</code>, <code>excluded_products.csv</code>. <code>normalise.py</code> đọc lại các file này mỗi lần chạy, và máy không ghi đè những dòng đã duyệt.</li>
+  </ul>
+
+  <h3>37 vấn đề đã gặp</h3>
+  <div class="sbar" role="img" aria-label="37 vấn đề: 21 đã xử lý, 9 giảm thiểu, 7 còn tồn">
+    <span class="b-done" style="flex:21"></span><span class="b-part" style="flex:9"></span><span class="b-open" style="flex:7"></span>
+  </div>
+  <ul class="slegend">
+    <li><span class="pill s-done">Đã xử lý</span><b>21</b></li>
+    <li><span class="pill s-part">Giảm thiểu</span><b>9</b></li>
+    <li><span class="pill s-open">Còn tồn</span><b>7</b></li>
+  </ul>
+  <p class="note">Chi tiết từng vấn đề ở mục <a href="#van-de">Vấn đề và cách xử lý</a>; 7 việc còn tồn và hướng sửa ở mục <a href="#con-ton">Còn tồn</a>.</p>
+</section>
+
+<section class="sec flow" id="luong">
+  <h2>Luồng xử lý</h2>
+  <p>Crawl và làm sạch là hai bước tách rời, nối với nhau qua <code>data/interim/</code>. Bước crawl chỉ ghi bản ghi nguồn đã parse. Mọi quy tắc gộp, loại và sửa đều nằm trong <code>normalise.py</code>, nên chạy lại toàn bộ bước làm sạch chỉ mất khoảng 3 giây.</p>
+  <figure>
+    <div class="dgwrap">
+      <svg class="dg" viewBox="0 0 1080 480" role="img" aria-label="Luồng dữ liệu: plan.py chia 15 điểm đến cho 4 nguồn; response được lưu thô vào data/raw rồi parse thành interim; normalise.py đọc interim cùng 4 file CSV soát tay và xuất products.jsonl. Có hai vòng sửa lỗi không phải crawl lại: reparse đọc lại cache, retry-missing chỉ tải lại bản ghi thiếu.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hd" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hda" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+
+        <!-- vòng sửa lỗi -->
+        <path class="loop" d="M800 110 V24 H304 V42" marker-end="url(#aha)"/>
+        <text class="la" x="552" y="17" text-anchor="middle">retry-missing · chỉ tải lại bản ghi thiếu giá, toạ độ</text>
+        <path class="loop" d="M564 100 V80 H762 V108" marker-end="url(#aha)"/>
+        <text class="la" x="663" y="73" text-anchor="middle">reparse · không tải lại web</text>
+
+        <!-- kế hoạch -->
+        <rect class="box" x="12" y="110" width="112" height="60" rx="6"/>
+        <text class="m" x="26" y="135">plan.py</text>
+        <text class="s" x="26" y="155">15 điểm đến</text>
+        <path class="ln" d="M124 140 H190 M190 65 V215"/>
+        <text class="l" x="157" y="132" text-anchor="middle">điểm đến</text>
+        <path class="ln" d="M190 65 H212" marker-end="url(#ah)"/>
+        <path class="ln" d="M190 115 H212" marker-end="url(#ah)"/>
+        <path class="ln" d="M190 165 H212" marker-end="url(#ah)"/>
+        <path class="ln" d="M190 215 H212" marker-end="url(#ah)"/>
+
+        <!-- nguồn -->
+        <rect class="box" x="214" y="44" width="180" height="42" rx="6"/>
+        <text class="t" x="228" y="62">Vinpearl API</text><text class="n" x="380" y="62" text-anchor="end">392</text>
+        <text class="s" x="228" y="78">HTTP + Chromium</text>
+        <rect class="box" x="214" y="94" width="180" height="42" rx="6"/>
+        <text class="t" x="228" y="112">trip.com</text><text class="n" x="380" y="112" text-anchor="end">282</text>
+        <text class="s" x="228" y="128">HTTP, đọc robots.txt</text>
+        <rect class="box" x="214" y="144" width="180" height="42" rx="6"/>
+        <text class="t" x="228" y="162">booking.com</text><text class="n" x="380" y="162" text-anchor="end">317</text>
+        <text class="s" x="228" y="178">Chromium có cửa sổ</text>
+        <rect class="box" x="214" y="194" width="180" height="42" rx="6"/>
+        <text class="t" x="228" y="212">agoda.com</text><text class="n" x="380" y="212" text-anchor="end">300</text>
+        <text class="s" x="228" y="228">Chromium, tắt --fast</text>
+
+        <!-- hàng đợi -->
+        <path class="ln" d="M304 238 V260" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text class="l" x="314" y="253">hàng đợi URL</text>
+        <rect class="box" x="214" y="262" width="180" height="52" rx="6"/>
+        <text class="m" x="228" y="284">crawl_state.sqlite</text>
+        <text class="s" x="228" y="302">899 URL · resume</text>
+
+        <!-- cache → interim -->
+        <path class="ln" d="M394 65 H424 M394 115 H424 M394 165 H424 M394 215 H424 M424 65 V215"/>
+        <path class="ln" d="M424 140 H482" marker-end="url(#ah)"/>
+        <text class="l" x="453" y="132" text-anchor="middle">lưu thô</text>
+        <rect class="box key" x="484" y="100" width="160" height="80" rx="6"/>
+        <text class="m" x="498" y="124">data/raw/</text>
+        <text class="s" x="498" y="144">HTML, JSON ≈ 43 MB</text>
+        <text class="s" x="498" y="162">đã xoá review</text>
+        <path class="ln" d="M644 140 H698" marker-end="url(#ah)"/>
+        <text class="l" x="671" y="132" text-anchor="middle">parse</text>
+        <rect class="box" x="700" y="110" width="124" height="60" rx="6"/>
+        <text class="m" x="714" y="135">interim/</text>
+        <text class="s" x="714" y="155">1.291 bản ghi</text>
+
+        <!-- normalise -->
+        <path class="ln" d="M824 140 H866" marker-end="url(#ah)"/>
+        <text class="l" x="845" y="132" text-anchor="middle">đọc</text>
+        <rect class="box" x="868" y="44" width="196" height="270" rx="6"/>
+        <text class="m" x="882" y="68">normalise.py</text>
+        <line class="rl" x1="868" y1="80" x2="1064" y2="80"/>
+        <text class="n" x="882" y="102">1</text><text class="st" x="900" y="102">dựng Product 13 trường</text>
+        <text class="n" x="882" y="128">2</text><text class="st" x="900" y="128">sửa điểm đến, toạ độ</text>
+        <text class="n" x="882" y="154">3</text><text class="st" x="900" y="154">gộp khách sạn trùng</text>
+        <text class="n" x="882" y="180">4</text><text class="st" x="900" y="180">gắn địa điểm cho vé</text>
+        <text class="n" x="882" y="206">5</text><text class="st" x="900" y="206">loại soát tay, thiếu giá</text>
+        <text class="n" x="882" y="232">6</text><text class="st" x="900" y="232">lọc theo kế hoạch</text>
+        <text class="n" x="882" y="258">7</text><text class="st" x="900" y="258">chuẩn hoá thuộc tính</text>
+        <text class="n" x="882" y="284">8</text><text class="st" x="900" y="284">gộp giá thành viên</text>
+
+        <!-- toạ độ địa điểm dùng vé -->
+        <path class="ln" d="M746 170 V340 H304 V354" marker-end="url(#ah)"/>
+        <text class="l" x="525" y="333" text-anchor="middle">nhà cung cấp vé, POI</text>
+        <rect class="box" x="214" y="356" width="180" height="52" rx="6"/>
+        <text class="m" x="228" y="378">crawl.py venues</text>
+        <text class="s" x="228" y="397">trip.com → OSM Photon</text>
+        <path class="ln" d="M394 382 H482" marker-end="url(#ah)"/>
+        <text class="l" x="438" y="374" text-anchor="middle">auto/review</text>
+
+        <!-- CSV soát tay -->
+        <rect class="box manual" x="484" y="350" width="358" height="112" rx="6"/>
+        <text class="t" x="498" y="373">CSV soát tay</text>
+        <text class="s" x="828" y="373" text-anchor="end">dòng ok không bị ghi đè</text>
+        <text class="mm" x="498" y="399">venues.csv</text><text class="s" x="498" y="415">23 địa điểm dùng vé</text>
+        <text class="mm" x="682" y="399">location_overrides.csv</text><text class="s" x="682" y="415">3 toạ độ khách sạn</text>
+        <text class="mm" x="498" y="437">destination_overrides.csv</text><text class="s" x="498" y="453">14 điểm đến</text>
+        <text class="mm" x="682" y="437">excluded_products.csv</text><text class="s" x="682" y="453">10 bản ghi bị loại</text>
+        <path class="ln" d="M770 350 V300 H866" marker-end="url(#ah)"/>
+        <text class="l" x="818" y="293" text-anchor="middle">đọc mỗi lần</text>
+
+        <!-- đầu ra -->
+        <path class="ln" d="M966 314 V348" marker-end="url(#ah)"/>
+        <text class="l" x="974" y="336">ghi</text>
+        <rect class="box" x="868" y="350" width="196" height="112" rx="6"/>
+        <text class="m" x="882" y="373">products.jsonl</text>
+        <text class="s" x="882" y="390">2.216 sản phẩm</text>
+        <line class="rl" x1="868" y1="400" x2="1064" y2="400"/>
+        <text class="mm" x="882" y="419">stats.md · map/</text>
+        <text class="mm" x="882" y="436">quality_review.csv</text>
+        <text class="mm" x="882" y="453">dedup_report.csv</text>
+      </svg>
+    </div>
+    <figcaption>Đường liền là luồng chính; con số cạnh mỗi nguồn là số bản ghi nguồn. Hai đường nét đứt là hai vòng sửa lỗi không phải crawl lại từ đầu: <code>reparse</code> đọc lại cache, còn <code>retry-missing</code> chỉ tải lại những bản ghi thiếu giá hoặc toạ độ. Khối nền xám là các quyết định do người soát tay.</figcaption>
+  </figure>
+</section>
+
+<section class="sec flow" id="crawl">
+  <h2>Chiến thuật crawl</h2>
+  <p>Handbook §3 yêu cầu 2.000–5.000 sản phẩm thật trên 10–15 điểm đến. Kế hoạch chọn trước các điểm đến có Vinpearl, sau đó thêm các điểm du lịch lớn. Slug và mã của từng nguồn cho mỗi điểm đến được kiểm tra tay và lưu trong <code>collectors/plan.py</code>.</p>
+
+  <h3>Phạm vi và ngân sách</h3>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Nguồn</th><th>Ngân sách mỗi điểm đến</th><th>Thực tế tìm được</th><th class="num">URL / bản ghi</th></tr></thead>
+      <tbody>
+        <tr><td>Vinpearl</td><td>Lấy toàn bộ</td><td>15 khách sạn, 116 hạng phòng, 377 vé, tour, combo, golf</td><td class="num">392</td></tr>
+        <tr><td>booking.com</td><td>30 khách sạn phổ biến; tối đa 3 hạng phòng mỗi khách sạn</td><td>Trang tìm kiếm trả 20–21 khách sạn mỗi điểm đến, cộng 23 URL thương hiệu Vinpearl từ sitemap</td><td class="num">317</td></tr>
+        <tr><td>agoda.com</td><td>20 khách sạn</td><td>20 khách sạn mỗi điểm đến; khách sạn trùng với booking.com được gộp</td><td class="num">300</td></tr>
+        <tr><td>trip.com, điểm tham quan</td><td>25 điểm</td><td>14–18 điểm ở 13 điểm đến. Trang Hội An đã bị gỡ, Hà Tĩnh không có trang thành phố</td><td class="num">221</td></tr>
+        <tr><td>trip.com, vé máy bay</td><td>5 chuyến cụ thể mỗi tuyến</td><td>11 sân bay, 61 tuyến nội địa giữa các điểm đến</td><td class="num">61</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nguồn và cách lấy</h3>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Nguồn</th><th>Điểm vào</th><th>Cách tải</th><th>Lấy được</th></tr></thead>
+      <tbody>
+        <tr><td>Vinpearl, khách sạn</td><td><code>booking-hotel-api.vinpearl.com</code> <code>/availability/rooms</code></td><td>HTTP thường, hỏi giá cho nhiều ngày</td><td>Mô tả, địa chỉ, toạ độ, sao, tiện nghi, ảnh; mỗi hạng phòng có diện tích, giường, sức chứa, giá theo ngày</td></tr>
+        <tr><td>Vinpearl, vé, tour, combo, golf</td><td><code>booking-tour-api.vinpearl.com</code></td><td>Gọi từ trong trang booking.vinpearl.com bằng Chromium, vì API nằm sau Cloudflare</td><td>Tên, mô tả, bao gồm, lịch trình, giá người lớn và trẻ em, thời gian bán, nhà cung cấp. Không có toạ độ</td></tr>
+        <tr><td>trip.com, vé máy bay</td><td>Trang sân bay → <code>/flights/&lt;a&gt;-to-&lt;b&gt;/airfares-…/</code></td><td>HTTP, đọc JSON-LD</td><td>Giá theo tháng, giá khứ hồi, chuyến cụ thể (số hiệu, hãng, giờ bay, thời gian bay, giá)</td></tr>
+        <tr><td>trip.com, điểm tham quan</td><td><code>/travel-guide/attraction/&lt;city&gt;/tourist-attractions/</code> → trang điểm</td><td>HTTP, đọc <code>__NEXT_DATA__</code></td><td>Giới thiệu, địa chỉ, toạ độ, giờ mở cửa, thời lượng đề xuất, giá vé, điểm, loại hình</td></tr>
+        <tr><td>booking.com, khách sạn</td><td>Trang tìm kiếm <code>order=popularity</code> + sitemap lọc thương hiệu Vinpearl</td><td>Chromium có cửa sổ, <code>--fast</code>, 2 worker</td><td>Mô tả tiếng Việt, toạ độ, sao, điểm, tiện nghi, hạng phòng kèm giá và điều kiện</td></tr>
+        <tr><td>agoda.com, khách sạn</td><td>Trang thành phố → trang khách sạn</td><td>Chromium có cửa sổ, chế độ thường, 2 worker</td><td>Mô tả, toạ độ, sao, điểm, tiện nghi, giá rẻ nhất</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Giá khách sạn hỏi cho 1 đêm, 2 người lớn, nhận phòng ngày 15/10/2026. Bảng điểm vào đầy đủ nằm trong <code>README.md</code>.</p>
+
+  <h3>Hạ tầng chống lỗi</h3>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Cơ chế</th><th>Làm gì</th><th>Ở đâu</th></tr></thead>
+      <tbody>
+        <tr><td>Cache thô</td><td>Lưu HTML/JSON đã rút gọn (khoảng 45 KB mỗi trang booking.com). Review, tên và ảnh người đánh giá bị xoá trước khi ghi đĩa. Tổng khoảng 43 MB: booking 19 MB, agoda 17 MB, Vinpearl 4,4 MB, trip.com 2,5 MB</td><td><code>RawCache</code>, <code>data/raw/</code></td></tr>
+        <tr><td>Hàng đợi và chạy tiếp</td><td>Mỗi URL lưu trạng thái, số lần thử, điểm đến và thứ hạng trong kế hoạch. Bảng <code>discovery</code> ghi nhớ trang tìm kiếm nào đã quét. Nhấn Ctrl+C rồi chạy lại đúng lệnh là tiếp tục từ chỗ dừng</td><td><code>StateDB</code>, <code>crawl_state.sqlite</code></td></tr>
+        <tr><td>Giới hạn tốc độ</td><td>Mỗi host tối thiểu 4 giây một request, có thêm jitter, dùng chung cho mọi worker; tôn trọng <code>Crawl-delay</code></td><td><code>HostRateLimiter</code></td></tr>
+        <tr><td>robots.txt</td><td>Kiểm tra từng URL (protego, hỗ trợ wildcard); URL bị cấm thì không tải</td><td><code>Robots</code></td></tr>
+        <tr><td>Lỗi mạng, 429</td><td>Thử lại với backoff lũy thừa bắt đầu từ 5 giây; đọc header <code>Retry-After</code></td><td><code>Http</code></td></tr>
+        <tr><td>Trang xác minh</td><td>Nhận diện dấu hiệu Cloudflare (<code>cf_chl_opt</code>, <code>challenge-running</code>…), chờ tối đa 45 giây; nếu chạy có cửa sổ thì chờ người chạy tự bấm</td><td><code>BrowserSession</code></td></tr>
+        <tr><td>Bị chặn liên tiếp</td><td>Dừng cả lượt chạy thay vì tiếp tục gửi request; thời gian nghỉ tăng từ 60 giây tới tối đa 15 phút; thoát với mã 75 để <code>run_forever.sh</code> tự nghỉ rồi chạy lại</td><td><code>BlockBreaker</code></td></tr>
+        <tr><td>Một tiến trình mỗi nguồn</td><td>Khoá file, tránh hai tiến trình cùng ghi một nguồn</td><td><code>RunLock</code>, <code>data/state/*.lock</code></td></tr>
+        <tr><td>Sửa dữ liệu đã crawl</td><td><code>reparse</code> đọc lại cache; <code>retry-missing</code> chỉ tải lại bản ghi thiếu và sao lưu trước khi ghi</td><td><code>crawl.py</code>, <code>retry_missing.py</code></td></tr>
+        <tr><td>Chạy qua đêm có hạn chót</td><td>Chạy kế hoạch tới giờ hẹn; không coi mã thoát 0 là đã hoàn thành, báo đúng các kiểm tra chưa đạt</td><td><code>overnight.py --until 07:00</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Tuân thủ</h3>
+  <ul>
+    <li>Chỉ lấy dữ liệu sản phẩm. Với review, chỉ giữ điểm trung bình và số lượt đánh giá.</li>
+    <li>Điều khoản của booking.com và agoda.com không cho phép thu thập tự động, nên dữ liệu chỉ dùng nội bộ cho demo thực tập và không phân phối lại.</li>
+    <li>Không lưu toạ độ từ Google Geocoding/Places, vì API cần billing và điều khoản chỉ cho lưu lat/lng tối đa 30 ngày. Toạ độ OpenStreetMap phải ghi “© OpenStreetMap contributors”; toạ độ sân bay lấy từ OurAirports (public domain).</li>
+    <li>Amadeus Self-Service đã ngừng hoạt động từ 17/07/2026, nên trip.com là nguồn vé máy bay duy nhất.</li>
+    <li>Không ghi gì vào CDP hay Insider production.</li>
+  </ul>
+</section>
+
+<section class="sec flow" id="dong-thoi-gian">
+  <h2>Dòng thời gian 15–16/09</h2>
+  <p>Giờ Việt Nam (UTC+7), lấy từ <code>data/logs/</code> và lịch sử commit. Ô bên phải là số sản phẩm sau lần chạy <code>normalise.py</code> đó.</p>
+  <ul class="tl-legend">
+    <li><span class="dot"></span>crawl, sửa dữ liệu</li>
+    <li><span class="dot k-norm"></span>chạy normalise</li>
+    <li><span class="dot k-check"></span>audit, kiểm tra</li>
+  </ul>
+
+  <p class="tl-day">Thứ Ba · 15/09/2026</p>
+  <ol class="tl">
+    <li><time>16:30–16:50</time><span class="rail"></span><div class="body"><strong>Crawl Vinpearl lần đầu</strong><p>15 khách sạn, 116 hạng phòng, 377 vé, tour, combo, golf. 25 vé không lấy được trang chi tiết (HTTP 500), tạm dùng thông tin từ trang danh sách.</p></div><div class="count"></div></li>
+    <li class="k-check"><time>17:15</time><span class="rail"></span><div class="body"><strong>Audit lần 1</strong><p>Catalog mới đạt 25,4% mốc 2.000 và chưa có vé máy bay. Benchmark booking.com: 3 worker <code>--fast</code> đạt 16,4 URL/phút. Kết luận: không crawl toàn bộ sitemap, chuyển sang crawl theo kế hoạch.</p></div><div class="count"><span>508</span></div></li>
+    <li><time>22:08–22:23</time><span class="rail"></span><div class="body"><strong>Tìm toạ độ địa điểm dùng vé</strong><p>23 địa điểm. Lần đầu tự tìm được 15, còn 8 cần duyệt; Grand Park bị khớp nhầm vào một trạm xe buýt. Sau khi thêm luật loại trạm xe buýt và đường phố, tự tìm được 17, còn 6 cần duyệt.</p></div><div class="count"></div></li>
+    <li><time>23:05–23:33</time><span class="rail"></span><div class="body"><strong>booking.com</strong><p>Quét 4/77 file sitemap được 23 URL thương hiệu Vinpearl, rồi tìm kiếm theo 15 điểm đến. Tổng 317 URL, 2 worker, tối thiểu 4 giây mỗi request, 12,4 trang/phút, 0 lỗi.</p></div><div class="count"></div></li>
+    <li><time>23:40–23:46</time><span class="rail"></span><div class="body"><strong>Vinpearl trong lượt <code>handbook</code></strong><p>Chạy lại theo thứ tự handbook; vẫn 25 vé lỗi trang chi tiết.</p></div><div class="count"></div></li>
+    <li><time>23:47–23:52</time><span class="rail"></span><div class="body"><strong>trip.com, vé máy bay</strong><p>11 sân bay → 61 tuyến nội địa giữa các điểm đến, 0 lỗi.</p></div><div class="count"></div></li>
+    <li><time>23:52–00:17</time><span class="rail"></span><div class="body"><strong>trip.com, điểm tham quan</strong><p>13 trang danh sách → 221 trang điểm tham quan. Trang danh sách Hội An trả về “gone”.</p></div><div class="count"></div></li>
+  </ol>
+
+  <p class="tl-day">Thứ Tư · 16/09/2026</p>
+  <ol class="tl">
+    <li><time>00:17–00:59</time><span class="rail"></span><div class="body"><strong>agoda.com</strong><p>300 URL, 2 worker, 7,3 trang/phút, 0 lỗi. Nguồn này tự tắt <code>--fast</code>.</p></div><div class="count"></div></li>
+    <li class="k-norm"><time>00:59</time><span class="rail"></span><div class="body"><strong>Chuẩn hoá toàn bộ lần đầu</strong><p>632 bản ghi khách sạn gộp còn 579.</p></div><div class="count"><span>2.324</span></div></li>
+    <li class="k-norm"><time>06:54–07:17</time><span class="rail"></span><div class="body"><strong>Sửa chất lượng lần 1</strong><p>Parse lại 300 trang agoda từ cache, lấy lại 4 mô tả. Đổi điểm đến cho 15 bản ghi theo bằng chứng. Tách lại 4 căn hộ bị gộp nhầm (579 → 583 khách sạn).</p></div><div class="count"><span>2.327</span></div></li>
+    <li><time>08:08–08:19</time><span class="rail"></span><div class="body"><strong>Commit snapshot và ghi chú bàn giao</strong><p><code>c17b7a7</code>, <code>bee991c</code>.</p></div><div class="count"></div></li>
+    <li><time>09:52</time><span class="rail"></span><div class="body"><strong>Duyệt tay toạ độ Golf Léman</strong><p>Đặt <code>status=ok</code> trong <code>venues.csv</code>; máy không ghi đè dòng này.</p></div><div class="count"></div></li>
+    <li class="k-norm"><time>10:05</time><span class="rail"></span><div class="body"><strong>Gộp biến thể giá thành viên</strong><p>54 biến thể <code>[VIN33 - …]</code> được gộp về vé gốc.</p></div><div class="count"><span>2.273</span></div></li>
+    <li class="k-norm"><time>11:52–12:08</time><span class="rail"></span><div class="body"><strong>Toạ độ sửa tay, mô tả tiếng Việt</strong><p>Nhập tay toạ độ cho 3 khách sạn agoda; duyệt tay 4 địa điểm dùng vé; dựng mô tả tiếng Việt cho 29 sản phẩm chỉ có mô tả tiếng Anh.</p></div><div class="count"><span>2.273</span></div></li>
+    <li><time>12:18–12:30</time><span class="rail"></span><div class="body"><strong><code>retry-missing</code></strong><p>Vinpearl: cả 25/25 vé vẫn lỗi. agoda: tải lại 29 trang với ngày nhận phòng 20/11, bổ sung được 4 bản ghi.</p></div><div class="count"></div></li>
+    <li class="k-norm"><time>12:36</time><span class="rail"></span><div class="body"><strong>Loại sản phẩm không có giá</strong><p>Loại 48 sản phẩm: 25 vé Vinpearl và 23 khách sạn agoda. Bản ghi gốc vẫn còn trong <code>interim/</code>.</p></div><div class="count"><span>2.225</span></div></li>
+    <li class="k-norm"><time>13:29–13:32</time><span class="rail"></span><div class="body"><strong>Parse lại trip.com, commit <code>bf35ffc</code></strong><p>Commit “Clean catalog to 2225 complete products”.</p></div><div class="count"><span>2.225</span></div></li>
+    <li class="k-check"><time>13:39</time><span class="rail"></span><div class="body"><strong>Kiểm tra gói bàn giao</strong><p>Phát hiện 6 nhóm lỗi: thiếu giá bị suy thành không bán vé, lẫn cơ sở không phải điểm tham quan, mô tả sai sản phẩm, thời lượng bằng 0, địa lý không nhất quán, tài liệu lệch số liệu.</p></div><div class="count"></div></li>
+    <li class="k-norm"><time>13:47–13:56</time><span class="rail"></span><div class="body"><strong>Sửa theo biên bản, chưa commit</strong><p>Loại 10 bản ghi đã soát tay; sửa parser thời lượng; chuẩn hoá tên tỉnh; sửa <code>SCHEMA.md</code>.</p></div><div class="count"><span>2.216</span></div></li>
+    <li class="k-check"><time>16:19</time><span class="rail"></span><div class="body"><strong>Chạy lại test khi viết báo cáo</strong><p>14/14 test offline đạt trên code chưa commit.</p></div><div class="count"></div></li>
+  </ol>
+</section>
+
+<section class="sec flow" id="lam-sach">
+  <h2>Làm sạch trong <code>normalise.py</code></h2>
+  <p>Đầu vào là 1.291 bản ghi nguồn, mỗi khoá chỉ lấy bản mới nhất: Vinpearl 392, booking.com 317, agoda.com 300, trip.com 221 điểm tham quan và 61 tuyến bay. Đầu ra là 2.216 sản phẩm. Số sản phẩm nhiều hơn số bản ghi vì mỗi khách sạn được tách thêm các hạng phòng, và mỗi tuyến bay được tách thêm các chuyến.</p>
+
+  <h3>Các bước, đúng thứ tự trong code</h3>
+  <ol class="steps">
+    <li><div><strong>Dựng Product 13 trường cho từng nguồn</strong><p><code>productId</code> là UUIDv5 của <code>sourceRef</code>, ổn định giữa các lần chạy; giá quy về VND. Với vé Vinpearl, điều khoản được tách khỏi mô tả và chuyển vào <code>attributes.policies</code> (285 sản phẩm); mô tả mở đầu bằng tên vé, và mô tả dưới 120 ký tự được bổ sung từ dữ liệu có cấu trúc. Thời lượng trip.com được quy về phút.</p></div></li>
+    <li><div><strong>Sửa điểm đến theo bằng chứng</strong><p><code>destination_overrides.csv</code> sửa 14 bản ghi; giá trị cũ giữ ở <code>originalDestination</code>.</p></div></li>
+    <li><div><strong>Đánh dấu toạ độ khách sạn nghi sai</strong><p>Nghi sai khi xa tâm điểm đến hơn bán kính cho phép (mặc định 40 km), hoặc khi toạ độ Vinpearl trùng trong phạm vi 30 m với một khách sạn khác địa chỉ. Toạ độ nghi sai không được dùng để ghép trùng.</p></div></li>
+    <li><div><strong>Áp toạ độ sửa tay</strong><p><code>location_overrides.csv</code>, 3 khách sạn. Toạ độ sửa tay thắng mọi nguồn.</p></div></li>
+    <li><div><strong>Gộp khách sạn trùng giữa các nguồn</strong><p>632 → 583 khách sạn, theo ngưỡng ở bảng bên dưới. Mỗi khách sạn giữ tối đa 3 hạng phòng OTA.</p></div></li>
+    <li><div><strong>Gắn địa điểm cho vé Vinpearl, gộp POI trùng</strong><p>Khớp theo mã nhà cung cấp, không có thì theo alias trong tên (<code>venues.csv</code>). Vé bị lệch điểm đến thì nhận điểm đến của địa điểm. Gộp 4 điểm tham quan trip.com trùng tên với vé Vinpearl.</p></div></li>
+    <li><div><strong>Dựng vé máy bay</strong><p>Mỗi tuyến tạo 1 sản phẩm <code>route</code> và tối đa 5 sản phẩm <code>flight</code>; toạ độ là sân bay đến.</p></div></li>
+    <li><div><strong>Loại bản ghi đã soát tay</strong><p><code>excluded_products.csv</code>, 10 bản ghi.</p></div></li>
+    <li><div><strong>Loại sản phẩm không có giá</strong><p>48 sản phẩm. Không áp dụng cho hạng phòng, chuyến bay, và các bản ghi có <code>ticketed=false</code>.</p></div></li>
+    <li><div><strong>Lọc theo kế hoạch</strong><p>Áp trần theo từng nguồn ở mỗi điểm đến; điểm ngoài kế hoạch chỉ giữ sản phẩm Vinpearl. Loại 1 khách sạn booking.com vượt trần, 1 tuyến bay ngoài kế hoạch, cùng hạng phòng và chuyến bay đi kèm.</p></div></li>
+    <li><div><strong>Chuẩn hoá thuộc tính</strong><p>316 tên tỉnh đưa về dạng chuẩn, bỏ 84 giá trị không phải tỉnh, 115 giá trị diện tích phòng đưa về kiểu số.</p></div></li>
+    <li><div><strong>Dựng mô tả tiếng Việt</strong><p>29 sản phẩm nguồn chỉ có mô tả tiếng Anh; văn bản gốc giữ ở <code>descriptionOriginal</code>.</p></div></li>
+    <li><div><strong>Gộp biến thể giá thành viên</strong><p>Gộp 53 biến thể; vé chỉ tồn tại dưới dạng biến thể thì giữ bản có giá cao nhất.</p></div></li>
+    <li><div><strong>Hoàn tất toạ độ, ghi đầu ra</strong><p><code>products.jsonl</code>, <code>products.csv</code>, <code>stats.md</code>, <code>dedup_report.csv</code>, <code>quality_review.csv</code> (405 dòng), <code>map/</code> (796 ghim).</p></div></li>
+  </ol>
+
+  <h3>Quy tắc gộp khách sạn</h3>
+  <p>Chỉ ghép trong cùng điểm đến. Tên được so sau khi bỏ dấu, bỏ các từ chung (khách sạn, khu nghỉ dưỡng, hotel, affiliated by…), và thử cả tên tiếng Anh trong ngoặc của agoda. Mỗi cụm có tối đa một bản ghi của mỗi nguồn, và cặp có điểm cao nhất được ghép trước.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Khoảng cách</th><th class="num">Điểm tên tối thiểu</th><th>Lý do</th></tr></thead>
+      <tbody>
+        <tr><td>≤ 300 m</td><td class="num">75</td><td>Rất gần; tên có thể khác nhiều giữa các OTA</td></tr>
+        <tr><td>≤ 1 km</td><td class="num">88</td><td>Ngưỡng mặc định <code>--match-threshold</code></td></tr>
+        <tr><td>≤ 5 km</td><td class="num">97</td><td>Toạ độ giữa các nguồn có thể lệch vài km</td></tr>
+        <tr><td>Không có toạ độ tin cậy</td><td class="num">92</td><td>Chỉ dựa vào tên</td></tr>
+        <tr><td>Căn hộ, condotel</td><td class="num">luôn ≥ 88</td><td>Cùng toà nhà nhưng khác chủ; ở gần không đủ để gộp</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Kết quả: gộp 49 khách sạn, cộng 4 điểm tham quan gộp vào vé Vinpearl, tổng cộng 53 cặp trong <code>dedup_report.csv</code>. Khoảng cách trung vị giữa hai bản ghi trùng là 52 m.</p>
+
+  <h3>Nguồn nào thắng trường nào</h3>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Trường</th><th>Thứ tự ưu tiên</th><th>Lý do</th></tr></thead>
+      <tbody>
+        <tr><td><code>name</code>, <code>description</code></td><td>Vinpearl → booking.com (nếu là tiếng Việt) → agoda.com</td><td>Mô tả do công ty viết là đầu vào embedding tốt nhất</td></tr>
+        <tr><td><code>unitPrice</code>, <code>available</code></td><td>Khách sạn: booking.com → agoda.com → Vinpearl. Vé: trip.com → Vinpearl</td><td>Giá OTA sát giá bán thực tế hơn; giá Vinpearl giữ ở <code>vinpearlPrice</code>, giá OTA khác ở <code>otaPrices</code></td></tr>
+        <tr><td>Toạ độ</td><td>Sửa tay → nguồn chính → nguồn khác nếu nghi sai → OpenStreetMap; sân bay lấy từ OurAirports</td><td>API Vinpearl có toạ độ sai</td></tr>
+        <tr><td>Hạng sao, tiện ích</td><td>Nguồn chính; thiếu thì nguồn khác bù</td><td>Tăng độ phủ</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Mỗi sản phẩm có <code>attributes.fieldSources</code> để truy ngược nguồn của từng giá trị.</p>
+
+  <h3>Đã gộp hoặc loại những gì</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Lý do</th><th>Kiểu</th><th class="num">Số lượng</th></tr></thead>
+      <tbody>
+        <tr><td>Biến thể giá thành viên Vinpearl; giá từng hạng giữ trong <code>memberPrices</code></td><td>Gộp</td><td class="num">53</td></tr>
+        <tr><td>Khách sạn trùng giữa các nguồn</td><td>Gộp</td><td class="num">49</td></tr>
+        <tr><td>Không có giá, nguồn không cung cấp được (25 vé Vinpearl, 23 khách sạn agoda)</td><td>Loại</td><td class="num">48</td></tr>
+        <tr><td>Đã soát tay: xếp nhầm danh mục hoặc mô tả của sản phẩm khác</td><td>Loại</td><td class="num">10</td></tr>
+        <tr><td>Điểm tham quan trip.com trùng vé Vinpearl</td><td>Gộp</td><td class="num">4</td></tr>
+        <tr><td>Hạng phòng, chuyến bay của sản phẩm bị loại</td><td>Loại</td><td class="num">3</td></tr>
+        <tr><td>Vượt ngân sách kế hoạch (1 khách sạn booking.com, 1 tuyến bay)</td><td>Loại</td><td class="num">2</td></tr>
+      </tbody>
+      <tfoot><tr><td>Tổng</td><td></td><td class="num">169</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="note">“Gộp” nghĩa là dữ liệu vẫn nằm trong sản phẩm được giữ lại. “Loại” nghĩa là sản phẩm không có trong catalog, nhưng bản ghi gốc vẫn còn trong <code>interim/</code> và <code>raw/</code>.</p>
+</section>
+
+<section class="sec flow" id="van-de">
+  <h2>Vấn đề đã gặp và cách xử lý</h2>
+  <p>Mỗi vấn đề được ghi theo thứ tự: hiện tượng, nguyên nhân, cách xử lý, rồi kết quả kiểm chứng được. Có ba trạng thái. <strong>Đã xử lý</strong>: đã sửa và kiểm tra lại trên catalog hiện tại. <strong>Giảm thiểu</strong>: giới hạn nằm ở nguồn hoặc ở phương pháp, chỉ xử lý được một phần và phần còn lại đã được ghi rõ. <strong>Còn tồn</strong>: chưa sửa.</p>
+
+  <div class="filters" role="group" aria-label="Lọc vấn đề">
+    <div class="frow"><span>Trạng thái</span>
+      <button type="button" class="chip" id="f-s-all" data-filter="status" data-value="all" aria-pressed="true">Tất cả <span class="n">37</span></button>
+      <button type="button" class="chip" id="f-s-done" data-filter="status" data-value="done" aria-pressed="false">Đã xử lý <span class="n">21</span></button>
+      <button type="button" class="chip" id="f-s-part" data-filter="status" data-value="part" aria-pressed="false">Giảm thiểu <span class="n">9</span></button>
+      <button type="button" class="chip" id="f-s-open" data-filter="status" data-value="open" aria-pressed="false">Còn tồn <span class="n">7</span></button>
+    </div>
+    <div class="frow"><span>Nhóm</span>
+      <button type="button" class="chip" id="f-g-all" data-filter="group" data-value="all" aria-pressed="true">Tất cả <span class="n">37</span></button>
+      <button type="button" class="chip" id="f-g-nguon" data-filter="group" data-value="nguon" aria-pressed="false">Truy cập nguồn <span class="n">10</span></button>
+      <button type="button" class="chip" id="f-g-noidung" data-filter="group" data-value="noidung" aria-pressed="false">Nội dung <span class="n">9</span></button>
+      <button type="button" class="chip" id="f-g-dialy" data-filter="group" data-value="dialy" aria-pressed="false">Địa lý, toạ độ <span class="n">7</span></button>
+      <button type="button" class="chip" id="f-g-gop" data-filter="group" data-value="gop" aria-pressed="false">Gộp trùng <span class="n">3</span></button>
+      <button type="button" class="chip" id="f-g-gia" data-filter="group" data-value="gia" aria-pressed="false">Giá, tình trạng <span class="n">5</span></button>
+      <button type="button" class="chip" id="f-g-quytrinh" data-filter="group" data-value="quytrinh" aria-pressed="false">Quy trình <span class="n">3</span></button>
+    </div>
+    <p id="issue-count" aria-live="polite">Đang hiện 37/37 vấn đề</p>
+  </div>
+
+  <div class="igroup" data-g="nguon">
+    <h3>Truy cập nguồn</h3>
+
+    <article class="issue" data-status="done" data-group="nguon">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Vé Vinpearl nằm sau Cloudflare</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd><code>booking-tour-api.vinpearl.com</code> chặn request HTTP thường. Ở chế độ <code>--headless</code>, Cloudflare chặn cả trình duyệt.</dd>
+        <dt>Xử lý</dt><dd>Gọi API từ bên trong trang booking.vinpearl.com bằng Chromium có cửa sổ (Playwright). Nếu hiện ô xác minh, người chạy tự bấm; script chờ theo <code>--manual-wait</code>. API khách sạn không bị chặn nên vẫn gọi bằng HTTP thường. Không dùng stealth plugin, giả fingerprint hay proxy.</dd>
+        <dt>Kết quả</dt><dd>Lấy đủ 377 vé, tour, combo, golf, khớp tổng số API báo.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="nguon">
+      <header><span class="pill s-done">Đã xử lý</span><h4>booking.com không trả giá khi chạy headless</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Khi chạy thử ngày 15/09, <code>--headless</code> vẫn lấy được thông tin khách sạn nhưng không có giá.</dd>
+        <dt>Xử lý</dt><dd>Chạy Chromium có cửa sổ; trên server không có màn hình thì dùng <code>xvfb-run</code>. Thêm <code>--fast</code> để chặn CSS và tracker, giúp chạy nhanh gấp đôi.</dd>
+        <dt>Kết quả</dt><dd>317/317 URL, 0 lỗi, 12,4 trang/phút.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="nguon">
+      <header><span class="pill s-done">Đã xử lý</span><h4>agoda.com không hiển thị nội dung khi chặn CSS</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Với <code>--fast</code>, trang agoda không render nội dung.</dd>
+        <dt>Xử lý</dt><dd>Nguồn agoda tự bỏ qua <code>--fast</code> và chạy ở chế độ thường.</dd>
+        <dt>Kết quả</dt><dd>300/300 URL, 0 lỗi, 7,3 trang/phút.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="nguon">
+      <header><span class="pill s-done">Đã xử lý</span><h4>robots.txt của trip.com cấm trang tìm chuyến bay</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd><code>showfarefirst</code>, <code>/*-to-*/tickets-*</code> và <code>graphql</code> đều bị cấm.</dd>
+        <dt>Xử lý</dt><dd>Bắt đầu từ trang sân bay <code>/flights/airport-&lt;iata&gt;/</code>, đi tới trang giá vé theo tuyến <code>/flights/&lt;a&gt;-to-&lt;b&gt;/airfares-…/</code> (được phép), rồi đọc JSON-LD.</dd>
+        <dt>Kết quả</dt><dd>61 tuyến và 610 chuyến trong interim; catalog giữ 60 tuyến và 184 chuyến. Đánh đổi: đây là giá theo tháng và các chuyến mẫu, không phải giá của một ngày bay cụ thể.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="nguon">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>Không có nguồn vé máy bay dự phòng</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Handbook gợi ý dùng Amadeus Self-Service làm nguồn dự phòng.</dd>
+        <dt>Nguyên nhân</dt><dd>Amadeus đã ngừng gói Self-Service từ 17/07/2026, chỉ còn gói Enterprise.</dd>
+        <dt>Xử lý</dt><dd>Dùng trip.com làm nguồn vé máy bay duy nhất và ghi rõ trong README.</dd>
+        <dt>Kết quả</dt><dd>Nếu trip.com đổi cấu trúc trang, sẽ không còn nguồn thay thế cho vé máy bay.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="nguon">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Crawl toàn bộ sitemap booking.com không kịp hạn</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Sitemap có 33.719 URL khách sạn Việt Nam, nhưng đến lúc audit 17:15 ngày 15/09 mới xong 54 URL.</dd>
+        <dt>Nguyên nhân</dt><dd>Benchmark đo được 3,3–16,4 URL/phút. Ngay ở mức nhanh nhất, 33.665 URL còn lại vẫn cần khoảng 34 giờ.</dd>
+        <dt>Xử lý</dt><dd>Chuyển sang crawl theo kế hoạch: dùng trang tìm kiếm <code>order=popularity</code> cho 15 điểm đến, cộng sitemap lọc theo thương hiệu Vinpearl. Việc quét sitemap dừng ngay khi đã qua vùng dữ liệu Việt Nam (sau 4/77 file). Cách cũ vẫn giữ dưới cờ <code>--all-vietnam</code>.</dd>
+        <dt>Kết quả</dt><dd>317 URL crawl xong trong 26 phút.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="nguon">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>25 vé Vinpearl trả HTTP 500</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>API chi tiết trả lỗi 500 trên cả kênh bán 10 và 11, tổng 50 lời gọi. Cả 25 slug đều có tiền tố <code>copy-</code>.</dd>
+        <dt>Nguyên nhân</dt><dd>Lỗi phía nguồn, không phải lỗi mạng nhất thời: chạy <code>retry-missing</code> lúc 12:18 ngày 16/09 vẫn lỗi đủ 25/25.</dd>
+        <dt>Xử lý</dt><dd>Ban đầu dùng thông tin từ trang danh sách. Sau đó <code>drop_unsellable</code> loại các vé này, vì không có giá và 21/25 vé không có mô tả dùng được. Bản ghi gốc vẫn giữ trong <code>interim/</code>; chạy với <code>--keep-unsellable</code> sẽ lấy lại.</dd>
+        <dt>Kết quả</dt><dd>Catalog không còn sản phẩm giá 0, đổi lại mất 25 vé (Grand Park, Wave Park, Vũ Yên, công viên nước Hà Tĩnh…).</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="nguon">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>Khách sạn agoda thiếu giá hoặc toạ độ</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>29 bản ghi thiếu dữ liệu: 26 thiếu giá, 3 thiếu toạ độ.</dd>
+        <dt>Xử lý</dt><dd>Dùng <code>retry-missing</code> chỉ tải lại 29 trang này với ngày nhận phòng 20/11/2026, sau khi đã sao lưu vào <code>data/backups/</code>. 3 toạ độ được nhập tay theo địa chỉ tra trên Google Maps và ghi vào <code>location_overrides.csv</code>.</dd>
+        <dt>Kết quả</dt><dd>Bổ sung được 4 bản ghi; 23 khách sạn vẫn không có giá nên bị loại. Hệ quả phụ: 3 sản phẩm có giá cho ngày 20/11 thay vì 15/10.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="nguon">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>trip.com: trang Hội An đã gỡ, Hà Tĩnh không có trang</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd><code>hoi-an-668/tourist-attractions/</code> trả về “gone”; Hà Tĩnh không có mã thành phố trên trip.com.</dd>
+        <dt>Xử lý</dt><dd>Lấy điểm tham quan Hội An từ danh sách Đà Nẵng, sau đó đổi điểm đến theo bằng chứng địa chỉ (Phố cổ Hội An, Mỹ Sơn, Ký Ức Hội An…). Hà Tĩnh dựa vào dữ liệu Vinpearl.</dd>
+        <dt>Kết quả</dt><dd>Hội An có 23 điểm tham quan; Hà Tĩnh chỉ có 3.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="nguon">
+      <header><span class="pill s-open">Còn tồn</span><h4>Hạ Long không có vé máy bay</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Kế hoạch có sân bay Vân Đồn (VDO), nhưng catalog không có vé máy bay nào tới Hạ Long.</dd>
+        <dt>Nguyên nhân</dt><dd>Đã kiểm tra trên interim: trong 61 tuyến tìm được chỉ có 1 tuyến xuất phát từ VDO (Vân Đồn → TP. Hồ Chí Minh), không có tuyến nào bay tới VDO. Vé máy bay được gán điểm đến theo sân bay đến.</dd>
+        <dt>Hướng sửa</dt><dd>Kiểm tra xem trang sân bay của các điểm đến khác có liệt kê VDO không; nếu không có, thêm tuyến tới VDO vào kế hoạch. Còn Hội An, Hà Tĩnh, Sa Pa và Phan Thiết không có vé máy bay là cố ý, vì các nơi này bay qua Đà Nẵng hoặc Vinh, hoặc không có sân bay.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="igroup" data-g="noidung">
+    <h3>Nội dung</h3>
+
+    <article class="issue" data-status="done" data-group="noidung">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Điều khoản vé lẫn vào mô tả</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Audit 17:15 thấy 60 nhóm mô tả giống hệt nhau, gồm 337 sản phẩm. Nhiều vé dùng chung vài đoạn điều khoản làm mô tả, kể cả trong khối có tiêu đề “Mô tả”, nên vector embedding của chúng gần như trùng nhau.</dd>
+        <dt>Xử lý</dt><dd><code>split_policy_lines</code> lọc từng dòng theo tiêu đề và nội dung kiểu điều khoản, rồi chuyển sang <code>attributes.policies</code>. Mô tả vé luôn mở đầu bằng tên vé; mô tả dưới 120 ký tự được bổ sung từ dữ liệu có cấu trúc.</dd>
+        <dt>Kết quả</dt><dd>285 sản phẩm có <code>policies</code>. Chỉ còn 4 nhóm mô tả trùng, gồm 8 hạng phòng cùng loại nhưng khác cấu hình giường.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="noidung">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Biến thể giá thành viên làm loãng catalog</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Mỗi vé <code>[VIN33 - Gold/Platinum/Diamond]</code> là một sản phẩm riêng, nội dung giống hệt vé gốc.</dd>
+        <dt>Xử lý</dt><dd><code>merge_member_variants</code> gộp các biến thể về vé gốc và lưu giá từng hạng vào <code>memberPrices</code>. Không xoá thẳng các biến thể, vì 5/18 vé chỉ tồn tại dưới dạng biến thể; với những vé này, giữ bản có giá cao nhất và đổi tên về tên gốc.</dd>
+        <dt>Kết quả</dt><dd>Gộp 53 biến thể; 23 vé có <code>memberPrices</code>.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="noidung">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Nguồn trả mô tả của sản phẩm khác</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd><code>VW00881</code> (vé thuyền Water Taxi) lại mang nội dung Bảo tàng Gấu Teddy; <code>VW02393</code> (Fastpass Water Taxi) lại mang nội dung vé vào cửa VinWonders.</dd>
+        <dt>Nguyên nhân</dt><dd>API Vinpearl trả sẵn nội dung sai, theo ghi nhận trong báo cáo bàn giao.</dd>
+        <dt>Xử lý</dt><dd>Thêm 2 vé vào <code>excluded_products.csv</code> kèm lý do và bằng chứng.</dd>
+        <dt>Kết quả</dt><dd>Đã loại. Chưa có quy tắc tự động phát hiện mô tả lệch với tên (xem vấn đề ngay dưới).</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="noidung">
+      <header><span class="pill s-open">Còn tồn</span><h4>Vé Safari Phú Quốc VW02335 vẫn mang mô tả VinWonders</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Tên vé là “[Vinpearl Safari Phú Quốc] - Vé Vào Cửa + Fastpass qua cổng + Xe điện”, nhưng ngay sau tên, mô tả lại nói về vé vào cửa khu vui chơi VinWonders Phú Quốc. Audit 17:15 ngày 15/09 đã nêu vé này, kèm thời gian ưu đãi năm 2023.</dd>
+        <dt>Nguyên nhân</dt><dd>Cùng loại lỗi với 2 vé ở trên, nhưng vé này chưa được đưa vào danh sách loại.</dd>
+        <dt>Hướng sửa</dt><dd>Đối chiếu JSON trong cache, sau đó loại vé hoặc dựng lại mô tả. Thêm kiểm tra tự động: tên địa điểm nhắc tới trong mô tả phải khớp với venue của vé.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="noidung">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>Danh sách điểm tham quan trip.com lẫn cơ sở không phải điểm du lịch</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Danh sách có văn phòng bảo hiểm (Hanwha Life SO Huế), trung tâm tiêm chủng VNVC Vinh, Taxi Quy Nhơn Xanh, dịch vụ cho thuê xe máy, công ty lữ hành Sapa Sisters, hãng du thuyền Bhaya, đại lý bán vé và một quán cà phê.</dd>
+        <dt>Xử lý</dt><dd>Soát tay và loại 8 bản ghi qua <code>excluded_products.csv</code>.</dd>
+        <dt>Kết quả</dt><dd>Đã loại 8 bản ghi, nhưng các POI còn lại chưa được soát hết. “TMS Quy Nhơn - Lee Xinh” vẫn đang ở loại attraction và cần đối chiếu.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="noidung">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Mô tả agoda rỗng khi trang thiếu JSON-LD</h4></header>
+      <dl>
+        <dt>Xử lý</dt><dd>Đọc mô tả từ phần <code>property-short-description</code> trên chính trang đã lưu, rồi chạy <code>reparse agoda-hotels</code> từ cache lúc 07:11; không tải lại trang nào.</dd>
+        <dt>Kết quả</dt><dd>Lấy lại 4 mô tả và 4 địa chỉ. Kiểm tra sau đó cho thấy raw không đổi; giá, toạ độ và thời điểm crawl của 300 bản ghi vẫn giữ nguyên.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="noidung">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Nguồn chỉ có mô tả tiếng Anh</h4></header>
+      <dl>
+        <dt>Xử lý</dt><dd><code>localise_descriptions</code> dựng mô tả tiếng Việt từ tên, loại hình, hạng sao, địa chỉ, tiện ích và điểm đánh giá. Tiện ích lấy từ booking.com vốn đã là tiếng Việt. Văn bản gốc giữ ở <code>descriptionOriginal</code>.</dd>
+        <dt>Kết quả</dt><dd>29 sản phẩm.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="noidung">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>Nhiều sản phẩm không có mô tả gốc đủ dùng</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Vé máy bay, hạng phòng OTA và nhiều điểm tham quan chỉ có tên và địa chỉ.</dd>
+        <dt>Xử lý</dt><dd>Dựng mô tả từ dữ liệu có cấu trúc và đánh dấu bằng <code>attributes.descriptionSource</code>.</dd>
+        <dt>Kết quả</dt><dd>1.275/2.216 mô tả (57,5%) là tự sinh; 33 mô tả vẫn dưới 120 ký tự. Con số “tiếng Việt 100%” chỉ là ước lượng theo tỷ lệ ký tự có dấu, chưa có ai đọc duyệt toàn bộ.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="noidung">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Thời lượng “0.5–1 ngày” bị đọc thành 0 phút</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>12 điểm tham quan có <code>durationMinutes=0</code>, trong đó có Phan Xi Păng và Sun World Hòn Thơm.</dd>
+        <dt>Nguyên nhân</dt><dd><code>fold()</code> bỏ dấu chấm thập phân, sau đó <code>duration_minutes</code> lấy số nguyên đầu tiên, nên <code>0.5</code> thành <code>0</code>.</dd>
+        <dt>Xử lý</dt><dd>Đọc số thập phân trên chuỗi gốc và bỏ các giá trị ≤ 0 (<code>normalise.py:159</code>).</dd>
+        <dt>Kết quả</dt><dd>Không còn sản phẩm nào có thời lượng bằng 0; “0.5–1 ngày” giờ ra 240 phút. Chưa commit.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="igroup" data-g="dialy">
+    <h3>Địa lý, toạ độ</h3>
+
+    <article class="issue" data-status="done" data-group="dialy">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Toạ độ khách sạn trong API Vinpearl sai</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Vinpearl Empire Nha Trang (đường Lê Thánh Tôn, trong thành phố) trùng khít toạ độ với Vinpearl Luxury Nha Trang trên đảo Hòn Tre. Vinpearl Resort Nha Trang trùng toạ độ với Resort &amp; Spa Nha Trang Bay, và cả hai trùng toạ độ chung của đảo.</dd>
+        <dt>Xử lý</dt><dd><code>flag_suspect_hotel_coords</code> đánh dấu toạ độ nghi sai khi trùng trong phạm vi 30 m với một khách sạn khác địa chỉ, hoặc khi xa tâm điểm đến hơn bán kính cho phép. Toạ độ nghi sai không được dùng để ghép trùng. Nếu khách sạn có bản OTA thì dùng toạ độ OTA và ghi lý do vào <code>locationNote</code>.</dd>
+        <dt>Kết quả</dt><dd>Đánh dấu 4 khách sạn trùng toạ độ và 10 khách sạn xa tâm.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="dialy">
+      <header><span class="pill s-done">Đã xử lý</span><h4>API vé Vinpearl không có toạ độ</h4></header>
+      <dl>
+        <dt>Xử lý</dt><dd>Nhà cung cấp của vé chính là nơi dùng vé, nên lập bảng <code>venues.csv</code> gồm 23 địa điểm. Vé được khớp theo <code>supplierCode</code>, không có thì theo alias trong tên. Toạ độ tìm theo thứ tự: POI trip.com đã crawl, rồi OpenStreetMap qua Photon. Chỉ nhận kết quả chứa đủ các từ trong tên và nằm trong bán kính điểm đến. Lần chạy đầu khớp nhầm một trạm xe buýt cho Grand Park, nên đã thêm luật loại trạm xe buýt và đường phố.</dd>
+        <dt>Kết quả</dt><dd>18 địa điểm tự tìm được, 5 địa điểm duyệt tay (<code>status=ok</code>, máy không ghi đè). 297 sản phẩm có toạ độ mức <code>venue</code>, tức là vị trí khu vui chơi chứ không phải vị trí riêng của từng vé. Không dùng Google Geocoding vì cần billing và điều khoản chỉ cho lưu toạ độ 30 ngày; Nominatim không phân giải được DNS trên máy crawl.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="dialy">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Điểm đến theo địa chỉ hành chính, không theo điểm du lịch</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Mỹ Sơn và Phố cổ Hội An bị ghi Đà Nẵng vì URL trip.com nằm dưới <code>da-nang</code>. Hòn Ti Tốp và Hang Sửng Sốt bị ghi Hải Phòng. Mũi Kê Gà và đồi cát Hòa Thắng bị ghi Đà Lạt vì địa chỉ ghi tỉnh Lâm Đồng. Vedana Lagoon ở Lăng Cô bị ghi Đà Nẵng.</dd>
+        <dt>Xử lý</dt><dd><code>destination_overrides.csv</code> sửa theo <code>sourceRef</code>, mỗi dòng kèm bằng chứng (địa chỉ, toạ độ, URL). Catalog giữ <code>originalDestination</code>, <code>destinationSource</code> và <code>destinationEvidence</code>. Không suy điểm đến từ tên đường trùng với địa danh ở tỉnh khác.</dd>
+        <dt>Kết quả</dt><dd>Sửa 14 bản ghi. Quy ước: <code>destination</code> là nhãn du lịch, <code>province</code> là tỉnh hành chính.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="dialy">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Tỉnh trong API Vinpearl sai làm vé lệch điểm đến</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Golf Léman ở Củ Chi (TP. Hồ Chí Minh) bị ghi Hải Phòng; vé Grand World Hà Nội bị tính thành Phú Quốc.</dd>
+        <dt>Xử lý</dt><dd>Vé khớp địa điểm qua nhà cung cấp mà lệch điểm đến thì nhận điểm đến của địa điểm; giá trị cũ giữ ở <code>originalDestination</code>.</dd>
+        <dt>Kết quả</dt><dd><code>destination</code> của các vé này đã đúng.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="dialy">
+      <header><span class="pill s-open">Còn tồn</span><h4><code>province</code> và <code>city</code> vẫn lệch với <code>destination</code></h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Golf LéMan có <code>destination=TP. Hồ Chí Minh</code> nhưng <code>province=Hải Phòng</code>. Vedana Lagoon có <code>destination=Huế</code> nhưng <code>city=Đà Nẵng</code>.</dd>
+        <dt>Nguyên nhân</dt><dd>Bước sửa điểm đến chỉ đổi <code>destination</code>, còn các thuộc tính địa chỉ lấy từ nguồn thì giữ nguyên.</dd>
+        <dt>Hướng sửa</dt><dd>Tách địa chỉ nguyên văn của nguồn khỏi tỉnh đã chuẩn hoá; khi có override hoặc venue thì cập nhật cả tỉnh. Trước khi sửa, không dùng <code>province</code> hay <code>city</code> làm bộ lọc hành chính.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="dialy">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Trường <code>province</code> chứa “Việt Nam” và nhiều kiểu viết</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>85 bản ghi có <code>province="Việt Nam"</code>; một tỉnh được viết theo nhiều cách khác nhau.</dd>
+        <dt>Xử lý</dt><dd><code>tidy_attributes</code> kết hợp <code>canonical_province</code>.</dd>
+        <dt>Kết quả</dt><dd>316 giá trị được đưa về tên chuẩn, bỏ 84 giá trị không phải tỉnh; không còn giá trị “Việt Nam”. Chưa commit.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="dialy">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>Toạ độ xa tâm điểm đến</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>12 cảnh báo: 9 ở Hà Tĩnh (xa nhất 59 km), 1 ở Ninh Bình, còn Hải Vân Quan và đèo Hải Vân cách tâm Huế 65–66 km.</dd>
+        <dt>Nguyên nhân</dt><dd>Điểm đến Hà Tĩnh là cả tỉnh chứ không riêng thành phố; Hải Vân nằm trên ranh giới Huế – Đà Nẵng.</dd>
+        <dt>Xử lý</dt><dd>Soát tay, giữ lại và ghi <code>locationWarning</code>. 30 dòng cần xem nằm trong <code>map/can-kiem-tra.csv</code>.</dd>
+        <dt>Kết quả</dt><dd>Chấp nhận. Chưa xác minh từng toạ độ ngoài thực địa.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="igroup" data-g="gop">
+    <h3>Gộp trùng</h3>
+
+    <article class="issue" data-status="done" data-group="gop">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Một khách sạn, nhiều tên và toạ độ lệch giữa các nguồn</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>“Hòn Tằm Resort” (Vinpearl) và “Khu nghỉ dưỡng Hòn Tằm (…)” (agoda) cách nhau 670 m; toạ độ giữa các OTA có thể lệch vài km.</dd>
+        <dt>Xử lý</dt><dd><code>name_keys</code> bỏ dấu, bỏ từ chung và thử cả tên tiếng Anh trong ngoặc; <code>name_score</code> kết hợp với khoảng cách theo từng tầng (xem bảng ở mục <a href="#lam-sach">Làm sạch</a>). Mỗi cụm có tối đa 1 bản ghi của mỗi nguồn.</dd>
+        <dt>Kết quả</dt><dd>632 → 583 khách sạn; 53 cặp trong <code>dedup_report.csv</code>, khoảng cách trung vị 52 m.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="gop">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Căn hộ cùng toà nhà bị gộp nhầm</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Các căn hộ, condotel khác chủ trong cùng toà nhà (FLC Sea Tower Quy Nhơn, APEC Mandala, Vinhomes Marina) bị ghép vì ở rất gần nhau.</dd>
+        <dt>Xử lý</dt><dd>Tên có dấu hiệu căn hộ hoặc condotel luôn phải đạt điểm tên ≥ 88; thêm test <code>test_nearby_apartments_with_different_names_are_kept_separate</code>.</dd>
+        <dt>Kết quả</dt><dd>Tách lại 4 căn hộ agoda (579 → 583 khách sạn).</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="done" data-group="gop">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Điểm tham quan trip.com trùng vé Vinpearl</h4></header>
+      <dl>
+        <dt>Xử lý</dt><dd><code>merge_pois</code> gộp POI có tên trùng vé vào chính vé đó; các vé khác có chứa tên điểm được bổ sung giờ mở cửa, thời lượng và toạ độ.</dd>
+        <dt>Kết quả</dt><dd>Gộp 4 POI. Theo quy tắc OTA thắng giá, VinWonders Nam Hội An lấy giá trip.com 650.000₫ thay cho giá Vinpearl 300.000₫.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="igroup" data-g="gia">
+    <h3>Giá, tình trạng</h3>
+
+    <article class="issue" data-status="done" data-group="gia">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Vé giá 0 vẫn được đánh dấu còn bán</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Audit 17:15 thấy 25 sản phẩm giá 0 nhưng vẫn <code>available=true</code>.</dd>
+        <dt>Nguyên nhân</dt><dd><code>available</code> được suy từ cờ bật và ngày kết thúc bán, không kiểm tra giá.</dd>
+        <dt>Xử lý</dt><dd>Sản phẩm không có giá thì không coi là bán được, và bị loại qua <code>drop_unsellable</code> (trừ hạng phòng và chuyến bay).</dd>
+        <dt>Kết quả</dt><dd>Không còn sản phẩm giá 0.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="gia">
+      <header><span class="pill s-open">Còn tồn</span><h4>Thiếu giá bị suy thành “không bán vé”</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Cả 140 sản phẩm có <code>unitPrice=null</code> đều mang <code>ticketed=false</code>, gồm 139 điểm tham quan và sân golf Sea Links. <code>BANGIAO.md</code> và <code>SCHEMA.md</code> đang ghi các sản phẩm này là “điểm công cộng không bán vé”.</dd>
+        <dt>Nguyên nhân</dt><dd><code>normalise.py:756</code> đặt <code>"ticketed": r.get("price") is not None</code>. Không thấy giá trên trip.com không chứng minh được địa điểm không bán vé; biên bản kiểm tra dẫn ví dụ Bảo tàng Quảng Ninh có bán vé.</dd>
+        <dt>Hệ quả</dt><dd><code>drop_unsellable</code> bỏ qua mọi bản ghi <code>ticketed=false</code>, nên 140 bản ghi này không bị loại mà cũng không vào danh sách cần xác minh giá.</dd>
+        <dt>Hướng sửa</dt><dd>Tách “chưa có thông tin giá” khỏi “đã xác minh không bán vé”; chỉ đặt <code>ticketed=false</code> khi có bằng chứng; sau đó sinh lại tài liệu, bộ mẫu và bản đồ.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="gia">
+      <header><span class="pill s-open">Còn tồn</span><h4>Biệt thự có <code>bedrooms = 0</code></h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>5 hạng biệt thự của Vinpearl Cửa Hội và Vinpearl Cửa Sót có <code>bedrooms=0</code>, trong khi tên ghi 2, 3 hoặc 4 phòng ngủ.</dd>
+        <dt>Nguyên nhân</dt><dd>Dùng 0 thay cho giá trị “chưa biết”.</dd>
+        <dt>Hướng sửa</dt><dd>Đọc số phòng ngủ từ tên hạng phòng; nếu tên không có thì để <code>null</code>.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="gia">
+      <header><span class="pill s-part">Giảm thiểu</span><h4>Ngày hỏi giá không đồng nhất</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>1.455 sản phẩm hỏi giá cho ngày 15/10/2026; 11 sản phẩm còn lại hỏi cho 29/09 (7), 14/11 (1) hoặc 20/11 (3).</dd>
+        <dt>Nguyên nhân</dt><dd>Giá phòng Vinpearl được hỏi cho nhiều ngày; agoda được hỏi lại với ngày khác trong <code>retry-missing</code>.</dd>
+        <dt>Xử lý</dt><dd>Ghi rõ trong <code>SCHEMA.md</code>; bên dùng dữ liệu luôn phải đọc <code>attributes.priceDate</code>.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="part" data-group="gia">
+      <header><span class="pill s-part">Giảm thiểu</span><h4><code>available</code> không có nghĩa là còn chỗ</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd>Giá được quan sát trong ngày 15–16/09 cho một ngày nhận phòng cụ thể.</dd>
+        <dt>Xử lý</dt><dd>Ghi trong <code>BANGIAO.md</code> và <code>SCHEMA.md</code> rằng luồng đặt chỗ thật phải gọi lại nguồn.</dd>
+        <dt>Kết quả</dt><dd>Đây là giới hạn của phương pháp crawl; chấp nhận được cho demo.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="igroup" data-g="quytrinh">
+    <h3>Quy trình</h3>
+
+    <article class="issue" data-status="done" data-group="quytrinh">
+      <header><span class="pill s-done">Đã xử lý</span><h4>Sửa dữ liệu mà không làm hỏng bản đã crawl</h4></header>
+      <dl>
+        <dt>Xử lý</dt><dd>Trước mỗi lần sửa đều sao lưu vào <code>data/backups/</code> (hiện có 4 bản, kèm SHA-256 của đầu vào). Sau khi sửa, kiểm tra raw và interim của các nguồn khác không đổi, <code>productId</code> không trùng, và không mất toạ độ nào đã có.</dd>
+        <dt>Kết quả</dt><dd><code>reports/quality-fix-2026-09-16.json</code> ghi <code>raw_unchanged: true</code> và <code>no_existing_coordinates_lost: true</code>. 14 test offline đạt trên code hiện tại.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="quytrinh">
+      <header><span class="pill s-open">Còn tồn</span><h4>Tài liệu bàn giao lệch số liệu catalog</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd><code>BANGIAO.md</code> và <code>bao-cao-ban-giao.md</code> ghi hạng sao phủ 91% khách sạn và 89% hạng phòng, trong khi <code>starRating</code> thực tế chỉ phủ 81,8% và 75,3%. Hai tài liệu này cũng khẳng định 140 sản phẩm thiếu giá là “không bán vé”.</dd>
+        <dt>Đã sửa</dt><dd>Trong <code>SCHEMA.md</code>, <code>conditions</code> đã được ghi đúng là mảng và <code>priceDate</code> được ghi là không đồng nhất. <code>template.json</code> giờ được sinh từ catalog và không còn giá trị <code>estimated</code>.</dd>
+        <dt>Hướng sửa</dt><dd>Sinh mọi bảng độ phủ từ catalog cuối cùng thay vì viết tay.</dd>
+      </dl>
+    </article>
+
+    <article class="issue" data-status="open" data-group="quytrinh">
+      <header><span class="pill s-open">Còn tồn</span><h4>Bản 2.216 sản phẩm chưa commit</h4></header>
+      <dl>
+        <dt>Hiện tượng</dt><dd><code>git status</code> cho thấy 14 file thay đổi (<code>normalise.py</code>, <code>make_template.py</code>, <code>products.*</code>, tài liệu, bản đồ). HEAD <code>bf35ffc</code> vẫn là bản 2.225 sản phẩm.</dd>
+        <dt>Hướng sửa</dt><dd>Sau khi sửa các lỗi còn tồn, chạy lại <code>normalise.py</code> và test, rồi commit cùng lúc để code và dữ liệu khớp nhau.</dd>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<section class="sec flow" id="con-ton">
+  <h2>Còn tồn và việc tiếp theo</h2>
+  <p>Nên xử lý theo thứ tự trong bảng: bốn việc đầu làm thay đổi dữ liệu, nên phải sửa xong trước khi sinh lại tài liệu và commit.</p>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Việc</th><th>Chỗ cần sửa</th><th>Hướng sửa</th><th>Ảnh hưởng tới</th></tr></thead>
+      <tbody>
+        <tr><td>Thiếu giá bị suy thành “không bán vé” (140 sản phẩm)</td><td><code>normalise.py:756</code>, <code>drop_unsellable</code></td><td>Thêm trạng thái “chưa rõ giá”; đưa 140 bản ghi vào <code>quality_review.csv</code> để xác minh</td><td>Web hiển thị giá; Agent xếp lịch</td></tr>
+        <tr><td>Mô tả VW02335 sai sản phẩm</td><td><code>excluded_products.csv</code></td><td>Đối chiếu cache rồi loại hoặc dựng lại; kiểm tra tự động tên venue trong mô tả</td><td>Embedding; quyền lợi vé hiển thị cho khách</td></tr>
+        <tr><td><code>province</code>, <code>city</code> lệch <code>destination</code></td><td>Bước áp override điểm đến và gắn venue</td><td>Cập nhật tỉnh khi override; tách địa chỉ gốc khỏi tỉnh chuẩn hoá</td><td>Bộ lọc theo tỉnh</td></tr>
+        <tr><td><code>bedrooms = 0</code> ở 5 biệt thự</td><td>Dựng hạng phòng Vinpearl trong <code>normalise.py</code></td><td>Đọc số phòng ngủ từ tên, hoặc để <code>null</code></td><td>Gợi ý theo nhóm khách</td></tr>
+        <tr><td>Hạ Long không có vé máy bay</td><td><code>collectors/trip.py</code>, <code>plan.py</code></td><td>Thêm tuyến bay tới VDO</td><td>Gợi ý chéo danh mục ở Tuần 3</td></tr>
+        <tr><td>Tài liệu lệch số liệu</td><td><code>BANGIAO.md</code>, <code>bao-cao-ban-giao.md</code></td><td>Sinh bảng độ phủ từ catalog</td><td>Các đội nhận bàn giao</td></tr>
+        <tr><td>Chưa commit</td><td>14 file</td><td>Commit sau khi sửa các việc trên và chạy lại test</td><td>Khả năng tái lập</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Giới hạn đã biết, không phải lỗi</h3>
+  <ul>
+    <li>Giờ mở cửa mới có ở 61,2% điểm tham quan và thời lượng lớn hơn 0 ở 44,7%, chưa đủ để xếp lịch theo giờ cho mọi điểm.</li>
+    <li>57,5% mô tả là tự sinh, và nhãn ngôn ngữ chỉ là ước lượng. RecSys nên lọc theo <code>descriptionSource</code> khi xây text cho embedding.</li>
+    <li>297 toạ độ vé là vị trí khu vui chơi, 244 toạ độ vé máy bay là sân bay đến.</li>
+    <li>Giá là ảnh chụp ngày 15–16/09 và sẽ cũ dần. Vì <code>productId</code> ổn định, crawl lại giá không làm đứt liên kết.</li>
+    <li>CDP clone (dựng schema và nạp dữ liệu) cũng thuộc nhiệm vụ Tuần 1 nhưng nằm ngoài phạm vi báo cáo crawl này, và hiện chưa làm.</li>
+  </ul>
+</section>
+
+<section class="sec flow" id="phu-luc">
+  <h2>Phụ lục cho người tiếp quản</h2>
+
+  <h3>Dựng lại catalog từ đầu</h3>
+<pre><code>conda activate vsf
+cd /home/dangkhoi/code/vsf/data-collection
+
+<span class="c"># Crawl trọn kế hoạch: Vinpearl → trip.com → booking.com → agoda.com → normalise</span>
+python crawl.py handbook --fast
+python crawl.py status
+
+<span class="c"># Toạ độ địa điểm dùng vé (chỉ gọi mạng cho dòng chưa có toạ độ)</span>
+python crawl.py venues
+
+<span class="c"># Làm sạch và sinh tài liệu</span>
+python normalise.py
+python make_template.py
+python make_sample.py</code></pre>
+
+  <h3>Sửa mà không tải lại web</h3>
+<pre><code><span class="c"># Sửa parser: đọc lại HTML/JSON trong data/raw/</span>
+python crawl.py reparse agoda-hotels
+python normalise.py
+
+<span class="c"># Chỉ lấy lại trường còn thiếu của bản ghi đã lưu (tự sao lưu trước)</span>
+python crawl.py retry-missing vinpearl
+
+<span class="c"># Kiểm tra hồi quy offline (14 test)</span>
+python -m unittest test_quality test_overnight -v</code></pre>
+
+  <h3>File và thư mục</h3>
+  <div class="tbl">
+    <table class="wide">
+      <thead><tr><th>Đường dẫn</th><th>Chứa gì</th></tr></thead>
+      <tbody>
+        <tr><td><code>collectors/plan.py</code></td><td>15 điểm đến, slug của từng nguồn, ngân sách</td></tr>
+        <tr><td><code>collectors/common.py</code></td><td>Cache, hàng đợi, robots.txt, giới hạn tốc độ, trình duyệt, khoá tiến trình</td></tr>
+        <tr><td><code>collectors/vinpearl.py</code>, <code>trip.py</code>, <code>booking_hotels.py</code>, <code>agoda_hotels.py</code></td><td>Crawler cho từng nguồn</td></tr>
+        <tr><td><code>collectors/retry_missing.py</code></td><td>Tải lại bản ghi còn thiếu</td></tr>
+        <tr><td><code>collectors/venues.py</code>, <code>geo.py</code>, <code>mapexport.py</code></td><td>Địa điểm dùng vé, toạ độ và bán kính điểm đến, xuất bản đồ</td></tr>
+        <tr><td><code>normalise.py</code></td><td>Toàn bộ bước làm sạch</td></tr>
+        <tr><td><code>collectors/*.csv</code></td><td>Các quyết định soát tay, kèm bằng chứng</td></tr>
+        <tr><td><code>data/raw/</code>, <code>interim/</code>, <code>state/</code>, <code>logs/</code>, <code>backups/</code></td><td>Cache thô, bản ghi nguồn, hàng đợi, log, bản sao lưu</td></tr>
+        <tr><td><code>data/products.jsonl</code>, <code>stats.md</code>, <code>quality_review.csv</code>, <code>dedup_report.csv</code>, <code>map/</code></td><td>Đầu ra</td></tr>
+        <tr><td><code>reports/crawl-audit-2026-09-15/</code>, <code>../KIEM_TRA_BAN_GIAO_20260916.md</code></td><td>Audit lúc 17:15 ngày 15/09 và biên bản kiểm tra lúc 13:39 ngày 16/09</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="foot">Báo cáo được viết ngày 16/09/2026 từ log, <code>crawl_state.sqlite</code>, interim, catalog và lịch sử git trong <code>data-collection/</code>. Khi viết báo cáo không tải lại website nào và không sửa file dữ liệu nào.</p>
+</section>
+</main>
+</div>
+</div>
+
+<script>
+(function () {
+  var issues = Array.prototype.slice.call(document.querySelectorAll('.issue'));
+  var groups = document.querySelectorAll('.igroup');
+  var buttons = document.querySelectorAll('[data-filter]');
+  var out = document.getElementById('issue-count');
+  var state = { status: 'all', group: 'all' };
+
+  function apply() {
+    var shown = 0;
+    issues.forEach(function (el) {
+      var ok = (state.status === 'all' || el.dataset.status === state.status) &&
+               (state.group === 'all' || el.dataset.group === state.group);
+      el.hidden = !ok;
+      if (ok) shown++;
+    });
+    groups.forEach(function (g) { g.hidden = !g.querySelector('.issue:not([hidden])'); });
+    out.textContent = shown ? 'Đang hiện ' + shown + '/' + issues.length + ' vấn đề'
+                            : 'Không có vấn đề nào khớp bộ lọc này';
+  }
+
+  buttons.forEach(function (btn) {
+    var key = btn.dataset.filter, val = btn.dataset.value;
+    var n = val === 'all' ? issues.length : issues.filter(function (i) { return i.dataset[key] === val; }).length;
+    var badge = btn.querySelector('.n');
+    if (badge) badge.textContent = n;
+    btn.addEventListener('click', function () {
+      state[key] = val;
+      document.querySelectorAll('[data-filter="' + key + '"]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      apply();
+    });
+  });
+  apply();
+})();
+</script>

@@ -1,0 +1,7 @@
+2026/09/16-00:16:58.845 8536 Reusing MANIFEST /home/dangkhoi/code/vsf/data-collection/data/browser-profile/booking_hotels/Default/Local Storage/leveldb/MANIFEST-000001
+2026/09/16-00:16:58.849 8536 Recovering log #4
+2026/09/16-00:16:58.849 8536 Level-0 table #7: started
+2026/09/16-00:16:58.851 8536 Level-0 table #7: 64599 bytes OK
+2026/09/16-00:16:58.851 8536 Recovering log #6
+2026/09/16-00:16:58.852 8536 Reusing old log /home/dangkhoi/code/vsf/data-collection/data/browser-profile/booking_hotels/Default/Local Storage/leveldb/000006.log 
+2026/09/16-00:16:58.854 8536 Delete type=0 #4

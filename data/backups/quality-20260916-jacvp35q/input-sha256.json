@@ -1,0 +1,7 @@
+{
+  "data/interim/agoda_hotels.jsonl": "353c42efe504f4ca8974da7046819accaa08860dc8a32b80af2e70a091f9a61b",
+  "data/interim/booking_hotels.jsonl": "ebe36bdf93c81773555a698645fef33153043afb59e1bbfca055800c0a2dd146",
+  "data/interim/trip_attractions.jsonl": "00d1d782c91407546b766a2fad9b312766e7edccd30330c91c3d15bd5ce18c64",
+  "data/interim/trip_flights.jsonl": "0d7d28a230615c3075c1527c5d7748a9cbe25d33d89e7141e0c5ff1a78c370bf",
+  "data/interim/vinpearl.jsonl": "ae71172db54d50693b1695516b3ff730f2dca9abdebf14ebeea8e0668ff75885"
+}

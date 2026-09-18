@@ -6,8 +6,8 @@ Mảng Data · handbook RecSys internship v3 §3 và §11 · 16/09/2026
 
 Catalog **đạt toàn bộ mốc nghiệm thu §3** và đã sẵn sàng bàn giao cho ba mảng Web, Agent, RecSys.
 
-**2.225 sản phẩm trên 15 điểm đến.** Mọi sản phẩm đều có mô tả tiếng Việt và toạ độ. Mọi sản phẩm có bán vé
-đều có giá — 146 sản phẩm còn `unitPrice = null` đều là điểm công cộng không bán vé, với chúng không có giá
+**2.216 sản phẩm trên 15 điểm đến.** Mọi sản phẩm đều có mô tả tiếng Việt và toạ độ. Mọi sản phẩm có bán vé
+đều có giá — 140 sản phẩm còn `unitPrice = null` đều là điểm công cộng không bán vé, với chúng không có giá
 là dữ liệu đúng.
 
 Phần còn thiếu của Tuần 1 là **CDP clone** — chưa dựng schema và chưa nạp danh mục vào cơ sở dữ liệu.
@@ -15,18 +15,18 @@ Ba đội đang đọc trực tiếp từ file; cần thay bằng CDP clone trư
 
 | Chỉ số | Giá trị |
 |---|---|
-| Sản phẩm | 2.225 |
-| Điểm đến theo kế hoạch | 15 (thấp nhất Hạ Long 68) |
+| Sản phẩm | 2.216 |
+| Điểm đến theo kế hoạch | 15 (thấp nhất Hạ Long 67) |
 | Mô tả tiếng Việt | 100% |
 | Có toạ độ | 100% |
-| Có giá | 93,4% — phần còn lại là điểm công cộng không bán vé |
+| Có giá | 93,7% — phần còn lại là điểm công cộng không bán vé |
 | Có ảnh | 89,0% — chỉ vé máy bay không có ảnh |
 
 ## 2. Đối chiếu nhiệm vụ Tuần 1 (§11, mảng Data)
 
 | Nhiệm vụ | Trạng thái | Bằng chứng |
 |---|---|---|
-| Dẫn dắt thu thập theo §3 | Xong | 2.225 sản phẩm từ 4 nguồn, 15 điểm đến |
+| Dẫn dắt thu thập theo §3 | Xong | 2.216 sản phẩm từ 4 nguồn, 15 điểm đến |
 | Cache response thô trước khi parse | Xong | 42 MB HTML/JSON gốc trong `data/raw/`; sửa parser thì `reparse` đọc lại từ cache, không tải lại web |
 | Xử lý rate limit và lỗi | Xong | Tự giới hạn tốc độ, kiểm tra `robots.txt`, dừng khi bị chặn và chạy tiếp sau; lỗi xử lý theo từng item |
 | Chạy tiếp được khi gián đoạn | Xong | Hàng đợi URL trong `state/crawl_state.sqlite`; toàn bộ 899 URL của kế hoạch ở trạng thái `done` |
@@ -42,13 +42,13 @@ Ba đội đang đọc trực tiếp từ file; cần thay bằng CDP clone trư
 
 | Tiêu chí | Kết quả | Đánh giá |
 |---|---|---|
-| 2.000–5.000 sản phẩm | 2.225 | Đạt |
-| 10–15 điểm đến, ≥20 sản phẩm mỗi nơi | 15 điểm, thấp nhất 68 | Đạt |
+| 2.000–5.000 sản phẩm | 2.216 | Đạt |
+| 10–15 điểm đến, ≥20 sản phẩm mỗi nơi | 15 điểm, thấp nhất 67 | Đạt |
 | Đủ hotel, flight, attraction, combo | Đủ cả bốn, thêm golf | Đạt |
-| Mô tả tiếng Việt dùng được cho embedding | 2.225/2.225 — 100% | Đạt |
+| Mô tả tiếng Việt dùng được cho embedding | 2.216/2.216 — 100% | Đạt |
 | Có giá | Mọi sản phẩm bán vé đều có giá | Đạt |
 | vinpearl.com là nguồn chính cho tên và mô tả | Ưu tiên Vinpearl → booking → agoda | Đạt |
-| Có toạ độ (§3: "nếu có") | 2.225 — 100% | Đạt |
+| Có toạ độ (§3: "nếu có") | 2.216 — 100% | Đạt |
 | Khử trùng lặp đa nguồn | 53 cặp giữa 4 nguồn | Đạt |
 | Chỉ dữ liệu sản phẩm, không dữ liệu cá nhân | Không có nội dung review, tên hay ảnh người đánh giá | Đạt |
 
@@ -60,7 +60,8 @@ Catalog cố ý **chỉ giữ sản phẩm hoàn chỉnh**. Bảng dưới là t
 | Lý do loại | Số lượng |
 |---|---|
 | Không có giá và nguồn không cung cấp được | 48 |
-| Biến thể giá thành viên Vinpearl (đã gộp, giá từng hạng giữ trong `memberPrices`) | 54 |
+| Đã soát tay và loại (`collectors/excluded_products.csv`) | 10 |
+| Biến thể giá thành viên Vinpearl (đã gộp, giá từng hạng giữ trong `memberPrices`) | 53 |
 | Khách sạn trùng giữa các nguồn (đã gộp) | 49 |
 | Điểm tham quan trip.com trùng vé Vinpearl (đã gộp) | 4 |
 | Hạng phòng, chuyến bay của sản phẩm bị loại | 3 |
@@ -78,6 +79,18 @@ Chúng vừa không đặt được vừa gần như không có nội dung để
 click vào là cụt. Bản ghi gốc vẫn nằm trong `data/interim/` và `data/raw/`, chạy lại với cờ
 `--keep-unsellable` là lấy lại được.
 
+**Về 10 sản phẩm loại sau khi soát tay.** Ghi trong `collectors/excluded_products.csv` kèm lý do và bằng chứng:
+
+- **8 bản ghi nguồn xếp nhầm danh mục.** Danh sách điểm tham quan của trip.com có lẫn văn phòng bảo hiểm
+  (Hanwha Life SO Huế), trung tâm tiêm chủng (VNVC Vinh), hãng taxi (Taxi Quy Nhơn Xanh), dịch vụ cho thuê
+  xe máy, công ty lữ hành (Sapa Sisters), hãng du thuyền (Bhaya Cruises), đại lý bán vé và một quán cà phê.
+- **2 vé mà nguồn trả mô tả của sản phẩm khác.** API Vinpearl trả nội dung Bảo Tàng Gấu Teddy Bear cho vé
+  thuyền Water Taxi, và nội dung vé vào cửa VinWonders cho vé Fastpass Water Taxi. Lỗi nằm ở dữ liệu nguồn,
+  không phải ở bước parse.
+
+Danh sách này là tệp riêng chứ không nằm trong code, nên thêm hay bớt một dòng là chạy lại `normalise.py`,
+và người đọc thấy ngay catalog đã bỏ gì, vì sao.
+
 ## 5. Dữ liệu hiện có
 
 ### 5.1 Theo loại sản phẩm
@@ -86,31 +99,31 @@ click vào là cụt. Bản ghi gốc vẫn nằm trong `data/interim/` và `dat
 |---|---|---|
 | Khách sạn (cơ sở lưu trú) | 559 | 316 khách sạn có hạng phòng đi kèm, trung bình 2,9 hạng phòng mỗi khách sạn |
 | Hạng phòng | 907 | Liên kết qua `attributes.parentProductId`; không có hạng phòng nào mất liên kết cha |
-| Điểm tham quan, vé | 416 | 200 vé Vinpearl · 71 vé trip.com bán được · 145 điểm công cộng không bán vé |
+| Điểm tham quan, vé | 407 | 199 vé Vinpearl · 69 vé trip.com bán được · 139 điểm công cộng không bán vé |
 | Vé máy bay | 244 | 60 tuyến và 184 chuyến cụ thể. VietJet Air 131, Sun PhuQuoc Airways 22, Vietravel Airlines 16, Vietnam Airlines 15 |
 | Combo | 93 | Combo nghỉ dưỡng và vé vui chơi Vinpearl |
 | Golf | 6 | Voucher sân golf Vinpearl |
-| **Tổng** | **2.225** | |
+| **Tổng** | **2.216** | |
 
 ### 5.2 Theo điểm đến
 
 | Điểm đến | Khách sạn + phòng | Vé máy bay | Tham quan | Combo | Golf | Tổng |
 |---|---|---|---|---|---|---|
-| Nha Trang | 144 | 23 | 64 | 19 | 1 | 251 |
-| Phú Quốc | 112 | 37 | 68 | 26 | 1 | 244 |
+| Nha Trang | 144 | 23 | 63 | 19 | 1 | 250 |
+| Phú Quốc | 112 | 37 | 67 | 26 | 1 | 243 |
 | Hà Nội | 87 | 33 | 68 | 13 | 0 | 201 |
 | Hải Phòng | 126 | 16 | 25 | 8 | 1 | 176 |
 | TP. Hồ Chí Minh | 99 | 42 | 21 | 1 | 1 | 164 |
 | Đà Nẵng | 93 | 34 | 10 | 0 | 0 | 137 |
-| Nghệ An | 77 | 17 | 28 | 11 | 0 | 133 |
 | Hội An | 101 | 0 | 23 | 8 | 1 | 133 |
+| Nghệ An | 77 | 17 | 27 | 11 | 0 | 132 |
 | Đà Lạt | 96 | 16 | 18 | 0 | 0 | 130 |
-| Huế | 97 | 14 | 18 | 0 | 0 | 129 |
-| Quy Nhơn | 90 | 12 | 18 | 0 | 0 | 120 |
-| Phan Thiết | 98 | 0 | 17 | 0 | 1 | 116 |
-| Sa Pa | 89 | 0 | 18 | 0 | 0 | 107 |
+| Huế | 97 | 14 | 17 | 0 | 0 | 128 |
+| Quy Nhơn | 90 | 12 | 16 | 0 | 0 | 118 |
+| Phan Thiết | 98 | 0 | 16 | 0 | 1 | 115 |
+| Sa Pa | 89 | 0 | 17 | 0 | 0 | 106 |
 | Hà Tĩnh | 83 | 0 | 3 | 7 | 0 | 93 |
-| Hạ Long | 51 | 0 | 17 | 0 | 0 | 68 |
+| Hạ Long | 51 | 0 | 16 | 0 | 0 | 67 |
 
 Thêm 23 sản phẩm Vinpearl ở 5 điểm ngoài kế hoạch (Bắc Ninh 7, Thanh Hóa 4, Quảng Bình 4, Ninh Bình 4,
 Tây Ninh 4) — sản phẩm của chính công ty nên giữ lại và đánh dấu riêng.
@@ -121,7 +134,7 @@ Tây Ninh 4) — sản phẩm của chính công ty nên giữ lại và đánh 
 |---|---|---|---|---|---|---|---|
 | Khách sạn | 559 | 100% | 100% | 99% | 91% | 100% | – |
 | Hạng phòng | 907 | 100% | 100% | 99% | 89% | 100% | – |
-| Điểm tham quan | 416 | 65% | 100% | 57% | 48% | 100% | 62% |
+| Điểm tham quan | 407 | 66% | 100% | 57% | 49% | 100% | 63% |
 | Vé máy bay | 244 | 100% | 0% | 86% | – | 100% | – |
 | Combo | 93 | 100% | 100% | 89% | 100% | 100% | 27% |
 | Golf | 6 | 83% | 100% | 83% | 83% | 100% | 17% |
@@ -131,7 +144,9 @@ không bán vé; vé máy bay không có ảnh vì một chuyến bay không có
 
 ### 5.4 Giá
 
-Toàn bộ là VND. Giá khách sạn là giá **một đêm** cho ngày nhận phòng 15/10/2026, hai người lớn.
+Toàn bộ là VND. Giá khách sạn là giá **một đêm**, hai người lớn. Ngày nhận phòng chủ yếu là 15/10/2026
+(1.455 sản phẩm); 11 sản phẩm hỏi cho ngày khác vì phải hỏi lại giá — luôn đọc `attributes.priceDate`
+thay vì giả định một ngày.
 
 | Loại | Có giá | Thấp nhất | Trung vị | Cao nhất |
 |---|---|---|---|---|
@@ -155,7 +170,7 @@ thành viên VinClub trong `memberPrices` (23 vé).
 | Điểm tham quan | 229 ký tự | 72 | 212 |
 | Vé máy bay | 217 ký tự | 169 | 244 |
 
-**1.281/2.225 mô tả (57,6%) là tự sinh**, nhận biết qua `attributes.descriptionSource`. Bảng đầy đủ từng
+**1.275/2.216 mô tả (57,5%) là tự sinh**, nhận biết qua `attributes.descriptionSource`. Bảng đầy đủ từng
 loại nằm trong `SCHEMA.md` mục 5.
 
 Hai điều đã xử lý ở bước chuẩn hoá và ảnh hưởng trực tiếp tới chất lượng embedding:
@@ -172,14 +187,14 @@ Hai điều đã xử lý ở bước chuẩn hoá và ảnh hưởng trực ti�
 
 - **Hạng sao:** 1.140 sản phẩm. 5 sao 453 · 4–4,5 sao 264 · 3–3,5 sao 319 · 1–2,5 sao 104.
   897 là hạng sao chính thức, 127 là ước lượng của booking.com.
-- **Điểm đánh giá:** 528 sản phẩm có điểm trung bình (trung vị 8,7/10), 690 có số lượt, tổng 726.884 lượt.
+- **Điểm đánh giá:** 528 sản phẩm có điểm trung bình (trung vị 8,7/10), 687 có số lượt, tổng 726.617 lượt.
   Chỉ là chỉ số tổng hợp — không có nội dung review, tên hay ảnh người đánh giá.
 - **Tiện ích:** 1.447 sản phẩm, trung vị 10, nhiều nhất 78.
-- **Ảnh:** 1.981 có ảnh chính (mọi loại trừ vé máy bay), 1.190 có thêm ảnh phụ (trung vị 5 ảnh).
+- **Ảnh:** 1.972 có ảnh chính (mọi loại trừ vé máy bay), 1.181 có thêm ảnh phụ (trung vị 5 ảnh).
 
 ### 5.7 Toạ độ
 
-Toàn bộ 2.225 sản phẩm đều có toạ độ.
+Toàn bộ 2.216 sản phẩm đều có toạ độ.
 
 | Nguồn | Số lượng | | Độ chính xác | Số lượng |
 |---|---|---|---|---|
@@ -200,8 +215,8 @@ golf Vinpearl Léman. Chúng nằm trong `collectors/venues.csv` và `collectors
 | Nguồn | Sản phẩm | Cung cấp gì |
 |---|---|---|
 | booking.com | 1.092 | Độ phủ lưu trú rộng nhất, thuộc tính có cấu trúc phong phú, giá để so sánh |
-| trip.com | 461 | Vé máy bay và điểm tham quan — dữ liệu cho gợi ý chéo danh mục ở Tuần 3 |
-| vinpearl.com | 429 | Sản phẩm của chính công ty. Mô tả tiếng Việt do công ty viết, chất lượng cao nhất |
+| trip.com | 453 | Vé máy bay và điểm tham quan — dữ liệu cho gợi ý chéo danh mục ở Tuần 3 |
+| vinpearl.com | 428 | Sản phẩm của chính công ty. Mô tả tiếng Việt do công ty viết, chất lượng cao nhất |
 | agoda.com | 243 | Bổ sung lưu trú nội địa, mạnh ở cơ sở nhỏ mà booking.com thiếu |
 
 **Thứ tự ưu tiên từng trường** — cùng một cơ sở lưu trú xuất hiện trên nhiều trang với tên, mô tả, giá khác nhau:
@@ -227,28 +242,26 @@ ODbL, khi hiển thị bản đồ phải ghi "© OpenStreetMap contributors". T
 
 ## 7. Gói bàn giao
 
+Gói gửi cho ba đội chỉ gồm những gì cần để dùng dữ liệu:
+
 | File | Nội dung |
 |---|---|
-| `products.jsonl` | **Bản chuẩn** — 2.225 dòng, mỗi dòng 13 trường CDP §6 |
-| `products.csv` | Cùng dữ liệu dạng bảng, để mở xem |
+| `products.jsonl` | **Bản chuẩn** — 2.216 dòng, mỗi dòng 13 trường CDP §6 |
 | `SCHEMA.md` | Tài liệu schema chi tiết: 13 trường, toàn bộ `attributes` theo nhóm, ngữ nghĩa và bẫy thường gặp |
-| `template.json` | Bản máy đọc được của schema, kèm độ phủ từng khoá và bản ghi thật cho cả 7 biến thể |
+| `template.json` | Bản máy đọc được của schema: 97 khoá `attributes` theo từng loại kèm độ phủ thực tế |
 | `sample/` | 50 sản phẩm để chạy thử nhanh, liên kết cha–con toàn vẹn, kèm README riêng |
 | `BANGIAO.md` | Tổng quan gói và ghi chú riêng cho từng đội |
 | `bao-cao-ban-giao.md` | Báo cáo này |
-| `stats.md` | Thống kê đối chiếu §3, bảng điểm đến × loại, mục "Bị loại", mẫu để đọc tay |
-| `quality_review.csv` | Danh sách cần kiểm tra còn lại |
-| `dedup_report.csv` | Các cặp trùng đã gộp kèm điểm khớp và khoảng cách |
-| `map/` | `places.geojson` và ba file CSV import thẳng vào Google My Maps |
 
-Không kèm `data/raw/` (42 MB HTML/JSON thô), `data/interim/`, `data/state/`, `data/logs/` và
-`data/browser-profile/` (cookie phiên đăng nhập).
+Các tệp phục vụ kiểm tra chất lượng nằm trong repo chứ không gửi kèm: `stats.md`, `quality_review.csv`
+(405 dòng cần soát), `dedup_report.csv` (53 cặp đã gộp), `map/places.geojson`, `products.csv`, cùng
+`data/raw/` (42 MB HTML/JSON thô), `data/interim/`, `data/state/`, `data/logs/` và `data/browser-profile/`.
 
 ## 8. Còn lại và giới hạn
 
 **Còn lại trong catalog, không phải lỗi:**
 
-- 146 điểm công cộng không bán vé nên không có giá (Phố cổ Hội An, Mỹ Sơn, hòn Thơm…). Giữ lại vì đây chính
+- 140 điểm công cộng không bán vé nên không có giá (Phố cổ Hội An, Mỹ Sơn, hòn Thơm…). Giữ lại vì đây chính
   là dữ liệu trợ lý lịch trình Tuần 3 cần nhất. Web cần trạng thái hiển thị riêng, không quy về 0 đồng.
 - 244 vé máy bay không có ảnh. Một chuyến bay không có ảnh sản phẩm, nên đây là giới hạn thật của loại dữ liệu.
 - 34 mô tả dưới 120 ký tự, gần như toàn bộ là nhóm điểm công cộng trên — nguồn chỉ có tên và địa chỉ.

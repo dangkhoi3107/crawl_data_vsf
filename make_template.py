@@ -8,7 +8,6 @@ from __future__ import annotations
 import argparse
 import collections
 import json
-import statistics
 
 _ap = argparse.ArgumentParser(description=__doc__)
 _ap.add_argument('--data-dir', default='data')
@@ -122,23 +121,13 @@ for v, items in sorted(groups.items(), key=lambda kv: -len(kv[1])):
         keys[k] = {'do_phu': f'{100*c/m:.0f}%', 'y_nghia': NOTE.get(k, '')}
     attributes_by_taxonomy[v] = {'so_san_pham': m, 'attributes': keys}
 
-# vi du: ban ghi co do dai mo ta gan trung vi nhat, uu tien ban ghi day du truong
-examples = {}
-for v, items in groups.items():
-    lens = sorted(len(o.get('description') or '') for o in items)
-    med = statistics.median(lens)
-    def score(o):
-        a = o.get('attributes') or {}
-        filled = sum(1 for x in a.values() if x not in (None, '', [], {}))
-        return (abs(len(o.get('description') or '') - med) / 100.0) - filled / 10.0
-    examples[v] = min(items, key=score)
-
 out = {
- '_doc': 'Template schema catalog du lịch V-OTA. Mô tả 13 trường CDP, các khoá trong attributes theo từng '
-         'loại sản phẩm, và một bản ghi thật làm ví dụ cho mỗi loại. Sinh tự động từ data/products.jsonl.',
+ '_doc': 'Bản máy đọc được của schema catalog V-OTA: 13 trường CDP và toàn bộ khoá trong attributes theo '
+         'từng loại sản phẩm, kèm độ phủ thực tế. Sinh tự động từ products.jsonl. '
+         'Bản ghi thật để đọc và chạy thử nằm ở sample/ — cố ý không lặp lại ở đây.',
  '_ban': __import__('datetime').date.today().isoformat(),
  '_tong_san_pham': n,
- '_doc_them': 'BANGIAO.md (cùng thư mục) và README.md của repo crawl_data_vsf',
+ '_doc_them': 'SCHEMA.md (giải thích cho người đọc) · sample/ (50 bản ghi thật) · BANGIAO.md',
  'schema': {
      k: {'kieu': SCHEMA[k][0],
          'do_phu': f'{100*schema_cov[k]/n:.1f}%',
@@ -146,7 +135,6 @@ out = {
      for k in SCHEMA
  },
  'attributes_by_taxonomy': attributes_by_taxonomy,
- 'vi_du': examples,
 }
 
 with open(f'{_args.data_dir}/template.json', 'w', encoding='utf-8') as f:

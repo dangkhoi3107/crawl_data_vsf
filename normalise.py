@@ -157,19 +157,26 @@ def name_score(a: list[str], b: list[str]) -> float:
 
 
 def duration_minutes(text: str | None) -> int | None:
-    """'3–5 tiếng đồng hồ' → 180; '1–2 ngày' → 480 (một ngày tham quan ~8 tiếng); '30 phút' → 30."""
+    """'3–5 tiếng đồng hồ' → 180; '1–2 ngày' → 480 (một ngày tham quan ~8 tiếng); '30 phút' → 30.
+
+    Số đầu tiên có thể là thập phân: '0.5–1 ngày' phải ra 240 phút, không phải 0 — đọc số nguyên sẽ lấy
+    nhầm phần '0' và làm 12 địa điểm có thời lượng bằng 0.
+    """
     if not text:
         return None
-    t = fold(text)
-    n = first_int(t)
-    if n is None:
+    t = fold(text)                                   # fold() bỏ dấu chấm thập phân, nên tìm số trên bản gốc
+    m = re.search(r"\d+(?:[.,]\d+)?", text)
+    if not m:
+        return None
+    n = float(m.group(0).replace(",", "."))
+    if n <= 0:
         return None
     if "ngay" in t or "day" in t:
-        return n * 480
+        return round(n * 480)
     if "tieng" in t or "gio" in t or "hour" in t:
-        return n * 60
+        return round(n * 60)
     if "phut" in t or "min" in t:
-        return n
+        return round(n)
     return None
 
 
@@ -1169,6 +1176,27 @@ def merge_pois(tickets: list[dict], pois: list[dict]) -> tuple[list[dict], list[
 
 
 LOCATION_OVERRIDES_CSV = Path(__file__).resolve().parent / "collectors" / "location_overrides.csv"
+EXCLUDED_PRODUCTS_CSV = Path(__file__).resolve().parent / "collectors" / "excluded_products.csv"
+
+
+def load_excluded_products(path: Path | None = None) -> dict[str, str]:
+    """sourceRef của sản phẩm đã soát tay và quyết định loại, kèm lý do.
+
+    Dùng cho thứ mà không quy tắc tự động nào bắt được: nguồn xếp nhầm danh mục (văn phòng bảo hiểm, hãng
+    taxi nằm trong danh sách điểm tham quan), hoặc nguồn trả mô tả của sản phẩm khác.
+    """
+    path = path or EXCLUDED_PRODUCTS_CSV
+    out: dict[str, str] = {}
+    if not path.exists():
+        return out
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            ref, reason = (str(row.get(k) or "").strip() for k in ("sourceRef", "reason"))
+            if ref:
+                out[ref] = reason or "đã soát tay và loại"
+    return out
+
+
 DESTINATION_OVERRIDES_CSV = Path(__file__).resolve().parent / "collectors" / "destination_overrides.csv"
 LOCATION_SOURCE = {"vinpearl": "vinpearl", "booking": "booking.com", "agoda": "agoda.com", "trip_attraction": "trip.com",
                    "booking_attraction": "booking.com"}
@@ -1337,6 +1365,55 @@ def finalize_locations(products: list[dict]) -> None:
             km = km_from_destination(p["destination"], a["latitude"], a["longitude"])
             if km is not None and km > destination_radius_km(p["destination"]):
                 a["locationWarning"] = f"cách tâm {p['destination']} {km:.0f} km"
+
+
+# ---------------------------------------------------------------------- tỉnh / thành
+
+
+# Các nguồn ghi tỉnh theo nhiều kiểu: "Khu vực TP. Hồ Chí Minh", "Thành phố Đà Nẵng", "Đảo Phú Quốc".
+# Đưa về một tên chuẩn để lọc và nhóm được; "Việt Nam" không phải tỉnh nên bỏ hẳn.
+PROVINCE_CANONICAL = {
+    "khu vuc tp ho chi minh": "TP. Hồ Chí Minh",
+    "thanh pho ho chi minh": "TP. Hồ Chí Minh",
+    "ho chi minh": "TP. Hồ Chí Minh",
+    "thanh pho da nang": "Đà Nẵng",
+    "thua thien hue": "Thừa Thiên Huế",
+    "dao phu quoc": "Kiên Giang",
+    "bac ninh": "Bắc Ninh",
+    "khanh hoa": "Khánh Hòa",
+    "thanh hoa": "Thanh Hóa",
+}
+NOT_A_PROVINCE = {"viet nam", "vietnam", "vn"}
+
+
+def canonical_province(raw: str | None) -> str | None:
+    if not raw:
+        return None
+    key = fold(raw)
+    if key in NOT_A_PROVINCE:
+        return None
+    return PROVINCE_CANONICAL.get(key, raw.strip())
+
+
+def tidy_attributes(products: list[dict]) -> Counter:
+    """Chuẩn hoá tỉnh/thành và kiểu số của thuộc tính phòng, sau khi mọi nguồn đã được gộp."""
+    stats: Counter = Counter()
+    for p in products:
+        a = p["attributes"]
+        raw = a.get("province")
+        if raw:
+            canon = canonical_province(raw)
+            if canon is None:
+                a.pop("province", None)
+                stats["bỏ giá trị không phải tỉnh"] += 1
+            elif canon != raw:
+                a["province"] = canon
+                stats["tỉnh/thành đưa về tên chuẩn"] += 1
+        size = a.get("roomSizeM2")
+        if isinstance(size, float):          # nguồn trả lẫn 56 và 56.0
+            a["roomSizeM2"] = int(size) if size == int(size) else round(size, 1)
+            stats["diện tích phòng về một kiểu số"] += 1
+    return stats
 
 
 # ---------------------------------------------------------------------- mô tả tiếng Việt
@@ -1561,6 +1638,9 @@ def write_quality_review(products: list[dict], path: Path) -> None:
                 issues.append("cần đọc lại ngôn ngữ mô tả")
             if a.get("latitude") is None or a.get("longitude") is None:
                 issues.append("thiếu tọa độ")
+            if not p.get("imageUrl"):
+                # vé máy bay không có ảnh sản phẩm: dùng logo hãng qua attributes.airlineCode / airlines
+                issues.append("không có ảnh: dùng logo hãng bay" if p["taxonomy"] == "flight" else "thiếu ảnh")
             if a.get("locationWarning"):
                 issues.append(a["locationWarning"])
             if issues:
@@ -1787,6 +1867,13 @@ def main(argv: list[str] | None = None) -> int:
     for r in raw.get("trip_flights", []):
         products.extend(trip_route_products(r, budget.flights_per_route))
 
+    excluded = load_excluded_products()
+    if excluded:
+        before = len(products)
+        products = [p for p in products if p["sourceRef"] not in excluded]
+        if before - len(products):
+            dropped["đã soát tay và loại (collectors/excluded_products.csv)"] += before - len(products)
+
     if not a.keep_unsellable:
         products, unsellable = drop_unsellable(products)
         if unsellable:
@@ -1812,6 +1899,10 @@ def main(argv: list[str] | None = None) -> int:
             continue
         seen.add(p["productId"])
         final.append(p)
+
+    tidy = tidy_attributes(final)
+    if tidy:
+        log.info("Chuẩn hoá thuộc tính: %s", dict(tidy))
 
     localised = localise_descriptions(final)
     if localised:

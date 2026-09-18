@@ -1,0 +1,532 @@
+2026-09-15 16:30:10,805 INFO    crawler.vinpearl Vinpearl: 15 khách sạn
+2026-09-15 16:30:20,078 INFO    crawler.vinpearl Vinpearl 1/15: Hòn Tằm Resort – 9 hạng phòng
+2026-09-15 16:30:25,598 INFO    crawler.vinpearl Vinpearl 2/15: VinHolidays Fiesta Phú Quốc – 7 hạng phòng
+2026-09-15 16:30:33,665 INFO    crawler.vinpearl Vinpearl 3/15: Vinpearl Beachfront Nha Trang – 9 hạng phòng
+2026-09-15 16:30:40,075 INFO    crawler.vinpearl Vinpearl 4/15: Vinpearl Cửa Hội Resort, Affiliated by Meliá – 11 hạng phòng
+2026-09-15 16:30:46,723 INFO    crawler.vinpearl Vinpearl 5/15: Vinpearl Cửa Sót Resort, Affiliated by Meliá – 3 hạng phòng
+2026-09-15 16:30:53,666 INFO    crawler.vinpearl Vinpearl 6/15: Vinpearl Empire Nha Trang, Affiliated by Meliá – 4 hạng phòng
+2026-09-15 16:31:05,268 INFO    crawler.vinpearl Vinpearl 7/15: Vinpearl Hotel Bắc Ninh – 6 hạng phòng
+2026-09-15 16:31:13,138 INFO    crawler.vinpearl Vinpearl 8/15: Vinpearl Hà Tĩnh, Affiliated by Meliá – 8 hạng phòng
+2026-09-15 16:31:25,746 INFO    crawler.vinpearl Vinpearl 9/15: Vinpearl Luxury Nha Trang – 5 hạng phòng
+2026-09-15 16:31:33,264 INFO    crawler.vinpearl Vinpearl 10/15: Vinpearl Resort & Golf Nam Hội An – 8 hạng phòng
+2026-09-15 16:31:40,190 INFO    crawler.vinpearl Vinpearl 11/15: Vinpearl Resort & Spa Hạ Long – 8 hạng phòng
+2026-09-15 16:31:51,804 INFO    crawler.vinpearl Vinpearl 12/15: Vinpearl Resort & Spa Nha Trang Bay – 13 hạng phòng
+2026-09-15 16:32:00,059 INFO    crawler.vinpearl Vinpearl 13/15: Vinpearl Resort & Spa Phú Quốc – 7 hạng phòng
+2026-09-15 16:32:12,008 INFO    crawler.vinpearl Vinpearl 14/15: Vinpearl Resort Nha Trang – 10 hạng phòng
+2026-09-15 16:32:24,946 INFO    crawler.vinpearl Vinpearl 15/15: Vinpearl Wonderworld Phú Quốc – 8 hạng phòng
+2026-09-15 16:33:07,043 INFO    crawler.vinpearl Vinpearl: 377 sản phẩm tour/vé/combo/golf (API báo tổng 377)
+2026-09-15 16:34:09,363 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=10
+2026-09-15 16:34:11,226 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=11
+2026-09-15 16:34:16,219 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=10
+2026-09-15 16:34:18,357 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=11
+2026-09-15 16:35:22,478 INFO    crawler.vinpearl Vinpearl tour: 50/377
+2026-09-15 16:37:20,542 INFO    crawler.vinpearl Vinpearl tour: 100/377
+2026-09-15 16:38:45,128 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=10
+2026-09-15 16:38:47,140 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=11
+2026-09-15 16:38:52,182 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=10
+2026-09-15 16:38:54,060 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=11
+2026-09-15 16:39:26,528 INFO    crawler.vinpearl Vinpearl tour: 150/377
+2026-09-15 16:39:58,765 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=10
+2026-09-15 16:40:01,424 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=11
+2026-09-15 16:40:29,446 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=10
+2026-09-15 16:40:32,002 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=11
+2026-09-15 16:40:36,850 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=10
+2026-09-15 16:40:39,437 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=11
+2026-09-15 16:40:44,298 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=10
+2026-09-15 16:40:46,674 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=11
+2026-09-15 16:41:42,623 INFO    crawler.vinpearl Vinpearl tour: 200/377
+2026-09-15 16:42:01,332 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=10
+2026-09-15 16:42:03,900 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=11
+2026-09-15 16:42:08,291 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=10
+2026-09-15 16:42:10,584 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=11
+2026-09-15 16:42:15,759 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=10
+2026-09-15 16:42:18,236 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=11
+2026-09-15 16:42:22,759 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=10
+2026-09-15 16:42:24,981 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=11
+2026-09-15 16:42:40,939 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=10
+2026-09-15 16:42:43,397 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=11
+2026-09-15 16:43:11,374 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=10
+2026-09-15 16:43:13,213 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=11
+2026-09-15 16:43:17,674 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=10
+2026-09-15 16:43:19,901 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=11
+2026-09-15 16:43:24,592 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=10
+2026-09-15 16:43:27,044 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=11
+2026-09-15 16:43:48,046 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=10
+2026-09-15 16:43:50,465 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=11
+2026-09-15 16:43:54,801 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=10
+2026-09-15 16:43:57,559 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=11
+2026-09-15 16:44:04,010 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=10
+2026-09-15 16:44:06,076 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=11
+2026-09-15 16:44:29,976 INFO    crawler.vinpearl Vinpearl tour: 250/377
+2026-09-15 16:46:13,044 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=10
+2026-09-15 16:46:15,461 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=11
+2026-09-15 16:46:42,038 INFO    crawler.vinpearl Vinpearl tour: 300/377
+2026-09-15 16:48:14,850 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=10
+2026-09-15 16:48:17,357 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=11
+2026-09-15 16:48:21,762 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=10
+2026-09-15 16:48:24,003 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=11
+2026-09-15 16:48:35,247 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=10
+2026-09-15 16:48:37,842 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=11
+2026-09-15 16:48:52,521 INFO    crawler.vinpearl Vinpearl tour: 350/377
+2026-09-15 16:49:11,276 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=10
+2026-09-15 16:49:13,205 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=11
+2026-09-15 16:49:24,746 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=10
+2026-09-15 16:49:27,198 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=11
+2026-09-15 16:50:05,389 INFO    crawler.vinpearl Vinpearl: 25 sản phẩm không lấy được trang chi tiết – dùng thông tin từ danh sách
+2026-09-15 16:50:05,511 INFO    crawler.vinpearl Đã ghi /home/dangkhoi/code/vsf/data-collection/data/interim/vinpearl.jsonl
+2026-09-15 16:50:05,511 INFO    crawler Vinpearl: {'hotels': 15, 'rooms': 116, 'tours': 377}
+2026-09-15 22:06:54,619 INFO    crawler.vinpearl Vinpearl: 15 khách sạn
+2026-09-15 22:06:54,632 INFO    crawler.vinpearl Vinpearl 1/15: Hòn Tằm Resort – 9 hạng phòng
+2026-09-15 22:06:54,640 INFO    crawler.vinpearl Vinpearl 2/15: VinHolidays Fiesta Phú Quốc – 7 hạng phòng
+2026-09-15 22:06:54,659 INFO    crawler.vinpearl Vinpearl 3/15: Vinpearl Beachfront Nha Trang – 9 hạng phòng
+2026-09-15 22:06:54,677 INFO    crawler.vinpearl Vinpearl 4/15: Vinpearl Cửa Hội Resort, Affiliated by Meliá – 11 hạng phòng
+2026-09-15 22:06:54,683 INFO    crawler.vinpearl Vinpearl 5/15: Vinpearl Cửa Sót Resort, Affiliated by Meliá – 3 hạng phòng
+2026-09-15 22:06:54,690 INFO    crawler.vinpearl Vinpearl 6/15: Vinpearl Empire Nha Trang, Affiliated by Meliá – 4 hạng phòng
+2026-09-15 22:06:54,697 INFO    crawler.vinpearl Vinpearl 7/15: Vinpearl Hotel Bắc Ninh – 6 hạng phòng
+2026-09-15 22:06:54,709 INFO    crawler.vinpearl Vinpearl 8/15: Vinpearl Hà Tĩnh, Affiliated by Meliá – 8 hạng phòng
+2026-09-15 22:06:54,721 INFO    crawler.vinpearl Vinpearl 9/15: Vinpearl Luxury Nha Trang – 5 hạng phòng
+2026-09-15 22:06:54,742 INFO    crawler.vinpearl Vinpearl 10/15: Vinpearl Resort & Golf Nam Hội An – 8 hạng phòng
+2026-09-15 22:06:54,761 INFO    crawler.vinpearl Vinpearl 11/15: Vinpearl Resort & Spa Hạ Long – 8 hạng phòng
+2026-09-15 22:06:54,793 INFO    crawler.vinpearl Vinpearl 12/15: Vinpearl Resort & Spa Nha Trang Bay – 13 hạng phòng
+2026-09-15 22:06:54,803 INFO    crawler.vinpearl Vinpearl 13/15: Vinpearl Resort & Spa Phú Quốc – 7 hạng phòng
+2026-09-15 22:06:54,829 INFO    crawler.vinpearl Vinpearl 14/15: Vinpearl Resort Nha Trang – 10 hạng phòng
+2026-09-15 22:06:54,846 INFO    crawler.vinpearl Vinpearl 15/15: Vinpearl Wonderworld Phú Quốc – 8 hạng phòng
+2026-09-15 22:06:54,856 INFO    crawler.vinpearl Vinpearl: 377 sản phẩm tour/vé/combo/golf (API báo tổng 377)
+2026-09-15 22:06:54,972 INFO    crawler.vinpearl Vinpearl tour: 50/377
+2026-09-15 22:06:55,056 INFO    crawler.vinpearl Vinpearl tour: 100/377
+2026-09-15 22:06:55,129 INFO    crawler.vinpearl Vinpearl tour: 150/377
+2026-09-15 22:06:55,212 INFO    crawler.vinpearl Vinpearl tour: 200/377
+2026-09-15 22:06:55,286 INFO    crawler.vinpearl Vinpearl tour: 250/377
+2026-09-15 22:06:55,389 INFO    crawler.vinpearl Vinpearl tour: 300/377
+2026-09-15 22:06:55,484 INFO    crawler.vinpearl Vinpearl tour: 350/377
+2026-09-15 22:06:55,530 INFO    crawler.vinpearl Vinpearl: 25 sản phẩm không lấy được trang chi tiết – dùng thông tin từ danh sách
+2026-09-15 22:06:55,547 INFO    crawler.vinpearl Đã ghi /home/dangkhoi/code/vsf/data-collection/data/interim/vinpearl.jsonl
+2026-09-15 22:06:55,547 INFO    crawler Vinpearl: {'hotels': 15, 'rooms': 116, 'tours': 377}
+2026-09-15 22:08:52,541 INFO    crawler.venues ~ VinWonders Nha Trang                   Nha Trang          36 vé  12.21740,109.24122     VinWonders (tourism=theme_park)
+2026-09-15 22:08:52,542 INFO    crawler.venues ! Vinpearl Harbour Nha Trang             Nha Trang          13 vé  12.22453,109.23968     chưa đạt kiểm tra: kết quả 'Vinpearl Resort Nha Trang' thiếu từ: harbour
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Hòn Tằm                                Nha Trang          14 vé  12.17472,109.24474     Hòn Tằm (place=island)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Aquafield Nha Trang                    Nha Trang          13 vé  12.21460,109.24094     Aquafield (leisure=sauna)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Vinpearl Golf Nha Trang                Nha Trang           1 vé  12.21254,109.25905     Vinpearl Golf Nha Trang (leisure=golf_course)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ VinWonders Phú Quốc                    Phú Quốc           42 vé  10.33840,103.85468     VinWonders Phú Quốc (tourism=theme_park)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Vinpearl Safari Phú Quốc               Phú Quốc           38 vé  10.33940,103.89501     Vinpearl Safari (tourism=zoo)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Grand World Phú Quốc                   Phú Quốc           25 vé  10.32494,103.85814     Grand World Phú Quốc (landuse=retail)
+2026-09-15 22:08:52,542 INFO    crawler.venues ! Vinpearl Golf Phú Quốc                 Phú Quốc            1 vé  10.35804,103.84952     chưa đạt kiểm tra: kết quả 'Meliá Vinpearl Phu Quoc' thiếu từ: golf
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ VinWonders Nam Hội An                  Hội An             31 vé  15.78878,108.41079     VinWonders Nam Hội An (tourism=theme_park)
+2026-09-15 22:08:52,542 INFO    crawler.venues ! Vinpearl Golf Nam Hội An               Hội An              1 vé  15.88078,108.38962     chưa đạt kiểm tra: kết quả 'Vinpearl Nam Hội An Resort & Villas' thiếu từ: golf
+2026-09-15 22:08:52,542 INFO    crawler.venues ! VinWonders Cửa Hội                     Nghệ An            36 vé  18.77433,105.75142     chưa đạt kiểm tra: kết quả 'VinWonder Cửa Hội' thiếu từ: vinwonders
+2026-09-15 22:08:52,542 INFO    crawler.venues ! Công viên nước Hà Tĩnh                 Hà Tĩnh            10 vé  18.34276,105.89863     chưa đạt kiểm tra: kết quả 'Công Viên' thiếu từ: nuoc
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ VinWonders Vũ Yên                      Hải Phòng          19 vé  20.87200,106.74946     VinWonders Vũ Yên (tourism=theme_park)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Học viện cưỡi ngựa Vinpearl Vũ Yên     Hải Phòng           8 vé  20.87321,106.74637     Học viện cưỡi ngựa Vinpearl Vũ Yên (leisure=horse_riding)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Vinpearl Golf Hải Phòng                Hải Phòng           1 vé  20.87056,106.73321     Vinpearl Golf Haiphong (leisure=golf_course)
+2026-09-15 22:08:52,542 INFO    crawler.venues ! VinWonders Wave Park & Water Park      Hà Nội             14 vé  20.95647,105.97655     chưa đạt kiểm tra: kết quả 'VinWonders Olympic Swimming Pool_Bể bơi' thiếu từ: wave
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Aquafield Ocean City                   Hà Nội             11 vé  20.95160,105.97504     Aquafield Ocean City (shop=beauty)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Mega Grand World Hà Nội                Hà Nội              6 vé  20.95544,105.97997     Mega Grand World Hà Nội (landuse=retail)
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ VinKE & Vinpearl Aquarium Times City   Hà Nội             10 vé  20.99637,105.86789     Vinpearl Aquarium Times City (tourism=aquarium)
+2026-09-15 22:08:52,542 INFO    crawler.venues ! Show "Đất nước thiên hùng ca"          Hà Nội             33 vé  20.95680,105.97742     chưa đạt kiểm tra: kết quả 'Điểm Vui Chơi Cầu Trượt Nước' thiếu từ: ca dat
+2026-09-15 22:08:52,542 INFO    crawler.venues ~ Công viên Grand Park                   TP. Hồ Chí Minh     7 vé  10.83943,106.84576     Công viên 36 hecta Vinhome Grand Park (highway=bus_stop)
+2026-09-15 22:08:52,542 INFO    crawler.venues ! Vinpearl Golf Léman                    TP. Hồ Chí Minh     1 vé  –                      không tìm thấy trên trip.com / OpenStreetMap với: Vinpearl Golf Léman | Léman Golf
+2026-09-15 22:08:52,542 INFO    crawler.venues Địa điểm: {'auto': 15, 'review': 8}. Đã ghi /home/dangkhoi/code/vsf/data-collection/collectors/venues.csv
+2026-09-15 22:08:52,542 WARNING crawler.venues 8 địa điểm có vé nhưng chưa có toạ độ dùng được: Vinpearl Harbour Nha Trang, Vinpearl Golf Phú Quốc, Vinpearl Golf Nam Hội An, VinWonders Cửa Hội, Công viên nước Hà Tĩnh, VinWonders Wave Park & Water Park, Show "Đất nước thiên hùng ca", Vinpearl Golf Léman. Mở venues.csv, xem cột mapUrl/note, điền latitude, longitude đúng rồi đặt status=ok.
+2026-09-15 22:08:52,543 INFO    crawler.venues 6 vé không khớp địa điểm nào (thiếu nhà cung cấp và tên không chứa alias) – xem data/map/can-kiem-tra.csv sau khi normalise.
+2026-09-15 22:11:15,075 INFO    crawler.venues ~ VinWonders Nha Trang                   Nha Trang          36 vé  12.21740,109.24122     VinWonders (tourism=theme_park)
+2026-09-15 22:11:15,075 INFO    crawler.venues ! Vinpearl Harbour Nha Trang             Nha Trang          13 vé  12.22453,109.23968     chưa đạt kiểm tra: kết quả 'Vinpearl Resort Nha Trang' thiếu từ: harbour
+2026-09-15 22:11:15,075 INFO    crawler.venues ~ Hòn Tằm                                Nha Trang          14 vé  12.17472,109.24474     Hòn Tằm (place=island)
+2026-09-15 22:11:15,075 INFO    crawler.venues ~ Aquafield Nha Trang                    Nha Trang          13 vé  12.21460,109.24094     Aquafield (leisure=sauna)
+2026-09-15 22:11:15,075 INFO    crawler.venues ~ Vinpearl Golf Nha Trang                Nha Trang           1 vé  12.21254,109.25905     Vinpearl Golf Nha Trang (leisure=golf_course)
+2026-09-15 22:11:15,075 INFO    crawler.venues ~ VinWonders Phú Quốc                    Phú Quốc           42 vé  10.33840,103.85468     VinWonders Phú Quốc (tourism=theme_park)
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ Vinpearl Safari Phú Quốc               Phú Quốc           38 vé  10.33940,103.89501     Vinpearl Safari (tourism=zoo)
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ Grand World Phú Quốc                   Phú Quốc           25 vé  10.32494,103.85814     Grand World Phú Quốc (landuse=retail)
+2026-09-15 22:11:15,076 INFO    crawler.venues ! Vinpearl Golf Phú Quốc                 Phú Quốc            1 vé  10.35804,103.84952     chưa đạt kiểm tra: kết quả 'Meliá Vinpearl Phu Quoc' thiếu từ: golf
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ VinWonders Nam Hội An                  Hội An             31 vé  15.78878,108.41079     VinWonders Nam Hội An (tourism=theme_park)
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ Vinpearl Golf Nam Hội An               Hội An              1 vé  15.79402,108.41228     Vin Pearl Golf Course (leisure=golf_course)
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ VinWonders Cửa Hội                     Nghệ An            36 vé  18.77433,105.75142     VinWonder Cửa Hội (tourism=theme_park)
+2026-09-15 22:11:15,076 INFO    crawler.venues ! Công viên nước Hà Tĩnh                 Hà Tĩnh            10 vé  18.34276,105.89863     chưa đạt kiểm tra: kết quả 'Công Viên' thiếu từ: nuoc
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ VinWonders Vũ Yên                      Hải Phòng          19 vé  20.87200,106.74946     VinWonders Vũ Yên (tourism=theme_park)
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ Học viện cưỡi ngựa Vinpearl Vũ Yên     Hải Phòng           8 vé  20.87321,106.74637     Học viện cưỡi ngựa Vinpearl Vũ Yên (leisure=horse_riding)
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ Vinpearl Golf Hải Phòng                Hải Phòng           1 vé  20.87056,106.73321     Vinpearl Golf Haiphong (leisure=golf_course)
+2026-09-15 22:11:15,076 INFO    crawler.venues ! VinWonders Wave Park & Water Park      Hà Nội             14 vé  20.95647,105.97655     chưa đạt kiểm tra: kết quả 'VinWonders Olympic Swimming Pool_Bể bơi' thiếu từ: wave
+2026-09-15 22:11:15,076 INFO    crawler.venues ~ Aquafield Ocean City                   Hà Nội             11 vé  20.95160,105.97504     Aquafield Ocean City (shop=beauty)
+2026-09-15 22:11:15,077 INFO    crawler.venues ~ Mega Grand World Hà Nội                Hà Nội              6 vé  20.95544,105.97997     Mega Grand World Hà Nội (landuse=retail)
+2026-09-15 22:11:15,077 INFO    crawler.venues ~ VinKE & Vinpearl Aquarium Times City   Hà Nội             10 vé  20.99637,105.86789     Vinpearl Aquarium Times City (tourism=aquarium)
+2026-09-15 22:11:15,077 INFO    crawler.venues ! Show "Đất nước thiên hùng ca"          Hà Nội             33 vé  20.95680,105.97742     chưa đạt kiểm tra: kết quả 'Điểm Vui Chơi Cầu Trượt Nước' thiếu từ: ca dat
+2026-09-15 22:11:15,077 INFO    crawler.venues ~ Công viên Grand Park                   TP. Hồ Chí Minh     7 vé  10.83994,106.84728     Công viên nước Grand Park (leisure=water_park)
+2026-09-15 22:11:15,077 INFO    crawler.venues ! Vinpearl Golf Léman                    TP. Hồ Chí Minh     1 vé  –                      không tìm thấy trên trip.com / OpenStreetMap với: Vinpearl Golf Léman | Léman Golf
+2026-09-15 22:11:15,077 INFO    crawler.venues Địa điểm: {'auto': 17, 'review': 6}. Đã ghi /home/dangkhoi/code/vsf/data-collection/collectors/venues.csv
+2026-09-15 22:11:15,077 WARNING crawler.venues 6 địa điểm có vé nhưng chưa có toạ độ dùng được: Vinpearl Harbour Nha Trang, Vinpearl Golf Phú Quốc, Công viên nước Hà Tĩnh, VinWonders Wave Park & Water Park, Show "Đất nước thiên hùng ca", Vinpearl Golf Léman. Mở venues.csv, xem cột mapUrl/note, điền latitude, longitude đúng rồi đặt status=ok.
+2026-09-15 22:11:15,077 INFO    crawler.venues 6 vé không khớp địa điểm nào (thiếu nhà cung cấp và tên không chứa alias) – xem data/map/can-kiem-tra.csv sau khi normalise.
+2026-09-15 22:11:29,372 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-15 22:11:29,574 INFO    normalise Khách sạn: 15 bản ghi → 15 sau khi gộp
+2026-09-15 22:11:29,652 INFO    normalise Đã ghi 508 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, stats.md, map/)
+2026-09-15 22:11:29,652 WARNING normalise Catalog có 508 sản phẩm – handbook nhắm 2000–5000. Xem data/stats.md.
+2026-09-15 22:13:42,066 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-15 22:13:42,266 INFO    normalise Khách sạn: 15 bản ghi → 15 sau khi gộp
+2026-09-15 22:13:42,345 INFO    normalise Đã ghi 508 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, stats.md, map/)
+2026-09-15 22:13:42,345 WARNING normalise Catalog có 508 sản phẩm – handbook nhắm 2000–5000. Xem data/stats.md.
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ VinWonders Nha Trang                   Nha Trang          36 vé  12.21740,109.24122     VinWonders (tourism=theme_park)
+2026-09-15 22:23:05,844 INFO    crawler.venues ! Vinpearl Harbour Nha Trang             Nha Trang          13 vé  12.22453,109.23968     chưa đạt kiểm tra: kết quả 'Vinpearl Resort Nha Trang' thiếu từ: harbour
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Hòn Tằm                                Nha Trang          14 vé  12.17472,109.24474     Hòn Tằm (place=island)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Aquafield Nha Trang                    Nha Trang          11 vé  12.21460,109.24094     Aquafield (leisure=sauna)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Vinpearl Golf Nha Trang                Nha Trang           1 vé  12.21254,109.25905     Vinpearl Golf Nha Trang (leisure=golf_course)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ VinWonders Phú Quốc                    Phú Quốc           42 vé  10.33840,103.85468     VinWonders Phú Quốc (tourism=theme_park)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Vinpearl Safari Phú Quốc               Phú Quốc           38 vé  10.33940,103.89501     Vinpearl Safari (tourism=zoo)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Grand World Phú Quốc                   Phú Quốc           25 vé  10.32494,103.85814     Grand World Phú Quốc (landuse=retail)
+2026-09-15 22:23:05,844 INFO    crawler.venues ! Vinpearl Golf Phú Quốc                 Phú Quốc            1 vé  10.35804,103.84952     chưa đạt kiểm tra: kết quả 'Meliá Vinpearl Phu Quoc' thiếu từ: golf
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ VinWonders Nam Hội An                  Hội An             31 vé  15.78878,108.41079     VinWonders Nam Hội An (tourism=theme_park)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Vinpearl Golf Nam Hội An               Hội An              1 vé  15.79402,108.41228     Vin Pearl Golf Course (leisure=golf_course)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ VinWonders Cửa Hội                     Nghệ An            36 vé  18.77433,105.75142     VinWonder Cửa Hội (tourism=theme_park)
+2026-09-15 22:23:05,844 INFO    crawler.venues ! Công viên nước Hà Tĩnh                 Hà Tĩnh            10 vé  18.34276,105.89863     chưa đạt kiểm tra: kết quả 'Công Viên' thiếu từ: nuoc
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ VinWonders Vũ Yên                      Hải Phòng          21 vé  20.87200,106.74946     VinWonders Vũ Yên (tourism=theme_park)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Học viện cưỡi ngựa Vinpearl Vũ Yên     Hải Phòng           8 vé  20.87321,106.74637     Học viện cưỡi ngựa Vinpearl Vũ Yên (leisure=horse_riding)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Vinpearl Golf Hải Phòng                Hải Phòng           1 vé  20.87056,106.73321     Vinpearl Golf Haiphong (leisure=golf_course)
+2026-09-15 22:23:05,844 INFO    crawler.venues ! VinWonders Wave Park & Water Park      Hà Nội             14 vé  20.95647,105.97655     chưa đạt kiểm tra: kết quả 'VinWonders Olympic Swimming Pool_Bể bơi' thiếu từ: wave
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Aquafield Ocean City                   Hà Nội             13 vé  20.95160,105.97504     Aquafield Ocean City (shop=beauty)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Mega Grand World Hà Nội                Hà Nội              6 vé  20.95544,105.97997     Mega Grand World Hà Nội (landuse=retail)
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ VinKE & Vinpearl Aquarium Times City   Hà Nội             10 vé  20.99637,105.86789     Vinpearl Aquarium Times City (tourism=aquarium)
+2026-09-15 22:23:05,844 INFO    crawler.venues ! Show "Đất nước thiên hùng ca"          Hà Nội             33 vé  20.95680,105.97742     chưa đạt kiểm tra: kết quả 'Điểm Vui Chơi Cầu Trượt Nước' thiếu từ: ca dat
+2026-09-15 22:23:05,844 INFO    crawler.venues ~ Công viên Grand Park                   TP. Hồ Chí Minh     9 vé  10.83994,106.84728     Công viên nước Grand Park (leisure=water_park)
+2026-09-15 22:23:05,844 INFO    crawler.venues ! Vinpearl Golf Léman                    TP. Hồ Chí Minh     1 vé  –                      không tìm thấy trên trip.com / OpenStreetMap với: Vinpearl Golf Léman | Léman Golf
+2026-09-15 22:23:05,844 INFO    crawler.venues Địa điểm: {'auto (giữ nguyên)': 17, 'review (giữ nguyên)': 6}. Đã ghi /home/dangkhoi/code/vsf/data-collection/collectors/venues.csv
+2026-09-15 22:23:05,844 WARNING crawler.venues 6 địa điểm có vé nhưng chưa có toạ độ dùng được: Vinpearl Harbour Nha Trang, Vinpearl Golf Phú Quốc, Công viên nước Hà Tĩnh, VinWonders Wave Park & Water Park, Show "Đất nước thiên hùng ca", Vinpearl Golf Léman. Mở venues.csv, xem cột mapUrl/note, điền latitude, longitude đúng rồi đặt status=ok.
+2026-09-15 22:23:05,844 INFO    crawler.venues 2 vé không khớp địa điểm nào (thiếu nhà cung cấp và tên không chứa alias) – xem data/map/can-kiem-tra.csv sau khi normalise.
+2026-09-15 22:23:05,994 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-15 22:23:06,197 INFO    normalise Khách sạn: 15 bản ghi → 15 sau khi gộp
+2026-09-15 22:23:06,276 INFO    normalise Đã ghi 508 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, stats.md, map/)
+2026-09-15 22:23:06,276 WARNING normalise Catalog có 508 sản phẩm – handbook nhắm 2000–5000. Xem data/stats.md.
+2026-09-15 22:23:52,645 INFO    normalise Đọc vinpearl.jsonl: 392 bản ghi
+2026-09-15 22:23:52,853 INFO    normalise Khách sạn: 15 bản ghi → 15 sau khi gộp
+2026-09-15 22:23:52,934 INFO    normalise Đã ghi 508 sản phẩm → /home/dangkhoi/code/vsf/data-collection/data/products.jsonl (+ products.csv, dedup_report.csv, stats.md, map/)
+2026-09-15 22:23:52,934 WARNING normalise Catalog có 508 sản phẩm – handbook nhắm 2000–5000. Xem data/stats.md.
+2026-09-15 23:05:07,503 INFO    crawler [booking_hotels] Giá lấy cho 2026-10-15, 1 đêm, 2 người lớn (VND)
+2026-09-15 23:05:07,897 INFO    crawler.browser [booking_hotels] 77 file sitemap phù hợp
+2026-09-15 23:05:11,076 INFO    crawler.browser [booking_hotels] sitemap 1/77: 0 URL phù hợp (tổng 0)
+2026-09-15 23:05:13,329 INFO    crawler.browser [booking_hotels] sitemap 2/77: 1 URL phù hợp (tổng 1)
+2026-09-15 23:05:16,028 INFO    crawler.browser [booking_hotels] sitemap 3/77: 22 URL phù hợp (tổng 23)
+2026-09-15 23:05:18,254 INFO    crawler.browser [booking_hotels] sitemap 4/77: 0 URL phù hợp (tổng 23)
+2026-09-15 23:05:18,254 INFO    crawler.browser [booking_hotels] Đã qua vùng dữ liệu Việt Nam trong sitemap – dừng quét
+2026-09-15 23:05:26,806 INFO    crawler.booking [booking_hotels] Nha Trang: 20 khách sạn
+2026-09-15 23:05:36,267 INFO    crawler.booking [booking_hotels] Phú Quốc: 20 khách sạn
+2026-09-15 23:05:46,970 INFO    crawler.booking [booking_hotels] Hội An: 20 khách sạn
+2026-09-15 23:05:56,635 INFO    crawler.booking [booking_hotels] Đà Nẵng: 20 khách sạn
+2026-09-15 23:06:05,547 INFO    crawler.booking [booking_hotels] Hạ Long: 20 khách sạn
+2026-09-15 23:06:13,866 INFO    crawler.booking [booking_hotels] Hà Nội: 20 khách sạn
+2026-09-15 23:06:24,283 INFO    crawler.booking [booking_hotels] TP. Hồ Chí Minh: 20 khách sạn
+2026-09-15 23:06:34,288 INFO    crawler.booking [booking_hotels] Hải Phòng: 20 khách sạn
+2026-09-15 23:06:43,350 INFO    crawler.booking [booking_hotels] Nghệ An: 20 khách sạn
+2026-09-15 23:06:52,450 INFO    crawler.booking [booking_hotels] Hà Tĩnh: 21 khách sạn
+2026-09-15 23:07:03,487 INFO    crawler.booking [booking_hotels] Đà Lạt: 20 khách sạn
+2026-09-15 23:07:11,322 INFO    crawler.booking [booking_hotels] Huế: 20 khách sạn
+2026-09-15 23:07:25,403 INFO    crawler.booking [booking_hotels] Quy Nhơn: 20 khách sạn
+2026-09-15 23:07:33,132 INFO    crawler.booking [booking_hotels] Sa Pa: 20 khách sạn
+2026-09-15 23:07:43,919 INFO    crawler.booking [booking_hotels] Phan Thiết: 20 khách sạn
+2026-09-15 23:07:43,919 INFO    crawler.browser [booking_hotels] Kế hoạch: đã xếp hàng 301 URL
+2026-09-15 23:07:43,920 INFO    crawler.browser [booking_hotels] Bắt đầu 317 URL · 2 worker · tối thiểu 4.0s/request
+2026-09-15 23:08:20,596 INFO    crawler [booking_hotels] 6/317 xong · 0 lỗi · 0 bỏ qua · 9.82 trang/phút · còn ~31m
+2026-09-15 23:08:53,567 INFO    crawler [booking_hotels] 13/317 xong · 0 lỗi · 0 bỏ qua · 11.20 trang/phút · còn ~27m
+2026-09-15 23:09:25,253 INFO    crawler [booking_hotels] 19/317 xong · 0 lỗi · 0 bỏ qua · 11.25 trang/phút · còn ~26m
+2026-09-15 23:09:59,829 INFO    crawler [booking_hotels] 26/317 xong · 0 lỗi · 0 bỏ qua · 11.48 trang/phút · còn ~25m
+2026-09-15 23:10:30,783 INFO    crawler [booking_hotels] 32/317 xong · 0 lỗi · 0 bỏ qua · 11.51 trang/phút · còn ~24m
+2026-09-15 23:11:00,829 INFO    crawler [booking_hotels] 37/317 xong · 0 lỗi · 0 bỏ qua · 11.27 trang/phút · còn ~24m
+2026-09-15 23:11:33,503 INFO    crawler [booking_hotels] 44/317 xong · 0 lỗi · 0 bỏ qua · 11.50 trang/phút · còn ~23m
+2026-09-15 23:12:07,953 INFO    crawler [booking_hotels] 51/317 xong · 0 lỗi · 0 bỏ qua · 11.59 trang/phút · còn ~22m
+2026-09-15 23:12:41,282 INFO    crawler [booking_hotels] 58/317 xong · 0 lỗi · 0 bỏ qua · 11.70 trang/phút · còn ~22m
+2026-09-15 23:13:13,225 INFO    crawler [booking_hotels] 65/317 xong · 0 lỗi · 0 bỏ qua · 11.84 trang/phút · còn ~21m
+2026-09-15 23:13:47,667 INFO    crawler [booking_hotels] 71/317 xong · 0 lỗi · 0 bỏ qua · 11.71 trang/phút · còn ~21m
+2026-09-15 23:14:20,155 INFO    crawler [booking_hotels] 78/317 xong · 0 lỗi · 0 bỏ qua · 11.81 trang/phút · còn ~20m
+2026-09-15 23:14:52,959 INFO    crawler [booking_hotels] 85/317 xong · 0 lỗi · 0 bỏ qua · 11.89 trang/phút · còn ~19m
+2026-09-15 23:15:23,574 INFO    crawler [booking_hotels] 92/317 xong · 0 lỗi · 0 bỏ qua · 12.01 trang/phút · còn ~18m
+2026-09-15 23:15:57,315 INFO    crawler [booking_hotels] 99/317 xong · 0 lỗi · 0 bỏ qua · 12.04 trang/phút · còn ~18m
+2026-09-15 23:16:27,725 INFO    crawler [booking_hotels] 106/317 xong · 0 lỗi · 0 bỏ qua · 12.14 trang/phút · còn ~17m
+2026-09-15 23:16:59,474 INFO    crawler [booking_hotels] 112/317 xong · 0 lỗi · 0 bỏ qua · 12.10 trang/phút · còn ~16m
+2026-09-15 23:17:30,160 INFO    crawler [booking_hotels] 119/317 xong · 0 lỗi · 0 bỏ qua · 12.18 trang/phút · còn ~16m
+2026-09-15 23:18:02,547 INFO    crawler [booking_hotels] 126/317 xong · 0 lỗi · 0 bỏ qua · 12.22 trang/phút · còn ~15m
+2026-09-15 23:18:36,154 INFO    crawler [booking_hotels] 133/317 xong · 0 lỗi · 0 bỏ qua · 12.23 trang/phút · còn ~15m
+2026-09-15 23:19:15,333 INFO    crawler [booking_hotels] 140/317 xong · 0 lỗi · 0 bỏ qua · 12.15 trang/phút · còn ~14m
+2026-09-15 23:19:47,848 INFO    crawler [booking_hotels] 147/317 xong · 0 lỗi · 0 bỏ qua · 12.18 trang/phút · còn ~13m
+2026-09-15 23:20:20,443 INFO    crawler [booking_hotels] 154/317 xong · 0 lỗi · 0 bỏ qua · 12.21 trang/phút · còn ~13m
+2026-09-15 23:20:50,792 INFO    crawler [booking_hotels] 160/317 xong · 0 lỗi · 0 bỏ qua · 12.20 trang/phút · còn ~12m
+2026-09-15 23:21:23,895 INFO    crawler [booking_hotels] 167/317 xong · 0 lỗi · 0 bỏ qua · 12.22 trang/phút · còn ~12m
+2026-09-15 23:21:57,434 INFO    crawler [booking_hotels] 174/317 xong · 0 lỗi · 0 bỏ qua · 12.23 trang/phút · còn ~11m
+2026-09-15 23:22:28,137 INFO    crawler [booking_hotels] 180/317 xong · 0 lỗi · 0 bỏ qua · 12.21 trang/phút · còn ~11m
+2026-09-15 23:22:59,891 INFO    crawler [booking_hotels] 187/317 xong · 0 lỗi · 0 bỏ qua · 12.25 trang/phút · còn ~10m
+2026-09-15 23:23:31,226 INFO    crawler [booking_hotels] 194/317 xong · 0 lỗi · 0 bỏ qua · 12.29 trang/phút · còn ~10m
+2026-09-15 23:24:04,241 INFO    crawler [booking_hotels] 201/317 xong · 0 lỗi · 0 bỏ qua · 12.30 trang/phút · còn ~9m
+2026-09-15 23:24:34,639 INFO    crawler [booking_hotels] 207/317 xong · 0 lỗi · 0 bỏ qua · 12.29 trang/phút · còn ~8m
+2026-09-15 23:25:04,876 INFO    crawler [booking_hotels] 213/317 xong · 0 lỗi · 0 bỏ qua · 12.28 trang/phút · còn ~8m
+2026-09-15 23:25:39,461 INFO    crawler [booking_hotels] 220/317 xong · 0 lỗi · 0 bỏ qua · 12.27 trang/phút · còn ~7m
+2026-09-15 23:26:09,520 INFO    crawler [booking_hotels] 226/317 xong · 0 lỗi · 0 bỏ qua · 12.26 trang/phút · còn ~7m
+2026-09-15 23:26:41,998 INFO    crawler [booking_hotels] 233/317 xong · 0 lỗi · 0 bỏ qua · 12.28 trang/phút · còn ~6m
+2026-09-15 23:27:15,662 INFO    crawler [booking_hotels] 240/317 xong · 0 lỗi · 0 bỏ qua · 12.29 trang/phút · còn ~6m
+2026-09-15 23:27:46,743 INFO    crawler [booking_hotels] 247/317 xong · 0 lỗi · 0 bỏ qua · 12.32 trang/phút · còn ~5m
+2026-09-15 23:28:19,993 INFO    crawler [booking_hotels] 254/317 xong · 0 lỗi · 0 bỏ qua · 12.33 trang/phút · còn ~5m
+2026-09-15 23:28:54,956 INFO    crawler [booking_hotels] 261/317 xong · 0 lỗi · 0 bỏ qua · 12.32 trang/phút · còn ~4m
+2026-09-15 23:29:27,444 INFO    crawler [booking_hotels] 268/317 xong · 0 lỗi · 0 bỏ qua · 12.34 trang/phút · còn ~3m
+2026-09-15 23:30:00,734 INFO    crawler [booking_hotels] 275/317 xong · 0 lỗi · 0 bỏ qua · 12.34 trang/phút · còn ~3m
+2026-09-15 23:30:33,138 INFO    crawler [booking_hotels] 282/317 xong · 0 lỗi · 0 bỏ qua · 12.36 trang/phút · còn ~2m
+2026-09-15 23:31:03,141 INFO    crawler [booking_hotels] 288/317 xong · 0 lỗi · 0 bỏ qua · 12.35 trang/phút · còn ~2m
+2026-09-15 23:31:35,046 INFO    crawler [booking_hotels] 295/317 xong · 0 lỗi · 0 bỏ qua · 12.37 trang/phút · còn ~1m
+2026-09-15 23:32:11,845 INFO    crawler [booking_hotels] 302/317 xong · 0 lỗi · 0 bỏ qua · 12.34 trang/phút · còn ~1m
+2026-09-15 23:32:45,595 INFO    crawler [booking_hotels] 310/317 xong · 0 lỗi · 0 bỏ qua · 12.39 trang/phút · còn ~0m
+2026-09-15 23:33:17,392 INFO    crawler [booking_hotels] 317/317 xong · 0 lỗi · 0 bỏ qua · 12.40 trang/phút · còn ~0m
+2026-09-15 23:33:17,392 INFO    crawler [booking_hotels] 317/317 xong · 0 lỗi · 0 bỏ qua · 12.40 trang/phút · còn ~0m
+2026-09-15 23:33:17,541 INFO    crawler [booking_hotels] Trạng thái: {'done': 317}
+2026-09-15 23:40:10,563 INFO    crawler ===== vinpearl =====
+2026-09-15 23:40:10,599 INFO    crawler.vinpearl Vinpearl: 15 khách sạn
+2026-09-15 23:40:10,613 INFO    crawler.vinpearl Vinpearl 1/15: Hòn Tằm Resort – 9 hạng phòng
+2026-09-15 23:40:10,621 INFO    crawler.vinpearl Vinpearl 2/15: VinHolidays Fiesta Phú Quốc – 7 hạng phòng
+2026-09-15 23:40:10,639 INFO    crawler.vinpearl Vinpearl 3/15: Vinpearl Beachfront Nha Trang – 9 hạng phòng
+2026-09-15 23:40:10,658 INFO    crawler.vinpearl Vinpearl 4/15: Vinpearl Cửa Hội Resort, Affiliated by Meliá – 11 hạng phòng
+2026-09-15 23:40:10,665 INFO    crawler.vinpearl Vinpearl 5/15: Vinpearl Cửa Sót Resort, Affiliated by Meliá – 3 hạng phòng
+2026-09-15 23:40:10,672 INFO    crawler.vinpearl Vinpearl 6/15: Vinpearl Empire Nha Trang, Affiliated by Meliá – 4 hạng phòng
+2026-09-15 23:40:10,680 INFO    crawler.vinpearl Vinpearl 7/15: Vinpearl Hotel Bắc Ninh – 6 hạng phòng
+2026-09-15 23:40:10,692 INFO    crawler.vinpearl Vinpearl 8/15: Vinpearl Hà Tĩnh, Affiliated by Meliá – 8 hạng phòng
+2026-09-15 23:40:10,704 INFO    crawler.vinpearl Vinpearl 9/15: Vinpearl Luxury Nha Trang – 5 hạng phòng
+2026-09-15 23:40:10,725 INFO    crawler.vinpearl Vinpearl 10/15: Vinpearl Resort & Golf Nam Hội An – 8 hạng phòng
+2026-09-15 23:40:10,745 INFO    crawler.vinpearl Vinpearl 11/15: Vinpearl Resort & Spa Hạ Long – 8 hạng phòng
+2026-09-15 23:40:10,779 INFO    crawler.vinpearl Vinpearl 12/15: Vinpearl Resort & Spa Nha Trang Bay – 13 hạng phòng
+2026-09-15 23:40:10,790 INFO    crawler.vinpearl Vinpearl 13/15: Vinpearl Resort & Spa Phú Quốc – 7 hạng phòng
+2026-09-15 23:40:10,815 INFO    crawler.vinpearl Vinpearl 14/15: Vinpearl Resort Nha Trang – 10 hạng phòng
+2026-09-15 23:40:10,834 INFO    crawler.vinpearl Vinpearl 15/15: Vinpearl Wonderworld Phú Quốc – 8 hạng phòng
+2026-09-15 23:40:10,845 INFO    crawler.vinpearl Vinpearl: 377 sản phẩm tour/vé/combo/golf (API báo tổng 377)
+2026-09-15 23:40:58,079 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=10
+2026-09-15 23:41:02,532 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-wave-park-mua-2-tang-1-ve-vao-cua-tieu-chuan-cong-vien-song-vw02886?Channel=11
+2026-09-15 23:41:13,246 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=10
+2026-09-15 23:41:18,147 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-water-park-ve-cong-vien-nuoc-buffet-250000-vnd-vw02885?Channel=11
+2026-09-15 23:41:22,884 INFO    crawler.vinpearl Vinpearl tour: 50/377
+2026-09-15 23:41:22,999 INFO    crawler.vinpearl Vinpearl tour: 100/377
+2026-09-15 23:41:27,075 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=10
+2026-09-15 23:41:32,309 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-mua-1-tang-1-ve-vao-cua-cong-vien-nuoc-ha-tinh-nguoi-lon-vw02687?Channel=11
+2026-09-15 23:41:41,982 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=10
+2026-09-15 23:41:47,244 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-nuoc-ha-tinh-ve-vao-cua-cong-vien-nuoc-vw02683?Channel=11
+2026-09-15 23:41:52,045 INFO    crawler.vinpearl Vinpearl tour: 150/377
+2026-09-15 23:42:00,235 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=10
+2026-09-15 23:42:02,117 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-cong-vien-grand-park-uu-dai-nhom-ban-combo-cong-vien-nuoc-games-khu-vuon-mong-mo-vw02475?Channel=11
+2026-09-15 23:42:12,017 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=10
+2026-09-15 23:42:15,828 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-da-nang-mua-2-tang-1-ve-vao-cua-tieu-chuan-voucher-am-thuc-300000-vnd-vw02447?Channel=11
+2026-09-15 23:42:24,959 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=10
+2026-09-15 23:42:29,534 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-mua-2-tang-1-ve-vao-cua-tieu-chuan-vinwonders-nam-hoi-an-vw02446?Channel=11
+2026-09-15 23:42:38,842 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=10
+2026-09-15 23:42:43,052 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-uu-dai-nguoi-dia-phuong-vinwonders-nam-hoi-an-ve-vao-cua-xe-buggy-voucher-am-thuc-chicken-fest-vw02445?Channel=11
+2026-09-15 23:42:48,410 INFO    crawler.vinpearl Vinpearl tour: 200/377
+2026-09-15 23:42:53,743 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=10
+2026-09-15 23:42:58,847 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-04-nguoi-lon-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02310?Channel=11
+2026-09-15 23:43:07,888 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=10
+2026-09-15 23:43:12,535 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-02-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02309?Channel=11
+2026-09-15 23:43:21,663 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=10
+2026-09-15 23:43:25,753 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-vu-yen-02-nguoi-lon-01-tre-em-combo-vuon-thu-khu-tro-choi-cong-vien-nuoc-tang-01-tui-tote-vw02308?Channel=11
+2026-09-15 23:43:34,355 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=10
+2026-09-15 23:43:39,159 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-lang-man-cho-cap-doi-ve-jjimjilbang-tieu-chuan-dich-vu-spa-cao-cap-tang-01-bingsu-vw02287?Channel=11
+2026-09-15 23:43:48,998 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=10
+2026-09-15 23:43:53,197 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-one-day-pass-nam-combo-02-cong-vien-ve-jjimjilbang-tieu-chuan-voucher-am-thuc-100k-vw02277?Channel=11
+2026-09-15 23:44:01,984 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=10
+2026-09-15 23:44:06,937 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-uu-dai-thcs-thpt-ve-cong-vien-nuoc-grand-park-vw02171?Channel=11
+2026-09-15 23:44:17,557 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=10
+2026-09-15 23:44:21,972 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-30-uu-dai-hs-tieu-hoc-mam-non-ve-cong-vien-nuoc-grand-park-vw02170?Channel=11
+2026-09-15 23:44:31,086 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=10
+2026-09-15 23:44:34,927 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-6-luot-giam-50-ve-cong-vien-nuoc-grand-park-vw02168?Channel=11
+2026-09-15 23:44:44,297 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=10
+2026-09-15 23:44:48,804 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cheo-thuyen-kayak-30-phut-01-02-nguoi-vw02063?Channel=11
+2026-09-15 23:44:58,426 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=10
+2026-09-15 23:45:03,070 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-cano-keo-du-bay-du-doi-cho-02-nguoi-vw02062?Channel=11
+2026-09-15 23:45:12,167 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=10
+2026-09-15 23:45:16,038 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-10-phao-chuoi-05-07-nguoi-vw02060?Channel=11
+2026-09-15 23:45:20,182 INFO    crawler.vinpearl Vinpearl tour: 250/377
+2026-09-15 23:45:24,711 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=10
+2026-09-15 23:45:29,758 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-20-combo-ve-vao-cua-2-khu-thuy-cung-vinke-times-city-ha-noi-vw01656?Channel=11
+2026-09-15 23:45:34,781 INFO    crawler.vinpearl Vinpearl tour: 300/377
+2026-09-15 23:45:39,180 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=10
+2026-09-15 23:45:43,382 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-02-ve-cap-treo-2-chieu-01-xe-doi-go-kart-nhap-ma-gk15-giam-15-vw01186?Channel=11
+2026-09-15 23:45:53,004 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=10
+2026-09-15 23:45:58,124 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-combo-04-ve-cap-treo-2-chieu-04-xe-don-go-kart-nhap-ma-gk30-giam-30-vw01185?Channel=11
+2026-09-15 23:46:08,893 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=10
+2026-09-15 23:46:12,571 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinwonders-cua-hoi-xeng-may-game-acarde-vw01167?Channel=11
+2026-09-15 23:46:17,918 INFO    crawler.vinpearl Vinpearl tour: 350/377
+2026-09-15 23:46:22,691 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=10
+2026-09-15 23:46:26,819 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-vinpearl-harbour-ve-xem-tata-show-vw01055?Channel=11
+2026-09-15 23:46:36,220 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=10
+2026-09-15 23:46:41,217 WARNING crawler.vinpearl API trả 500 cho https://booking-tour-api.vinpearl.com/api/frontend/tour/copy-times-city-ha-noi-show-dien-nang-tien-ca-tang-ve-vao-cua-vinpearl-aquarium-mien-phi-vw00932?Channel=11
+2026-09-15 23:46:45,538 INFO    crawler.vinpearl Vinpearl: 25 sản phẩm không lấy được trang chi tiết – dùng thông tin từ danh sách
+2026-09-15 23:46:45,686 INFO    crawler.vinpearl Đã ghi /home/dangkhoi/code/vsf/data-collection/data/interim/vinpearl.jsonl
+2026-09-15 23:46:45,686 INFO    crawler Vinpearl: {'hotels': 15, 'rooms': 116, 'tours': 377}
+2026-09-15 23:46:45,687 INFO    crawler ===== trip-flights =====
+2026-09-15 23:47:32,551 INFO    crawler.trip [trip_flights] 11 sân bay trong kế hoạch → 61 tuyến nội địa giữa các điểm đến
+2026-09-15 23:47:32,551 INFO    crawler.trip [trip_flights] Kế hoạch: đã xếp hàng 61 URL
+2026-09-15 23:47:32,551 INFO    crawler.trip [trip_flights] Bắt đầu 61 URL · tối thiểu 4.0s/request
+2026-09-15 23:48:06,310 INFO    crawler [trip_flights] 7/61 xong · 0 lỗi · 0 bỏ qua · 12.44 trang/phút · còn ~4m
+2026-09-15 23:48:41,219 INFO    crawler [trip_flights] 14/61 xong · 0 lỗi · 0 bỏ qua · 12.23 trang/phút · còn ~3m
+2026-09-15 23:49:13,215 INFO    crawler [trip_flights] 21/61 xong · 0 lỗi · 0 bỏ qua · 12.52 trang/phút · còn ~3m
+2026-09-15 23:49:45,443 INFO    crawler [trip_flights] 28/61 xong · 0 lỗi · 0 bỏ qua · 12.64 trang/phút · còn ~2m
+2026-09-15 23:50:18,535 INFO    crawler [trip_flights] 35/61 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~2m
+2026-09-15 23:50:51,817 INFO    crawler [trip_flights] 42/61 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~1m
+2026-09-15 23:51:25,047 INFO    crawler [trip_flights] 49/61 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~0m
+2026-09-15 23:51:58,205 INFO    crawler [trip_flights] 56/61 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~0m
+2026-09-15 23:52:23,115 INFO    crawler [trip_flights] 61/61 xong · 0 lỗi · 0 bỏ qua · 12.60 trang/phút · còn ~0m
+2026-09-15 23:52:23,116 INFO    crawler [trip_flights] Trạng thái: {'done': 61}
+2026-09-15 23:52:23,119 INFO    crawler ===== trip-attractions =====
+2026-09-15 23:52:52,554 INFO    crawler.trip [trip_attractions] Nha Trang: 16 điểm tham quan
+2026-09-15 23:53:26,953 INFO    crawler.trip [trip_attractions] Phú Quốc: 16 điểm tham quan
+2026-09-15 23:53:31,656 WARNING crawler.trip [trip_attractions] không mở được https://vn.trip.com/travel-guide/attraction/hoi-an-668/tourist-attractions/ (gone)
+2026-09-15 23:54:04,334 INFO    crawler.trip [trip_attractions] Đà Nẵng: 17 điểm tham quan
+2026-09-15 23:54:38,009 INFO    crawler.trip [trip_attractions] Hạ Long: 17 điểm tham quan
+2026-09-15 23:55:11,698 INFO    crawler.trip [trip_attractions] Hà Nội: 16 điểm tham quan
+2026-09-15 23:55:45,017 INFO    crawler.trip [trip_attractions] TP. Hồ Chí Minh: 17 điểm tham quan
+2026-09-15 23:56:19,891 INFO    crawler.trip [trip_attractions] Hải Phòng: 19 điểm tham quan
+2026-09-15 23:56:53,208 INFO    crawler.trip [trip_attractions] Nghệ An: 18 điểm tham quan
+2026-09-15 23:57:27,644 INFO    crawler.trip [trip_attractions] Đà Lạt: 18 điểm tham quan
+2026-09-15 23:57:58,736 INFO    crawler.trip [trip_attractions] Huế: 18 điểm tham quan
+2026-09-15 23:58:31,578 INFO    crawler.trip [trip_attractions] Quy Nhơn: 18 điểm tham quan
+2026-09-15 23:59:03,353 INFO    crawler.trip [trip_attractions] Sa Pa: 18 điểm tham quan
+2026-09-15 23:59:37,278 INFO    crawler.trip [trip_attractions] Phan Thiết: 18 điểm tham quan
+2026-09-15 23:59:37,279 INFO    crawler.trip [trip_attractions] Kế hoạch: đã xếp hàng 226 URL
+2026-09-15 23:59:37,279 INFO    crawler.trip [trip_attractions] Bắt đầu 221 URL · tối thiểu 4.0s/request
+2026-09-16 00:00:10,789 INFO    crawler [trip_attractions] 7/221 xong · 0 lỗi · 0 bỏ qua · 12.53 trang/phút · còn ~17m
+2026-09-16 00:00:43,824 INFO    crawler [trip_attractions] 14/221 xong · 0 lỗi · 0 bỏ qua · 12.62 trang/phút · còn ~16m
+2026-09-16 00:01:13,982 INFO    crawler [trip_attractions] 20/221 xong · 0 lỗi · 0 bỏ qua · 12.41 trang/phút · còn ~16m
+2026-09-16 00:01:45,915 INFO    crawler [trip_attractions] 27/221 xong · 0 lỗi · 0 bỏ qua · 12.59 trang/phút · còn ~15m
+2026-09-16 00:02:18,413 INFO    crawler [trip_attractions] 34/221 xong · 0 lỗi · 0 bỏ qua · 12.66 trang/phút · còn ~14m
+2026-09-16 00:02:50,673 INFO    crawler [trip_attractions] 41/221 xong · 0 lỗi · 0 bỏ qua · 12.72 trang/phút · còn ~14m
+2026-09-16 00:03:23,746 INFO    crawler [trip_attractions] 48/221 xong · 0 lỗi · 0 bỏ qua · 12.72 trang/phút · còn ~13m
+2026-09-16 00:03:56,530 INFO    crawler [trip_attractions] 55/221 xong · 0 lỗi · 0 bỏ qua · 12.73 trang/phút · còn ~13m
+2026-09-16 00:04:30,210 INFO    crawler [trip_attractions] 62/221 xong · 0 lỗi · 0 bỏ qua · 12.70 trang/phút · còn ~12m
+2026-09-16 00:05:00,335 INFO    crawler [trip_attractions] 68/221 xong · 0 lỗi · 0 bỏ qua · 12.63 trang/phút · còn ~12m
+2026-09-16 00:05:35,196 INFO    crawler [trip_attractions] 75/221 xong · 0 lỗi · 0 bỏ qua · 12.57 trang/phút · còn ~11m
+2026-09-16 00:06:08,979 INFO    crawler [trip_attractions] 82/221 xong · 0 lỗi · 0 bỏ qua · 12.56 trang/phút · còn ~11m
+2026-09-16 00:06:39,769 INFO    crawler [trip_attractions] 89/221 xong · 0 lỗi · 0 bỏ qua · 12.64 trang/phút · còn ~10m
+2026-09-16 00:07:11,792 INFO    crawler [trip_attractions] 96/221 xong · 0 lỗi · 0 bỏ qua · 12.67 trang/phút · còn ~9m
+2026-09-16 00:07:46,480 INFO    crawler [trip_attractions] 103/221 xong · 0 lỗi · 0 bỏ qua · 12.63 trang/phút · còn ~9m
+2026-09-16 00:08:18,467 INFO    crawler [trip_attractions] 110/221 xong · 0 lỗi · 0 bỏ qua · 12.66 trang/phút · còn ~8m
+2026-09-16 00:08:52,468 INFO    crawler [trip_attractions] 117/221 xong · 0 lỗi · 0 bỏ qua · 12.64 trang/phút · còn ~8m
+2026-09-16 00:09:25,365 INFO    crawler [trip_attractions] 124/221 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~7m
+2026-09-16 00:09:58,529 INFO    crawler [trip_attractions] 131/221 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~7m
+2026-09-16 00:10:32,612 INFO    crawler [trip_attractions] 138/221 xong · 0 lỗi · 0 bỏ qua · 12.63 trang/phút · còn ~6m
+2026-09-16 00:11:05,586 INFO    crawler [trip_attractions] 145/221 xong · 0 lỗi · 0 bỏ qua · 12.64 trang/phút · còn ~6m
+2026-09-16 00:11:39,076 INFO    crawler [trip_attractions] 152/221 xong · 0 lỗi · 0 bỏ qua · 12.64 trang/phút · còn ~5m
+2026-09-16 00:12:11,271 INFO    crawler [trip_attractions] 159/221 xong · 0 lỗi · 0 bỏ qua · 12.65 trang/phút · còn ~4m
+2026-09-16 00:12:42,049 INFO    crawler [trip_attractions] 166/221 xong · 0 lỗi · 0 bỏ qua · 12.69 trang/phút · còn ~4m
+2026-09-16 00:13:13,688 INFO    crawler [trip_attractions] 173/221 xong · 0 lỗi · 0 bỏ qua · 12.71 trang/phút · còn ~3m
+2026-09-16 00:13:47,282 INFO    crawler [trip_attractions] 180/221 xong · 0 lỗi · 0 bỏ qua · 12.71 trang/phút · còn ~3m
+2026-09-16 00:14:18,577 INFO    crawler [trip_attractions] 187/221 xong · 0 lỗi · 0 bỏ qua · 12.73 trang/phút · còn ~2m
+2026-09-16 00:14:51,117 INFO    crawler [trip_attractions] 194/221 xong · 0 lỗi · 0 bỏ qua · 12.74 trang/phút · còn ~2m
+2026-09-16 00:15:24,457 INFO    crawler [trip_attractions] 201/221 xong · 0 lỗi · 0 bỏ qua · 12.73 trang/phút · còn ~1m
+2026-09-16 00:15:56,919 INFO    crawler [trip_attractions] 208/221 xong · 0 lỗi · 0 bỏ qua · 12.74 trang/phút · còn ~1m
+2026-09-16 00:16:28,662 INFO    crawler [trip_attractions] 215/221 xong · 0 lỗi · 0 bỏ qua · 12.75 trang/phút · còn ~0m
+2026-09-16 00:16:58,257 INFO    crawler [trip_attractions] 221/221 xong · 0 lỗi · 0 bỏ qua · 12.74 trang/phút · còn ~0m
+2026-09-16 00:16:58,258 INFO    crawler [trip_attractions] Trạng thái: {'done': 221}
+2026-09-16 00:16:58,261 INFO    crawler ===== booking-hotels =====
+2026-09-16 00:16:58,261 INFO    crawler [booking_hotels] Giá lấy cho 2026-10-15, 1 đêm, 2 người lớn (VND)
+2026-09-16 00:16:59,105 INFO    crawler.browser [booking_hotels] Không còn URL nào cần crawl. Trạng thái: {'done': 317}
+2026-09-16 00:16:59,173 INFO    crawler [booking_hotels] Trạng thái: {'done': 317}
+2026-09-16 00:16:59,174 INFO    crawler ===== agoda-hotels =====
+2026-09-16 00:16:59,174 INFO    crawler [agoda_hotels] Giá lấy cho 2026-10-15, 1 đêm, 2 người lớn (VND)
+2026-09-16 00:16:59,178 INFO    crawler.browser [agoda_hotels] Nguồn này không hỗ trợ --fast – chạy chế độ thường
+2026-09-16 00:17:07,125 INFO    crawler.agoda [agoda_hotels] Nha Trang: 20 khách sạn
+2026-09-16 00:17:11,630 INFO    crawler.agoda [agoda_hotels] Phú Quốc: 20 khách sạn
+2026-09-16 00:17:14,719 INFO    crawler.agoda [agoda_hotels] Hội An: 20 khách sạn
+2026-09-16 00:17:19,912 INFO    crawler.agoda [agoda_hotels] Đà Nẵng: 20 khách sạn
+2026-09-16 00:17:27,037 INFO    crawler.agoda [agoda_hotels] Hạ Long: 20 khách sạn
+2026-09-16 00:17:30,169 INFO    crawler.agoda [agoda_hotels] Hà Nội: 20 khách sạn
+2026-09-16 00:17:35,237 INFO    crawler.agoda [agoda_hotels] TP. Hồ Chí Minh: 20 khách sạn
+2026-09-16 00:17:40,058 INFO    crawler.agoda [agoda_hotels] Hải Phòng: 20 khách sạn
+2026-09-16 00:17:45,065 INFO    crawler.agoda [agoda_hotels] Nghệ An: 20 khách sạn
+2026-09-16 00:17:50,470 INFO    crawler.agoda [agoda_hotels] Hà Tĩnh: 20 khách sạn
+2026-09-16 00:17:55,702 INFO    crawler.agoda [agoda_hotels] Đà Lạt: 20 khách sạn
+2026-09-16 00:17:59,818 INFO    crawler.agoda [agoda_hotels] Huế: 20 khách sạn
+2026-09-16 00:18:03,938 INFO    crawler.agoda [agoda_hotels] Quy Nhơn: 20 khách sạn
+2026-09-16 00:18:09,078 INFO    crawler.agoda [agoda_hotels] Sa Pa: 20 khách sạn
+2026-09-16 00:18:14,495 INFO    crawler.agoda [agoda_hotels] Phan Thiết: 20 khách sạn
+2026-09-16 00:18:14,495 INFO    crawler.browser [agoda_hotels] Kế hoạch: đã xếp hàng 300 URL
+2026-09-16 00:18:14,496 INFO    crawler.browser [agoda_hotels] Bắt đầu 300 URL · 2 worker · tối thiểu 4.0s/request
+2026-09-16 00:18:53,699 INFO    crawler [agoda_hotels] 3/300 xong · 0 lỗi · 0 bỏ qua · 4.59 trang/phút · còn ~1h04m
+2026-09-16 00:19:25,059 INFO    crawler [agoda_hotels] 8/300 xong · 0 lỗi · 0 bỏ qua · 6.80 trang/phút · còn ~42m
+2026-09-16 00:19:56,648 INFO    crawler [agoda_hotels] 12/300 xong · 0 lỗi · 0 bỏ qua · 7.05 trang/phút · còn ~40m
+2026-09-16 00:20:42,056 INFO    crawler [agoda_hotels] 17/300 xong · 0 lỗi · 0 bỏ qua · 6.91 trang/phút · còn ~40m
+2026-09-16 00:21:14,280 INFO    crawler [agoda_hotels] 21/300 xong · 0 lỗi · 0 bỏ qua · 7.01 trang/phút · còn ~39m
+2026-09-16 00:21:51,272 INFO    crawler [agoda_hotels] 25/300 xong · 0 lỗi · 0 bỏ qua · 6.92 trang/phút · còn ~39m
+2026-09-16 00:22:28,971 INFO    crawler [agoda_hotels] 30/300 xong · 0 lỗi · 0 bỏ qua · 7.07 trang/phút · còn ~38m
+2026-09-16 00:23:03,854 INFO    crawler [agoda_hotels] 35/300 xong · 0 lỗi · 0 bỏ qua · 7.26 trang/phút · còn ~36m
+2026-09-16 00:23:40,648 INFO    crawler [agoda_hotels] 39/300 xong · 0 lỗi · 0 bỏ qua · 7.17 trang/phút · còn ~36m
+2026-09-16 00:24:25,715 INFO    crawler [agoda_hotels] 44/300 xong · 0 lỗi · 0 bỏ qua · 7.11 trang/phút · còn ~35m
+2026-09-16 00:25:08,357 INFO    crawler [agoda_hotels] 49/300 xong · 0 lỗi · 0 bỏ qua · 7.10 trang/phút · còn ~35m
+2026-09-16 00:25:46,493 INFO    crawler [agoda_hotels] 53/300 xong · 0 lỗi · 0 bỏ qua · 7.04 trang/phút · còn ~35m
+2026-09-16 00:26:31,146 INFO    crawler [agoda_hotels] 58/300 xong · 0 lỗi · 0 bỏ qua · 7.01 trang/phút · còn ~34m
+2026-09-16 00:27:02,454 INFO    crawler [agoda_hotels] 62/300 xong · 0 lỗi · 0 bỏ qua · 7.05 trang/phút · còn ~33m
+2026-09-16 00:27:46,740 INFO    crawler [agoda_hotels] 67/300 xong · 0 lỗi · 0 bỏ qua · 7.02 trang/phút · còn ~33m
+2026-09-16 00:28:24,174 INFO    crawler [agoda_hotels] 71/300 xong · 0 lỗi · 0 bỏ qua · 6.99 trang/phút · còn ~32m
+2026-09-16 00:28:55,574 INFO    crawler [agoda_hotels] 75/300 xong · 0 lỗi · 0 bỏ qua · 7.02 trang/phút · còn ~32m
+2026-09-16 00:29:32,550 INFO    crawler [agoda_hotels] 79/300 xong · 0 lỗi · 0 bỏ qua · 6.99 trang/phút · còn ~31m
+2026-09-16 00:30:09,600 INFO    crawler [agoda_hotels] 84/300 xong · 0 lỗi · 0 bỏ qua · 7.05 trang/phút · còn ~30m
+2026-09-16 00:30:46,085 INFO    crawler [agoda_hotels] 89/300 xong · 0 lỗi · 0 bỏ qua · 7.10 trang/phút · còn ~29m
+2026-09-16 00:31:23,838 INFO    crawler [agoda_hotels] 93/300 xong · 0 lỗi · 0 bỏ qua · 7.07 trang/phút · còn ~29m
+2026-09-16 00:32:01,037 INFO    crawler [agoda_hotels] 98/300 xong · 0 lỗi · 0 bỏ qua · 7.11 trang/phút · còn ~28m
+2026-09-16 00:32:37,691 INFO    crawler [agoda_hotels] 102/300 xong · 0 lỗi · 0 bỏ qua · 7.09 trang/phút · còn ~27m
+2026-09-16 00:33:13,322 INFO    crawler [agoda_hotels] 107/300 xong · 0 lỗi · 0 bỏ qua · 7.14 trang/phút · còn ~27m
+2026-09-16 00:33:44,922 INFO    crawler [agoda_hotels] 111/300 xong · 0 lỗi · 0 bỏ qua · 7.16 trang/phút · còn ~26m
+2026-09-16 00:34:22,200 INFO    crawler [agoda_hotels] 115/300 xong · 0 lỗi · 0 bỏ qua · 7.13 trang/phút · còn ~25m
+2026-09-16 00:34:52,618 INFO    crawler [agoda_hotels] 120/300 xong · 0 lỗi · 0 bỏ qua · 7.21 trang/phút · còn ~24m
+2026-09-16 00:35:22,788 INFO    crawler [agoda_hotels] 123/300 xong · 0 lỗi · 0 bỏ qua · 7.18 trang/phút · còn ~24m
+2026-09-16 00:36:06,156 INFO    crawler [agoda_hotels] 128/300 xong · 0 lỗi · 0 bỏ qua · 7.17 trang/phút · còn ~24m
+2026-09-16 00:36:42,556 INFO    crawler [agoda_hotels] 132/300 xong · 0 lỗi · 0 bỏ qua · 7.15 trang/phút · còn ~23m
+2026-09-16 00:37:21,755 INFO    crawler [agoda_hotels] 138/300 xong · 0 lỗi · 0 bỏ qua · 7.22 trang/phút · còn ~22m
+2026-09-16 00:37:58,811 INFO    crawler [agoda_hotels] 142/300 xong · 0 lỗi · 0 bỏ qua · 7.19 trang/phút · còn ~21m
+2026-09-16 00:38:36,386 INFO    crawler [agoda_hotels] 146/300 xong · 0 lỗi · 0 bỏ qua · 7.17 trang/phút · còn ~21m
+2026-09-16 00:39:12,290 INFO    crawler [agoda_hotels] 151/300 xong · 0 lỗi · 0 bỏ qua · 7.20 trang/phút · còn ~20m
+2026-09-16 00:39:49,422 INFO    crawler [agoda_hotels] 155/300 xong · 0 lỗi · 0 bỏ qua · 7.18 trang/phút · còn ~20m
+2026-09-16 00:40:26,303 INFO    crawler [agoda_hotels] 159/300 xong · 0 lỗi · 0 bỏ qua · 7.16 trang/phút · còn ~19m
+2026-09-16 00:41:08,509 INFO    crawler [agoda_hotels] 164/300 xong · 0 lỗi · 0 bỏ qua · 7.16 trang/phút · còn ~18m
+2026-09-16 00:41:45,786 INFO    crawler [agoda_hotels] 168/300 xong · 0 lỗi · 0 bỏ qua · 7.14 trang/phút · còn ~18m
+2026-09-16 00:42:23,300 INFO    crawler [agoda_hotels] 172/300 xong · 0 lỗi · 0 bỏ qua · 7.12 trang/phút · còn ~17m
+2026-09-16 00:43:00,614 INFO    crawler [agoda_hotels] 177/300 xong · 0 lỗi · 0 bỏ qua · 7.15 trang/phút · còn ~17m
+2026-09-16 00:43:32,844 INFO    crawler [agoda_hotels] 182/300 xong · 0 lỗi · 0 bỏ qua · 7.19 trang/phút · còn ~16m
+2026-09-16 00:44:07,052 INFO    crawler [agoda_hotels] 186/300 xong · 0 lỗi · 0 bỏ qua · 7.19 trang/phút · còn ~15m
+2026-09-16 00:44:43,876 INFO    crawler [agoda_hotels] 190/300 xong · 0 lỗi · 0 bỏ qua · 7.17 trang/phút · còn ~15m
+2026-09-16 00:45:20,871 INFO    crawler [agoda_hotels] 194/300 xong · 0 lỗi · 0 bỏ qua · 7.16 trang/phút · còn ~14m
+2026-09-16 00:45:54,705 INFO    crawler [agoda_hotels] 199/300 xong · 0 lỗi · 0 bỏ qua · 7.19 trang/phút · còn ~14m
+2026-09-16 00:46:37,620 INFO    crawler [agoda_hotels] 204/300 xong · 0 lỗi · 0 bỏ qua · 7.19 trang/phút · còn ~13m
+2026-09-16 00:47:11,646 INFO    crawler [agoda_hotels] 209/300 xong · 0 lỗi · 0 bỏ qua · 7.22 trang/phút · còn ~12m
+2026-09-16 00:47:42,887 INFO    crawler [agoda_hotels] 216/300 xong · 0 lỗi · 0 bỏ qua · 7.33 trang/phút · còn ~11m
+2026-09-16 00:48:22,045 INFO    crawler [agoda_hotels] 220/300 xong · 0 lỗi · 0 bỏ qua · 7.30 trang/phút · còn ~10m
+2026-09-16 00:48:59,418 INFO    crawler [agoda_hotels] 225/300 xong · 0 lỗi · 0 bỏ qua · 7.32 trang/phút · còn ~10m
+2026-09-16 00:49:36,462 INFO    crawler [agoda_hotels] 229/300 xong · 0 lỗi · 0 bỏ qua · 7.30 trang/phút · còn ~9m
+2026-09-16 00:50:19,813 INFO    crawler [agoda_hotels] 234/300 xong · 0 lỗi · 0 bỏ qua · 7.29 trang/phút · còn ~9m
+2026-09-16 00:50:57,231 INFO    crawler [agoda_hotels] 238/300 xong · 0 lỗi · 0 bỏ qua · 7.28 trang/phút · còn ~8m
+2026-09-16 00:51:34,564 INFO    crawler [agoda_hotels] 242/300 xong · 0 lỗi · 0 bỏ qua · 7.26 trang/phút · còn ~7m
+2026-09-16 00:52:12,347 INFO    crawler [agoda_hotels] 246/300 xong · 0 lỗi · 0 bỏ qua · 7.24 trang/phút · còn ~7m
+2026-09-16 00:52:48,826 INFO    crawler [agoda_hotels] 250/300 xong · 0 lỗi · 0 bỏ qua · 7.23 trang/phút · còn ~6m
+2026-09-16 00:53:25,650 INFO    crawler [agoda_hotels] 254/300 xong · 0 lỗi · 0 bỏ qua · 7.22 trang/phút · còn ~6m
+2026-09-16 00:54:03,185 INFO    crawler [agoda_hotels] 261/300 xong · 0 lỗi · 0 bỏ qua · 7.29 trang/phút · còn ~5m
+2026-09-16 00:54:39,630 INFO    crawler [agoda_hotels] 265/300 xong · 0 lỗi · 0 bỏ qua · 7.28 trang/phút · còn ~4m
+2026-09-16 00:55:16,851 INFO    crawler [agoda_hotels] 269/300 xong · 0 lỗi · 0 bỏ qua · 7.26 trang/phút · còn ~4m
+2026-09-16 00:55:58,577 INFO    crawler [agoda_hotels] 275/300 xong · 0 lỗi · 0 bỏ qua · 7.29 trang/phút · còn ~3m
+2026-09-16 00:56:42,515 INFO    crawler [agoda_hotels] 280/300 xong · 0 lỗi · 0 bỏ qua · 7.28 trang/phút · còn ~2m
+2026-09-16 00:57:13,966 INFO    crawler [agoda_hotels] 285/300 xong · 0 lỗi · 0 bỏ qua · 7.31 trang/phút · còn ~2m
+2026-09-16 00:57:44,263 INFO    crawler [agoda_hotels] 289/300 xong · 0 lỗi · 0 bỏ qua · 7.32 trang/phút · còn ~1m
+2026-09-16 00:58:14,975 INFO    crawler [agoda_hotels] 293/300 xong · 0 lỗi · 0 bỏ qua · 7.32 trang/phút · còn ~0m
+2026-09-16 00:58:51,946 INFO    crawler [agoda_hotels] 297/300 xong · 0 lỗi · 0 bỏ qua · 7.31 trang/phút · còn ~0m
+2026-09-16 00:59:10,497 INFO    crawler [agoda_hotels] 300/300 xong · 0 lỗi · 0 bỏ qua · 7.33 trang/phút · còn ~0m
+2026-09-16 00:59:10,717 INFO    crawler [agoda_hotels] Trạng thái: {'done': 300}
+2026-09-16 00:59:10,720 INFO    crawler ===== venues =====
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ VinWonders Nha Trang                   Nha Trang          36 vé  12.21740,109.24122     VinWonders (tourism=theme_park)
+2026-09-16 00:59:10,828 INFO    crawler.venues ! Vinpearl Harbour Nha Trang             Nha Trang          13 vé  12.22453,109.23968     chưa đạt kiểm tra: kết quả 'Vinpearl Resort Nha Trang' thiếu từ: harbour
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Hòn Tằm                                Nha Trang          14 vé  12.17472,109.24474     Hòn Tằm (place=island)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Aquafield Nha Trang                    Nha Trang          11 vé  12.21460,109.24094     Aquafield (leisure=sauna)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Vinpearl Golf Nha Trang                Nha Trang           1 vé  12.21254,109.25905     Vinpearl Golf Nha Trang (leisure=golf_course)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ VinWonders Phú Quốc                    Phú Quốc           42 vé  10.33840,103.85468     VinWonders Phú Quốc (tourism=theme_park)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Vinpearl Safari Phú Quốc               Phú Quốc           38 vé  10.33940,103.89501     Vinpearl Safari (tourism=zoo)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Grand World Phú Quốc                   Phú Quốc           25 vé  10.32494,103.85814     Grand World Phú Quốc (landuse=retail)
+2026-09-16 00:59:10,828 INFO    crawler.venues ! Vinpearl Golf Phú Quốc                 Phú Quốc            1 vé  10.35804,103.84952     chưa đạt kiểm tra: kết quả 'Meliá Vinpearl Phu Quoc' thiếu từ: golf
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ VinWonders Nam Hội An                  Hội An             31 vé  15.78878,108.41079     VinWonders Nam Hội An (tourism=theme_park)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Vinpearl Golf Nam Hội An               Hội An              1 vé  15.79402,108.41228     Vin Pearl Golf Course (leisure=golf_course)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ VinWonders Cửa Hội                     Nghệ An            36 vé  18.77433,105.75142     VinWonder Cửa Hội (tourism=theme_park)
+2026-09-16 00:59:10,828 INFO    crawler.venues ! Công viên nước Hà Tĩnh                 Hà Tĩnh            10 vé  18.34276,105.89863     chưa đạt kiểm tra: kết quả 'Công Viên' thiếu từ: nuoc
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ VinWonders Vũ Yên                      Hải Phòng          21 vé  20.87200,106.74946     VinWonders Vũ Yên (tourism=theme_park)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Học viện cưỡi ngựa Vinpearl Vũ Yên     Hải Phòng           8 vé  20.87321,106.74637     Học viện cưỡi ngựa Vinpearl Vũ Yên (leisure=horse_riding)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Vinpearl Golf Hải Phòng                Hải Phòng           1 vé  20.87056,106.73321     Vinpearl Golf Haiphong (leisure=golf_course)
+2026-09-16 00:59:10,828 INFO    crawler.venues ! VinWonders Wave Park & Water Park      Hà Nội             14 vé  20.95647,105.97655     chưa đạt kiểm tra: kết quả 'VinWonders Olympic Swimming Pool_Bể bơi' thiếu từ: wave
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Aquafield Ocean City                   Hà Nội             13 vé  20.95160,105.97504     Aquafield Ocean City (shop=beauty)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ Mega Grand World Hà Nội                Hà Nội              6 vé  20.95544,105.97997     Mega Grand World Hà Nội (landuse=retail)
+2026-09-16 00:59:10,828 INFO    crawler.venues ~ VinKE & Vinpearl Aquarium Times City   Hà Nội             10 vé  20.99637,105.86789     Vinpearl Aquarium Times City (tourism=aquarium)
+2026-09-16 00:59:10,829 INFO    crawler.venues ! Show "Đất nước thiên hùng ca"          Hà Nội             33 vé  20.95680,105.97742     chưa đạt kiểm tra: kết quả 'Điểm Vui Chơi Cầu Trượt Nước' thiếu từ: ca dat
+2026-09-16 00:59:10,829 INFO    crawler.venues ~ Công viên Grand Park                   TP. Hồ Chí Minh     9 vé  10.83994,106.84728     Công viên nước Grand Park (leisure=water_park)
+2026-09-16 00:59:10,829 INFO    crawler.venues ! Vinpearl Golf Léman                    TP. Hồ Chí Minh     1 vé  –                      không tìm thấy trên trip.com / OpenStreetMap với: Vinpearl Golf Léman | Léman Golf
+2026-09-16 00:59:10,829 INFO    crawler.venues Địa điểm: {'auto (giữ nguyên)': 17, 'review (giữ nguyên)': 6}. Đã ghi /home/dangkhoi/code/vsf/data-collection/collectors/venues.csv
+2026-09-16 00:59:10,829 WARNING crawler.venues 6 địa điểm có vé nhưng chưa có toạ độ dùng được: Vinpearl Harbour Nha Trang, Vinpearl Golf Phú Quốc, Công viên nước Hà Tĩnh, VinWonders Wave Park & Water Park, Show "Đất nước thiên hùng ca", Vinpearl Golf Léman. Mở venues.csv, xem cột mapUrl/note, điền latitude, longitude đúng rồi đặt status=ok.
+2026-09-16 00:59:10,829 INFO    crawler.venues 2 vé không khớp địa điểm nào (thiếu nhà cung cấp và tên không chứa alias) – xem data/map/can-kiem-tra.csv sau khi normalise.
